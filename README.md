@@ -4,6 +4,8 @@
 
 A zero-trust security architecture for the edge-fog-cloud continuum, applied to critical energy infrastructure (smart-grid substations).
 
+**Project page:** [philipfleischer.github.io/projects/zero-trust-continuum](https://philipfleischer.github.io/projects/zero-trust-continuum/) explains the architecture, the design decisions and the research questions in more depth, with the diagrams. More projects: [philipfleischer.github.io](https://philipfleischer.github.io/).
+
 ZTC is a long-running research and engineering project by Philip Elias Fleischer (MSc Informatics: Programming and System Architecture, UiO). It serves three purposes at once:
 
 1. **Master's thesis testbed.** A design, a reference implementation and an OMNeT++ simulation for the thesis directions discussed with potential supervisors: zero-trust architecture for the fog-cloud continuum, access control / IAM across the continuum, and secure service migration.
@@ -40,7 +42,7 @@ Every arrow crosses a trust boundary. No component trusts another because of its
 
 ![Target architecture](Docs/diagrams/svg/00-system-overview-1.svg)
 
-The target architecture and the design of every milestone, as editable [diagrams.net](https://app.diagrams.net) files with the reasoning behind each decision: NIST SP 800-207 mapping, the decision chain, credential models and the trust algorithm, PDP placement, the continuous-verification loop, Raft/SWIM/Chord, IEC 62443 zones, the STRIDE threat model, secure migration and the evaluation plan. Start at [Docs/diagrams](Docs/diagrams/README.md).
+The target architecture and the design of every milestone, as editable [diagrams.net](https://app.diagrams.net) files with the reasoning behind each decision: NIST SP 800-207 mapping, the decision chain, credential models and the trust algorithm, PDP placement, the continuous-verification loop, Raft/SWIM/Chord, IEC 62443 zones, the STRIDE threat model, secure migration and the evaluation plan. Start at [Docs/diagrams](Docs/diagrams/README.md), or read the walkthrough on the [project page](https://philipfleischer.github.io/projects/zero-trust-continuum/).
 
 ## Research questions (thesis)
 
