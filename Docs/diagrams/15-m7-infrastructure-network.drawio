@@ -1,0 +1,123 @@
+<mxfile host="app.diagrams.net" agent="ztc-diagram-generator" type="device">
+  <diagram name="Network design (Cisco)" id="page-0">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="900" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="p0-0" />
+        <mxCell id="p0-1" parent="p0-0" />
+        <mxCell id="p0-networkd-1" value="M7 — Purdue-segmented substation network in Cisco IOS" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="10" width="1600" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-networkd-2" value="The same zone model as real switch and router configuration (CCNA / CCNP Security level), plus a free containerlab version of the topology. ACLs decide which hosts may talk; the PEP decides which identity may act." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="44" width="1600" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-wan" value="WAN&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;utility MPLS / Internet&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;shape=cloud;fillColor=#ffffff;strokeColor=#888888;strokeWidth=1.5;fontSize=11;" vertex="1" parent="p0-1">
+          <mxGeometry x="560" y="90" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-cc" value="&lt;b&gt;Control centre (VLAN 300, 10.30.0.0/24)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;ztc-pdp, ztc-ca, SCADA — reached only over IPsec&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="1000" y="100" width="360" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-networkd-3" value="IKEv2 / IPsec VTI" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;startArrow=block;startFill=1;" edge="1" parent="p0-1" source="p0-wan" target="p0-cc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-fw" value="&lt;b&gt;SUB1-FW (ISR 1100)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;zone-based firewall OUTSIDE ↔ OT-DMZ ↔ INSIDE · IKEv2 IPsec · NAT for the DMZ · CoPP · uRPF&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="480" y="230" width="360" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-core" value="&lt;b&gt;SUB1-CORE (Catalyst 9300)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;L3 SVIs + ZTC-IN-&amp;lt;zone&amp;gt; ACLs (generated) · DHCP snooping · DAI · IP source guard · SSH v2 · AAA · SNMPv3 authPriv · NTP auth · syslog&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="430" y="370" width="460" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-acc" value="&lt;b&gt;SUB1-ACC1 (IE-3400)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;802.1X with MAB fallback · port security (sticky, restrict) · BPDU guard · storm control · parking VLAN&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="430" y="640" width="460" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-networkd-4" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-wan" target="p0-fw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-networkd-5" value="802.1Q trunk (VLAN 103, 200)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;startArrow=block;startFill=1;" edge="1" parent="p0-1" source="p0-fw" target="p0-core">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-networkd-6" value="trunk" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;startArrow=block;startFill=1;exitX=0.815;exitY=1;exitDx=0;exitDy=0;entryX=0.815;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-core" target="p0-acc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-v101" value="&lt;b&gt;VLAN 101 · process-bus&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;IEDs, merging units&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="40" y="520" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-networkd-7" value="" style="html=1;endArrow=none;strokeColor=#999999;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-core" target="p0-v101">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-v102" value="&lt;b&gt;VLAN 102 · station-bus&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;bay controllers, HMI&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="300" y="520" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-networkd-8" value="" style="html=1;endArrow=none;strokeColor=#999999;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-core" target="p0-v102">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-v103" value="&lt;b&gt;VLAN 103 · substation-fog&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;ztc-fog, ztc-ids&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="560" y="520" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-networkd-9" value="" style="html=1;endArrow=none;strokeColor=#999999;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-core" target="p0-v103">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-v200" value="&lt;b&gt;VLAN 200 · ot-dmz&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;ztc-pep, broker&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="820" y="520" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-networkd-10" value="" style="html=1;endArrow=none;strokeColor=#999999;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-core" target="p0-v200">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-v999" value="&lt;b&gt;VLAN 999 · management (OOB)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;switch / router mgmt&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="1080" y="520" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-networkd-11" value="" style="html=1;endArrow=none;strokeColor=#999999;strokeWidth=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-core" target="p0-v999">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-networkd-12" value="&lt;b&gt;Addressing plan&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:11px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;VLAN&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Zone&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Purdue&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Subnet&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;SL-T&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;101&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;process-bus&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;1&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;10.10.1.0/24&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;3&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;102&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;station-bus&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;2&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;10.10.2.0/24&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;3&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;103&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;substation-fog&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;3&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;10.10.3.0/24&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;3&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;200&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;ot-dmz&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;3.5&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;10.20.0.0/24&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;300&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;control-centre (remote)&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;4&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;10.30.0.0/24&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;3&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;999&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;management (OOB)&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;—&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;10.99.0.0/24&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;—&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;666&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;parking (unused ports)&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;—&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;—&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;—&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=11;overflow=fill;fontColor=#222222;" vertex="1" parent="p0-1">
+          <mxGeometry x="1360" y="230" width="340" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-networkd-13" value="&lt;b&gt;Layer 2 / 3 hardening mapped to threats&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:11px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Control&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Stops&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;802.1X / MAB + port security&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;T1 rogue laptop&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;DHCP snooping, DAI, IP source guard&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;ARP / DHCP spoofing, MITM&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;storm control, CoPP&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;T4 flooding&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;zone-based firewall&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;T5 skipping zones&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;IPsec to the control centre&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;T9 WAN eavesdropping&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=11;overflow=fill;fontColor=#222222;" vertex="1" parent="p0-1">
+          <mxGeometry x="960" y="620" width="740" height="170" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Infrastructure as code" id="page-1">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="800" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="p1-0" />
+        <mxCell id="p1-1" parent="p1-0" />
+        <mxCell id="p1-infrastr-1" value="M7 — from nothing to a running continuum: Terraform → Ansible → Kubernetes" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="10" width="1600" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-infrastr-2" value="Every environment is reproducible from the repository. The zone model appears a fourth time, as OpenStack security groups." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="44" width="1600" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-tf" value="&lt;b&gt;Terraform (NREC / OpenStack)&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;provider and versions pinned&lt;/li&gt;&lt;li&gt;one network + security group per zone&lt;/li&gt;&lt;li&gt;cloud VMs and fog VMs with cloud-init&lt;/li&gt;&lt;li&gt;outputs → Ansible inventory (inventory.tftpl)&lt;/li&gt;&lt;li&gt;CI: terraform fmt -check, validate&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;verticalAlign=top;spacing=10;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="110" width="390" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-ans" value="&lt;b&gt;Ansible&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;common: packages, chrony time sync&lt;/li&gt;&lt;li&gt;hardening (CIS-style): SSH, sysctl, auditd&lt;/li&gt;&lt;li&gt;k3s server and agents; fog nodes tainted&lt;/li&gt;&lt;li&gt;site playbook; ansible-lint in CI&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;verticalAlign=top;spacing=10;" vertex="1" parent="p1-1">
+          <mxGeometry x="440" y="110" width="390" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-infrastr-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p1-1" source="p1-tf" target="p1-ans">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-k8s" value="&lt;b&gt;Kubernetes deploy&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;kubectl apply -k overlays/edge or Helm&lt;/li&gt;&lt;li&gt;arm64 images for Raspberry Pi fog nodes&lt;/li&gt;&lt;li&gt;generated NetworkPolicies&lt;/li&gt;&lt;li&gt;Prometheus + Grafana&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;verticalAlign=top;spacing=10;" vertex="1" parent="p1-1">
+          <mxGeometry x="860" y="110" width="390" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-infrastr-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p1-1" source="p1-ans" target="p1-k8s">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-run" value="&lt;b&gt;Running continuum&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;3 PDP replicas in the cloud&lt;/li&gt;&lt;li&gt;PEP + fog + IDS on each fog node&lt;/li&gt;&lt;li&gt;simulated devices at the edge&lt;/li&gt;&lt;li&gt;demo and failure drills against real hardware&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;align=left;verticalAlign=top;spacing=10;" vertex="1" parent="p1-1">
+          <mxGeometry x="1280" y="110" width="390" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-infrastr-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p1-1" source="p1-k8s" target="p1-run">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-infrastr-6" value="&lt;b&gt;Free lab of the same network: containerlab&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;FRR routers and Linux hosts with nftables as the zone firewall&lt;/li&gt;&lt;li&gt;reachability matrix script: every allowed conduit answers, every other pair times out&lt;/li&gt;&lt;li&gt;runs on a laptop, no Cisco licence needed&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="370" width="800" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-infrastr-7" value="&lt;b&gt;Why this toolchain&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;Terraform: declarative, plan before apply, state shows drift&lt;/li&gt;&lt;li&gt;Ansible: agentless over SSH, fits small fog fleets and Raspberry Pis&lt;/li&gt;&lt;li&gt;k3s: a certified Kubernetes in one binary, sized for fog hardware&lt;/li&gt;&lt;li&gt;the same manifests run on kind (laptop) and k3s (fog) via kustomize overlays&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p1-1">
+          <mxGeometry x="860" y="370" width="840" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-infrastr-8" value="&lt;b&gt;Security notes&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;secrets never in Terraform state or the repo: OpenStack credentials from the environment&lt;/li&gt;&lt;li&gt;SSH keys only, password login disabled by the hardening role&lt;/li&gt;&lt;li&gt;time sync is a security control here: short-lived certificates fail on clock skew&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="530" width="800" height="120" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -36,6 +36,12 @@ EDGE  (field devices)
 
 Every arrow crosses a trust boundary. No component trusts another because of its network location. Every request carries a verifiable identity (SPIFFE-style ID in a short-lived X.509 certificate), is authorized by a policy decision (ABAC plus a continuously updated trust score), and is enforced at a policy enforcement point. Zones and conduits follow IEC 62443. Network segmentation is expressed at three layers: Cisco VLANs/ACLs, Docker networks, and Kubernetes NetworkPolicies, so the same model is verified three different ways.
 
+## Architecture diagrams
+
+![Target architecture](Docs/diagrams/svg/00-system-overview-1.svg)
+
+The target architecture and the design of every milestone, as editable [diagrams.net](https://app.diagrams.net) files with the reasoning behind each decision: NIST SP 800-207 mapping, the decision chain, credential models and the trust algorithm, PDP placement, the continuous-verification loop, Raft/SWIM/Chord, IEC 62443 zones, the STRIDE threat model, secure migration and the evaluation plan. Start at [Docs/diagrams](Docs/diagrams/README.md).
+
 ## Research questions (thesis)
 
 | # | Question |
