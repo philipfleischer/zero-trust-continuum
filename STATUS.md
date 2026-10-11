@@ -27,7 +27,7 @@ Legend: ✅ implemented and tested · 🟡 works, known gaps · 🔴 not started
 | Analytics | `analytics/` | 🔴 | |
 | Deployment | `deploy/` | 🟡 | `policies/substation.json`, the canonical default policy |
 | CI/CD | `.github/workflows/` | ✅ | build, race tests with coverage, golangci-lint, actionlint, Dependabot |
-| Docs | `Docs/` | 🟡 | `adr/`: 0001 fail closed, 0002 PDP write token; `architecture/`: trust algorithm |
+| Docs | `Docs/` | 🟡 | `adr/`: 0001 fail closed, 0002 PDP write token; `architecture/`: trust algorithm; `diagrams/`: target architecture and design per milestone (17 diagrams.net files with rationale) |
 
 ## Go packages
 
