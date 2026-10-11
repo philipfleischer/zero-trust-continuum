@@ -1,0 +1,378 @@
+<mxfile host="app.diagrams.net" agent="ztc-diagram-generator" type="device">
+  <diagram name="Raft PDP cluster" id="page-0">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="980" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="p0-0" />
+        <mxCell id="p0-1" parent="p0-0" />
+        <mxCell id="p0-raftpdpc-1" value="M3 — a replicated control plane: three PDPs with Raft" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="10" width="1600" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-2" value="Policy installs, revocations and compromises go through the Raft log, so every replica applies the same changes in the same order. Decisions are served locally from each replica's state." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="44" width="1600" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-admin" value="&lt;b&gt;Operator&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;ztcctl policy push (PUT /v1/policy)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="130" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-L" value="ztc-pdp-0 — leader (term 4)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#1f3a5f;" vertex="1" parent="p0-1">
+          <mxGeometry x="560" y="110" width="400" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-3" value="&lt;span style=&quot;font-size:10px&quot;&gt;1 · install-policy v1&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-L">
+          <mxGeometry x="15" y="40" width="88" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-4" value="&lt;span style=&quot;font-size:10px&quot;&gt;2 · install-policy v2&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-L">
+          <mxGeometry x="109" y="40" width="88" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-5" value="&lt;span style=&quot;font-size:10px&quot;&gt;3 · revoke jti 9f…&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-L">
+          <mxGeometry x="203" y="40" width="88" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-6" value="&lt;span style=&quot;font-size:10px&quot;&gt;4 · compromise pmu-b1-3&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-L">
+          <mxGeometry x="297" y="40" width="88" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-7" value="&lt;span style=&quot;font-size:11px&quot;&gt;state machine: policy.Engine (Install) + revocation list (Snapshot / Replace)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p0-L">
+          <mxGeometry x="15" y="105" width="370" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-8" value="&lt;span style=&quot;font-size:11px&quot;&gt;commitIndex 3 → 4 after majority ack&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;fontColor=#1f3a5f;" vertex="1" parent="p0-L">
+          <mxGeometry x="15" y="150" width="370" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-F1" value="ztc-pdp-1 — follower" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#1f3a5f;" vertex="1" parent="p0-1">
+          <mxGeometry x="140" y="420" width="400" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-9" value="&lt;span style=&quot;font-size:10px&quot;&gt;1 · install-policy v1&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-F1">
+          <mxGeometry x="15" y="40" width="88" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-10" value="&lt;span style=&quot;font-size:10px&quot;&gt;2 · install-policy v2&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-F1">
+          <mxGeometry x="109" y="40" width="88" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-11" value="&lt;span style=&quot;font-size:10px&quot;&gt;3 · revoke jti 9f…&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-F1">
+          <mxGeometry x="203" y="40" width="88" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-12" value="&lt;span style=&quot;font-size:10px&quot;&gt;4 · compromise pmu-b1-3&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-F1">
+          <mxGeometry x="297" y="40" width="88" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-13" value="&lt;span style=&quot;font-size:11px&quot;&gt;state machine: policy.Engine (Install) + revocation list (Snapshot / Replace)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p0-F1">
+          <mxGeometry x="15" y="105" width="370" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-14" value="&lt;span style=&quot;font-size:11px&quot;&gt;commitIndex 3 · applied 3&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;fontColor=#1f3a5f;" vertex="1" parent="p0-F1">
+          <mxGeometry x="15" y="150" width="370" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-F2" value="ztc-pdp-2 — follower" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#1f3a5f;" vertex="1" parent="p0-1">
+          <mxGeometry x="980" y="420" width="400" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-15" value="&lt;span style=&quot;font-size:10px&quot;&gt;1 · install-policy v1&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-F2">
+          <mxGeometry x="15" y="40" width="88" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-16" value="&lt;span style=&quot;font-size:10px&quot;&gt;2 · install-policy v2&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-F2">
+          <mxGeometry x="109" y="40" width="88" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-17" value="&lt;span style=&quot;font-size:10px&quot;&gt;3 · revoke jti 9f…&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-F2">
+          <mxGeometry x="203" y="40" width="88" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-18" value="&lt;span style=&quot;font-size:11px&quot;&gt;state machine: policy.Engine (Install) + revocation list (Snapshot / Replace)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p0-F2">
+          <mxGeometry x="15" y="105" width="370" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-19" value="&lt;span style=&quot;font-size:11px&quot;&gt;commitIndex 3 · applied 3&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;fontColor=#1f3a5f;" vertex="1" parent="p0-F2">
+          <mxGeometry x="15" y="150" width="370" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-20" value="write" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-admin" target="p0-L">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-21" value="AppendEntries (prevLogIndex / Term)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;startArrow=block;startFill=1;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-L" target="p0-F1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-22" value="AppendEntries + heartbeat" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;startArrow=block;startFill=1;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-L" target="p0-F2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-23" value="RequestVote on leader timeout (randomised 150–300 ms)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#6c8ebf;fontColor=#1f3a5f;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-F1" target="p0-F2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-peps" value="&lt;b&gt;PEPs / decision caches&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;POST /v1/decide to any replica; writes to a follower → 307 to the leader&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="560" y="700" width="400" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-24" value="read" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.15;exitY=0;exitDx=0;exitDy=0;entryX=0.7;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-peps" target="p0-F1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-25" value="read" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.85;exitY=0;exitDx=0;exitDy=0;entryX=0.3;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-peps" target="p0-F2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-26" value="&lt;b&gt;Write path&lt;/b&gt;&lt;ol style='margin:4px 0 0 0;padding-left:18px;font-size:11px'&gt;&lt;li&gt;validate on the leader, append to the log&lt;/li&gt;&lt;li&gt;replicate; commit when a majority (2 of 3) has it&lt;/li&gt;&lt;li&gt;only current-term entries advance commitIndex (§5.4.2)&lt;/li&gt;&lt;li&gt;apply in order on every replica, then answer 204&lt;/li&gt;&lt;/ol&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p0-1">
+          <mxGeometry x="1420" y="110" width="280" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-27" value="&lt;b&gt;Read path (deliberate trade-off)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;decisions read local state: fast and available on every replica, but not linearizable. A follower may lag by one heartbeat + apply. Documented, bounded, measured.&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p0-1">
+          <mxGeometry x="1420" y="300" width="280" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-28" value="&lt;b&gt;What is replicated&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:11px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;State&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;How&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;policy versions&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;Raft log&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;revocations, compromise&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;Raft log&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust scores&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;per replica (open question: Raft, gossip or local?)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;decision cache&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;never (local, epoch-invalidated)&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=11;overflow=fill;fontColor=#222222;" vertex="1" parent="p0-1">
+          <mxGeometry x="1020" y="700" width="680" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-29" value="&lt;b&gt;Partition behaviour&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;{leader, follower} majority keeps committing&lt;/li&gt;&lt;li&gt;isolated minority cannot commit; its leader steps down&lt;/li&gt;&lt;li&gt;minority still serves (stale) reads until its cache TTLs expire&lt;/li&gt;&lt;li&gt;leader killed ⇒ new leader in ≈ 1 s, demo keeps passing&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="700" width="500" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-raftpdpc-30" value="&lt;b&gt;Why Raft (ADR 0003)&lt;/b&gt;: understandable, a clear leader for writes, well-specified failure handling. Paxos is equivalent but harder to explain; etcd would be the production choice, but writing Raft is the IN5020 learning goal and keeps the trust path dependency-free." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="870" width="1680" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="SWIM membership" id="page-1">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="900" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="p1-0" />
+        <mxCell id="p1-1" parent="p1-0" />
+        <mxCell id="p1-swimmemb-1" value="M3 — fog nodes find each other: SWIM gossip membership" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="10" width="1600" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-swimmemb-2" value="Each fog node probes one random peer per period, asks k others to probe on its behalf before suspecting it, and piggybacks membership updates on the probes. Constant load per node, detection time independent of cluster size." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="44" width="1600" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-fog-A" value="&lt;b&gt;fog-A&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="365.0" y="160.0" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-fog-B" value="&lt;b&gt;fog-B&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="590.1666049839541" y="290.0" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-fog-C" value="&lt;b&gt;fog-C&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="590.1666049839541" y="550.0" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-fog-D" value="&lt;b&gt;fog-D&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="365.0" y="680.0" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-fog-E" value="&lt;b&gt;fog-E&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="139.83339501604593" y="550.0" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-fog-F" value="&lt;b&gt;fog-F&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="139.83339501604596" y="290.0" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-swimmemb-3" value="① ping" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;" edge="1" parent="p1-1" source="p1-fog-A" target="p1-fog-B">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-swimmemb-4" value="② ping-req(B)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#6c8ebf;fontColor=#1f3a5f;dashed=1;" edge="1" parent="p1-1" source="p1-fog-A" target="p1-fog-F">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-swimmemb-5" value="② ping-req(B)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#6c8ebf;fontColor=#1f3a5f;dashed=1;" edge="1" parent="p1-1" source="p1-fog-A" target="p1-fog-C">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-swimmemb-6" value="③ ping" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;" edge="1" parent="p1-1" source="p1-fog-F" target="p1-fog-B">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-swimmemb-7" value="③ ping" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;" edge="1" parent="p1-1" source="p1-fog-C" target="p1-fog-B">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-swimmemb-8" value="&lt;span style=&quot;font-size:11px&quot;&gt;no ack from B, directly or through F and C, within the period → A marks B &lt;b&gt;suspect&lt;/b&gt; and gossips it; no refutation within the suspicion timeout → &lt;b&gt;dead&lt;/b&gt;&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;align=center;" vertex="1" parent="p1-1">
+          <mxGeometry x="290" y="460" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-s_alive" value="alive" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="900" y="190" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-s_susp" value="suspect" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="1170" y="190" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-s_dead" value="dead" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=12;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="1440" y="190" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-s_left" value="left" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="900" y="310" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-swimmemb-9" value="no ack (direct + indirect)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p1-1" source="p1-s_alive" target="p1-s_susp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-swimmemb-10" value="timeout" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p1-1" source="p1-s_susp" target="p1-s_dead">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-swimmemb-11" value="refute: incarnation + 1" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p1-1" source="p1-s_susp" target="p1-s_alive">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1230" y="160" />
+              <mxPoint x="960" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-swimmemb-12" value="graceful leave" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p1-1" source="p1-s_alive" target="p1-s_left">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-swimmemb-13" value="&lt;b&gt;Member state machine&lt;/b&gt;&lt;span style=&quot;font-size:11px&quot;&gt; (higher incarnation always wins; only the node itself may increase its own)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p1-1">
+          <mxGeometry x="900" y="100" width="700" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-swimmemb-14" value="&lt;b&gt;Dissemination&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;updates piggyback on ping / ack packets&lt;/li&gt;&lt;li&gt;each update retransmitted λ·log n times, then dropped&lt;/li&gt;&lt;li&gt;infection-style: every node learns of a failure in O(log n) periods&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p1-1">
+          <mxGeometry x="900" y="390" width="560" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-swimmemb-15" value="&lt;b&gt;How ZTC uses it&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;offloading candidates = alive members only (suspect and dead are skipped)&lt;/li&gt;&lt;li&gt;migration targets come from the same list&lt;/li&gt;&lt;li&gt;GET /v1/members on every fog node&lt;/li&gt;&lt;li&gt;ZTC_GOSSIP_ADDR, ZTC_GOSSIP_SEEDS; UDP transport&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p1-1">
+          <mxGeometry x="900" y="520" width="560" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-swimmemb-16" value="&lt;b&gt;Zero-trust hardening (M5)&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;datagrams authenticated with HMAC-SHA256 under a zone key: a node with the wrong key is never admitted&lt;/li&gt;&lt;li&gt;known limits: shared key per zone, replay inside the window; per-node DTLS identity is future work&lt;/li&gt;&lt;li&gt;membership is a liveness hint, never an authorization: the PEP still decides every call&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="p1-1">
+          <mxGeometry x="900" y="660" width="800" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-swimmemb-17" value="&lt;b&gt;Why SWIM and not heartbeats to a central registry?&lt;/b&gt; A registry is another thing that must be reachable across the WAN. SWIM keeps working inside a partitioned substation and spreads load evenly (IN5020: failure detectors, P2P)." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="790" width="840" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Chord placement" id="page-2">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="900" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="p2-0" />
+        <mxCell id="p2-1" parent="p2-0" />
+        <mxCell id="p2-chordpla-1" value="M3 — where does a device's state live? Chord consistent hashing" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p2-1">
+          <mxGeometry x="20" y="10" width="1600" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-chordpla-2" value="Fog nodes and device IDs hash onto the same identifier ring (SHA-1, m bits). A device's state belongs to the first node clockwise from its key, so a node joining or leaving only moves the keys next to it." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p2-1">
+          <mxGeometry x="20" y="44" width="1600" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-chordpla-3" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=none;strokeColor=#82b366;strokeWidth=3;" vertex="1" parent="p2-1">
+          <mxGeometry x="130" y="170" width="600" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-N1" value="&lt;b&gt;N1&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p2-1">
+          <mxGeometry x="433.40514209886817" y="153.44458199834094" width="52" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-N8" value="&lt;b&gt;N8&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p2-1">
+          <mxGeometry x="616.1320343559643" y="239.86796564403573" width="52" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-N14" value="&lt;b&gt;N14&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p2-1">
+          <mxGeometry x="698.2355841209692" y="393.47290339516155" width="52" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-N21" value="&lt;b&gt;N21&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p2-1">
+          <mxGeometry x="668.5763793045065" y="593.4190210477993" width="52" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-N32" value="&lt;b&gt;N32&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p2-1">
+          <mxGeometry x="404.0" y="752.0" width="52" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-N38" value="&lt;b&gt;N38&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p2-1">
+          <mxGeometry x="237.3289300941193" y="701.4408836907635" width="52" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-N42" value="&lt;b&gt;N42&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p2-1">
+          <mxGeometry x="154.5591163092364" y="618.6710699058806" width="52" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-N48" value="&lt;b&gt;N48&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p2-1">
+          <mxGeometry x="104.0" y="452.00000000000006" width="52" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-N51" value="&lt;b&gt;N51&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p2-1">
+          <mxGeometry x="116.91789928033734" y="364.9145968236614" width="52" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-N56" value="&lt;b&gt;N56&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p2-1">
+          <mxGeometry x="191.8679656440357" y="239.86796564403573" width="52" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-K54" value="&lt;span style=&quot;font-size:11px&quot;&gt;K54&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p2-1">
+          <mxGeometry x="98.35624344805825" y="250.4390137827471" width="48" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-chordpla-4" value="owner" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#6c8ebf;fontColor=#1f3a5f;dashed=1;" edge="1" parent="p2-1" source="p2-K54" target="p2-N56">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-chordpla-5" value="1" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;strokeColor=#b85450;fontColor=#b85450;" edge="1" parent="p2-1" source="p2-N8" target="p2-N42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-chordpla-6" value="2" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;strokeColor=#b85450;fontColor=#b85450;" edge="1" parent="p2-1" source="p2-N42" target="p2-N51">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-chordpla-7" value="3" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;strokeColor=#b85450;fontColor=#b85450;" edge="1" parent="p2-1" source="p2-N51" target="p2-N56">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-chordpla-8" value="&lt;span style=&quot;font-size:12px&quot;&gt;lookup(K54) from N8:&lt;br&gt;N8 → N42 → N51 → N56&lt;br&gt;O(log N) hops&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;align=center;" vertex="1" parent="p2-1">
+          <mxGeometry x="470" y="540" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-chordpla-9" value="&lt;b&gt;Finger table of N8 (m = 6)&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:11px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;i&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;start = 8 + 2^(i−1)&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;successor&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;1&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;9&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;N14&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;2&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;10&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;N14&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;3&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;12&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;N14&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;4&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;16&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;N21&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;5&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;24&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;N32&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;6&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;40&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;N42&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=11;overflow=fill;fontColor=#222222;" vertex="1" parent="p2-1">
+          <mxGeometry x="900" y="110" width="380" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-chordpla-10" value="&lt;b&gt;How ZTC uses it&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;key = SHA-1(device SPIFFE ID); owner = successor(key)&lt;/li&gt;&lt;li&gt;GET /v1/owner?device=… on any fog node&lt;/li&gt;&lt;li&gt;the owner keeps the device's windows and IDS state, so detectors are not split across nodes&lt;/li&gt;&lt;li&gt;membership changes come from SWIM; only neighbouring keys move&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p2-1">
+          <mxGeometry x="1320" y="110" width="380" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-chordpla-11" value="&lt;b&gt;Checked against theory and my own IN5020 A3&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;unit test: finger table for m = 3, nodes {0, 1, 3} (textbook example)&lt;/li&gt;&lt;li&gt;≈ ½·log₂N hops on average at N = 100 (≈ 4.1), matching the Java implementation from A3&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p2-1">
+          <mxGeometry x="900" y="370" width="800" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-chordpla-12" value="&lt;b&gt;Design choice: why a DHT at all?&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;a central placement table in the cloud would not survive a WAN partition&lt;/li&gt;&lt;li&gt;consistent hashing gives balanced placement without coordination&lt;/li&gt;&lt;li&gt;alternative: rendezvous hashing — simpler, but O(N) per lookup; Chord shows the routing idea&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p2-1">
+          <mxGeometry x="900" y="490" width="800" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="p2-chordpla-13" value="&lt;b&gt;Security note&lt;/b&gt;: ring position is derived from a hash, so a node cannot pick where it lands without grinding IDs; fog identities come from the CA, and state handover between owners uses the same sealed-state mechanism as migration (RQ3)." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="p2-1">
+          <mxGeometry x="900" y="630" width="800" height="90" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Logical clocks" id="page-3">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="700" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="p3-0" />
+        <mxCell id="p3-1" parent="p3-0" />
+        <mxCell id="p3-logicalc-1" value="M3 — ordering events across nodes: hybrid logical clocks" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p3-1">
+          <mxGeometry x="20" y="10" width="1600" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-2" value="Wall clocks drift, Lamport clocks lose real time. HLC keeps both: (l, c) where l tracks the largest physical time seen and c breaks ties. Audit logs from different nodes then merge in an order consistent with causality." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p3-1">
+          <mxGeometry x="20" y="44" width="1600" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-3" value="&lt;b&gt;ztc-fog&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p3-1">
+          <mxGeometry x="20" y="150" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-4" value="&lt;b&gt;ztc-pdp-0&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p3-1">
+          <mxGeometry x="20" y="330" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-5" value="" style="html=1;endArrow=none;strokeColor=#999999;strokeWidth=1;strokeWidth=2;strokeColor=#82b366;endArrow=block;" edge="1" parent="p3-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="150" y="170" as="sourcePoint" />
+            <mxPoint x="1100" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3-logicalc-6" value="" style="html=1;endArrow=none;strokeColor=#999999;strokeWidth=1;strokeWidth=2;strokeColor=#6c8ebf;endArrow=block;" edge="1" parent="p3-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="150" y="350" as="sourcePoint" />
+            <mxPoint x="1100" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3-logicalc-7" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p3-1">
+          <mxGeometry x="243" y="163" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-8" value="&lt;span style=&quot;font-size:11px&quot;&gt;a: alert ANOM-001&lt;br&gt;&lt;b&gt;(100, 0)&lt;/b&gt;&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;align=center;" vertex="1" parent="p3-1">
+          <mxGeometry x="180" y="120" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-9" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p3-1">
+          <mxGeometry x="413" y="163" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-10" value="&lt;span style=&quot;font-size:11px&quot;&gt;b: send signal&lt;br&gt;&lt;b&gt;(100, 1)&lt;/b&gt;&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;align=center;" vertex="1" parent="p3-1">
+          <mxGeometry x="350" y="120" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-11" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p3-1">
+          <mxGeometry x="513" y="343" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-12" value="&lt;span style=&quot;font-size:11px&quot;&gt;c: receive signal&lt;br&gt;&lt;b&gt;(100, 2)&lt;/b&gt;&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;align=center;" vertex="1" parent="p3-1">
+          <mxGeometry x="450" y="362" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-13" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p3-1">
+          <mxGeometry x="673" y="343" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-14" value="&lt;span style=&quot;font-size:11px&quot;&gt;d: compromise, epoch 8&lt;br&gt;&lt;b&gt;(100, 3)&lt;/b&gt;&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;align=center;" vertex="1" parent="p3-1">
+          <mxGeometry x="610" y="362" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-15" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p3-1">
+          <mxGeometry x="893" y="163" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-16" value="&lt;span style=&quot;font-size:11px&quot;&gt;e: flush cache&lt;br&gt;&lt;b&gt;(105, 0)&lt;/b&gt;&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;align=center;" vertex="1" parent="p3-1">
+          <mxGeometry x="830" y="120" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-17" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p3-1">
+          <mxGeometry x="293" y="343" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-18" value="&lt;span style=&quot;font-size:11px&quot;&gt;x: unrelated decision&lt;br&gt;&lt;b&gt;(98, 0)&lt;/b&gt;&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;align=center;" vertex="1" parent="p3-1">
+          <mxGeometry x="230" y="362" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-19" value="signal carries (100, 1)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;" edge="1" parent="p3-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="170" as="sourcePoint" />
+            <mxPoint x="520" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3-logicalc-20" value="epoch carries (100, 3)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#6c8ebf;fontColor=#1f3a5f;dashed=1;" edge="1" parent="p3-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="680" y="350" as="sourcePoint" />
+            <mxPoint x="900" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p3-logicalc-21" value="&lt;b&gt;Merged audit log (sorted by HLC)&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:11px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;HLC&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;node&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;event&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;(98, 0)&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;pdp-0&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;x: unrelated decision&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;(100, 0)&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;fog&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;a: alert&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;(100, 1)&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;fog&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;b: send signal&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;(100, 2)&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;pdp-0&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;c: receive signal&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;(100, 3)&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;pdp-0&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;d: compromise&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;(105, 0)&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;fog&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;e: flush cache&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=11;overflow=fill;fontColor=#222222;" vertex="1" parent="p3-1">
+          <mxGeometry x="1150" y="110" width="550" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-22" value="&lt;b&gt;Which clock for what&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:11px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Clock&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Gives&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Used in ZTC for&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;Lamport&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;a → b ⇒ L(a) &amp;lt; L(b)&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;teaching baseline, tests&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;Vector&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;detects concurrency (a ∥ b)&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;debugging replicated state, tests&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;HLC&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;causal order + close to wall time, 64-bit&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;audit entries, migration tickets&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=11;overflow=fill;fontColor=#222222;" vertex="1" parent="p3-1">
+          <mxGeometry x="20" y="470" width="840" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="p3-logicalc-23" value="&lt;b&gt;Why it matters for security&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;incident timelines across fog and cloud need a trustworthy order&lt;/li&gt;&lt;li&gt;short-lived credentials still need synchronised wall clocks: chrony on every node (M7), skew allowance in token checks&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p3-1">
+          <mxGeometry x="900" y="470" width="800" height="120" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

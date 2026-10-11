@@ -1,0 +1,232 @@
+<mxfile host="app.diagrams.net" agent="ztc-diagram-generator" type="device">
+  <diagram name="Handover ticket sequence" id="page-0">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1560" pageHeight="820" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="p0-0" />
+        <mxCell id="p0-1" parent="p0-0" />
+        <mxCell id="p0-handover-1" value="M6 — secure service migration with a handover ticket (RQ3)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="10" width="1500" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-handover-2" value="A service moves from one fog node to another. Its state must not leak, its credentials must not be usable by anyone but the target, and it should keep working when the substation is cut off from the cloud." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="44" width="1500" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-src" value="&lt;b&gt;source fog node&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;fog-A&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="90.0" y="100" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-handover-3" value="" style="html=1;endArrow=none;dashed=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="p0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="150" as="sourcePoint" />
+            <mxPoint x="160" y="670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p0-tgt" value="&lt;b&gt;target fog node&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;fog-B&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="420.0" y="100" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-handover-4" value="" style="html=1;endArrow=none;dashed=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="p0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="490" y="150" as="sourcePoint" />
+            <mxPoint x="490" y="670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p0-auth" value="&lt;b&gt;ticket authority&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;fog-local (or PDP)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="750.0" y="100" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-handover-5" value="" style="html=1;endArrow=none;dashed=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="p0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="820" y="150" as="sourcePoint" />
+            <mxPoint x="820" y="670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p0-pdp" value="&lt;b&gt;ztc-pdp&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;cloud&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="1080.0" y="100" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-handover-6" value="" style="html=1;endArrow=none;dashed=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="p0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1150" y="150" as="sourcePoint" />
+            <mxPoint x="1150" y="670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p0-handover-7" value="decide: migrate-service (trust ≥ 0.7, target trust checked)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="190" as="sourcePoint" />
+            <mxPoint x="1150" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p0-handover-8" value="allow, TTL 10 s" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1150" y="220" as="sourcePoint" />
+            <mxPoint x="160" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p0-handover-9" value="freeze the service, snapshot state" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;align=left;spacingLeft=46;labelBackgroundColor=none;" edge="1" parent="p0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="235" as="sourcePoint" />
+            <mxPoint x="160" y="261" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="200" y="235" />
+              <mxPoint x="200" y="261" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p0-handover-10" value="HandoverTicket{service, to = fog-B, targetKey, nonce, exp = 10 s, HLC} signed by fog-A" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="300" as="sourcePoint" />
+            <mxPoint x="490" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p0-handover-11" value="exchange ticket + proof of possession of targetKey" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="490" y="350" as="sourcePoint" />
+            <mxPoint x="820" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p0-handover-12" value="verify sig_A (known fog key), expiry, key binding, nonce unused" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;align=left;spacingLeft=46;labelBackgroundColor=none;" edge="1" parent="p0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="820" y="362" as="sourcePoint" />
+            <mxPoint x="820" y="388" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="860" y="362" />
+              <mxPoint x="860" y="388" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p0-handover-13" value="short-lived credentials for the service" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="820" y="430" as="sourcePoint" />
+            <mxPoint x="490" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p0-handover-14" value="Seal(state) for fog-B: X25519 + HKDF-SHA256 + AES-256-GCM" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="480" as="sourcePoint" />
+            <mxPoint x="490" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p0-handover-15" value="Open, restore, start" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;align=left;spacingLeft=46;labelBackgroundColor=none;" edge="1" parent="p0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="490" y="492" as="sourcePoint" />
+            <mxPoint x="490" y="518" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="530" y="492" />
+              <mxPoint x="530" y="518" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p0-handover-16" value="ready" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="490" y="560" as="sourcePoint" />
+            <mxPoint x="160" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p0-handover-17" value="stop, wipe state and drop credentials" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;align=left;spacingLeft=46;labelBackgroundColor=none;" edge="1" parent="p0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="572" as="sourcePoint" />
+            <mxPoint x="160" y="598" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="200" y="572" />
+              <mxPoint x="200" y="598" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p0-handover-18" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;shape=mxgraph.basic.x;fillColor=#b85450;strokeColor=none;" vertex="1" parent="p0-1">
+          <mxGeometry x="1137" y="330" width="26" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-handover-19" value="&lt;span style=&quot;font-size:11px&quot;&gt;&lt;b&gt;WAN partition after the decision&lt;/b&gt;&lt;br&gt;the rest of the migration needs no cloud&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;fontColor=#b85450;" vertex="1" parent="p0-1">
+          <mxGeometry x="1170" y="320" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-handover-20" value="&lt;b&gt;Why the authority sits on the fog&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;if the cloud validates the ticket, migration fails whenever the WAN is down — exactly when local autonomy matters&lt;/li&gt;&lt;li&gt;the target knows the source fog node's public key (from the CA bundle), so it can validate locally&lt;/li&gt;&lt;li&gt;the PDP is still asked for the migrate decision beforehand; during a partition a fog PDP replica answers&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p0-1">
+          <mxGeometry x="40" y="680" width="900" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-handover-21" value="&lt;b&gt;Ticket properties&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;signed by the source: authenticity&lt;/li&gt;&lt;li&gt;bound to the target's key: useless to anyone else&lt;/li&gt;&lt;li&gt;single-use nonce + 10 s expiry: no replay&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p0-1">
+          <mxGeometry x="980" y="680" width="540" height="110" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Migration strategies" id="page-1">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="900" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="p1-0" />
+        <mxCell id="p1-1" parent="p1-0" />
+        <mxCell id="p1-migratio-1" value="M6 — three ways for trust to follow a migrating service" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="10" width="1600" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-2" value="Downtime (service unavailable) against exposure window (credentials valid on the target before they are needed). Illustrative timelines; RQ3 measures them." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="44" width="1600" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-3" value="&lt;b&gt;Full re-authentication&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;verticalAlign=middle;fontSize=13;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="130" width="250" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-4" value="&lt;span style=&quot;font-size:11px&quot;&gt;freeze&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fillColor=#dae8fc;strokeColor=#888888;" vertex="1" parent="p1-1">
+          <mxGeometry x="290.0" y="130" width="72.0" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-5" value="&lt;span style=&quot;font-size:11px&quot;&gt;transfer state&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fillColor=#dae8fc;strokeColor=#888888;" vertex="1" parent="p1-1">
+          <mxGeometry x="362.0" y="130" width="192.0" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-6" value="&lt;span style=&quot;font-size:11px&quot;&gt;re-auth via cloud (WAN RTT)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fillColor=#f8cecc;strokeColor=#888888;" vertex="1" parent="p1-1">
+          <mxGeometry x="554.0" y="130" width="312.0" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-7" value="&lt;span style=&quot;font-size:11px&quot;&gt;start&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fillColor=#d5e8d4;strokeColor=#888888;" vertex="1" parent="p1-1">
+          <mxGeometry x="866.0" y="130" width="60.0" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-8" value="&lt;span style=&quot;font-size:12px&quot;&gt;downtime grows with WAN delay; fails in a partition; no exposure&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p1-1">
+          <mxGeometry x="290" y="188" width="640" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-9" value="&lt;b&gt;Pre-authentication&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;verticalAlign=middle;fontSize=13;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="280" width="250" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-10" value="&lt;span style=&quot;font-size:11px&quot;&gt;pre-auth on target&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fillColor=#fff2cc;strokeColor=#888888;" vertex="1" parent="p1-1">
+          <mxGeometry x="290.0" y="280" width="504.0" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-11" value="&lt;span style=&quot;font-size:11px&quot;&gt;freeze&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fillColor=#dae8fc;strokeColor=#888888;" vertex="1" parent="p1-1">
+          <mxGeometry x="794.0" y="280" width="48.0" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-12" value="&lt;span style=&quot;font-size:11px&quot;&gt;transfer&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fillColor=#dae8fc;strokeColor=#888888;" vertex="1" parent="p1-1">
+          <mxGeometry x="842.0" y="280" width="84.0" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-13" value="&lt;span style=&quot;font-size:11px&quot;&gt;start&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fillColor=#d5e8d4;strokeColor=#888888;" vertex="1" parent="p1-1">
+          <mxGeometry x="926.0" y="280" width="48.0" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-14" value="&lt;span style=&quot;font-size:12px&quot;&gt;smallest downtime; credentials sit on the target long before use → long exposure window&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p1-1">
+          <mxGeometry x="290" y="338" width="640" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-15" value="&lt;b&gt;Token handover (fog-local ticket)&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;verticalAlign=middle;fontSize=13;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="430" width="250" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-16" value="&lt;span style=&quot;font-size:11px&quot;&gt;freeze&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fillColor=#dae8fc;strokeColor=#888888;" vertex="1" parent="p1-1">
+          <mxGeometry x="290.0" y="430" width="72.0" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-17" value="&lt;span style=&quot;font-size:11px&quot;&gt;ticket&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fillColor=#e1d5e7;strokeColor=#888888;" vertex="1" parent="p1-1">
+          <mxGeometry x="362.0" y="430" width="48.0" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-18" value="&lt;span style=&quot;font-size:11px&quot;&gt;transfer sealed state&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fillColor=#dae8fc;strokeColor=#888888;" vertex="1" parent="p1-1">
+          <mxGeometry x="410.0" y="430" width="192.0" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-19" value="&lt;span style=&quot;font-size:11px&quot;&gt;start&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fillColor=#d5e8d4;strokeColor=#888888;" vertex="1" parent="p1-1">
+          <mxGeometry x="602.0" y="430" width="60.0" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-20" value="&lt;span style=&quot;font-size:12px&quot;&gt;downtime independent of the WAN; exposure ≈ ticket lifetime; works in a partition&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p1-1">
+          <mxGeometry x="290" y="488" width="640" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-21" value="time →" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="290" y="580" as="sourcePoint" />
+            <mxPoint x="930" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-migratio-22" value="&lt;b&gt;Expected outcome (hypothesis)&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:12px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Strategy&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Downtime&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Exposure window&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Under WAN partition&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;full re-auth (cloud)&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;high, grows with WAN delay&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;minimal&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;fails&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;pre-auth&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;lowest&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;long (lead time)&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;works if done before the cut&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;token handover, cloud validates&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;like full re-auth&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;short&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;fails&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;token handover, fog validates&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;close to pre-auth&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;short (ticket TTL)&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;works&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=11;overflow=fill;fontColor=#222222;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="620" width="900" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-23" value="&lt;b&gt;Sealing the state&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-family:Courier New;font-size:11px&quot;&gt;eph = X25519 keypair (per migration)&lt;br&gt;shared = X25519(eph.priv, target.pub)&lt;br&gt;key = HKDF-SHA256(shared, salt, &quot;ztc-migration v1&quot; ‖ service)&lt;br&gt;ct = AES-256-GCM(key, nonce, state, aad = ticket id)&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;only the target can open it; the ticket id as AAD binds the state to this migration; RFC 5869 test vector in the tests&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;verticalAlign=top;spacing=10;" vertex="1" parent="p1-1">
+          <mxGeometry x="1000" y="130" width="700" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-24" value="&lt;b&gt;Failure handling (IN5020: distributed transactions)&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;source crashes after sending the ticket: ticket expires in 10 s; target never starts without the sealed state&lt;/li&gt;&lt;li&gt;target crashes after restore: source keeps the frozen snapshot until it receives ready&lt;/li&gt;&lt;li&gt;duplicate delivery: nonce is single-use, restore is idempotent&lt;/li&gt;&lt;li&gt;net effect: at most one running copy — never two&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p1-1">
+          <mxGeometry x="1000" y="360" width="700" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-migratio-25" value="&lt;b&gt;Implemented twice&lt;/b&gt;: services/internal/migration (Go, ztc-migrate experiment CLI → CSV) and the OMNeT++ MigrationController, so simulated and measured downtime can be compared." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p1-1">
+          <mxGeometry x="1000" y="520" width="700" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,283 @@
+<mxfile host="app.diagrams.net" agent="ztc-diagram-generator" type="device">
+  <diagram name="SPIFFE identity and PKI" id="page-0">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="900" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="p0-0" />
+        <mxCell id="p0-1" parent="p0-0" />
+        <mxCell id="p0-spiffeid-1" value="M5 — workload identity: SPIFFE IDs in short-lived certificates" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="10" width="1600" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-spiffeid-2" value="Every service and every device gets its own cryptographic identity, so a request is trusted because of who sent it, never because of where it came from (NIST tenet 2). Short lifetimes make revocation mostly a matter of not renewing." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="44" width="1600" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-root" value="&lt;b&gt;Root key&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;offline in production (HSM + key ceremony); in memory in ZTC (documented simplification)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="40" y="110" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-ca" value="&lt;b&gt;ztc-ca (issuing)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;ECDSA P-256 X.509-SVIDs · Ed25519 token key (separate key, separate purpose)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="40" y="240" width="300" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-spiffeid-3" value="signs" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-root" target="p0-ca">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-leaf0" value="&lt;span style=&quot;font-size:11px&quot;&gt;spiffe://grid.example/edge/pmu/pmu-b1-1&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;fontFamily=Courier New;" vertex="1" parent="p0-1">
+          <mxGeometry x="420" y="120" width="360" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-spiffeid-4" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-ca" target="p0-leaf0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-leaf1" value="&lt;span style=&quot;font-size:11px&quot;&gt;spiffe://grid.example/fog/pep/sub1&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;fontFamily=Courier New;" vertex="1" parent="p0-1">
+          <mxGeometry x="420" y="195" width="360" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-spiffeid-5" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-ca" target="p0-leaf1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-leaf2" value="&lt;span style=&quot;font-size:11px&quot;&gt;spiffe://grid.example/cloud/pdp/pdp-0&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;fontFamily=Courier New;" vertex="1" parent="p0-1">
+          <mxGeometry x="420" y="270" width="360" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-spiffeid-6" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-ca" target="p0-leaf2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-leaf3" value="&lt;span style=&quot;font-size:11px&quot;&gt;spiffe://grid.example/cloud/admin/alice&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;fontFamily=Courier New;" vertex="1" parent="p0-1">
+          <mxGeometry x="420" y="345" width="360" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-spiffeid-7" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-ca" target="p0-leaf3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-spiffeid-8" value="&lt;b&gt;ID scheme&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:11px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Part&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Meaning&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Used by&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;grid.example&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust domain (one per operator)&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;VerifyConnection rejects other domains&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;/edge, /fog, /cloud&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;layer&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;subject.layer in policy&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;/pmu, /pep, /admin …&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;kind / role&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;inventory → roles&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;/pmu-b1-1&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;instance&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;audit, trust per subject&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=11;overflow=fill;fontColor=#222222;" vertex="1" parent="p0-1">
+          <mxGeometry x="840" y="110" width="860" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-spiffeid-9" value="&lt;b&gt;Endpoints of ztc-ca&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:11px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Endpoint&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Purpose&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;POST /v1/issue&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;CSR + join token → X.509-SVID&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;POST /v1/token&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;join token → Ed25519-signed token (M1)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;GET /v1/bundle&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust bundle (CA certificates)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;GET /v1/keys&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;token verification keys (kid)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;POST /v1/revoke · GET /v1/revoked&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;serials revoked before expiry&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=11;overflow=fill;fontColor=#222222;" vertex="1" parent="p0-1">
+          <mxGeometry x="840" y="300" width="860" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-e1" value="&lt;b&gt;① generate key pair on the device&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;private key never leaves it&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="40" y="560" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-e2" value="&lt;b&gt;② CSR + one-time join token&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;join token issued out of band for this device&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="320" y="560" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-spiffeid-10" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-e1" target="p0-e2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-e3" value="&lt;b&gt;③ CA checks token, maps it to the SPIFFE ID in the inventory&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;the device cannot choose its own name&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="600" y="560" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-spiffeid-11" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-e2" target="p0-e3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-e4" value="&lt;b&gt;④ SVID with TTL (e.g. 1 h)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;URI SAN = SPIFFE ID; no IP or DNS names needed&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="880" y="560" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-spiffeid-12" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-e3" target="p0-e4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-e5" value="&lt;b&gt;⑤ renew at 2/3 of lifetime&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;a missed renewal expires the identity by itself&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="1160" y="560" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-spiffeid-13" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-e4" target="p0-e5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-e6" value="&lt;b&gt;⑥ revocation&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;stop renewing; for urgent cases add to /v1/revoked and bump the PDP epoch&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="1440" y="560" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-spiffeid-14" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-e5" target="p0-e6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-spiffeid-15" value="&lt;b&gt;Enrolment and life cycle&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p0-1">
+          <mxGeometry x="40" y="530" width="400" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-spiffeid-16" value="&lt;b&gt;Why SPIFFE-style and short-lived (ADR 0005)&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;names describe workloads, not hosts: survives IP changes, migration and NAT&lt;/li&gt;&lt;li&gt;short TTLs replace most of CRL / OCSP, which fog nodes may not be able to reach during a partition&lt;/li&gt;&lt;li&gt;same identity for mTLS and for policy (subjects: spiffe://*/cloud/admin/*)&lt;/li&gt;&lt;li&gt;production equivalent: SPIRE with node and workload attestation; written by hand here to keep the trust path readable&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p0-1">
+          <mxGeometry x="40" y="680" width="1000" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-spiffeid-17" value="&lt;b&gt;Lessons kept from the reference build&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;use tls.Config.VerifyConnection, not VerifyPeerCertificate (gosec G123: resumed sessions skip the latter)&lt;/li&gt;&lt;li&gt;chrony on every node: short-lived certificates need synchronised clocks&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="p0-1">
+          <mxGeometry x="1080" y="680" width="620" height="150" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="mTLS request sequence" id="page-1">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1560" pageHeight="980" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="p1-0" />
+        <mxCell id="p1-1" parent="p1-0" />
+        <mxCell id="p1-mtlsrequ-1" value="M5 — a request over mutual TLS" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="10" width="1500" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-dev" value="&lt;b&gt;PMU&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;edge&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="50.0" y="70" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-2" value="" style="html=1;endArrow=none;dashed=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="120" y="120" as="sourcePoint" />
+            <mxPoint x="120" y="940" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-ca" value="&lt;b&gt;ztc-ca&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;cloud&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="350.0" y="70" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-3" value="" style="html=1;endArrow=none;dashed=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="120" as="sourcePoint" />
+            <mxPoint x="420" y="940" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-pep" value="&lt;b&gt;ztc-pep&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;fog&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="650.0" y="70" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-4" value="" style="html=1;endArrow=none;dashed=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="120" as="sourcePoint" />
+            <mxPoint x="720" y="940" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-pdp" value="&lt;b&gt;ztc-pdp&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;cloud&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="950.0" y="70" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-5" value="" style="html=1;endArrow=none;dashed=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1020" y="120" as="sourcePoint" />
+            <mxPoint x="1020" y="940" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-up" value="&lt;b&gt;ztc-fog&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;upstream&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="1250.0" y="70" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-6" value="" style="html=1;endArrow=none;dashed=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1320" y="120" as="sourcePoint" />
+            <mxPoint x="1320" y="940" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-7" value="POST /v1/issue (CSR + join token)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="120" y="160" as="sourcePoint" />
+            <mxPoint x="420" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-8" value="X.509-SVID spiffe://grid.example/edge/pmu/pmu-b1-1, TTL 1 h + trust bundle" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="190" as="sourcePoint" />
+            <mxPoint x="120" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-9" value="TLS 1.3 ClientHello" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="120" y="250" as="sourcePoint" />
+            <mxPoint x="720" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-10" value="server SVID spiffe://grid.example/fog/pep/sub1" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="280" as="sourcePoint" />
+            <mxPoint x="120" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-11" value="verify: chain to bundle, expected PEP ID" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;align=left;spacingLeft=46;labelBackgroundColor=none;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="120" y="290" as="sourcePoint" />
+            <mxPoint x="120" y="316" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="160" y="290" />
+              <mxPoint x="160" y="316" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-12" value="client SVID + proof of key possession (CertificateVerify)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="120" y="350" as="sourcePoint" />
+            <mxPoint x="720" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-13" value="VerifyConnection: chain, trust domain, ID shape, not expired, not revoked" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;align=left;spacingLeft=46;labelBackgroundColor=none;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="362" as="sourcePoint" />
+            <mxPoint x="720" y="388" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="760" y="362" />
+              <mxPoint x="760" y="388" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-14" value="SPIFFE ID → inventory → roles, zone" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;align=left;spacingLeft=46;labelBackgroundColor=none;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="410" as="sourcePoint" />
+            <mxPoint x="720" y="436" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="760" y="410" />
+              <mxPoint x="760" y="436" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-15" value="signal: authentication 0.8 (new session)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;verticalAlign=bottom;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="470" as="sourcePoint" />
+            <mxPoint x="1020" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-16" value="POST /bay-1/telemetry/pmu-b1-1 (inside the session, no token needed)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="120" y="520" as="sourcePoint" />
+            <mxPoint x="720" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-17" value="decide (or cache hit)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="560" as="sourcePoint" />
+            <mxPoint x="1020" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-18" value="allow, TTL 60 s" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1020" y="590" as="sourcePoint" />
+            <mxPoint x="720" y="590" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-19" value="forward over mTLS (PEP's own SVID)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="630" as="sourcePoint" />
+            <mxPoint x="1320" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-20" value="202" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1320" y="660" as="sourcePoint" />
+            <mxPoint x="720" y="660" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-21" value="202" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="690" as="sourcePoint" />
+            <mxPoint x="120" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-22" value="later" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=3;container=1;collapsible=0;recursiveResize=0;fillColor=#ffffff;strokeColor=#888888;dashed=1;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;fontSize=12;fontColor=#333333;dashed=0;strokeColor=#666666;fillColor=none;fontSize=11;" vertex="1" parent="p1-1">
+          <mxGeometry x="60" y="720" width="1300" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-23" value="renew at 2/3 of TTL (40 min)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="120" y="760" as="sourcePoint" />
+            <mxPoint x="420" y="760" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-24" value="revocation epoch ↑ (device compromised)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;verticalAlign=bottom;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1020" y="810" as="sourcePoint" />
+            <mxPoint x="720" y="810" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-25" value="tear down the device's TLS sessions, flush cache" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;align=left;spacingLeft=46;labelBackgroundColor=none;" edge="1" parent="p1-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="820" as="sourcePoint" />
+            <mxPoint x="720" y="846" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="760" y="820" />
+              <mxPoint x="760" y="846" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1-mtlsrequ-26" value="&lt;b&gt;Why sessions must be torn down&lt;/b&gt;: with long-lived sessions the PEP authenticates once per handshake. A revoked device would keep its open connection, and every request becomes a cache miss and a WAN round trip — turning a revoked device into load on the PDP. Revocation therefore closes sessions, and session lifetime is capped by the certificate TTL." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p1-1">
+          <mxGeometry x="60" y="900" width="1300" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
