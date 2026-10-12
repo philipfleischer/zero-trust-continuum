@@ -28,7 +28,7 @@ type EmergencyState struct {
 	On bool `json:"on"`
 }
 
-// NewHandler returns the HTTP API of p:
+// NewHandler returns the HTTP API of pdp:
 //
 //	POST /v1/decide              model.AccessRequest → model.Decision
 //	POST /v1/signals             trust.Signal → 204                 (token)
@@ -40,130 +40,131 @@ type EmergencyState struct {
 //
 // Requests marked (token) change the PDP and need the header
 // "Authorization: Bearer <token>". An empty token disables them. Decisions are
-// counted in reg as ztc_pdp_decisions_total{effect}.
-func NewHandler(p *PDP, token string, reg *observability.Registry) http.Handler {
-	h := &handler{
-		pdp:       p,
+// counted in registry as ztc_pdp_decisions_total{effect}.
+func NewHandler(pdp *PDP, token string, registry *observability.Registry) http.Handler {
+	api := &pdpAPI{
+		pdp:       pdp,
 		token:     token,
-		decisions: reg.Counter("ztc_pdp_decisions_total", "Access decisions by effect."),
+		decisions: registry.Counter("ztc_pdp_decisions_total", "Access decisions by effect."),
 	}
 	mux := http.NewServeMux()
-	mux.HandleFunc("POST /v1/decide", h.decide)
-	mux.HandleFunc("POST /v1/signals", h.authorized(h.signal))
-	mux.HandleFunc("GET /v1/trust", h.trust)
-	mux.HandleFunc("GET /v1/policy", h.getPolicy)
-	mux.HandleFunc("PUT /v1/policy", h.authorized(h.putPolicy))
-	mux.HandleFunc("GET /v1/emergency", h.getEmergency)
-	mux.HandleFunc("PUT /v1/emergency", h.authorized(h.putEmergency))
+	mux.HandleFunc("POST /v1/decide", api.decide)
+	mux.HandleFunc("POST /v1/signals", api.requireToken(api.recordSignal))
+	mux.HandleFunc("GET /v1/trust", api.getTrust)
+	mux.HandleFunc("GET /v1/policy", api.getPolicy)
+	mux.HandleFunc("PUT /v1/policy", api.requireToken(api.putPolicy))
+	mux.HandleFunc("GET /v1/emergency", api.getEmergency)
+	mux.HandleFunc("PUT /v1/emergency", api.requireToken(api.putEmergency))
 	return mux
 }
 
-// handler holds what the endpoints share.
-type handler struct {
+// pdpAPI holds what the endpoints share.
+type pdpAPI struct {
 	pdp       *PDP
 	token     string
 	decisions *observability.Counter
 }
 
-// authorized wraps next so it runs only with the right bearer token. The
+// requireToken wraps next so it runs only with the right bearer token. The
 // comparison takes the same time however much of the token is right, so the
 // token cannot be guessed one character at a time.
-func (h *handler) authorized(next http.HandlerFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		if h.token == "" {
-			httpx.Error(w, http.StatusForbidden, "writes are disabled on this PDP")
+func (api *pdpAPI) requireToken(next http.HandlerFunc) http.HandlerFunc {
+	return func(writer http.ResponseWriter, request *http.Request) {
+		if api.token == "" {
+			httpx.Error(writer, http.StatusForbidden, "writes are disabled on this PDP")
 			return
 		}
-		got, ok := strings.CutPrefix(r.Header.Get("Authorization"), "Bearer ")
-		if !ok || subtle.ConstantTimeCompare([]byte(got), []byte(h.token)) != 1 {
-			w.Header().Set("WWW-Authenticate", "Bearer")
-			httpx.Error(w, http.StatusUnauthorized, "missing or wrong bearer token")
+		presentedToken, hasBearer := strings.CutPrefix(request.Header.Get("Authorization"), "Bearer ")
+		tokenMatches := subtle.ConstantTimeCompare([]byte(presentedToken), []byte(api.token)) == 1
+		if !hasBearer || !tokenMatches {
+			writer.Header().Set("WWW-Authenticate", "Bearer")
+			httpx.Error(writer, http.StatusUnauthorized, "missing or wrong bearer token")
 			return
 		}
-		next(w, r)
+		next(writer, request)
 	}
 }
 
-func (h *handler) decide(w http.ResponseWriter, r *http.Request) {
-	var req model.AccessRequest
-	if err := httpx.ReadJSON(w, r, &req); err != nil {
-		badRequest(w, err)
+func (api *pdpAPI) decide(writer http.ResponseWriter, request *http.Request) {
+	var accessRequest model.AccessRequest
+	if err := httpx.ReadJSON(writer, request, &accessRequest); err != nil {
+		badRequest(writer, err)
 		return
 	}
-	d, err := h.pdp.Decide(r.Context(), req)
-	h.decisions.Inc("effect", string(d.Effect))
+	decision, err := api.pdp.Decide(request.Context(), accessRequest)
+	api.decisions.Inc("effect", string(decision.Effect))
 	if err != nil {
-		httpx.Error(w, http.StatusServiceUnavailable, err.Error())
+		httpx.Error(writer, http.StatusServiceUnavailable, err.Error())
 		return
 	}
-	httpx.WriteJSON(w, http.StatusOK, d)
+	httpx.WriteJSON(writer, http.StatusOK, decision)
 }
 
-func (h *handler) signal(w http.ResponseWriter, r *http.Request) {
-	var sig trust.Signal
-	if err := httpx.ReadJSON(w, r, &sig); err != nil {
-		badRequest(w, err)
+func (api *pdpAPI) recordSignal(writer http.ResponseWriter, request *http.Request) {
+	var signal trust.Signal
+	if err := httpx.ReadJSON(writer, request, &signal); err != nil {
+		badRequest(writer, err)
 		return
 	}
-	if _, err := h.pdp.RecordSignal(sig); err != nil {
-		httpx.Error(w, http.StatusBadRequest, err.Error())
+	if _, err := api.pdp.RecordSignal(signal); err != nil {
+		httpx.Error(writer, http.StatusBadRequest, err.Error())
 		return
 	}
-	w.WriteHeader(http.StatusNoContent)
+	writer.WriteHeader(http.StatusNoContent)
 }
 
-func (h *handler) trust(w http.ResponseWriter, r *http.Request) {
-	subject := r.URL.Query().Get("subject")
+func (api *pdpAPI) getTrust(writer http.ResponseWriter, request *http.Request) {
+	subject := request.URL.Query().Get("subject")
 	if subject == "" {
-		httpx.Error(w, http.StatusBadRequest, "missing query parameter subject")
+		httpx.Error(writer, http.StatusBadRequest, "missing query parameter subject")
 		return
 	}
-	score := h.pdp.Trust.Score(subject)
-	httpx.WriteJSON(w, http.StatusOK, TrustResponse{Subject: subject, Score: score, Level: trust.LevelOf(score)})
+	score := api.pdp.Trust.Score(subject)
+	httpx.WriteJSON(writer, http.StatusOK, TrustResponse{Subject: subject, Score: score, Level: trust.LevelOf(score)})
 }
 
-func (h *handler) getPolicy(w http.ResponseWriter, _ *http.Request) {
-	httpx.WriteJSON(w, http.StatusOK, h.pdp.Engine.Policy())
+func (api *pdpAPI) getPolicy(writer http.ResponseWriter, _ *http.Request) {
+	httpx.WriteJSON(writer, http.StatusOK, api.pdp.Engine.Policy())
 }
 
-func (h *handler) putPolicy(w http.ResponseWriter, r *http.Request) {
-	p, err := policy.Load(http.MaxBytesReader(w, r.Body, httpx.MaxBody))
+func (api *pdpAPI) putPolicy(writer http.ResponseWriter, request *http.Request) {
+	newPolicy, err := policy.Load(http.MaxBytesReader(writer, request.Body, httpx.MaxBody))
 	if err != nil {
-		badRequest(w, err)
+		badRequest(writer, err)
 		return
 	}
-	if err := h.pdp.Engine.Install(p); err != nil {
+	if err := api.pdp.Engine.Install(newPolicy); err != nil {
 		status := http.StatusBadRequest
 		if errors.Is(err, policy.ErrStalePolicy) {
 			status = http.StatusConflict
 		}
-		httpx.Error(w, status, err.Error())
+		httpx.Error(writer, status, err.Error())
 		return
 	}
-	w.WriteHeader(http.StatusNoContent)
+	writer.WriteHeader(http.StatusNoContent)
 }
 
-func (h *handler) getEmergency(w http.ResponseWriter, _ *http.Request) {
-	httpx.WriteJSON(w, http.StatusOK, EmergencyState{On: h.pdp.Emergency()})
+func (api *pdpAPI) getEmergency(writer http.ResponseWriter, _ *http.Request) {
+	httpx.WriteJSON(writer, http.StatusOK, EmergencyState{On: api.pdp.Emergency()})
 }
 
-func (h *handler) putEmergency(w http.ResponseWriter, r *http.Request) {
-	var s EmergencyState
-	if err := httpx.ReadJSON(w, r, &s); err != nil {
-		badRequest(w, err)
+func (api *pdpAPI) putEmergency(writer http.ResponseWriter, request *http.Request) {
+	var emergency EmergencyState
+	if err := httpx.ReadJSON(writer, request, &emergency); err != nil {
+		badRequest(writer, err)
 		return
 	}
-	h.pdp.SetEmergency(s.On)
-	w.WriteHeader(http.StatusNoContent)
+	api.pdp.SetEmergency(emergency.On)
+	writer.WriteHeader(http.StatusNoContent)
 }
 
 // badRequest answers a body that could not be read: 413 if it was too large,
 // 400 otherwise.
-func badRequest(w http.ResponseWriter, err error) {
+func badRequest(writer http.ResponseWriter, err error) {
 	status := http.StatusBadRequest
 	var tooLarge *http.MaxBytesError
 	if errors.As(err, &tooLarge) {
 		status = http.StatusRequestEntityTooLarge
 	}
-	httpx.Error(w, status, err.Error())
+	httpx.Error(writer, status, err.Error())
 }

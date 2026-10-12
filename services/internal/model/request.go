@@ -70,4 +70,4 @@ type Decision struct {
 
 // Allowed reports whether the decision permits the request.
 // Anything other than an explicit Allow counts as deny, including the zero value.
-func (d Decision) Allowed() bool { return d.Effect == Allow }
+func (decision Decision) Allowed() bool { return decision.Effect == Allow }

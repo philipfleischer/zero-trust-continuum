@@ -29,7 +29,7 @@ type Cache struct {
 	upstream Decider
 	maxSize  int
 
-	mu              sync.Mutex
+	mutex           sync.Mutex
 	now             func() time.Time
 	entries         map[cacheKey]cacheEntry
 	policyVersion   uint64 // newest policy version seen
@@ -42,9 +42,9 @@ type Cache struct {
 type cacheKey [sha256.Size]byte
 
 type cacheEntry struct {
-	subject string
-	d       model.Decision
-	expires time.Time
+	subject   string
+	decision  model.Decision
+	expiresAt time.Time
 }
 
 // NewCache returns a cache called name in front of upstream that holds at
@@ -60,120 +60,130 @@ func NewCache(name string, upstream Decider, maxSize int) *Cache {
 }
 
 // SetClock replaces the clock used for TTLs, for tests.
-func (c *Cache) SetClock(now func() time.Time) {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	c.now = now
+func (cache *Cache) SetClock(now func() time.Time) {
+	cache.mutex.Lock()
+	defer cache.mutex.Unlock()
+	cache.now = now
 }
 
-// Decide answers req from the cache if a live allow is stored for it, and
+// Decide answers request from the cache if a live allow is stored for it, and
 // asks upstream otherwise. A cached answer has DecidedBy set to the cache's
 // name. If upstream fails, the answer is a deny and the error.
-func (c *Cache) Decide(ctx context.Context, req model.AccessRequest) (model.Decision, error) {
-	key, cacheable := keyOf(req)
+func (cache *Cache) Decide(ctx context.Context, request model.AccessRequest) (model.Decision, error) {
+	key, cacheable := keyOf(request)
 	if cacheable {
-		c.mu.Lock()
-		e, ok := c.entries[key]
-		if ok && c.now().Before(e.expires) {
-			c.hits++
-			c.mu.Unlock()
-			e.d.DecidedBy = c.name
-			return e.d, nil
+		cache.mutex.Lock()
+		entry, found := cache.entries[key]
+		isLive := found && cache.now().Before(entry.expiresAt)
+		if isLive {
+			cache.hits++
+			cache.mutex.Unlock()
+			entry.decision.DecidedBy = cache.name
+			return entry.decision, nil
 		}
-		c.misses++
-		c.mu.Unlock()
+		cache.misses++
+		cache.mutex.Unlock()
 	}
 
-	d, err := c.upstream.Decide(ctx, req)
+	decision, err := cache.upstream.Decide(ctx, request)
 	if err != nil {
-		return model.Decision{Effect: model.Deny, Reason: "no decision: " + err.Error(), DecidedBy: c.name}, err
+		return model.Decision{Effect: model.Deny, Reason: "no decision: " + err.Error(), DecidedBy: cache.name}, err
 	}
 
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	c.observe(d.PolicyVersion, d.RevocationEpoch)
-	if !d.Allowed() {
-		c.dropSubject(req.Subject.ID)
-		return d, nil
+	cache.mutex.Lock()
+	defer cache.mutex.Unlock()
+	cache.observe(decision.PolicyVersion, decision.RevocationEpoch)
+	if !decision.Allowed() {
+		cache.dropSubject(request.Subject.ID)
+		return decision, nil
 	}
-	stale := d.PolicyVersion < c.policyVersion || d.RevocationEpoch < c.revocationEpoch
-	if cacheable && d.TTL > 0 && !stale {
-		c.store(key, cacheEntry{subject: req.Subject.ID, d: d, expires: c.now().Add(d.TTL)})
+	isStale := decision.PolicyVersion < cache.policyVersion || decision.RevocationEpoch < cache.revocationEpoch
+	if cacheable && decision.TTL > 0 && !isStale {
+		entry := cacheEntry{subject: request.Subject.ID, decision: decision, expiresAt: cache.now().Add(decision.TTL)}
+		cache.store(key, entry)
 	}
-	return d, nil
+	return decision, nil
 }
 
 // InvalidateSubject drops every cached decision for subject.
-func (c *Cache) InvalidateSubject(subject string) {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	c.dropSubject(subject)
+func (cache *Cache) InvalidateSubject(subject string) {
+	cache.mutex.Lock()
+	defer cache.mutex.Unlock()
+	cache.dropSubject(subject)
 }
 
 // Stats returns the number of hits and misses so far and the number of
 // cached decisions.
-func (c *Cache) Stats() (hits, misses uint64, size int) {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	return c.hits, c.misses, len(c.entries)
+func (cache *Cache) Stats() (hits, misses uint64, size int) {
+	cache.mutex.Lock()
+	defer cache.mutex.Unlock()
+	return cache.hits, cache.misses, len(cache.entries)
 }
 
 // observe records the versions of an upstream answer and drops every entry if
 // either is newer than seen before. The two are separate sequences: policy
-// version 3 says nothing about revocation epoch 3. c.mu must be held.
-func (c *Cache) observe(policyVersion, revocationEpoch uint64) {
-	if policyVersion <= c.policyVersion && revocationEpoch <= c.revocationEpoch {
+// version 3 says nothing about revocation epoch 3. cache.mutex must be held.
+func (cache *Cache) observe(policyVersion, revocationEpoch uint64) {
+	nothingIsNewer := policyVersion <= cache.policyVersion && revocationEpoch <= cache.revocationEpoch
+	if nothingIsNewer {
 		return
 	}
-	c.policyVersion = max(c.policyVersion, policyVersion)
-	c.revocationEpoch = max(c.revocationEpoch, revocationEpoch)
-	clear(c.entries)
+	cache.policyVersion = max(cache.policyVersion, policyVersion)
+	cache.revocationEpoch = max(cache.revocationEpoch, revocationEpoch)
+	clear(cache.entries)
 }
 
-// dropSubject removes the entries of subject. c.mu must be held.
-func (c *Cache) dropSubject(subject string) {
-	for k, e := range c.entries {
-		if e.subject == subject {
-			delete(c.entries, k)
+// dropSubject removes the entries of subject. cache.mutex must be held.
+func (cache *Cache) dropSubject(subject string) {
+	for key, entry := range cache.entries {
+		if entry.subject == subject {
+			delete(cache.entries, key)
 		}
 	}
 }
 
-// store adds e, first removing expired entries and, if the cache is still
-// full, the entry that would expire first. c.mu must be held.
-func (c *Cache) store(key cacheKey, e cacheEntry) {
-	if _, exists := c.entries[key]; !exists && len(c.entries) >= c.maxSize {
-		now := c.now()
-		var oldest cacheKey
-		var oldestExpiry time.Time
-		for k, old := range c.entries {
-			if !now.Before(old.expires) {
-				delete(c.entries, k)
-				continue
-			}
-			if oldestExpiry.IsZero() || old.expires.Before(oldestExpiry) {
-				oldest, oldestExpiry = k, old.expires
-			}
-		}
-		if len(c.entries) >= c.maxSize {
-			delete(c.entries, oldest)
-		}
+// store adds newEntry, first removing expired entries and, if the cache is
+// still full, the entry that would expire first. cache.mutex must be held.
+func (cache *Cache) store(key cacheKey, newEntry cacheEntry) {
+	_, alreadyStored := cache.entries[key]
+	if !alreadyStored && len(cache.entries) >= cache.maxSize {
+		cache.makeRoom()
 	}
-	c.entries[key] = e
+	cache.entries[key] = newEntry
 }
 
-// keyOf hashes req without the fields the PDP sets itself (time, trust score,
-// emergency). It reports false if req cannot be encoded; such a request is
-// never cached.
-func keyOf(req model.AccessRequest) (cacheKey, bool) {
-	req.Context.Time = time.Time{}
-	req.Context.TrustScore = 0
-	req.Context.Emergency = false
-	data, err := json.Marshal(req)
+// makeRoom removes every expired entry and, if the cache is still full, the
+// entry that expires first. cache.mutex must be held.
+func (cache *Cache) makeRoom() {
+	now := cache.now()
+	var soonestKey cacheKey
+	var soonestExpiry time.Time
+	for key, entry := range cache.entries {
+		if !now.Before(entry.expiresAt) {
+			delete(cache.entries, key)
+			continue
+		}
+		if soonestExpiry.IsZero() || entry.expiresAt.Before(soonestExpiry) {
+			soonestKey, soonestExpiry = key, entry.expiresAt
+		}
+	}
+	if len(cache.entries) >= cache.maxSize {
+		delete(cache.entries, soonestKey)
+	}
+}
+
+// keyOf hashes request without the fields the PDP sets itself (time, trust
+// score, emergency). It reports false if request cannot be encoded; such a
+// request is never cached.
+func keyOf(request model.AccessRequest) (cacheKey, bool) {
+	request.Context.Time = time.Time{}
+	request.Context.TrustScore = 0
+	request.Context.Emergency = false
+	encoded, err := json.Marshal(request)
 	if err != nil {
 		return cacheKey{}, false
 	}
-	return sha256.Sum256(data), true
+	return sha256.Sum256(encoded), true
 }
 
 // Check at compile time that *Cache satisfies Decider.

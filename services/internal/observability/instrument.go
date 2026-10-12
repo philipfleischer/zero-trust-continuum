@@ -6,8 +6,8 @@ import (
 	"time"
 )
 
-// Instrument wraps h and records the RED metrics (rate, errors, duration) of
-// every request in reg:
+// Instrument wraps handler and records the RED metrics (rate, errors,
+// duration) of every request in registry:
 //
 //	ztc_http_requests_total{service, method, code}
 //	ztc_http_request_seconds{service}
@@ -15,24 +15,25 @@ import (
 // The URL path is deliberately not a label, and unknown methods are recorded
 // as "OTHER": label values chosen by clients would let anyone create
 // unlimited time series and exhaust the service's memory (denial of service).
-func Instrument(reg *Registry, service string, h http.Handler) http.Handler {
-	requests := reg.Counter("ztc_http_requests_total", "HTTP requests by service, method and status code.")
-	latency := reg.Histogram("ztc_http_request_seconds", "HTTP request latency in seconds.", DefBuckets)
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		start := time.Now()
-		rec := &statusRecorder{ResponseWriter: w, status: http.StatusOK}
-		h.ServeHTTP(rec, r)
-		requests.Inc("service", service, "method", methodLabel(r.Method), "code", strconv.Itoa(rec.status))
-		latency.Observe(time.Since(start).Seconds(), "service", service)
+func Instrument(registry *Registry, service string, handler http.Handler) http.Handler {
+	requestCount := registry.Counter("ztc_http_requests_total", "HTTP requests by service, method and status code.")
+	latency := registry.Histogram("ztc_http_request_seconds", "HTTP request latency in seconds.", DefaultLatencyBuckets)
+	return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+		startedAt := time.Now()
+		recorder := &statusRecorder{ResponseWriter: writer, status: http.StatusOK}
+		handler.ServeHTTP(recorder, request)
+		statusCode := strconv.Itoa(recorder.status)
+		requestCount.Inc("service", service, "method", methodLabel(request.Method), "code", statusCode)
+		latency.Observe(time.Since(startedAt).Seconds(), "service", service)
 	})
 }
 
 // methodLabel maps the HTTP request method to a bounded set of label values.
-func methodLabel(m string) string {
-	switch m {
+func methodLabel(method string) string {
+	switch method {
 	case http.MethodGet, http.MethodHead, http.MethodPost, http.MethodPut,
 		http.MethodPatch, http.MethodDelete, http.MethodOptions:
-		return m
+		return method
 	}
 	return "OTHER"
 }
@@ -46,14 +47,14 @@ type statusRecorder struct {
 }
 
 // WriteHeader records the first status code and passes every call on.
-func (r *statusRecorder) WriteHeader(code int) {
-	if !r.wroteHeader {
-		r.status = code
-		r.wroteHeader = true
+func (recorder *statusRecorder) WriteHeader(statusCode int) {
+	if !recorder.wroteHeader {
+		recorder.status = statusCode
+		recorder.wroteHeader = true
 	}
-	r.ResponseWriter.WriteHeader(code)
+	recorder.ResponseWriter.WriteHeader(statusCode)
 }
 
 // Unwrap lets http.ResponseController reach the underlying ResponseWriter,
 // for example to flush or to set per-request deadlines.
-func (r *statusRecorder) Unwrap() http.ResponseWriter { return r.ResponseWriter }
+func (recorder *statusRecorder) Unwrap() http.ResponseWriter { return recorder.ResponseWriter }

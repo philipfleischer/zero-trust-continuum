@@ -14,9 +14,9 @@ import (
 	"github.com/philipfleischer/zero-trust-continuum/services/internal/model"
 )
 
-// cond is shorthand for a Condition in the test tables.
-func cond(attr, op, value string) Condition {
-	return Condition{Attribute: attr, Op: op, Value: value}
+// condition is shorthand for a Condition in the test tables.
+func condition(attribute, operator, value string) Condition {
+	return Condition{Attribute: attribute, Operator: operator, Value: value}
 }
 
 func TestEvaluate(t *testing.T) {
@@ -24,7 +24,7 @@ func TestEvaluate(t *testing.T) {
 	tests := []struct {
 		name     string
 		rules    []Rule
-		mutate   func(r *model.AccessRequest) // nil means sampleRequest() as is
+		mutate   func(request *model.AccessRequest) // nil means sampleRequest() as is
 		want     model.Effect
 		wantRule string
 	}{
@@ -48,129 +48,131 @@ func TestEvaluate(t *testing.T) {
 		{"resource ID pattern", []Rule{{ID: "a", Effect: model.Allow, Resources: []string{"substation-1/*"}}}, nil, model.Allow, "a"},
 
 		// Condition operators.
-		{"eq", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{cond("subject.zone", "eq", "substation-1")}}}, nil, model.Allow, "a"},
-		{"neq", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{cond("subject.zone", "neq", "substation-1")}}}, nil, model.Deny, ""},
-		{"in", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{cond("context.sourceZone", "in", "control-centre, substation-hmi")}}}, nil, model.Allow, "a"},
-		{"nin", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{cond("context.sourceZone", "nin", "control-centre,substation-hmi")}}}, nil, model.Deny, ""},
-		{"in on multi-valued role", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{cond("subject.role", "in", "engineer")}}}, nil, model.Allow, "a"},
-		{"glob", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{cond("resource.id", "glob", "*/breaker/*")}}}, nil, model.Allow, "a"},
-		{"gte at the threshold", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{cond("context.trustScore", "gte", "0.8")}}},
-			func(r *model.AccessRequest) { r.Context.TrustScore = 0.8 }, model.Allow, "a"},
-		{"gte just below the threshold", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{cond("context.trustScore", "gte", "0.8")}}},
-			func(r *model.AccessRequest) { r.Context.TrustScore = 0.79 }, model.Deny, ""},
-		{"gt at the threshold", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{cond("context.trustScore", "gt", "0.85")}}}, nil, model.Deny, ""},
-		{"lt", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{cond("resource.sensitivity", "lt", "5")}}}, nil, model.Allow, "a"},
-		{"lte", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{cond("resource.sensitivity", "lte", "3")}}}, nil, model.Deny, ""},
-		{"numeric op on text never matches", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{cond("subject.zone", "gt", "1")}}}, nil, model.Deny, ""},
-		{"sameAs", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{cond("subject.zone", "sameAs", "resource.zone")}}}, nil, model.Allow, "a"},
-		{"sameAs, other zone", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{cond("subject.zone", "sameAs", "resource.zone")}}},
-			func(r *model.AccessRequest) { r.Resource.Zone = "substation-2" }, model.Deny, ""},
-		{"sameAs, both empty", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{cond("subject.zone", "sameAs", "resource.zone")}}},
-			func(r *model.AccessRequest) { r.Subject.Zone, r.Resource.Zone = "", "" }, model.Deny, ""},
-		{"missing attribute never matches", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{cond("subject.attr.clearance", "eq", "")}}}, nil, model.Deny, ""},
+		{"eq", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{condition("subject.zone", "eq", "substation-1")}}}, nil, model.Allow, "a"},
+		{"neq", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{condition("subject.zone", "neq", "substation-1")}}}, nil, model.Deny, ""},
+		{"in", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{condition("context.sourceZone", "in", "control-centre, substation-hmi")}}}, nil, model.Allow, "a"},
+		{"nin", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{condition("context.sourceZone", "nin", "control-centre,substation-hmi")}}}, nil, model.Deny, ""},
+		{"in on multi-valued role", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{condition("subject.role", "in", "engineer")}}}, nil, model.Allow, "a"},
+		{"glob", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{condition("resource.id", "glob", "*/breaker/*")}}}, nil, model.Allow, "a"},
+		{"gte at the threshold", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{condition("context.trustScore", "gte", "0.8")}}},
+			func(request *model.AccessRequest) { request.Context.TrustScore = 0.8 }, model.Allow, "a"},
+		{"gte just below the threshold", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{condition("context.trustScore", "gte", "0.8")}}},
+			func(request *model.AccessRequest) { request.Context.TrustScore = 0.79 }, model.Deny, ""},
+		{"gt at the threshold", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{condition("context.trustScore", "gt", "0.85")}}}, nil, model.Deny, ""},
+		{"lt", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{condition("resource.sensitivity", "lt", "5")}}}, nil, model.Allow, "a"},
+		{"lte", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{condition("resource.sensitivity", "lte", "3")}}}, nil, model.Deny, ""},
+		{"numeric op on text never matches", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{condition("subject.zone", "gt", "1")}}}, nil, model.Deny, ""},
+		{"sameAs", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{condition("subject.zone", "sameAs", "resource.zone")}}}, nil, model.Allow, "a"},
+		{"sameAs, other zone", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{condition("subject.zone", "sameAs", "resource.zone")}}},
+			func(request *model.AccessRequest) { request.Resource.Zone = "substation-2" }, model.Deny, ""},
+		{"sameAs, both empty", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{condition("subject.zone", "sameAs", "resource.zone")}}},
+			func(request *model.AccessRequest) { request.Subject.Zone, request.Resource.Zone = "", "" }, model.Deny, ""},
+		{"missing attribute never matches", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{condition("subject.attr.clearance", "eq", "")}}}, nil, model.Deny, ""},
 		{"all conditions must hold", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{
-			cond("subject.zone", "eq", "substation-1"), cond("action", "eq", "write")}}}, nil, model.Deny, ""},
+			condition("subject.zone", "eq", "substation-1"), condition("action", "eq", "write")}}}, nil, model.Deny, ""},
 
 		// Time.
-		{"night deny, daytime request", []Rule{allowAll, {ID: "deny-night", Effect: model.Deny, Conditions: []Condition{cond("context.hour", "lt", "6")}}}, nil, model.Allow, "allow-all"},
-		{"night deny, night request", []Rule{allowAll, {ID: "deny-night", Effect: model.Deny, Conditions: []Condition{cond("context.hour", "lt", "6")}}},
-			func(r *model.AccessRequest) { r.Context.Time = time.Date(2026, 10, 7, 3, 0, 0, 0, time.UTC) }, model.Deny, "deny-night"},
-		{"time condition without time", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{cond("context.hour", "gte", "0")}}},
-			func(r *model.AccessRequest) { r.Context.Time = time.Time{} }, model.Deny, ""},
+		{"night deny, daytime request", []Rule{allowAll, {ID: "deny-night", Effect: model.Deny, Conditions: []Condition{condition("context.hour", "lt", "6")}}}, nil, model.Allow, "allow-all"},
+		{"night deny, night request", []Rule{allowAll, {ID: "deny-night", Effect: model.Deny, Conditions: []Condition{condition("context.hour", "lt", "6")}}},
+			func(request *model.AccessRequest) {
+				request.Context.Time = time.Date(2026, 10, 7, 3, 0, 0, 0, time.UTC)
+			}, model.Deny, "deny-night"},
+		{"time condition without time", []Rule{{ID: "a", Effect: model.Allow, Conditions: []Condition{condition("context.hour", "gte", "0")}}},
+			func(request *model.AccessRequest) { request.Context.Time = time.Time{} }, model.Deny, ""},
 	}
-	for _, tc := range tests {
-		t.Run(tc.name, func(t *testing.T) {
-			req := sampleRequest()
-			if tc.mutate != nil {
-				tc.mutate(&req)
+	for _, testCase := range tests {
+		t.Run(testCase.name, func(t *testing.T) {
+			request := sampleRequest()
+			if testCase.mutate != nil {
+				testCase.mutate(&request)
 			}
-			d := NewEngine(&Policy{Version: 1, Rules: tc.rules}).Evaluate(req)
-			if d.Effect != tc.want || d.RuleID != tc.wantRule {
-				t.Errorf("Evaluate() = %s by %q (%s), want %s by %q", d.Effect, d.RuleID, d.Reason, tc.want, tc.wantRule)
+			decision := NewEngine(&Policy{Version: 1, Rules: testCase.rules}).Evaluate(request)
+			if decision.Effect != testCase.want || decision.RuleID != testCase.wantRule {
+				t.Errorf("Evaluate() = %s by %q (%s), want %s by %q", decision.Effect, decision.RuleID, decision.Reason, testCase.want, testCase.wantRule)
 			}
 		})
 	}
 }
 
 func TestEvaluateDecisionFields(t *testing.T) {
-	e := NewEngine(&Policy{Version: 7, Rules: []Rule{
+	engine := NewEngine(&Policy{Version: 7, Rules: []Rule{
 		{ID: "read", Effect: model.Allow, Actions: []string{"read"}, Obligations: []string{"log", "reverify:10s"}, TTLSeconds: 10},
 		{ID: "write", Effect: model.Allow, Actions: []string{"write"}},
 	}})
 
-	d := e.Evaluate(sampleRequest())
-	if d.RuleID != "read" || d.PolicyVersion != 7 || d.TTL != 10*time.Second || d.Reason == "" {
-		t.Errorf("allow decision = %+v", d)
+	decision := engine.Evaluate(sampleRequest())
+	if decision.RuleID != "read" || decision.PolicyVersion != 7 || decision.TTL != 10*time.Second || decision.Reason == "" {
+		t.Errorf("allow decision = %+v", decision)
 	}
-	if !slices.Equal(d.Obligations, []string{"log", "reverify:10s"}) {
-		t.Fatalf("obligations = %v", d.Obligations)
+	if !slices.Equal(decision.Obligations, []string{"log", "reverify:10s"}) {
+		t.Fatalf("obligations = %v", decision.Obligations)
 	}
-	d.Obligations[0] = "changed" // the caller owns its copy
-	if got := installed(t, e).Rules[0].Obligations[0]; got != "log" {
+	decision.Obligations[0] = "changed" // the caller owns its copy
+	if got := installed(t, engine).Rules[0].Obligations[0]; got != "log" {
 		t.Errorf("changing the decision changed the policy: %q", got)
 	}
 
 	write := sampleRequest()
 	write.Action = "write"
-	if d := e.Evaluate(write); d.TTL != e.DefaultTTL || d.TTL != 30*time.Second {
-		t.Errorf("rule without TTL: TTL = %v, want DefaultTTL 30s", d.TTL)
+	if decision := engine.Evaluate(write); decision.TTL != engine.DefaultTTL || decision.TTL != 30*time.Second {
+		t.Errorf("rule without TTL: TTL = %v, want DefaultTTL 30s", decision.TTL)
 	}
 
 	execute := sampleRequest()
 	execute.Action = "execute"
-	d = e.Evaluate(execute)
-	if d.Allowed() || d.PolicyVersion != 7 || d.Reason == "" || len(d.Obligations) != 0 {
-		t.Errorf("default deny decision = %+v", d)
+	decision = engine.Evaluate(execute)
+	if decision.Allowed() || decision.PolicyVersion != 7 || decision.Reason == "" || len(decision.Obligations) != 0 {
+		t.Errorf("default deny decision = %+v", decision)
 	}
 }
 
 // installed returns the engine's policy and stops the test if there is none,
 // so a missing policy is reported as a failure instead of a nil-pointer panic.
-func installed(t *testing.T, e *Engine) *Policy {
+func installed(t *testing.T, engine *Engine) *Policy {
 	t.Helper()
-	p := e.Policy()
-	if p == nil {
+	policy := engine.Policy()
+	if policy == nil {
 		t.Fatal("Policy() = nil, want the installed policy")
 	}
-	return p
+	return policy
 }
 
 func TestNewEngineNil(t *testing.T) {
-	e := NewEngine(nil)
-	installed(t, e)
-	if d := e.Evaluate(sampleRequest()); d.Allowed() {
-		t.Errorf("empty engine allowed: %+v", d)
+	engine := NewEngine(nil)
+	installed(t, engine)
+	if decision := engine.Evaluate(sampleRequest()); decision.Allowed() {
+		t.Errorf("empty engine allowed: %+v", decision)
 	}
 }
 
 func TestInstall(t *testing.T) {
-	e := NewEngine(&Policy{Version: 1})
+	engine := NewEngine(&Policy{Version: 1})
 	allowAll := []Rule{{ID: "allow-all", Effect: model.Allow}}
 
-	if err := e.Install(nil); err == nil {
+	if err := engine.Install(nil); err == nil {
 		t.Error("Install(nil) = nil, want error")
 	}
 	invalid := &Policy{Version: 2, Rules: []Rule{{ID: "x", Effect: "maybe"}}}
-	if err := e.Install(invalid); err == nil {
+	if err := engine.Install(invalid); err == nil {
 		t.Error("invalid policy installed")
 	}
-	if err := e.Install(&Policy{Version: 1, Rules: allowAll}); !errors.Is(err, ErrStalePolicy) {
+	if err := engine.Install(&Policy{Version: 1, Rules: allowAll}); !errors.Is(err, ErrStalePolicy) {
 		t.Errorf("same version: err = %v, want ErrStalePolicy", err)
 	}
-	if v := installed(t, e).Version; v != 1 {
-		t.Fatalf("a rejected Install changed the policy: version %d", v)
+	if version := installed(t, engine).Version; version != 1 {
+		t.Fatalf("a rejected Install changed the policy: version %d", version)
 	}
 
-	if err := e.Install(&Policy{Version: 2, Rules: allowAll}); err != nil {
+	if err := engine.Install(&Policy{Version: 2, Rules: allowAll}); err != nil {
 		t.Fatalf("Install(v2) = %v", err)
 	}
-	if v := installed(t, e).Version; v != 2 {
-		t.Errorf("version = %d, want 2", v)
+	if version := installed(t, engine).Version; version != 2 {
+		t.Errorf("version = %d, want 2", version)
 	}
-	if !e.Evaluate(sampleRequest()).Allowed() {
+	if !engine.Evaluate(sampleRequest()).Allowed() {
 		t.Error("the new policy is not used")
 	}
-	if err := e.Install(&Policy{Version: 1}); !errors.Is(err, ErrStalePolicy) {
+	if err := engine.Install(&Policy{Version: 1}); !errors.Is(err, ErrStalePolicy) {
 		t.Errorf("older version: err = %v, want ErrStalePolicy", err)
 	}
 }
@@ -178,23 +180,23 @@ func TestInstall(t *testing.T) {
 // TestConcurrentEvaluateAndInstall is for the race detector (make test runs
 // with -race): readers must never see a half-installed policy.
 func TestConcurrentEvaluateAndInstall(t *testing.T) {
-	e := NewEngine(&Policy{Version: 1})
-	req := sampleRequest()
-	var wg sync.WaitGroup
+	engine := NewEngine(&Policy{Version: 1})
+	request := sampleRequest()
+	var workers sync.WaitGroup
 	for range 4 {
-		wg.Go(func() {
+		workers.Go(func() {
 			for range 1000 {
-				e.Evaluate(req)
+				engine.Evaluate(request)
 			}
 		})
 	}
-	for v := uint64(2); v <= 100; v++ {
-		if err := e.Install(&Policy{Version: v, Rules: []Rule{{ID: "allow-all", Effect: model.Allow}}}); err != nil {
-			t.Errorf("Install(v%d) = %v", v, err)
+	for version := uint64(2); version <= 100; version++ {
+		if err := engine.Install(&Policy{Version: version, Rules: []Rule{{ID: "allow-all", Effect: model.Allow}}}); err != nil {
+			t.Errorf("Install(v%d) = %v", version, err)
 		}
 	}
-	wg.Wait()
-	if v := installed(t, e).Version; v != 100 {
-		t.Errorf("version = %d, want 100", v)
+	workers.Wait()
+	if version := installed(t, engine).Version; version != 100 {
+		t.Errorf("version = %d, want 100", version)
 	}
 }

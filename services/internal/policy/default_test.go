@@ -29,38 +29,41 @@ var (
 	analytics = actor{"spiffe://grid.example/cloud/analytics/1", model.LayerCloud, "cloud", nil}
 )
 
-// wants builds a request from a to perform action on a resource of type
-// rtype in zone rzone, sent from a's own zone with the given trust score.
-func (a actor) wants(action, rtype, rzone string, trust float64) model.AccessRequest {
+// wants builds a request from requester to perform action on a resource of
+// type resourceType in zone resourceZone, sent from the requester's own zone
+// with the given trust score.
+func (requester actor) wants(action, resourceType, resourceZone string, trustScore float64) model.AccessRequest {
 	return model.AccessRequest{
-		Subject:  model.Subject{ID: a.id, Layer: a.layer, Zone: a.zone, Roles: a.roles},
+		Subject:  model.Subject{ID: requester.id, Layer: requester.layer, Zone: requester.zone, Roles: requester.roles},
 		Action:   action,
-		Resource: model.Resource{ID: rzone + "/" + rtype + "/1", Type: rtype, Zone: rzone},
-		Context: model.Context{Time: time.Date(2026, 10, 7, 12, 0, 0, 0, time.UTC), TrustScore: trust,
-			SourceZone: a.zone, SourceLayer: a.layer},
+		Resource: model.Resource{ID: resourceZone + "/" + resourceType + "/1", Type: resourceType, Zone: resourceZone},
+		Context: model.Context{Time: time.Date(2026, 10, 7, 12, 0, 0, 0, time.UTC), TrustScore: trustScore,
+			SourceZone: requester.zone, SourceLayer: requester.layer},
 	}
 }
 
 func TestDefaultSubstationPolicyIsValid(t *testing.T) {
-	p := DefaultSubstationPolicy()
-	if err := Validate(p); err != nil {
+	policy := DefaultSubstationPolicy()
+	if err := Validate(policy); err != nil {
 		t.Fatalf("Validate() = %v", err)
 	}
-	if p.Version != 1 {
-		t.Errorf("version = %d, want 1", p.Version)
+	if policy.Version != 1 {
+		t.Errorf("version = %d, want 1", policy.Version)
 	}
 }
 
 func TestDefaultSubstationPolicy(t *testing.T) {
-	fromEnterprise := func(r *model.AccessRequest) { r.Context.SourceZone = "enterprise" }
-	emergency := func(r *model.AccessRequest) { r.Context.SourceZone, r.Context.Emergency = "enterprise", true }
-	alsoOperator := func(r *model.AccessRequest) { r.Subject.Roles = []string{"auditor", "operator"} }
-	adminIsAuditor := func(r *model.AccessRequest) { r.Subject.Roles = []string{"auditor"} }
+	fromEnterprise := func(request *model.AccessRequest) { request.Context.SourceZone = "enterprise" }
+	emergency := func(request *model.AccessRequest) {
+		request.Context.SourceZone, request.Context.Emergency = "enterprise", true
+	}
+	alsoOperator := func(request *model.AccessRequest) { request.Subject.Roles = []string{"auditor", "operator"} }
+	adminIsAuditor := func(request *model.AccessRequest) { request.Subject.Roles = []string{"auditor"} }
 
 	tests := []struct {
 		name     string
-		req      model.AccessRequest
-		mutate   func(r *model.AccessRequest)
+		request  model.AccessRequest
+		mutate   func(request *model.AccessRequest)
 		want     model.Effect
 		wantRule string
 	}{
@@ -104,31 +107,31 @@ func TestDefaultSubstationPolicy(t *testing.T) {
 		// Anything not listed.
 		{"unknown action", operator.wants("delete", "breaker", "bay-1", 0.95), nil, model.Deny, ""},
 	}
-	e := NewEngine(DefaultSubstationPolicy())
-	for _, tc := range tests {
-		t.Run(tc.name, func(t *testing.T) {
-			req := tc.req
-			if tc.mutate != nil {
-				tc.mutate(&req)
+	engine := NewEngine(DefaultSubstationPolicy())
+	for _, testCase := range tests {
+		t.Run(testCase.name, func(t *testing.T) {
+			request := testCase.request
+			if testCase.mutate != nil {
+				testCase.mutate(&request)
 			}
-			d := e.Evaluate(req)
-			if d.Effect != tc.want || d.RuleID != tc.wantRule {
-				t.Errorf("Evaluate() = %s by %q (%s), want %s by %q", d.Effect, d.RuleID, d.Reason, tc.want, tc.wantRule)
+			decision := engine.Evaluate(request)
+			if decision.Effect != testCase.want || decision.RuleID != testCase.wantRule {
+				t.Errorf("Evaluate() = %s by %q (%s), want %s by %q", decision.Effect, decision.RuleID, decision.Reason, testCase.want, testCase.wantRule)
 			}
 		})
 	}
 }
 
 func TestDefaultSubstationPolicyBreakerDecision(t *testing.T) {
-	d := NewEngine(DefaultSubstationPolicy()).Evaluate(operator.wants("operate", "breaker", "bay-1", 0.9))
-	if d.TTL != 10*time.Second || !slices.Equal(d.Obligations, []string{"log", "reverify:10s"}) {
-		t.Errorf("breaker decision = %+v, want TTL 10s and obligations log, reverify:10s", d)
+	decision := NewEngine(DefaultSubstationPolicy()).Evaluate(operator.wants("operate", "breaker", "bay-1", 0.9))
+	if decision.TTL != 10*time.Second || !slices.Equal(decision.Obligations, []string{"log", "reverify:10s"}) {
+		t.Errorf("breaker decision = %+v, want TTL 10s and obligations log, reverify:10s", decision)
 	}
 }
 
 func TestDefaultSubstationPolicyIsFresh(t *testing.T) {
-	p := DefaultSubstationPolicy()
-	p.Rules[0].ID = "changed"
+	policy := DefaultSubstationPolicy()
+	policy.Rules[0].ID = "changed"
 	if got := DefaultSubstationPolicy().Rules[0].ID; got != "deny-untrusted" {
 		t.Errorf("a change to one copy leaked into the next: %q", got)
 	}

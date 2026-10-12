@@ -31,100 +31,107 @@ func KnownAttribute(name string) bool {
 		return true
 	}
 	for _, prefix := range mapPrefixes {
-		if key, ok := strings.CutPrefix(name, prefix); ok && key != "" {
+		key, hasPrefix := strings.CutPrefix(name, prefix)
+		if hasPrefix && key != "" {
 			return true
 		}
 	}
 	return false
 }
 
-// Resolve returns the value of the attribute name in req as a string, and
+// Resolve returns the value of the attribute name in request as a string, and
 // whether the attribute exists. Numbers are formatted with strconv so the
 // numeric operators can parse them back, and subject.role is the roles joined
 // by commas. A missing map key or an unset time reports false, so a condition
 // on it can never match (fail closed).
-func Resolve(name string, req model.AccessRequest) (string, bool) {
+func Resolve(name string, request model.AccessRequest) (string, bool) {
+	subject, resource, requestContext := request.Subject, request.Resource, request.Context
 	switch name {
 	case "subject.id":
-		return req.Subject.ID, true
+		return subject.ID, true
 	case "subject.layer":
-		return req.Subject.Layer.String(), true
+		return subject.Layer.String(), true
 	case "subject.class":
-		return string(req.Subject.Class), true
+		return string(subject.Class), true
 	case "subject.owner":
-		return req.Subject.Owner, true
+		return subject.Owner, true
 	case "subject.zone":
-		return req.Subject.Zone, true
+		return subject.Zone, true
 	case "subject.role":
-		return strings.Join(req.Subject.Roles, ","), true
+		return strings.Join(subject.Roles, ","), true
 	case "subject.authMethod":
-		return req.Subject.AuthMethod, true
+		return subject.AuthMethod, true
 	case "resource.id":
-		return req.Resource.ID, true
+		return resource.ID, true
 	case "resource.type":
-		return req.Resource.Type, true
+		return resource.Type, true
 	case "resource.zone":
-		return req.Resource.Zone, true
+		return resource.Zone, true
 	case "resource.layer":
-		return req.Resource.Layer.String(), true
+		return resource.Layer.String(), true
 	case "resource.sensitivity":
-		return strconv.Itoa(req.Resource.Sensitivity), true
+		return strconv.Itoa(resource.Sensitivity), true
 	case "action":
-		return req.Action, true
+		return request.Action, true
 	case "context.trustScore":
-		return strconv.FormatFloat(req.Context.TrustScore, 'f', -1, 64), true
+		return strconv.FormatFloat(requestContext.TrustScore, 'f', -1, 64), true
 	case "context.sourceZone":
-		return req.Context.SourceZone, true
+		return requestContext.SourceZone, true
 	case "context.sourceLayer":
-		return req.Context.SourceLayer.String(), true
+		return requestContext.SourceLayer.String(), true
 	case "context.emergency":
-		return strconv.FormatBool(req.Context.Emergency), true
+		return strconv.FormatBool(requestContext.Emergency), true
 	case "context.hour":
-		if req.Context.Time.IsZero() {
+		if requestContext.Time.IsZero() {
 			return "", false
 		}
-		return strconv.Itoa(req.Context.Time.UTC().Hour()), true
+		return strconv.Itoa(requestContext.Time.UTC().Hour()), true
 	}
-	if key, ok := strings.CutPrefix(name, "subject.attr."); ok {
-		v, found := req.Subject.Attributes[key]
-		return v, found
+	if key, isSubjectAttribute := strings.CutPrefix(name, "subject.attr."); isSubjectAttribute {
+		value, found := subject.Attributes[key]
+		return value, found
 	}
-	if key, ok := strings.CutPrefix(name, "resource.attr."); ok {
-		v, found := req.Resource.Attributes[key]
-		return v, found
+	if key, isResourceAttribute := strings.CutPrefix(name, "resource.attr."); isResourceAttribute {
+		value, found := resource.Attributes[key]
+		return value, found
 	}
-	if key, ok := strings.CutPrefix(name, "context.attr."); ok {
-		v, found := req.Context.Attributes[key]
-		return v, found
+	if key, isContextAttribute := strings.CutPrefix(name, "context.attr."); isContextAttribute {
+		value, found := requestContext.Attributes[key]
+		return value, found
 	}
 	return "", false
 }
 
-// Glob reports whether s matches pattern, where "*" matches any sequence of
-// characters (also empty, also across "/") and every other character,
+// Glob reports whether text matches pattern, where "*" matches any sequence
+// of characters (also empty, also across "/") and every other character,
 // including "[", "]" and "?", matches only itself. It runs in linear time:
 // on a mismatch it backtracks to the last star instead of trying every split.
-func Glob(pattern, s string) bool {
-	p, i := 0, 0 // positions in pattern and s
-	star, mark := -1, 0
-	for i < len(s) {
+func Glob(pattern, text string) bool {
+	patternPosition, textPosition := 0, 0
+	lastStar := -1          // position of the last star in pattern, -1 if none yet
+	textPositionAtStar := 0 // where in text that star started matching
+	for textPosition < len(text) {
+		atStar := patternPosition < len(pattern) && pattern[patternPosition] == '*'
+		sameCharacter := patternPosition < len(pattern) && pattern[patternPosition] == text[textPosition]
 		switch {
-		case p < len(pattern) && pattern[p] == '*':
-			star, mark = p, i // remember the star; first try matching nothing
-			p++
-		case p < len(pattern) && pattern[p] == s[i]:
-			p++
-			i++
-		case star >= 0:
-			p = star + 1 // let the last star swallow one more character
-			mark++
-			i = mark
+		case atStar:
+			// Remember the star and first try letting it match nothing.
+			lastStar, textPositionAtStar = patternPosition, textPosition
+			patternPosition++
+		case sameCharacter:
+			patternPosition++
+			textPosition++
+		case lastStar >= 0:
+			// Let the last star swallow one more character and try again.
+			patternPosition = lastStar + 1
+			textPositionAtStar++
+			textPosition = textPositionAtStar
 		default:
 			return false
 		}
 	}
-	for p < len(pattern) && pattern[p] == '*' {
-		p++ // trailing stars match the empty rest
+	for patternPosition < len(pattern) && pattern[patternPosition] == '*' {
+		patternPosition++ // trailing stars match the empty rest
 	}
-	return p == len(pattern)
+	return patternPosition == len(pattern)
 }

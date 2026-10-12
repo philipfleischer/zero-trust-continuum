@@ -12,8 +12,8 @@ import (
 
 func TestGlob(t *testing.T) {
 	tests := []struct {
-		pattern, s string
-		want       bool
+		pattern, text string
+		want          bool
 	}{
 		{"", "", true},
 		{"*", "", true},
@@ -30,9 +30,9 @@ func TestGlob(t *testing.T) {
 		{"[ab]", "a", false},           // not a character class
 		{"a?c", "abc", false},          // "?" is literal
 	}
-	for _, tc := range tests {
-		if got := Glob(tc.pattern, tc.s); got != tc.want {
-			t.Errorf("Glob(%q, %q) = %v, want %v", tc.pattern, tc.s, got, tc.want)
+	for _, testCase := range tests {
+		if got := Glob(testCase.pattern, testCase.text); got != testCase.want {
+			t.Errorf("Glob(%q, %q) = %v, want %v", testCase.pattern, testCase.text, got, testCase.want)
 		}
 	}
 }
@@ -40,10 +40,10 @@ func TestGlob(t *testing.T) {
 // TestGlobDiffersFromPathMatch documents why Glob is not path.Match: the
 // standard library treats "[" as a character class and stops "*" at "/".
 func TestGlobDiffersFromPathMatch(t *testing.T) {
-	if ok, _ := path.Match("spiffe://*/edge/*", "spiffe://grid.example/edge/pmu/1"); ok {
+	if matched, _ := path.Match("spiffe://*/edge/*", "spiffe://grid.example/edge/pmu/1"); matched {
 		t.Error("path.Match crossed a slash; the reason for Glob is gone")
 	}
-	if ok, _ := path.Match("[ab]", "a"); !ok {
+	if matched, _ := path.Match("[ab]", "a"); !matched {
 		t.Error("path.Match did not treat [ab] as a class; the reason for Glob is gone")
 	}
 }
@@ -62,9 +62,9 @@ func TestKnownAttribute(t *testing.T) {
 		{"subject.password", false},
 		{"", false},
 	}
-	for _, tc := range tests {
-		if got := KnownAttribute(tc.name); got != tc.want {
-			t.Errorf("KnownAttribute(%q) = %v, want %v", tc.name, got, tc.want)
+	for _, testCase := range tests {
+		if got := KnownAttribute(testCase.name); got != testCase.want {
+			t.Errorf("KnownAttribute(%q) = %v, want %v", testCase.name, got, testCase.want)
 		}
 	}
 }
@@ -90,11 +90,11 @@ func sampleRequest() model.AccessRequest {
 }
 
 func TestResolve(t *testing.T) {
-	req := sampleRequest()
+	request := sampleRequest()
 	tests := []struct {
-		name   string
-		want   string
-		wantOK bool
+		name      string
+		want      string
+		wantFound bool
 	}{
 		{"subject.layer", "fog", true},
 		{"subject.class", "gateway", true},
@@ -113,18 +113,18 @@ func TestResolve(t *testing.T) {
 		{"context.attr.migration", "", false}, // nil map
 		{"subject.password", "", false},
 	}
-	for _, tc := range tests {
-		got, ok := Resolve(tc.name, req)
-		if got != tc.want || ok != tc.wantOK {
-			t.Errorf("Resolve(%q) = %q, %v, want %q, %v", tc.name, got, ok, tc.want, tc.wantOK)
+	for _, testCase := range tests {
+		got, found := Resolve(testCase.name, request)
+		if got != testCase.want || found != testCase.wantFound {
+			t.Errorf("Resolve(%q) = %q, %v, want %q, %v", testCase.name, got, found, testCase.want, testCase.wantFound)
 		}
 	}
 }
 
 func TestResolveHourWithoutTime(t *testing.T) {
-	req := sampleRequest()
-	req.Context.Time = time.Time{}
-	if v, ok := Resolve("context.hour", req); ok {
-		t.Errorf("Resolve(context.hour) with zero time = %q, true, want false", v)
+	request := sampleRequest()
+	request.Context.Time = time.Time{}
+	if value, found := Resolve("context.hour", request); found {
+		t.Errorf("Resolve(context.hour) with zero time = %q, true, want false", value)
 	}
 }

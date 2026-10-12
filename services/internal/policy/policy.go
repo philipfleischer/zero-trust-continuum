@@ -57,58 +57,66 @@ type Rule struct {
 // subject.zone sameAs resource.zone).
 type Condition struct {
 	Attribute string `json:"attr"`
-	Op        string `json:"op"`
+	Operator  string `json:"op"`
 	Value     string `json:"value"`
 }
 
-// validOps is the set of operators a Condition may use.
-var validOps = map[string]bool{
+// validOperators is the set of operators a Condition may use.
+var validOperators = map[string]bool{
 	"eq": true, "neq": true, "in": true, "nin": true,
 	"gt": true, "gte": true, "lt": true, "lte": true,
 	"glob": true, "sameAs": true,
 }
 
-// Validate reports the first mistake in p: a nil policy, an empty or duplicate
-// rule ID, an effect other than allow or deny, a negative TTL, or a condition
-// with an unknown attribute or operator, a numeric operator without a number,
-// or sameAs naming an unknown attribute. A policy that does not validate must
-// never be installed (fail closed).
-func Validate(p *Policy) error {
-	if p == nil {
+// Validate reports the first mistake in policy: a nil policy, an empty or
+// duplicate rule ID, an effect other than allow or deny, a negative TTL, or a
+// condition with an unknown attribute or operator, a numeric operator without
+// a number, or sameAs naming an unknown attribute. A policy that does not
+// validate must never be installed (fail closed).
+func Validate(policy *Policy) error {
+	if policy == nil {
 		return errors.New("policy: nil policy")
 	}
-	seen := make(map[string]bool, len(p.Rules))
-	for i := range p.Rules {
-		r := &p.Rules[i]
-		if r.ID == "" {
-			return fmt.Errorf("policy: rule %d: empty id", i)
+	seenRuleIDs := make(map[string]bool, len(policy.Rules))
+	for ruleIndex := range policy.Rules {
+		rule := &policy.Rules[ruleIndex]
+		if rule.ID == "" {
+			return fmt.Errorf("policy: rule %d: empty id", ruleIndex)
 		}
-		if seen[r.ID] {
-			return fmt.Errorf("policy: rule %q: duplicate id", r.ID)
+		if seenRuleIDs[rule.ID] {
+			return fmt.Errorf("policy: rule %q: duplicate id", rule.ID)
 		}
-		seen[r.ID] = true
-		if r.Effect != model.Allow && r.Effect != model.Deny {
-			return fmt.Errorf("policy: rule %q: unknown effect %q", r.ID, r.Effect)
+		seenRuleIDs[rule.ID] = true
+		if rule.Effect != model.Allow && rule.Effect != model.Deny {
+			return fmt.Errorf("policy: rule %q: unknown effect %q", rule.ID, rule.Effect)
 		}
-		if r.TTLSeconds < 0 {
-			return fmt.Errorf("policy: rule %q: negative ttlSeconds %d", r.ID, r.TTLSeconds)
+		if rule.TTLSeconds < 0 {
+			return fmt.Errorf("policy: rule %q: negative ttlSeconds %d", rule.ID, rule.TTLSeconds)
 		}
-		for _, c := range r.Conditions {
-			if !KnownAttribute(c.Attribute) {
-				return fmt.Errorf("policy: rule %q: unknown attribute %q", r.ID, c.Attribute)
-			}
-			if !validOps[c.Op] {
-				return fmt.Errorf("policy: rule %q: unknown op %q", r.ID, c.Op)
-			}
-			if isNumericOp(c.Op) {
-				if _, err := parseNumber(c.Value); err != nil {
-					return fmt.Errorf("policy: rule %q: %s needs a number, got %q", r.ID, c.Op, c.Value)
-				}
-			}
-			if c.Op == "sameAs" && !KnownAttribute(c.Value) {
-				return fmt.Errorf("policy: rule %q: sameAs refers to unknown attribute %q", r.ID, c.Value)
+		for _, condition := range rule.Conditions {
+			if err := validateCondition(condition); err != nil {
+				return fmt.Errorf("policy: rule %q: %w", rule.ID, err)
 			}
 		}
+	}
+	return nil
+}
+
+// validateCondition reports the first mistake in one condition.
+func validateCondition(condition Condition) error {
+	if !KnownAttribute(condition.Attribute) {
+		return fmt.Errorf("unknown attribute %q", condition.Attribute)
+	}
+	if !validOperators[condition.Operator] {
+		return fmt.Errorf("unknown op %q", condition.Operator)
+	}
+	if isNumericOperator(condition.Operator) {
+		if _, err := parseNumber(condition.Value); err != nil {
+			return fmt.Errorf("%s needs a number, got %q", condition.Operator, condition.Value)
+		}
+	}
+	if condition.Operator == "sameAs" && !KnownAttribute(condition.Value) {
+		return fmt.Errorf("sameAs refers to unknown attribute %q", condition.Value)
 	}
 	return nil
 }
