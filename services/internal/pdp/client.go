@@ -33,21 +33,22 @@ const (
 	PlacementHierarchical Placement = "hierarchical"
 )
 
-// ParsePlacement returns the placement called s, or an error if there is none.
-func ParsePlacement(s string) (Placement, error) {
-	switch p := Placement(s); p {
+// ParsePlacement returns the placement called name, or an error if there is none.
+func ParsePlacement(name string) (Placement, error) {
+	placement := Placement(name)
+	switch placement {
 	case PlacementCloud, PlacementFog, PlacementHierarchical:
-		return p, nil
+		return placement, nil
 	}
-	return "", fmt.Errorf("pdp: unknown placement %q (want cloud, fog or hierarchical)", s)
+	return "", fmt.Errorf("pdp: unknown placement %q (want cloud, fog or hierarchical)", name)
 }
 
 // DefaultTimeout is how long a RemoteClient waits for an answer when its
 // Timeout is 0.
 const DefaultTimeout = 2 * time.Second
 
-// maxResponse is the largest response body a RemoteClient reads (1 MiB).
-const maxResponse = 1 << 20
+// maxResponseSize is the largest response body a RemoteClient reads (1 MiB).
+const maxResponseSize = 1 << 20
 
 // RemoteClient asks a PDP over HTTP. It implements Decider.
 type RemoteClient struct {
@@ -59,78 +60,79 @@ type RemoteClient struct {
 	HTTP *http.Client
 }
 
-// noRedirects is the default HTTP client of a RemoteClient.
-var noRedirects = &http.Client{
+// clientWithoutRedirects is the default HTTP client of a RemoteClient.
+var clientWithoutRedirects = &http.Client{
 	CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse },
 }
 
-// Decide sends req to POST /v1/decide. Any failure (unreachable, timeout, a
-// status other than 200, a body that is not a decision) returns a deny and
+// Decide sends request to POST /v1/decide. Any failure (unreachable, timeout,
+// a status other than 200, a body that is not a decision) returns a deny and
 // the error, so a PEP fails closed.
-func (c *RemoteClient) Decide(ctx context.Context, req model.AccessRequest) (model.Decision, error) {
+func (client *RemoteClient) Decide(ctx context.Context, request model.AccessRequest) (model.Decision, error) {
 	deny := model.Decision{Effect: model.Deny, Reason: "remote PDP unavailable"}
-	resp, err := c.post(ctx, "/v1/decide", req, "")
+	response, err := client.post(ctx, "/v1/decide", request, "")
 	if err != nil {
 		return deny, err
 	}
-	defer func() { _ = resp.Body.Close() }()
-	if resp.StatusCode != http.StatusOK {
-		return deny, statusError(resp)
+	defer func() { _ = response.Body.Close() }()
+	if response.StatusCode != http.StatusOK {
+		return deny, statusError(response)
 	}
-	var d model.Decision
-	if err := json.NewDecoder(io.LimitReader(resp.Body, maxResponse)).Decode(&d); err != nil {
+	var decision model.Decision
+	limitedBody := io.LimitReader(response.Body, maxResponseSize)
+	if err := json.NewDecoder(limitedBody).Decode(&decision); err != nil {
 		return deny, fmt.Errorf("pdp: decode decision: %w", err)
 	}
-	if d.Effect != model.Allow && d.Effect != model.Deny {
-		return deny, fmt.Errorf("pdp: remote PDP returned effect %q", d.Effect)
+	if decision.Effect != model.Allow && decision.Effect != model.Deny {
+		return deny, fmt.Errorf("pdp: remote PDP returned effect %q", decision.Effect)
 	}
-	return d, nil
+	return decision, nil
 }
 
-// RecordSignal sends sig to POST /v1/signals with the client's token.
-func (c *RemoteClient) RecordSignal(ctx context.Context, sig trust.Signal) error {
-	resp, err := c.post(ctx, "/v1/signals", sig, c.Token)
+// RecordSignal sends signal to POST /v1/signals with the client's token.
+func (client *RemoteClient) RecordSignal(ctx context.Context, signal trust.Signal) error {
+	response, err := client.post(ctx, "/v1/signals", signal, client.Token)
 	if err != nil {
 		return err
 	}
-	defer func() { _ = resp.Body.Close() }()
-	if resp.StatusCode != http.StatusNoContent {
-		return statusError(resp)
+	defer func() { _ = response.Body.Close() }()
+	if response.StatusCode != http.StatusNoContent {
+		return statusError(response)
 	}
 	return nil
 }
 
-// post sends v as JSON to BaseURL+path within the client's timeout.
-func (c *RemoteClient) post(ctx context.Context, path string, v any, bearer string) (*http.Response, error) {
-	body, err := json.Marshal(v)
+// post sends body as JSON to BaseURL+path within the client's timeout.
+func (client *RemoteClient) post(ctx context.Context, path string, body any, bearerToken string) (*http.Response, error) {
+	encodedBody, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
-	timeout := c.Timeout
+	timeout := client.Timeout
 	if timeout <= 0 {
 		timeout = DefaultTimeout
 	}
 	ctx, cancel := context.WithTimeout(ctx, timeout)
-	req, err := http.NewRequestWithContext(ctx, http.MethodPost, c.BaseURL+path, bytes.NewReader(body))
+	request, err := http.NewRequestWithContext(ctx, http.MethodPost, client.BaseURL+path, bytes.NewReader(encodedBody))
 	if err != nil {
 		cancel()
 		return nil, err
 	}
-	req.Header.Set("Content-Type", "application/json")
-	if bearer != "" {
-		req.Header.Set("Authorization", "Bearer "+bearer)
+	request.Header.Set("Content-Type", "application/json")
+	if bearerToken != "" {
+		request.Header.Set("Authorization", "Bearer "+bearerToken)
 	}
-	client := c.HTTP
-	if client == nil {
-		client = noRedirects
+	httpClient := client.HTTP
+	if httpClient == nil {
+		httpClient = clientWithoutRedirects
 	}
-	resp, err := client.Do(req)
+	response, err := httpClient.Do(request)
 	if err != nil {
 		cancel()
 		return nil, fmt.Errorf("pdp: %w", err)
 	}
-	resp.Body = cancelOnClose{resp.Body, cancel}
-	return resp, nil
+	response.Body = cancelOnClose{ReadCloser: response.Body, cancel: cancel}
+	return response, nil
 }
 
 // cancelOnClose releases the request's timeout when the body is closed, so
@@ -140,17 +142,17 @@ type cancelOnClose struct {
 	cancel context.CancelFunc
 }
 
-func (b cancelOnClose) Close() error {
-	err := b.ReadCloser.Close()
-	b.cancel()
+func (body cancelOnClose) Close() error {
+	err := body.ReadCloser.Close()
+	body.cancel()
 	return err
 }
 
 // statusError turns an unexpected response into an error that carries the
 // status and the start of the body.
-func statusError(resp *http.Response) error {
-	msg, _ := io.ReadAll(io.LimitReader(resp.Body, 512))
-	return fmt.Errorf("pdp: remote PDP answered %s: %s", resp.Status, bytes.TrimSpace(msg))
+func statusError(response *http.Response) error {
+	bodyStart, _ := io.ReadAll(io.LimitReader(response.Body, 512))
+	return fmt.Errorf("pdp: remote PDP answered %s: %s", response.Status, bytes.TrimSpace(bodyStart))
 }
 
 // Chain asks each Decider in order and returns the first answer. A deny is an
@@ -159,25 +161,25 @@ func statusError(resp *http.Response) error {
 type Chain []Decider
 
 // Decide implements Decider.
-func (ch Chain) Decide(ctx context.Context, req model.AccessRequest) (model.Decision, error) {
-	errs := []error{errors.New("pdp: no decider answered")}
-	for _, d := range ch {
-		dec, err := d.Decide(ctx, req)
+func (chain Chain) Decide(ctx context.Context, request model.AccessRequest) (model.Decision, error) {
+	failures := []error{errors.New("pdp: no decider answered")}
+	for _, decider := range chain {
+		decision, err := decider.Decide(ctx, request)
 		if err == nil {
-			return dec, nil
+			return decision, nil
 		}
-		errs = append(errs, err)
+		failures = append(failures, err)
 	}
-	return model.Decision{Effect: model.Deny, Reason: "no decider answered"}, errors.Join(errs...)
+	return model.Decision{Effect: model.Deny, Reason: "no decider answered"}, errors.Join(failures...)
 }
 
 // DeciderFunc lets an ordinary function act as a Decider, for tests and
 // small adapters.
-type DeciderFunc func(ctx context.Context, req model.AccessRequest) (model.Decision, error)
+type DeciderFunc func(ctx context.Context, request model.AccessRequest) (model.Decision, error)
 
-// Decide calls f.
-func (f DeciderFunc) Decide(ctx context.Context, req model.AccessRequest) (model.Decision, error) {
-	return f(ctx, req)
+// Decide calls decide.
+func (decide DeciderFunc) Decide(ctx context.Context, request model.AccessRequest) (model.Decision, error) {
+	return decide(ctx, request)
 }
 
 // Check at compile time that the deciders satisfy Decider.

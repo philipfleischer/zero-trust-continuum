@@ -26,211 +26,233 @@ type Engine struct {
 	DefaultTTL time.Duration          // cache lifetime of a decision when the rule sets none
 }
 
-// NewEngine returns an engine with p installed and DefaultTTL 30 s. A nil p
-// installs an empty policy, which denies everything.
-func NewEngine(p *Policy) *Engine {
-	if p == nil {
-		p = &Policy{}
+// NewEngine returns an engine with initialPolicy installed and DefaultTTL
+// 30 s. A nil initialPolicy installs an empty policy, which denies everything.
+func NewEngine(initialPolicy *Policy) *Engine {
+	if initialPolicy == nil {
+		initialPolicy = &Policy{}
 	}
-	e := &Engine{DefaultTTL: 30 * time.Second}
-	e.current.Store(p)
-	return e
+	engine := &Engine{DefaultTTL: 30 * time.Second}
+	engine.current.Store(initialPolicy)
+	return engine
 }
 
 // Policy returns the installed policy. Callers must not modify it.
-func (e *Engine) Policy() *Policy { return e.current.Load() }
+func (engine *Engine) Policy() *Policy { return engine.current.Load() }
 
-// Install validates p and installs it if p.Version is newer than the
-// installed version. On any error the installed policy is kept.
-func (e *Engine) Install(p *Policy) error {
-	if err := Validate(p); err != nil {
+// Install validates newPolicy and installs it if its version is newer than
+// the installed version. On any error the installed policy is kept.
+func (engine *Engine) Install(newPolicy *Policy) error {
+	if err := Validate(newPolicy); err != nil {
 		return err
 	}
 	for {
-		old := e.current.Load()
-		if p.Version <= old.Version {
-			return fmt.Errorf("%w (have %d, got %d)", ErrStalePolicy, old.Version, p.Version)
+		installed := engine.current.Load()
+		if newPolicy.Version <= installed.Version {
+			return fmt.Errorf("%w (have %d, got %d)", ErrStalePolicy, installed.Version, newPolicy.Version)
 		}
-		if e.current.CompareAndSwap(old, p) {
+		if engine.current.CompareAndSwap(installed, newPolicy) {
 			return nil
 		}
 		// Another Install won the race; compare against its version and retry.
 	}
 }
 
-// Evaluate returns the decision for req with deny-overrides and default deny:
-// the first matching deny rule decides; otherwise the first matching allow
-// rule decides; otherwise the request is denied. The decision carries RuleID,
-// Reason, TTL and PolicyVersion, and an allow also carries a copy of the
-// rule's obligations. Evaluate never fails: every problem becomes a deny.
-func (e *Engine) Evaluate(req model.AccessRequest) model.Decision {
-	p := e.current.Load() // one snapshot for the whole evaluation
-	var allow *Rule
-	for i := range p.Rules {
-		r := &p.Rules[i]
-		if !matches(r, req) {
+// Evaluate returns the decision for request with deny-overrides and default
+// deny: the first matching deny rule decides; otherwise the first matching
+// allow rule decides; otherwise the request is denied. The decision carries
+// RuleID, Reason, TTL and PolicyVersion, and an allow also carries a copy of
+// the rule's obligations. Evaluate never fails: every problem becomes a deny.
+func (engine *Engine) Evaluate(request model.AccessRequest) model.Decision {
+	policy := engine.current.Load() // one snapshot for the whole evaluation
+	var firstAllowRule *Rule
+	for ruleIndex := range policy.Rules {
+		rule := &policy.Rules[ruleIndex]
+		if !ruleMatches(rule, request) {
 			continue
 		}
-		if r.Effect == model.Deny {
+		if rule.Effect == model.Deny {
 			return model.Decision{
-				Effect: model.Deny, Reason: "denied by rule " + r.ID, RuleID: r.ID,
-				TTL: e.ttl(r), PolicyVersion: p.Version,
+				Effect:        model.Deny,
+				Reason:        "denied by rule " + rule.ID,
+				RuleID:        rule.ID,
+				TTL:           engine.cacheLifetime(rule),
+				PolicyVersion: policy.Version,
 			}
 		}
-		if allow == nil {
-			allow = r
+		if firstAllowRule == nil {
+			firstAllowRule = rule
 		}
 	}
-	if allow == nil {
+	if firstAllowRule == nil {
 		return model.Decision{
-			Effect: model.Deny, Reason: "no rule matched (default deny)",
-			TTL: e.DefaultTTL, PolicyVersion: p.Version,
+			Effect:        model.Deny,
+			Reason:        "no rule matched (default deny)",
+			TTL:           engine.DefaultTTL,
+			PolicyVersion: policy.Version,
 		}
 	}
 	return model.Decision{
-		Effect: model.Allow, Reason: "allowed by rule " + allow.ID, RuleID: allow.ID,
-		TTL: e.ttl(allow), PolicyVersion: p.Version,
-		Obligations: append([]string(nil), allow.Obligations...),
+		Effect:        model.Allow,
+		Reason:        "allowed by rule " + firstAllowRule.ID,
+		RuleID:        firstAllowRule.ID,
+		TTL:           engine.cacheLifetime(firstAllowRule),
+		PolicyVersion: policy.Version,
+		Obligations:   slices.Clone(firstAllowRule.Obligations),
 	}
 }
 
-// ttl returns how long a decision made by r may be cached.
-func (e *Engine) ttl(r *Rule) time.Duration {
-	if r.TTLSeconds > 0 {
-		return time.Duration(r.TTLSeconds) * time.Second
+// cacheLifetime returns how long a decision made by rule may be cached.
+func (engine *Engine) cacheLifetime(rule *Rule) time.Duration {
+	if rule.TTLSeconds > 0 {
+		return time.Duration(rule.TTLSeconds) * time.Second
 	}
-	return e.DefaultTTL
+	return engine.DefaultTTL
 }
 
-// matches reports whether r applies to req: every non-empty pattern list has
-// a match and every condition holds.
-func matches(r *Rule, req model.AccessRequest) bool {
-	if len(r.Subjects) > 0 && !matchSubject(r.Subjects, req.Subject) {
+// ruleMatches reports whether rule applies to request: every non-empty
+// pattern list has a match and every condition holds.
+func ruleMatches(rule *Rule, request model.AccessRequest) bool {
+	if len(rule.Subjects) > 0 && !subjectMatchesAny(rule.Subjects, request.Subject) {
 		return false
 	}
-	if len(r.Resources) > 0 && !matchResource(r.Resources, req.Resource) {
+	if len(rule.Resources) > 0 && !resourceMatchesAny(rule.Resources, request.Resource) {
 		return false
 	}
-	if len(r.Actions) > 0 && !matchAny(r.Actions, req.Action) {
+	if len(rule.Actions) > 0 && !textMatchesAny(rule.Actions, request.Action) {
 		return false
 	}
-	for _, c := range r.Conditions {
-		if !evalCondition(c, req) {
+	for _, condition := range rule.Conditions {
+		if !conditionHolds(condition, request) {
 			return false
 		}
 	}
 	return true
 }
 
-// matchAny reports whether s matches at least one of the glob patterns.
-func matchAny(patterns []string, s string) bool {
-	for _, p := range patterns {
-		if Glob(p, s) {
+// textMatchesAny reports whether text matches at least one of the glob patterns.
+func textMatchesAny(patterns []string, text string) bool {
+	for _, pattern := range patterns {
+		if Glob(pattern, text) {
 			return true
 		}
 	}
 	return false
 }
 
-// matchSubject matches "role:<glob>" against each of the subject's roles and
-// any other pattern against its SPIFFE ID.
-func matchSubject(patterns []string, s model.Subject) bool {
-	for _, p := range patterns {
-		if role, ok := strings.CutPrefix(p, "role:"); ok {
-			for _, have := range s.Roles {
-				if Glob(role, have) {
+// subjectMatchesAny matches "role:<glob>" against each of the subject's roles
+// and any other pattern against its SPIFFE ID.
+func subjectMatchesAny(patterns []string, subject model.Subject) bool {
+	for _, pattern := range patterns {
+		rolePattern, isRolePattern := strings.CutPrefix(pattern, "role:")
+		if isRolePattern {
+			for _, role := range subject.Roles {
+				if Glob(rolePattern, role) {
 					return true
 				}
 			}
 			continue
 		}
-		if Glob(p, s.ID) {
+		if Glob(pattern, subject.ID) {
 			return true
 		}
 	}
 	return false
 }
 
-// matchResource matches "type:<glob>" against the resource type and any other
-// pattern against the resource ID.
-func matchResource(patterns []string, r model.Resource) bool {
-	for _, p := range patterns {
-		if typ, ok := strings.CutPrefix(p, "type:"); ok {
-			if Glob(typ, r.Type) {
+// resourceMatchesAny matches "type:<glob>" against the resource type and any
+// other pattern against the resource ID.
+func resourceMatchesAny(patterns []string, resource model.Resource) bool {
+	for _, pattern := range patterns {
+		typePattern, isTypePattern := strings.CutPrefix(pattern, "type:")
+		if isTypePattern {
+			if Glob(typePattern, resource.Type) {
 				return true
 			}
 			continue
 		}
-		if Glob(p, r.ID) {
+		if Glob(pattern, resource.ID) {
 			return true
 		}
 	}
 	return false
 }
 
-// evalCondition reports whether c holds for req. A missing attribute, an
-// unknown operator or a value that is not a number for a numeric operator
-// all give false (fail closed).
-func evalCondition(c Condition, req model.AccessRequest) bool {
-	v, ok := Resolve(c.Attribute, req)
-	if !ok {
+// conditionHolds reports whether condition holds for request. A missing
+// attribute, an unknown operator or a value that is not a number for a
+// numeric operator all give false (fail closed).
+func conditionHolds(condition Condition, request model.AccessRequest) bool {
+	actual, found := Resolve(condition.Attribute, request)
+	if !found {
 		return false
 	}
-	switch c.Op {
+	expected := condition.Value
+	switch condition.Operator {
 	case "eq":
-		return v == c.Value
+		return actual == expected
 	case "neq":
-		return v != c.Value
+		return actual != expected
 	case "in":
-		return overlaps(splitList(v), splitList(c.Value))
+		return listsOverlap(splitList(actual), splitList(expected))
 	case "nin":
-		return !overlaps(splitList(v), splitList(c.Value))
+		return !listsOverlap(splitList(actual), splitList(expected))
 	case "glob":
-		return Glob(c.Value, v)
+		return Glob(expected, actual)
 	case "sameAs":
-		other, ok := Resolve(c.Value, req)
-		return ok && v != "" && v == other
+		other, otherFound := Resolve(expected, request)
+		return otherFound && actual != "" && actual == other
 	case "gt", "gte", "lt", "lte":
-		a, errA := parseNumber(v)
-		b, errB := parseNumber(c.Value)
-		if errA != nil || errB != nil {
-			return false
-		}
-		switch c.Op {
-		case "gt":
-			return a > b
-		case "gte":
-			return a >= b
-		case "lt":
-			return a < b
-		default:
-			return a <= b
-		}
+		return compareNumbers(actual, condition.Operator, expected)
 	}
 	return false
 }
 
-// isNumericOp reports whether op compares numbers.
-func isNumericOp(op string) bool { return op == "gt" || op == "gte" || op == "lt" || op == "lte" }
-
-// parseNumber parses a decimal number such as "0.8", ignoring surrounding spaces.
-func parseNumber(s string) (float64, error) { return strconv.ParseFloat(strings.TrimSpace(s), 64) }
-
-// splitList splits a comma-separated list and drops spaces and empty items.
-func splitList(s string) []string {
-	var out []string
-	for _, item := range strings.Split(s, ",") {
-		if item = strings.TrimSpace(item); item != "" {
-			out = append(out, item)
-		}
+// compareNumbers reports whether "actual operator expected" holds when both
+// are parsed as numbers. Text that is not a number gives false.
+func compareNumbers(actual, operator, expected string) bool {
+	actualNumber, actualError := parseNumber(actual)
+	expectedNumber, expectedError := parseNumber(expected)
+	if actualError != nil || expectedError != nil {
+		return false
 	}
-	return out
+	switch operator {
+	case "gt":
+		return actualNumber > expectedNumber
+	case "gte":
+		return actualNumber >= expectedNumber
+	case "lt":
+		return actualNumber < expectedNumber
+	default:
+		return actualNumber <= expectedNumber
+	}
 }
 
-// overlaps reports whether a and b have at least one item in common.
-func overlaps(a, b []string) bool {
-	for _, x := range a {
-		if slices.Contains(b, x) {
+// isNumericOperator reports whether operator compares numbers.
+func isNumericOperator(operator string) bool {
+	return operator == "gt" || operator == "gte" || operator == "lt" || operator == "lte"
+}
+
+// parseNumber parses a decimal number such as "0.8", ignoring surrounding spaces.
+func parseNumber(text string) (float64, error) {
+	return strconv.ParseFloat(strings.TrimSpace(text), 64)
+}
+
+// splitList splits a comma-separated list and drops spaces and empty items.
+func splitList(text string) []string {
+	var items []string
+	for _, item := range strings.Split(text, ",") {
+		item = strings.TrimSpace(item)
+		if item != "" {
+			items = append(items, item)
+		}
+	}
+	return items
+}
+
+// listsOverlap reports whether first and second have at least one item in common.
+func listsOverlap(first, second []string) bool {
+	for _, item := range first {
+		if slices.Contains(second, item) {
 			return true
 		}
 	}

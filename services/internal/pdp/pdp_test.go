@@ -19,27 +19,27 @@ const (
 	operator = "spiffe://grid.example/cloud/operator/alice"
 )
 
-// t0 is 14:00, inside working hours.
-var t0 = time.Date(2026, 10, 9, 14, 0, 0, 0, time.UTC)
+// referenceTime is 14:00, inside working hours.
+var referenceTime = time.Date(2026, 10, 9, 14, 0, 0, 0, time.UTC)
 
 // newPDP returns a PDP with the default substation policy whose clock reads *now.
 func newPDP(t *testing.T, now *time.Time) *PDP {
 	t.Helper()
-	p := New("cloud-pdp", policy.NewEngine(policy.DefaultSubstationPolicy()))
-	p.Trust.SetClock(func() time.Time { return *now })
-	return p
+	pdp := New("cloud-pdp", policy.NewEngine(policy.DefaultSubstationPolicy()))
+	pdp.Trust.SetClock(func() time.Time { return *now })
+	return pdp
 }
 
 // authenticate gives subject mTLS authentication, good posture and one
 // location signal: 0.35·0.8 + 0.25 + 0.30 + 0.10·0.5 = 0.88.
-func authenticate(t *testing.T, p *PDP, subject string) {
+func authenticate(t *testing.T, pdp *PDP, subject string) {
 	t.Helper()
-	for _, sig := range []trust.Signal{
+	for _, signal := range []trust.Signal{
 		{Subject: subject, Kind: trust.Authentication, Value: 0.8},
 		{Subject: subject, Kind: trust.Posture, Value: 1},
 		{Subject: subject, Kind: trust.Location, Value: 1},
 	} {
-		if _, err := p.RecordSignal(sig); err != nil {
+		if _, err := pdp.RecordSignal(signal); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -65,108 +65,108 @@ func operateBreaker() model.AccessRequest {
 }
 
 // decide fails the test if the PDP returns an error.
-func decide(t *testing.T, p *PDP, req model.AccessRequest) model.Decision {
+func decide(t *testing.T, pdp *PDP, request model.AccessRequest) model.Decision {
 	t.Helper()
-	d, err := p.Decide(context.Background(), req)
+	decision, err := pdp.Decide(context.Background(), request)
 	if err != nil {
 		t.Fatalf("Decide() error = %v", err)
 	}
-	return d
+	return decision
 }
 
 func TestDecideUnknownSubject(t *testing.T) {
-	now := t0
-	p := newPDP(t, &now)
-	d := decide(t, p, writeTelemetry("bay-1"))
-	if d.Allowed() || d.RuleID != "deny-untrusted" || d.TrustScore != 0 || d.DecidedBy != "cloud-pdp" {
-		t.Errorf("unknown PMU: %+v", d)
+	now := referenceTime
+	pdp := newPDP(t, &now)
+	decision := decide(t, pdp, writeTelemetry("bay-1"))
+	if decision.Allowed() || decision.RuleID != "deny-untrusted" || decision.TrustScore != 0 || decision.DecidedBy != "cloud-pdp" {
+		t.Errorf("unknown PMU: %+v", decision)
 	}
 }
 
 func TestDecideAuthenticated(t *testing.T) {
-	now := t0
-	p := newPDP(t, &now)
-	authenticate(t, p, pmu)
-	d := decide(t, p, writeTelemetry("bay-1"))
-	if !d.Allowed() || d.RuleID != "edge-write-telemetry" || math.Abs(d.TrustScore-0.88) > 1e-9 {
-		t.Errorf("authenticated PMU: %+v", d)
+	now := referenceTime
+	pdp := newPDP(t, &now)
+	authenticate(t, pdp, pmu)
+	decision := decide(t, pdp, writeTelemetry("bay-1"))
+	if !decision.Allowed() || decision.RuleID != "edge-write-telemetry" || math.Abs(decision.TrustScore-0.88) > 1e-9 {
+		t.Errorf("authenticated PMU: %+v", decision)
 	}
 }
 
 func TestDecideIgnoresClaimedTrust(t *testing.T) {
-	now := t0
-	p := newPDP(t, &now)
-	req := writeTelemetry("bay-1")
-	req.Context.TrustScore = 1 // a PEP must not be able to raise trust
-	if d := decide(t, p, req); d.Allowed() || d.TrustScore != 0 {
-		t.Errorf("claimed trust was used: %+v", d)
+	now := referenceTime
+	pdp := newPDP(t, &now)
+	request := writeTelemetry("bay-1")
+	request.Context.TrustScore = 1 // a PEP must not be able to raise trust
+	if decision := decide(t, pdp, request); decision.Allowed() || decision.TrustScore != 0 {
+		t.Errorf("claimed trust was used: %+v", decision)
 	}
 }
 
 func TestDecideIgnoresClaimedEmergency(t *testing.T) {
-	now := t0
-	p := newPDP(t, &now)
-	authenticate(t, p, operator)
-	req := operateBreaker()
-	req.Context.Emergency = true
-	if d := decide(t, p, req); d.Allowed() {
-		t.Errorf("claimed emergency was used: %+v", d)
+	now := referenceTime
+	pdp := newPDP(t, &now)
+	authenticate(t, pdp, operator)
+	request := operateBreaker()
+	request.Context.Emergency = true
+	if decision := decide(t, pdp, request); decision.Allowed() {
+		t.Errorf("claimed emergency was used: %+v", decision)
 	}
-	p.SetEmergency(true)
-	if d := decide(t, p, operateBreaker()); !d.Allowed() || d.RuleID != "break-glass-breaker" {
-		t.Errorf("emergency declared by the PDP: %+v", d)
+	pdp.SetEmergency(true)
+	if decision := decide(t, pdp, operateBreaker()); !decision.Allowed() || decision.RuleID != "break-glass-breaker" {
+		t.Errorf("emergency declared by the PDP: %+v", decision)
 	}
 }
 
 func TestDecideIgnoresClaimedTime(t *testing.T) {
-	now := t0
-	p := New("cloud-pdp", policy.NewEngine(&policy.Policy{Version: 1, Rules: []policy.Rule{
+	now := referenceTime
+	pdp := New("cloud-pdp", policy.NewEngine(&policy.Policy{Version: 1, Rules: []policy.Rule{
 		{ID: "allow-all", Effect: model.Allow},
-		{ID: "deny-night", Effect: model.Deny, Conditions: []policy.Condition{{Attribute: "context.hour", Op: "lt", Value: "6"}}},
+		{ID: "deny-night", Effect: model.Deny, Conditions: []policy.Condition{{Attribute: "context.hour", Operator: "lt", Value: "6"}}},
 	}}))
-	p.Trust.SetClock(func() time.Time { return now })
-	authenticate(t, p, pmu)
+	pdp.Trust.SetClock(func() time.Time { return now })
+	authenticate(t, pdp, pmu)
 
-	req := writeTelemetry("bay-1")
-	req.Context.Time = time.Date(2026, 10, 9, 3, 0, 0, 0, time.UTC) // claims night
-	if d := decide(t, p, req); !d.Allowed() {
-		t.Errorf("claimed time was used: %+v", d)
+	request := writeTelemetry("bay-1")
+	request.Context.Time = time.Date(2026, 10, 9, 3, 0, 0, 0, time.UTC) // claims night
+	if decision := decide(t, pdp, request); !decision.Allowed() {
+		t.Errorf("claimed time was used: %+v", decision)
 	}
 	now = time.Date(2026, 10, 10, 3, 0, 0, 0, time.UTC) // it really is night
-	if d := decide(t, p, writeTelemetry("bay-1")); d.RuleID != "deny-night" {
-		t.Errorf("PDP clock at night: %+v", d)
+	if decision := decide(t, pdp, writeTelemetry("bay-1")); decision.RuleID != "deny-night" {
+		t.Errorf("PDP clock at night: %+v", decision)
 	}
 }
 
 func TestDenialLowersTrust(t *testing.T) {
-	now := t0
-	p := newPDP(t, &now)
-	authenticate(t, p, pmu)
-	if d := decide(t, p, writeTelemetry("bay-2")); d.Allowed() {
-		t.Fatalf("PMU wrote to another bay: %+v", d)
+	now := referenceTime
+	pdp := newPDP(t, &now)
+	authenticate(t, pdp, pmu)
+	if decision := decide(t, pdp, writeTelemetry("bay-2")); decision.Allowed() {
+		t.Fatalf("PMU wrote to another bay: %+v", decision)
 	}
 	// 0.88 − 0.1 for one fresh denial
-	if got := p.Trust.Score(pmu); math.Abs(got-0.78) > 1e-9 {
+	if got := pdp.Trust.Score(pmu); math.Abs(got-0.78) > 1e-9 {
 		t.Errorf("score after a denial = %v, want 0.78", got)
 	}
 }
 
 func TestDecideCancelled(t *testing.T) {
-	now := t0
-	p := newPDP(t, &now)
-	authenticate(t, p, pmu)
+	now := referenceTime
+	pdp := newPDP(t, &now)
+	authenticate(t, pdp, pmu)
 	ctx, cancel := context.WithCancel(context.Background())
 	cancel()
-	d, err := p.Decide(ctx, writeTelemetry("bay-1"))
-	if err == nil || d.Allowed() {
-		t.Errorf("cancelled request: %+v, %v", d, err)
+	decision, err := pdp.Decide(ctx, writeTelemetry("bay-1"))
+	if err == nil || decision.Allowed() {
+		t.Errorf("cancelled request: %+v, %v", decision, err)
 	}
 }
 
 func TestRecordSignalEscalation(t *testing.T) {
-	now := t0
-	p := newPDP(t, &now)
-	authenticate(t, p, pmu)
+	now := referenceTime
+	pdp := newPDP(t, &now)
+	authenticate(t, pdp, pmu)
 	tests := []struct {
 		name  string
 		value float64
@@ -177,21 +177,21 @@ func TestRecordSignalEscalation(t *testing.T) {
 		{"strong alert", 0.95, true},
 		{"already compromised", 0.99, false},
 	}
-	for _, tc := range tests {
-		got, err := p.RecordSignal(trust.Signal{Subject: pmu, Kind: trust.Behaviour, Value: tc.value, Source: "ztc-ids"})
-		if err != nil || got != tc.want {
-			t.Errorf("%s: RecordSignal() = %v, %v, want %v", tc.name, got, err, tc.want)
+	for _, testCase := range tests {
+		got, err := pdp.RecordSignal(trust.Signal{Subject: pmu, Kind: trust.Behaviour, Value: testCase.value, Source: "ztc-ids"})
+		if err != nil || got != testCase.want {
+			t.Errorf("%s: RecordSignal() = %v, %v, want %v", testCase.name, got, err, testCase.want)
 		}
 	}
-	if d := decide(t, p, writeTelemetry("bay-1")); d.Allowed() || d.TrustScore != 0 {
-		t.Errorf("compromised PMU: %+v", d)
+	if decision := decide(t, pdp, writeTelemetry("bay-1")); decision.Allowed() || decision.TrustScore != 0 {
+		t.Errorf("compromised PMU: %+v", decision)
 	}
 }
 
 func TestRecordSignalRejectsInvalid(t *testing.T) {
-	now := t0
-	p := newPDP(t, &now)
-	if _, err := p.RecordSignal(trust.Signal{Subject: pmu, Kind: "reset"}); err == nil {
+	now := referenceTime
+	pdp := newPDP(t, &now)
+	if _, err := pdp.RecordSignal(trust.Signal{Subject: pmu, Kind: "reset"}); err == nil {
 		t.Error("RecordSignal() of an unknown kind = nil error")
 	}
 }

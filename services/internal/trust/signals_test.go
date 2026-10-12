@@ -8,14 +8,14 @@ import (
 )
 
 func TestKindValid(t *testing.T) {
-	for _, k := range []Kind{Authentication, Posture, Behaviour, Location, Denial, Compromise} {
-		if !k.Valid() {
-			t.Errorf("%q.Valid() = false, want true", k)
+	for _, kind := range []Kind{Authentication, Posture, Behaviour, Location, Denial, Compromise} {
+		if !kind.Valid() {
+			t.Errorf("%q.Valid() = false, want true", kind)
 		}
 	}
-	for _, k := range []Kind{"", "Authentication", "auth", "reset"} {
-		if k.Valid() {
-			t.Errorf("%q.Valid() = true, want false", k)
+	for _, kind := range []Kind{"", "Authentication", "auth", "reset"} {
+		if kind.Valid() {
+			t.Errorf("%q.Valid() = true, want false", kind)
 		}
 	}
 }
@@ -36,9 +36,9 @@ func TestLevelOf(t *testing.T) {
 		{-1, Untrusted},
 		{math.NaN(), Untrusted},
 	}
-	for _, tc := range tests {
-		if got := LevelOf(tc.score); got != tc.want {
-			t.Errorf("LevelOf(%v) = %q, want %q", tc.score, got, tc.want)
+	for _, testCase := range tests {
+		if got := LevelOf(testCase.score); got != testCase.want {
+			t.Errorf("LevelOf(%v) = %q, want %q", testCase.score, got, testCase.want)
 		}
 	}
 }

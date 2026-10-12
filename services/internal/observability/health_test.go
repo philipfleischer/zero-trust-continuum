@@ -13,17 +13,18 @@ import (
 	"testing"
 )
 
-func get(t *testing.T, h http.Handler, path string) (int, string) {
+// get sends a GET request for path to handler and returns the status code and body.
+func get(t *testing.T, handler http.Handler, path string) (int, string) {
 	t.Helper()
-	rec := httptest.NewRecorder()
-	h.ServeHTTP(rec, httptest.NewRequest(http.MethodGet, path, nil))
-	return rec.Code, rec.Body.String()
+	recorder := httptest.NewRecorder()
+	handler.ServeHTTP(recorder, httptest.NewRequest(http.MethodGet, path, nil))
+	return recorder.Code, recorder.Body.String()
 }
 
 func TestHealthMux(t *testing.T) {
-	pdpErr := error(nil)
+	pdpError := error(nil)
 	checks := map[string]Check{
-		"pdp":   func(context.Context) error { return pdpErr },
+		"pdp":   func(context.Context) error { return pdpError },
 		"audit": func(context.Context) error { return nil },
 	}
 	var logs bytes.Buffer
@@ -36,7 +37,7 @@ func TestHealthMux(t *testing.T) {
 		t.Errorf("/readyz with healthy checks = %d, want 200", code)
 	}
 
-	pdpErr = errors.New("dial tcp 10.0.3.7:8181: connection refused")
+	pdpError = errors.New("dial tcp 10.0.3.7:8181: connection refused")
 	code, body := get(t, mux, "/readyz")
 	if code != http.StatusServiceUnavailable || !strings.Contains(body, "pdp") {
 		t.Errorf("/readyz with failing check = %d %q, want 503 naming pdp", code, body)
@@ -67,25 +68,25 @@ func TestReadyzGivesChecksADeadline(t *testing.T) {
 }
 
 func TestInstrument(t *testing.T) {
-	reg := NewRegistry()
-	h := Instrument(reg, "ztc-pdp", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/deny" {
-			w.WriteHeader(http.StatusForbidden)
-			w.WriteHeader(http.StatusInternalServerError) // ignored by net/http; the first code counts
+	registry := NewRegistry()
+	handler := Instrument(registry, "ztc-pdp", http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+		if request.URL.Path == "/deny" {
+			writer.WriteHeader(http.StatusForbidden)
+			writer.WriteHeader(http.StatusInternalServerError) // ignored by net/http; the first code counts
 			return
 		}
-		_, _ = w.Write([]byte("ok")) // implicit 200
+		_, _ = writer.Write([]byte("ok")) // implicit 200
 	}))
 
-	for _, req := range []*http.Request{
+	for _, request := range []*http.Request{
 		httptest.NewRequest(http.MethodGet, "/allow", nil),
 		httptest.NewRequest(http.MethodPost, "/deny", nil),
 		httptest.NewRequest("EVIL-METHOD", "/allow", nil),
 	} {
-		h.ServeHTTP(httptest.NewRecorder(), req)
+		handler.ServeHTTP(httptest.NewRecorder(), request)
 	}
 
-	requests := reg.Counter("ztc_http_requests_total", "")
+	requestCount := registry.Counter("ztc_http_requests_total", "")
 	tests := []struct {
 		method, code string
 		want         float64
@@ -95,43 +96,44 @@ func TestInstrument(t *testing.T) {
 		{"OTHER", "200", 1},
 		{"EVIL-METHOD", "200", 0},
 	}
-	for _, tc := range tests {
-		if got := requests.Value("service", "ztc-pdp", "method", tc.method, "code", tc.code); got != tc.want {
-			t.Errorf("requests{method=%s,code=%s} = %v, want %v", tc.method, tc.code, got, tc.want)
+	for _, testCase := range tests {
+		got := requestCount.Value("service", "ztc-pdp", "method", testCase.method, "code", testCase.code)
+		if got != testCase.want {
+			t.Errorf("requests{method=%s,code=%s} = %v, want %v", testCase.method, testCase.code, got, testCase.want)
 		}
 	}
 
-	var b strings.Builder
-	if err := reg.Write(&b); err != nil {
+	var text strings.Builder
+	if err := registry.Write(&text); err != nil {
 		t.Fatal(err)
 	}
-	if !strings.Contains(b.String(), `ztc_http_request_seconds_count{service="ztc-pdp"} 3`) {
-		t.Errorf("latency histogram did not record 3 requests:\n%s", b.String())
+	if !strings.Contains(text.String(), `ztc_http_request_seconds_count{service="ztc-pdp"} 3`) {
+		t.Errorf("latency histogram did not record 3 requests:\n%s", text.String())
 	}
 }
 
 func TestNewLogger(t *testing.T) {
-	var buf bytes.Buffer
-	log, err := NewLogger(&buf, "ztc-pdp", "warn")
+	var output bytes.Buffer
+	logger, err := NewLogger(&output, "ztc-pdp", "warn")
 	if err != nil {
 		t.Fatal(err)
 	}
-	log.Info("hidden")
-	log.Warn("shown", "subject", "pmu-7")
+	logger.Info("hidden")
+	logger.Warn("shown", "subject", "pmu-7")
 
-	lines := strings.Split(strings.TrimSpace(buf.String()), "\n")
+	lines := strings.Split(strings.TrimSpace(output.String()), "\n")
 	if len(lines) != 1 {
-		t.Fatalf("got %d log lines, want 1 (info is below warn):\n%s", len(lines), buf.String())
+		t.Fatalf("got %d log lines, want 1 (info is below warn):\n%s", len(lines), output.String())
 	}
-	var rec map[string]any
-	if err := json.Unmarshal([]byte(lines[0]), &rec); err != nil {
+	var record map[string]any
+	if err := json.Unmarshal([]byte(lines[0]), &record); err != nil {
 		t.Fatalf("log line is not JSON: %v", err)
 	}
-	if rec["service"] != "ztc-pdp" || rec["msg"] != "shown" || rec["subject"] != "pmu-7" {
-		t.Errorf("log record = %v, want service, msg and subject fields", rec)
+	if record["service"] != "ztc-pdp" || record["msg"] != "shown" || record["subject"] != "pmu-7" {
+		t.Errorf("log record = %v, want service, msg and subject fields", record)
 	}
 
-	if _, err := NewLogger(&buf, "ztc-pdp", "verbose"); err == nil {
+	if _, err := NewLogger(&output, "ztc-pdp", "verbose"); err == nil {
 		t.Error("NewLogger accepted the unknown level \"verbose\"")
 	}
 }

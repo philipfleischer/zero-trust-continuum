@@ -64,8 +64,8 @@ func main() {
 
 // run executes one ztcctl command and returns the exit status. It takes its
 // dependencies as parameters so tests can call it directly.
-func run(ctx context.Context, args []string, env config.Env, stdout, stderr io.Writer) int {
-	err := dispatch(ctx, args, env, stdout, stderr)
+func run(ctx context.Context, arguments []string, environment config.Env, stdout, stderr io.Writer) int {
+	err := dispatch(ctx, arguments, environment, stdout, stderr)
 	switch {
 	case err == nil:
 		return exitOK
@@ -82,27 +82,29 @@ func run(ctx context.Context, args []string, env config.Env, stdout, stderr io.W
 	}
 }
 
-func dispatch(ctx context.Context, args []string, env config.Env, stdout, stderr io.Writer) error {
-	pdpURL := env.String("pdp_url", "http://localhost:8181")
-	switch {
-	case len(args) == 2 && args[0] == "policy" && args[1] == "default":
-		return printPolicy(stdout)
-	case len(args) == 3 && args[0] == "policy" && args[1] == "validate":
-		return validate(args[2], stdout)
-	case len(args) >= 1 && args[0] == "decide":
-		return decide(ctx, args[1:], pdpURL, stdout, stderr)
-	case len(args) >= 1 && args[0] == "signal":
-		return signal(ctx, args[1:], pdpURL, env.String("pdp_token", ""), stderr)
-	}
-	if len(args) == 0 {
+// dispatch picks the command named by the first arguments and runs it.
+func dispatch(ctx context.Context, arguments []string, environment config.Env, stdout, stderr io.Writer) error {
+	pdpURL := environment.String("pdp_url", "http://localhost:8181")
+	if len(arguments) == 0 {
 		return fmt.Errorf("%w: no command", errUsage)
 	}
-	return fmt.Errorf("%w: unknown command %q", errUsage, strings.Join(args, " "))
+	command, commandArguments := arguments[0], arguments[1:]
+	switch {
+	case command == "policy" && len(commandArguments) == 1 && commandArguments[0] == "default":
+		return printDefaultPolicy(stdout)
+	case command == "policy" && len(commandArguments) == 2 && commandArguments[0] == "validate":
+		return validatePolicyFile(commandArguments[1], stdout)
+	case command == "decide":
+		return decideCommand(ctx, commandArguments, pdpURL, stdout, stderr)
+	case command == "signal":
+		return signalCommand(ctx, commandArguments, pdpURL, environment.String("pdp_token", ""), stderr)
+	}
+	return fmt.Errorf("%w: unknown command %q", errUsage, strings.Join(arguments, " "))
 }
 
-// printPolicy writes the built-in policy in the canonical form of
+// printDefaultPolicy writes the built-in policy in the canonical form of
 // deploy/policies/substation.json.
-func printPolicy(stdout io.Writer) error {
+func printDefaultPolicy(stdout io.Writer) error {
 	data, err := policy.Marshal(policy.DefaultSubstationPolicy())
 	if err != nil {
 		return err
@@ -111,105 +113,114 @@ func printPolicy(stdout io.Writer) error {
 	return err
 }
 
-func validate(path string, stdout io.Writer) error {
-	p, err := policy.LoadFile(path)
+// validatePolicyFile loads the policy file at path the way ztc-pdp does and
+// prints a one-line summary.
+func validatePolicyFile(path string, stdout io.Writer) error {
+	loaded, err := policy.LoadFile(path)
 	if err != nil {
 		return err
 	}
-	_, err = fmt.Fprintf(stdout, "ok: %s is policy version %d with %d rules\n", path, p.Version, len(p.Rules))
+	_, err = fmt.Fprintf(stdout, "ok: %s is policy version %d with %d rules\n", path, loaded.Version, len(loaded.Rules))
 	return err
 }
 
-// decide builds an access request from flags, asks the PDP and prints the
-// decision. A deny returns errDenied, so scripts can test the exit status.
-func decide(ctx context.Context, args []string, pdpURL string, stdout, stderr io.Writer) error {
-	fs := flag.NewFlagSet("ztcctl decide", flag.ContinueOnError)
-	fs.SetOutput(stderr)
-	subject := fs.String("subject", "", "subject SPIFFE ID, e.g. spiffe://grid.example/edge/pmu/1 (required)")
-	action := fs.String("action", "read", "action: read, write, operate, execute, migrate or admin")
-	resource := fs.String("resource", "", "resource ID, e.g. bay-1/telemetry/pmu-1 (required)")
-	rtype := fs.String("type", "", "resource type, e.g. telemetry or breaker (required)")
-	zone := fs.String("zone", "", "the subject's zone")
-	rzone := fs.String("resource-zone", "", "the resource's zone (default: -zone)")
-	source := fs.String("source-zone", "", "the zone the request comes from (default: -zone)")
-	roles := fs.String("roles", "", "comma-separated roles of the subject")
-	if err := fs.Parse(args); err != nil {
+// decideCommand builds an access request from flags, asks the PDP and prints
+// the decision. A deny returns errDenied, so scripts can test the exit status.
+func decideCommand(ctx context.Context, arguments []string, pdpURL string, stdout, stderr io.Writer) error {
+	flags := flag.NewFlagSet("ztcctl decide", flag.ContinueOnError)
+	flags.SetOutput(stderr)
+	subject := flags.String("subject", "", "subject SPIFFE ID, e.g. spiffe://grid.example/edge/pmu/1 (required)")
+	action := flags.String("action", "read", "action: read, write, operate, execute, migrate or admin")
+	resource := flags.String("resource", "", "resource ID, e.g. bay-1/telemetry/pmu-1 (required)")
+	resourceType := flags.String("type", "", "resource type, e.g. telemetry or breaker (required)")
+	subjectZone := flags.String("zone", "", "the subject's zone")
+	resourceZone := flags.String("resource-zone", "", "the resource's zone (default: -zone)")
+	sourceZone := flags.String("source-zone", "", "the zone the request comes from (default: -zone)")
+	roles := flags.String("roles", "", "comma-separated roles of the subject")
+	if err := flags.Parse(arguments); err != nil {
 		return parseError(err)
 	}
-	if *subject == "" || *resource == "" || *rtype == "" {
+	if *subject == "" || *resource == "" || *resourceType == "" {
 		return fmt.Errorf("%w: decide needs -subject, -resource and -type", errUsage)
 	}
 	layer, err := layerOf(*subject)
 	if err != nil {
 		return fmt.Errorf("%w: %w", errUsage, err)
 	}
-	req := model.AccessRequest{
-		Subject:  model.Subject{ID: *subject, Layer: layer, Zone: *zone, Roles: splitRoles(*roles)},
+	request := model.AccessRequest{
+		Subject:  model.Subject{ID: *subject, Layer: layer, Zone: *subjectZone, Roles: splitRoles(*roles)},
 		Action:   *action,
-		Resource: model.Resource{ID: *resource, Type: *rtype, Zone: orDefault(*rzone, *zone)},
-		Context:  model.Context{SourceZone: orDefault(*source, *zone), SourceLayer: layer},
+		Resource: model.Resource{ID: *resource, Type: *resourceType, Zone: valueOrDefault(*resourceZone, *subjectZone)},
+		Context:  model.Context{SourceZone: valueOrDefault(*sourceZone, *subjectZone), SourceLayer: layer},
 	}
-	d, err := (&pdp.RemoteClient{BaseURL: pdpURL, Timeout: 5 * time.Second}).Decide(ctx, req)
+	client := &pdp.RemoteClient{BaseURL: pdpURL, Timeout: 5 * time.Second}
+	decision, err := client.Decide(ctx, request)
 	if err != nil {
 		return err
 	}
-	if _, err := fmt.Fprintf(stdout, "%s: %s (trust %.3f, decided by %s)\n",
-		d.Effect, d.Reason, d.TrustScore, d.DecidedBy); err != nil {
+	_, err = fmt.Fprintf(stdout, "%s: %s (trust %.3f, decided by %s)\n",
+		decision.Effect, decision.Reason, decision.TrustScore, decision.DecidedBy)
+	if err != nil {
 		return err
 	}
-	if !d.Allowed() {
+	if !decision.Allowed() {
 		return errDenied
 	}
 	return nil
 }
 
-// signal sends one trust signal, authenticated with ZTC_PDP_TOKEN.
-func signal(ctx context.Context, args []string, pdpURL, token string, stderr io.Writer) error {
-	fs := flag.NewFlagSet("ztcctl signal", flag.ContinueOnError)
-	fs.SetOutput(stderr)
-	subject := fs.String("subject", "", "subject SPIFFE ID (required)")
-	kind := fs.String("kind", "", "authentication, posture, behaviour, location, denial or compromise (required)")
-	value := fs.Float64("value", 1, "signal value in [0, 1]")
-	if err := fs.Parse(args); err != nil {
+// signalCommand sends one trust signal, authenticated with ZTC_PDP_TOKEN.
+func signalCommand(ctx context.Context, arguments []string, pdpURL, token string, stderr io.Writer) error {
+	flags := flag.NewFlagSet("ztcctl signal", flag.ContinueOnError)
+	flags.SetOutput(stderr)
+	subject := flags.String("subject", "", "subject SPIFFE ID (required)")
+	kind := flags.String("kind", "", "authentication, posture, behaviour, location, denial or compromise (required)")
+	value := flags.Float64("value", 1, "signal value in [0, 1]")
+	if err := flags.Parse(arguments); err != nil {
 		return parseError(err)
 	}
-	if *subject == "" || !trust.Kind(*kind).Valid() {
+	signalKind := trust.Kind(*kind)
+	if *subject == "" || !signalKind.Valid() {
 		return fmt.Errorf("%w: signal needs -subject and a valid -kind", errUsage)
 	}
 	if token == "" {
 		return errors.New("ZTC_PDP_TOKEN is not set")
 	}
-	c := &pdp.RemoteClient{BaseURL: pdpURL, Token: token, Timeout: 5 * time.Second}
-	return c.RecordSignal(ctx, trust.Signal{Subject: *subject, Kind: trust.Kind(*kind), Value: *value, Source: "ztcctl"})
+	client := &pdp.RemoteClient{BaseURL: pdpURL, Token: token, Timeout: 5 * time.Second}
+	signal := trust.Signal{Subject: *subject, Kind: signalKind, Value: *value, Source: "ztcctl"}
+	return client.RecordSignal(ctx, signal)
 }
 
 // layerOf reads the layer from a SPIFFE ID of the form
 // spiffe://<trust-domain>/<layer>/<kind>/<name>.
-func layerOf(id string) (model.Layer, error) {
-	rest, ok := strings.CutPrefix(id, "spiffe://")
-	parts := strings.Split(rest, "/")
-	if !ok || len(parts) < 3 {
-		return model.LayerUnknown, fmt.Errorf("subject %q is not of the form spiffe://<trust-domain>/<layer>/<kind>/<name>", id)
+func layerOf(spiffeID string) (model.Layer, error) {
+	path, hasScheme := strings.CutPrefix(spiffeID, "spiffe://")
+	segments := strings.Split(path, "/")
+	if !hasScheme || len(segments) < 3 {
+		return model.LayerUnknown, fmt.Errorf("subject %q is not of the form spiffe://<trust-domain>/<layer>/<kind>/<name>", spiffeID)
 	}
-	return model.ParseLayer(parts[1])
+	layerName := segments[1]
+	return model.ParseLayer(layerName)
 }
 
 // splitRoles turns "operator, engineer" into ["operator" "engineer"].
-func splitRoles(s string) []string {
+func splitRoles(commaSeparated string) []string {
 	var roles []string
-	for _, r := range strings.Split(s, ",") {
-		if r = strings.TrimSpace(r); r != "" {
-			roles = append(roles, r)
+	for _, role := range strings.Split(commaSeparated, ",") {
+		role = strings.TrimSpace(role)
+		if role != "" {
+			roles = append(roles, role)
 		}
 	}
 	return roles
 }
 
-func orDefault(s, def string) string {
-	if s == "" {
-		return def
+// valueOrDefault returns value, or defaultValue if value is empty.
+func valueOrDefault(value, defaultValue string) string {
+	if value == "" {
+		return defaultValue
 	}
-	return s
+	return value
 }
 
 // parseError keeps -h a success and turns other flag errors into usage errors.

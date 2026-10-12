@@ -21,19 +21,19 @@ var update = flag.Bool("update", false, "rewrite deploy/policies/substation.json
 const substationJSON = "../../../deploy/policies/substation.json"
 
 func TestLoad(t *testing.T) {
-	in := `{"version": 3, "rules": [{"id": "a", "effect": "allow", "actions": ["read"]}]}`
-	p, err := Load(strings.NewReader(in))
+	input := `{"version": 3, "rules": [{"id": "a", "effect": "allow", "actions": ["read"]}]}`
+	loaded, err := Load(strings.NewReader(input))
 	if err != nil {
 		t.Fatalf("Load() = %v", err)
 	}
-	if p.Version != 3 || len(p.Rules) != 1 || p.Rules[0].ID != "a" {
-		t.Errorf("Load() = %+v", p)
+	if loaded.Version != 3 || len(loaded.Rules) != 1 || loaded.Rules[0].ID != "a" {
+		t.Errorf("Load() = %+v", loaded)
 	}
 }
 
 func TestLoadRejects(t *testing.T) {
 	tests := []struct {
-		name, in, wantErr string
+		name, input, wantError string
 	}{
 		{"misspelt field", `{"version": 1, "rules": [{"id": "a", "effect": "allow", "sujbects": ["x"]}]}`, "unknown field"},
 		{"not JSON", `version: 1`, "decode"},
@@ -42,11 +42,11 @@ func TestLoadRejects(t *testing.T) {
 		{"two policies", `{"version": 1} {"version": 2}`, "after the policy"},
 		{"invalid policy", `{"version": 1, "rules": [{"id": "a", "effect": "maybe"}]}`, "unknown effect"},
 	}
-	for _, tc := range tests {
-		t.Run(tc.name, func(t *testing.T) {
-			_, err := Load(strings.NewReader(tc.in))
-			if err == nil || !strings.Contains(err.Error(), tc.wantErr) {
-				t.Fatalf("Load() = %v, want error containing %q", err, tc.wantErr)
+	for _, testCase := range tests {
+		t.Run(testCase.name, func(t *testing.T) {
+			_, err := Load(strings.NewReader(testCase.input))
+			if err == nil || !strings.Contains(err.Error(), testCase.wantError) {
+				t.Fatalf("Load() = %v, want error containing %q", err, testCase.wantError)
 			}
 		})
 	}
