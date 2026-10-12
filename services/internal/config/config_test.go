@@ -7,72 +7,73 @@ import (
 	"time"
 )
 
-// fakeEnv returns an Env that reads from vars instead of the process environment.
-func fakeEnv(vars map[string]string) Env {
+// fakeEnvironment returns an Env that reads from variables instead of the
+// process environment.
+func fakeEnvironment(variables map[string]string) Env {
 	return NewWithLookup(func(name string) (string, bool) {
-		v, ok := vars[name]
-		return v, ok
+		value, found := variables[name]
+		return value, found
 	})
 }
 
 func TestString(t *testing.T) {
-	e := fakeEnv(map[string]string{"ZTC_LISTEN": ":8181", "ZTC_EMPTY": ""})
-	tests := []struct{ key, def, want string }{
+	environment := fakeEnvironment(map[string]string{"ZTC_LISTEN": ":8181", "ZTC_EMPTY": ""})
+	tests := []struct{ key, defaultValue, want string }{
 		{"listen", ":9999", ":8181"},
 		{"LISTEN", ":9999", ":8181"},
 		{"missing", ":9999", ":9999"},
 		{"empty", "fallback", "fallback"},
 	}
-	for _, tc := range tests {
-		if got := e.String(tc.key, tc.def); got != tc.want {
-			t.Errorf("String(%q, %q) = %q, want %q", tc.key, tc.def, got, tc.want)
+	for _, testCase := range tests {
+		if got := environment.String(testCase.key, testCase.defaultValue); got != testCase.want {
+			t.Errorf("String(%q, %q) = %q, want %q", testCase.key, testCase.defaultValue, got, testCase.want)
 		}
 	}
 }
 
 func TestTypedValues(t *testing.T) {
-	e := fakeEnv(map[string]string{
+	environment := fakeEnvironment(map[string]string{
 		"ZTC_PORT":    "8181",
 		"ZTC_ALPHA":   "0.5",
 		"ZTC_TLS":     "true",
 		"ZTC_TIMEOUT": "250ms",
 	})
-	if got := e.Int("port", 0); got != 8181 {
+	if got := environment.Int("port", 0); got != 8181 {
 		t.Errorf("Int(port) = %d, want 8181", got)
 	}
-	if got := e.Float("alpha", 0); got != 0.5 {
+	if got := environment.Float("alpha", 0); got != 0.5 {
 		t.Errorf("Float(alpha) = %v, want 0.5", got)
 	}
-	if got := e.Bool("tls", false); !got {
+	if got := environment.Bool("tls", false); !got {
 		t.Errorf("Bool(tls) = false, want true")
 	}
-	if got := e.Duration("timeout", time.Second); got != 250*time.Millisecond {
+	if got := environment.Duration("timeout", time.Second); got != 250*time.Millisecond {
 		t.Errorf("Duration(timeout) = %v, want 250ms", got)
 	}
-	if got := e.Int("missing", 7); got != 7 {
+	if got := environment.Int("missing", 7); got != 7 {
 		t.Errorf("Int(missing) = %d, want default 7", got)
 	}
-	if err := e.Err(); err != nil {
+	if err := environment.Err(); err != nil {
 		t.Errorf("Err() = %v, want nil", err)
 	}
 }
 
 func TestInvalidValuesFallBackAndAreReported(t *testing.T) {
-	e := fakeEnv(map[string]string{
+	environment := fakeEnvironment(map[string]string{
 		"ZTC_PORT":    "eighty",
 		"ZTC_TLS":     "ture",
 		"ZTC_TIMEOUT": "5",
 	})
-	if got := e.Int("port", 8181); got != 8181 {
+	if got := environment.Int("port", 8181); got != 8181 {
 		t.Errorf("Int(port) = %d, want default 8181", got)
 	}
-	if got := e.Bool("tls", false); got {
+	if got := environment.Bool("tls", false); got {
 		t.Errorf("Bool(tls) = true, want default false")
 	}
-	if got := e.Duration("timeout", time.Second); got != time.Second {
+	if got := environment.Duration("timeout", time.Second); got != time.Second {
 		t.Errorf("Duration(timeout) = %v, want default 1s", got)
 	}
-	err := e.Err()
+	err := environment.Err()
 	if err == nil {
 		t.Fatal("Err() = nil, want an error naming the three invalid variables")
 	}
@@ -84,18 +85,18 @@ func TestInvalidValuesFallBackAndAreReported(t *testing.T) {
 }
 
 func TestList(t *testing.T) {
-	e := fakeEnv(map[string]string{"ZTC_PEERS": " a, ,b ,c", "ZTC_NONE": ""})
+	environment := fakeEnvironment(map[string]string{"ZTC_PEERS": " a, ,b ,c", "ZTC_NONE": ""})
 	tests := []struct {
-		key       string
-		def, want []string
+		key                string
+		defaultValue, want []string
 	}{
 		{"peers", nil, []string{"a", "b", "c"}},
 		{"none", []string{"x"}, []string{"x"}},
 		{"missing", []string{"x"}, []string{"x"}},
 	}
-	for _, tc := range tests {
-		if got := e.List(tc.key, tc.def); !slices.Equal(got, tc.want) {
-			t.Errorf("List(%q) = %q, want %q", tc.key, got, tc.want)
+	for _, testCase := range tests {
+		if got := environment.List(testCase.key, testCase.defaultValue); !slices.Equal(got, testCase.want) {
+			t.Errorf("List(%q) = %q, want %q", testCase.key, got, testCase.want)
 		}
 	}
 }

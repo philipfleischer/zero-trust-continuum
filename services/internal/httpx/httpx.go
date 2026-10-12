@@ -15,42 +15,43 @@ import (
 // services from memory exhaustion by oversized requests.
 const MaxBody = 1 << 20
 
-// WriteJSON writes v as JSON with the given status code. nosniff stops
+// WriteJSON writes body as JSON with the given status code. nosniff stops
 // browsers from guessing a different content type for the response.
-func WriteJSON(w http.ResponseWriter, status int, v any) {
-	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("X-Content-Type-Options", "nosniff")
-	w.WriteHeader(status)
-	_ = json.NewEncoder(w).Encode(v)
+func WriteJSON(writer http.ResponseWriter, status int, body any) {
+	writer.Header().Set("Content-Type", "application/json")
+	writer.Header().Set("X-Content-Type-Options", "nosniff")
+	writer.WriteHeader(status)
+	_ = json.NewEncoder(writer).Encode(body)
 }
 
-// Error writes {"error": msg} with the given status code.
-func Error(w http.ResponseWriter, status int, msg string) {
-	WriteJSON(w, status, map[string]string{"error": msg})
+// Error writes {"error": message} with the given status code.
+func Error(writer http.ResponseWriter, status int, message string) {
+	WriteJSON(writer, status, map[string]string{"error": message})
 }
 
-// ReadJSON decodes the request body into v. It rejects unknown fields,
-// trailing data after the JSON value, and bodies larger than MaxBody; for an
-// oversized body the error is an *http.MaxBytesError, which callers can map
-// to 413 Request Entity Too Large.
-func ReadJSON(w http.ResponseWriter, r *http.Request, v any) error {
-	dec := json.NewDecoder(http.MaxBytesReader(w, r.Body, MaxBody))
-	dec.DisallowUnknownFields()
-	if err := dec.Decode(v); err != nil {
+// ReadJSON decodes the request body into destination. It rejects unknown
+// fields, trailing data after the JSON value, and bodies larger than MaxBody;
+// for an oversized body the error is an *http.MaxBytesError, which callers
+// can map to 413 Request Entity Too Large.
+func ReadJSON(writer http.ResponseWriter, request *http.Request, destination any) error {
+	limitedBody := http.MaxBytesReader(writer, request.Body, MaxBody)
+	decoder := json.NewDecoder(limitedBody)
+	decoder.DisallowUnknownFields()
+	if err := decoder.Decode(destination); err != nil {
 		return err
 	}
-	if dec.More() {
+	if decoder.More() {
 		return errors.New("httpx: trailing data after JSON body")
 	}
 	return nil
 }
 
-// NewServer returns an http.Server for addr with timeouts that stop slow
+// NewServer returns an http.Server for address with timeouts that stop slow
 // clients (slowloris) from holding connections open forever.
-func NewServer(addr string, h http.Handler) *http.Server {
+func NewServer(address string, handler http.Handler) *http.Server {
 	return &http.Server{
-		Addr:              addr,
-		Handler:           h,
+		Addr:              address,
+		Handler:           handler,
 		ReadHeaderTimeout: 5 * time.Second,
 		ReadTimeout:       15 * time.Second,
 		WriteTimeout:      30 * time.Second,
@@ -62,31 +63,31 @@ func NewServer(addr string, h http.Handler) *http.Server {
 // ShutdownTimeout is how long Run waits for in-flight requests to finish.
 const ShutdownTimeout = 10 * time.Second
 
-// Run serves srv (over TLS if srv.TLSConfig is set) until ctx is cancelled,
-// then shuts it down gracefully: no new connections are accepted and
-// in-flight requests get ShutdownTimeout to finish. It returns early with an
-// error if the server cannot start, for example because the port is in use.
-func Run(ctx context.Context, srv *http.Server) error {
-	errCh := make(chan error, 1)
+// Run serves server (over TLS if server.TLSConfig is set) until ctx is
+// cancelled, then shuts it down gracefully: no new connections are accepted
+// and in-flight requests get ShutdownTimeout to finish. It returns early with
+// an error if the server cannot start, for example because the port is in use.
+func Run(ctx context.Context, server *http.Server) error {
+	startupFailed := make(chan error, 1)
 	go func() {
 		var err error
-		if srv.TLSConfig != nil {
-			err = srv.ListenAndServeTLS("", "")
+		if server.TLSConfig != nil {
+			err = server.ListenAndServeTLS("", "")
 		} else {
-			err = srv.ListenAndServe()
+			err = server.ListenAndServe()
 		}
 		if !errors.Is(err, http.ErrServerClosed) {
-			errCh <- err
+			startupFailed <- err
 		}
-		close(errCh)
+		close(startupFailed)
 	}()
 
 	select {
-	case err := <-errCh:
+	case err := <-startupFailed:
 		return err
 	case <-ctx.Done():
 		shutdownCtx, cancel := context.WithTimeout(context.Background(), ShutdownTimeout)
 		defer cancel()
-		return srv.Shutdown(shutdownCtx)
+		return server.Shutdown(shutdownCtx)
 	}
 }

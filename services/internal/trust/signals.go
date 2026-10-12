@@ -38,10 +38,10 @@ const (
 	Compromise Kind = "compromise"
 )
 
-// Valid reports whether k is one of the defined signal kinds, so an API can
+// Valid reports whether kind is one of the defined signal kinds, so an API can
 // reject a signal it would otherwise ignore.
-func (k Kind) Valid() bool {
-	switch k {
+func (kind Kind) Valid() bool {
+	switch kind {
 	case Authentication, Posture, Behaviour, Location, Denial, Compromise:
 		return true
 	}

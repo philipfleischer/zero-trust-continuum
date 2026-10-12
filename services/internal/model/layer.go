@@ -27,8 +27,8 @@ const (
 )
 
 // String returns the lower-case name used in SPIFFE paths, config files and metric labels.
-func (l Layer) String() string {
-	switch l {
+func (layer Layer) String() string {
+	switch layer {
 	case LayerEdge:
 		return "edge"
 	case LayerFog:
@@ -42,8 +42,8 @@ func (l Layer) String() string {
 
 // ParseLayer converts "edge", "fog" or "cloud" (case-insensitive, surrounding spaces ignored)
 // to a Layer. Anything else is an error.
-func ParseLayer(s string) (Layer, error) {
-	switch strings.ToLower(strings.TrimSpace(s)) {
+func ParseLayer(name string) (Layer, error) {
+	switch strings.ToLower(strings.TrimSpace(name)) {
 	case "edge":
 		return LayerEdge, nil
 	case "fog":
@@ -51,16 +51,16 @@ func ParseLayer(s string) (Layer, error) {
 	case "cloud":
 		return LayerCloud, nil
 	}
-	return LayerUnknown, fmt.Errorf("model: unknown layer %q", s)
+	return LayerUnknown, fmt.Errorf("model: unknown layer %q", name)
 }
 
-// Distance returns how many layer hops separate a and b (0, 1 or 2).
-func Distance(a, b Layer) int {
-	d := int(a) - int(b)
-	if d < 0 {
-		d = -d
+// Distance returns how many layer hops separate from and to (0, 1 or 2).
+func Distance(from, to Layer) int {
+	hops := int(from) - int(to)
+	if hops < 0 {
+		hops = -hops
 	}
-	return d
+	return hops
 }
 
 // DeviceClass describes how capable and how exposed a device is.

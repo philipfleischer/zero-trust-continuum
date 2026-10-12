@@ -18,44 +18,45 @@ import (
 
 // Service holds what every service's main function needs.
 type Service struct {
-	Name    string
-	Env     config.Env
-	Log     *slog.Logger
-	Metrics *observability.Registry
+	Name        string
+	Environment config.Env
+	Logger      *slog.Logger
+	Metrics     *observability.Registry
 }
 
-// New creates a Service called name that reads its configuration from env and
-// writes JSON logs to logOut. ZTC_LOG_LEVEL sets the log level (default info);
-// an unknown level is an error.
-func New(name string, env config.Env, logOut io.Writer) (*Service, error) {
-	log, err := observability.NewLogger(logOut, name, env.String("log_level", "info"))
+// New creates a Service called name that reads its configuration from
+// environment and writes JSON logs to logOutput. ZTC_LOG_LEVEL sets the log
+// level (default info); an unknown level is an error.
+func New(name string, environment config.Env, logOutput io.Writer) (*Service, error) {
+	logLevel := environment.String("log_level", "info")
+	logger, err := observability.NewLogger(logOutput, name, logLevel)
 	if err != nil {
 		return nil, err
 	}
-	return &Service{Name: name, Env: env, Log: log, Metrics: observability.NewRegistry()}, nil
+	return &Service{Name: name, Environment: environment, Logger: logger, Metrics: observability.NewRegistry()}, nil
 }
 
 // Handler returns the complete HTTP handler of the service: the operational
 // endpoints, and app instrumented with request metrics for every other path.
 // checks are the readiness checks behind /readyz.
-func (s *Service) Handler(app http.Handler, checks map[string]observability.Check) http.Handler {
-	mux := observability.HealthMux(s.Metrics, s.Log, checks)
-	mux.Handle("/", observability.Instrument(s.Metrics, s.Name, app))
+func (service *Service) Handler(app http.Handler, checks map[string]observability.Check) http.Handler {
+	mux := observability.HealthMux(service.Metrics, service.Logger, checks)
+	mux.Handle("/", observability.Instrument(service.Metrics, service.Name, app))
 	return mux
 }
 
-// Serve listens on ZTC_LISTEN (default defaultAddr) and serves Handler(app,
-// checks) until ctx is cancelled, then shuts down gracefully. It refuses to
-// start if any configuration value read so far was invalid, so every service
-// fails fast on a typo in its environment.
-func (s *Service) Serve(ctx context.Context, defaultAddr string, app http.Handler, checks map[string]observability.Check) error {
-	addr := s.Env.String("listen", defaultAddr)
-	if err := s.Env.Err(); err != nil {
+// Serve listens on ZTC_LISTEN (default defaultAddress) and serves
+// Handler(app, checks) until ctx is cancelled, then shuts down gracefully. It
+// refuses to start if any configuration value read so far was invalid, so
+// every service fails fast on a typo in its environment.
+func (service *Service) Serve(ctx context.Context, defaultAddress string, app http.Handler, checks map[string]observability.Check) error {
+	address := service.Environment.String("listen", defaultAddress)
+	if err := service.Environment.Err(); err != nil {
 		return fmt.Errorf("svc: invalid configuration: %w", err)
 	}
-	srv := httpx.NewServer(addr, s.Handler(app, checks))
-	s.Log.Info("listening", "addr", addr)
-	err := httpx.Run(ctx, srv)
-	s.Log.Info("stopped", "err", err)
+	server := httpx.NewServer(address, service.Handler(app, checks))
+	service.Logger.Info("listening", "addr", address)
+	err := httpx.Run(ctx, server)
+	service.Logger.Info("stopped", "err", err)
 	return err
 }

@@ -26,6 +26,9 @@ Current state: see STATUS.md. Most components do not exist yet; do not assume a 
 - Every file starts with a header comment; every exported function has a doc comment saying what it must do.
 - Unfinished functions keep their doc comment, contain `// TODO(ztc): <what>` and return zero values, so everything compiles.
 - Go: standard library only, gofmt, go vet, table-driven tests next to the code, config from `ZTC_`-prefixed env vars, `/healthz`, `/readyz` and `/metrics` on every service.
+- Go code reads like text (full rules in `Docs/go-style.md`): variables, parameters, receivers and fields are whole words
+  (`signer`, `request`, `decision`, `func (store *Store)`), never `s`, `req`, `d`; only `err`, `ctx`, `ok`, `t` and a plain index `i` stay short.
+  Booleans read as statements (`isExpired`, `found`). Name the parts of a long condition before testing them. Comments say why, not what.
 - The same concept means the same thing in Go and C++ (e.g. the trust formula); change both together.
-- Git: short-lived branches (`feat/`, `fix/`, `build/`, `ci/`, `deploy/`, `sim/`, `docs/`, `chore/`),
+- Git: short-lived branches (`feat/`, `fix/`, `refactor/`, `build/`, `ci/`, `deploy/`, `sim/`, `docs/`, `chore/`),
   Conventional Commits, merge commits (no squash), every merge to `main` keeps build, tests and demo green.

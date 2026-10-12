@@ -19,9 +19,9 @@ import (
 // Env reads variables that share a prefix. Create it with New or NewWithLookup.
 // It is meant to be used during start-up from one goroutine.
 type Env struct {
-	Prefix string
-	lookup func(string) (string, bool)
-	errs   *[]error
+	Prefix      string
+	lookup      func(name string) (value string, found bool)
+	parseErrors *[]error
 }
 
 // New returns an Env that reads the process environment with the "ZTC_" prefix.
@@ -29,74 +29,81 @@ func New() Env { return NewWithLookup(os.LookupEnv) }
 
 // NewWithLookup returns an Env with the "ZTC_" prefix that reads variables
 // through lookup instead of the process environment, so tests can inject values.
-func NewWithLookup(lookup func(string) (string, bool)) Env {
-	return Env{Prefix: "ZTC_", lookup: lookup, errs: new([]error)}
+func NewWithLookup(lookup func(name string) (value string, found bool)) Env {
+	return Env{Prefix: "ZTC_", lookup: lookup, parseErrors: new([]error)}
 }
 
-// name returns the full variable name: "listen" becomes "ZTC_LISTEN".
-func (e Env) name(key string) string { return e.Prefix + strings.ToUpper(key) }
+// variableName returns the full variable name: "listen" becomes "ZTC_LISTEN".
+func (environment Env) variableName(key string) string {
+	return environment.Prefix + strings.ToUpper(key)
+}
 
 // Err returns every parse error seen so far joined into one error, or nil.
-func (e Env) Err() error { return errors.Join(*e.errs...) }
+func (environment Env) Err() error { return errors.Join(*environment.parseErrors...) }
 
-// String returns the variable, or def if it is unset or empty.
-func (e Env) String(key, def string) string {
-	if v, ok := e.lookup(e.name(key)); ok && v != "" {
-		return v
+// String returns the variable, or defaultValue if it is unset or empty.
+func (environment Env) String(key, defaultValue string) string {
+	value, found := environment.lookup(environment.variableName(key))
+	if !found || value == "" {
+		return defaultValue
 	}
-	return def
+	return value
 }
 
-// Int returns the variable parsed as an int, or def if it is unset, empty or invalid.
-func (e Env) Int(key string, def int) int {
-	return parse(e, key, def, strconv.Atoi)
+// Int returns the variable parsed as an int, or defaultValue if it is unset, empty or invalid.
+func (environment Env) Int(key string, defaultValue int) int {
+	return parse(environment, key, defaultValue, strconv.Atoi)
 }
 
-// Float returns the variable parsed as a float64, or def if it is unset, empty or invalid.
-func (e Env) Float(key string, def float64) float64 {
-	return parse(e, key, def, func(s string) (float64, error) { return strconv.ParseFloat(s, 64) })
+// Float returns the variable parsed as a float64, or defaultValue if it is unset, empty or invalid.
+func (environment Env) Float(key string, defaultValue float64) float64 {
+	parseFloat := func(text string) (float64, error) { return strconv.ParseFloat(text, 64) }
+	return parse(environment, key, defaultValue, parseFloat)
 }
 
 // Bool returns the variable parsed by strconv.ParseBool
-// ("true", "1", "false", "0", ...), or def if it is unset, empty or invalid.
-func (e Env) Bool(key string, def bool) bool {
-	return parse(e, key, def, strconv.ParseBool)
+// ("true", "1", "false", "0", ...), or defaultValue if it is unset, empty or invalid.
+func (environment Env) Bool(key string, defaultValue bool) bool {
+	return parse(environment, key, defaultValue, strconv.ParseBool)
 }
 
 // Duration returns the variable parsed by time.ParseDuration ("250ms", "5s", "1m"),
-// or def if it is unset, empty or invalid. A number without a unit is invalid.
-func (e Env) Duration(key string, def time.Duration) time.Duration {
-	return parse(e, key, def, time.ParseDuration)
+// or defaultValue if it is unset, empty or invalid. A number without a unit is invalid.
+func (environment Env) Duration(key string, defaultValue time.Duration) time.Duration {
+	return parse(environment, key, defaultValue, time.ParseDuration)
 }
 
 // List returns a comma-separated variable as a slice with surrounding spaces
-// trimmed and empty items dropped, or def if it is unset or empty.
-func (e Env) List(key string, def []string) []string {
-	v, ok := e.lookup(e.name(key))
-	if !ok || v == "" {
-		return def
+// trimmed and empty items dropped, or defaultValue if it is unset or empty.
+func (environment Env) List(key string, defaultValue []string) []string {
+	value, found := environment.lookup(environment.variableName(key))
+	if !found || value == "" {
+		return defaultValue
 	}
 
-	var out []string
-	for _, s := range strings.Split(v, ",") {
-		if s = strings.TrimSpace(s); s != "" {
-			out = append(out, s)
+	var items []string
+	for _, item := range strings.Split(value, ",") {
+		item = strings.TrimSpace(item)
+		if item != "" {
+			items = append(items, item)
 		}
 	}
-	return out
+	return items
 }
 
 // parse is shared by the typed getters. An unset or empty variable returns
-// def; a value that conv rejects is recorded in e and also returns def.
-func parse[T any](e Env, key string, def T, conv func(string) (T, error)) T {
-	v, ok := e.lookup(e.name(key))
-	if !ok || v == "" {
-		return def
+// defaultValue; a value that convert rejects is recorded in environment and
+// also returns defaultValue.
+func parse[Value any](environment Env, key string, defaultValue Value, convert func(string) (Value, error)) Value {
+	name := environment.variableName(key)
+	text, found := environment.lookup(name)
+	if !found || text == "" {
+		return defaultValue
 	}
-	x, err := conv(v)
+	value, err := convert(text)
 	if err != nil {
-		*e.errs = append(*e.errs, fmt.Errorf("config: %s: %w", e.name(key), err))
-		return def
+		*environment.parseErrors = append(*environment.parseErrors, fmt.Errorf("config: %s: %w", name, err))
+		return defaultValue
 	}
-	return x
+	return value
 }

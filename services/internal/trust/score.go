@@ -50,83 +50,92 @@ func NewEvaluator() *Evaluator {
 	}
 }
 
-// Apply returns st updated with signal s; st itself is not changed. Values
-// are clamped to [0, 1] and NaN counts as 0. A signal without a time is
-// applied at st.LastUpdate. An authentication with strength 0, or older than
-// the last one, is ignored, and an unknown kind changes nothing.
-func (e *Evaluator) Apply(st State, s Signal) State {
-	t := s.Time
-	if t.IsZero() {
-		t = st.LastUpdate
+// Apply returns state updated with signal; state itself is not changed.
+// Values are clamped to [0, 1] and NaN counts as 0. A signal without a time is
+// applied at state.LastUpdate. An authentication with strength 0, or older
+// than the last one, is ignored, and an unknown kind changes nothing.
+func (evaluator *Evaluator) Apply(state State, signal Signal) State {
+	observedAt := signal.Time
+	if observedAt.IsZero() {
+		observedAt = state.LastUpdate
 	}
-	v := clamp01(s.Value)
-	switch s.Kind {
+	value := clampToUnitInterval(signal.Value)
+	smoothing := evaluator.Alpha
+	switch signal.Kind {
 	case Authentication:
-		if v == 0 || t.IsZero() || t.Before(st.LastAuth) {
-			return st // no proof, or older than the proof we have
+		hasNoProof := value == 0 || observedAt.IsZero()
+		isOlderThanLastProof := observedAt.Before(state.LastAuth)
+		if hasNoProof || isOlderThanLastProof {
+			return state
 		}
-		st.AuthStrength, st.LastAuth = v, t
+		state.AuthStrength, state.LastAuth = value, observedAt
 	case Posture:
-		st.Posture = v
+		state.Posture = value
 	case Behaviour:
-		st.Anomaly = e.Alpha*v + (1-e.Alpha)*st.Anomaly
+		state.Anomaly = smoothing*value + (1-smoothing)*state.Anomaly
 	case Location:
-		st.Location = e.Alpha*v + (1-e.Alpha)*st.Location
+		state.Location = smoothing*value + (1-smoothing)*state.Location
 	case Denial:
-		// Decay the old count to t, then add this denial.
-		st.Denials = st.Denials*halfLife(t.Sub(st.LastDenial), e.DenialHalfLife) + 1
-		if t.After(st.LastDenial) {
-			st.LastDenial = t
+		// Decay the old count to observedAt, then add this denial.
+		decayFactor := halfLifeFactor(observedAt.Sub(state.LastDenial), evaluator.DenialHalfLife)
+		state.Denials = state.Denials*decayFactor + 1
+		if observedAt.After(state.LastDenial) {
+			state.LastDenial = observedAt
 		}
 	case Compromise:
-		st.Compromised = true
+		state.Compromised = true
 	default:
-		return st
+		return state
 	}
-	if t.After(st.LastUpdate) {
-		st.LastUpdate = t
+	if observedAt.After(state.LastUpdate) {
+		state.LastUpdate = observedAt
 	}
-	return st
+	return state
 }
 
-// Score returns the trust score of st at time now, in [0, 1]:
+// Score returns the trust score of state at time now, in [0, 1]:
 //
 //	auth  = AuthStrength · 0.5^((now − LastAuth) / AuthHalfLife)
 //	score = wA·auth + wP·Posture + wB·(1 − Anomaly) + wL·Location
 //	        − DenialPenalty · Denials · 0.5^((now − LastDenial) / DenialHalfLife)
 //
 // A compromised subject, and a subject that has never authenticated, scores 0.
-func (e *Evaluator) Score(st State, now time.Time) float64 {
-	if st.Compromised || st.LastAuth.IsZero() {
+func (evaluator *Evaluator) Score(state State, now time.Time) float64 {
+	if state.Compromised || state.LastAuth.IsZero() {
 		return 0
 	}
-	w := e.Weights
-	auth := st.AuthStrength * halfLife(now.Sub(st.LastAuth), e.AuthHalfLife)
-	score := w.Authentication*auth + w.Posture*st.Posture + w.Behaviour*(1-st.Anomaly) + w.Location*st.Location
-	score -= e.DenialPenalty * st.Denials * halfLife(now.Sub(st.LastDenial), e.DenialHalfLife)
-	return clamp01(score)
+	weights := evaluator.Weights
+	authentication := state.AuthStrength * halfLifeFactor(now.Sub(state.LastAuth), evaluator.AuthHalfLife)
+	score := weights.Authentication*authentication +
+		weights.Posture*state.Posture +
+		weights.Behaviour*(1-state.Anomaly) +
+		weights.Location*state.Location
+	denialDecay := halfLifeFactor(now.Sub(state.LastDenial), evaluator.DenialHalfLife)
+	score -= evaluator.DenialPenalty * state.Denials * denialDecay
+	return clampToUnitInterval(score)
 }
 
-// halfLife returns 0.5^(age/hl): 1 for a fresh event, 0.5 after one
-// half-life. A negative age (clock skew) counts as 0, and a half-life of 0 or
-// less makes everything older than now worthless.
-func halfLife(age, hl time.Duration) float64 {
+// halfLifeFactor returns 0.5^(age/halfLife): 1 for a fresh event, 0.5 after
+// one half-life. A negative age (clock skew) counts as 0, and a half-life of
+// 0 or less makes everything older than now worthless.
+func halfLifeFactor(age, halfLife time.Duration) float64 {
 	if age <= 0 {
 		return 1
 	}
-	if hl <= 0 {
+	if halfLife <= 0 {
 		return 0
 	}
-	return math.Pow(0.5, float64(age)/float64(hl))
+	return math.Pow(0.5, float64(age)/float64(halfLife))
 }
 
-// clamp01 limits x to [0, 1] and turns NaN into 0, the least trusted value.
-func clamp01(x float64) float64 {
+// clampToUnitInterval limits number to [0, 1] and turns NaN into 0, the least
+// trusted value.
+func clampToUnitInterval(number float64) float64 {
 	switch {
-	case math.IsNaN(x) || x < 0:
+	case math.IsNaN(number) || number < 0:
 		return 0
-	case x > 1:
+	case number > 1:
 		return 1
 	}
-	return x
+	return number
 }

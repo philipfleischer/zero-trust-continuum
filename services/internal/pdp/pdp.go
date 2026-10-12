@@ -27,7 +27,7 @@ import (
 // a remote PDP all implement it, so a PEP does not know which one it talks to.
 // On an error the decision is always a deny.
 type Decider interface {
-	Decide(ctx context.Context, req model.AccessRequest) (model.Decision, error)
+	Decide(ctx context.Context, request model.AccessRequest) (model.Decision, error)
 }
 
 // PDP decides access requests from a policy engine and a trust store.
@@ -50,51 +50,56 @@ func New(name string, engine *policy.Engine) *PDP {
 
 // SetEmergency turns emergency (break-glass) mode on or off for every
 // decision. Only the PDP decides this; a request cannot claim it.
-func (p *PDP) SetEmergency(on bool) { p.emergency.Store(on) }
+func (pdp *PDP) SetEmergency(on bool) { pdp.emergency.Store(on) }
 
 // Emergency reports whether emergency mode is on.
-func (p *PDP) Emergency() bool { return p.emergency.Load() }
+func (pdp *PDP) Emergency() bool { return pdp.emergency.Load() }
 
-// Decide evaluates req and returns the decision. It sets the request time
+// Decide evaluates request and returns the decision. It sets the request time
 // from the trust store's clock, the trust score from the trust store and the
 // emergency flag from the PDP, whatever the request said, then evaluates the
 // policy. A denial is recorded as a trust signal for the subject. The error is
 // non-nil only if ctx is done, and the decision is then a deny.
-func (p *PDP) Decide(ctx context.Context, req model.AccessRequest) (model.Decision, error) {
+func (pdp *PDP) Decide(ctx context.Context, request model.AccessRequest) (model.Decision, error) {
 	if err := ctx.Err(); err != nil {
-		return model.Decision{Effect: model.Deny, Reason: "request cancelled", DecidedBy: p.Name}, err
+		return model.Decision{Effect: model.Deny, Reason: "request cancelled", DecidedBy: pdp.Name}, err
 	}
-	req.Context.Time = p.Trust.Now()
-	req.Context.TrustScore = p.Trust.Score(req.Subject.ID)
-	req.Context.Emergency = p.Emergency()
+	subjectID := request.Subject.ID
+	request.Context.Time = pdp.Trust.Now()
+	request.Context.TrustScore = pdp.Trust.Score(subjectID)
+	request.Context.Emergency = pdp.Emergency()
 
-	d := p.Engine.Evaluate(req)
-	if !d.Allowed() && req.Subject.ID != "" {
+	decision := pdp.Engine.Evaluate(request)
+	if !decision.Allowed() && subjectID != "" {
 		// A denial lowers trust, which slows down a subject that probes for
 		// what it may do. The signal is valid, so Record cannot fail.
-		_ = p.Trust.Record(trust.Signal{Subject: req.Subject.ID, Kind: trust.Denial, Time: req.Context.Time, Source: p.Name})
+		denial := trust.Signal{Subject: subjectID, Kind: trust.Denial, Time: request.Context.Time, Source: pdp.Name}
+		_ = pdp.Trust.Record(denial)
 	}
-	d.DecidedBy = p.Name
-	d.TrustScore = req.Context.TrustScore
-	return d, nil
+	decision.DecidedBy = pdp.Name
+	decision.TrustScore = request.Context.TrustScore
+	return decision, nil
 }
 
-// RecordSignal feeds sig into the trust store. A behaviour signal at or above
-// CompromiseThreshold also declares the subject compromised, which drops its
-// trust to 0. It reports whether this signal newly declared a compromise, and
-// returns the store's error for an invalid signal.
-func (p *PDP) RecordSignal(sig trust.Signal) (bool, error) {
-	if err := p.Trust.Record(sig); err != nil {
+// RecordSignal feeds signal into the trust store. A behaviour signal at or
+// above CompromiseThreshold also declares the subject compromised, which drops
+// its trust to 0. It reports whether this signal newly declared a compromise,
+// and returns the store's error for an invalid signal.
+func (pdp *PDP) RecordSignal(signal trust.Signal) (bool, error) {
+	if err := pdp.Trust.Record(signal); err != nil {
 		return false, err
 	}
-	if sig.Kind != trust.Behaviour || p.CompromiseThreshold <= 0 || !(sig.Value >= p.CompromiseThreshold) {
+	escalationIsOn := pdp.CompromiseThreshold > 0
+	reachesThreshold := signal.Value >= pdp.CompromiseThreshold // false for NaN
+	if signal.Kind != trust.Behaviour || !escalationIsOn || !reachesThreshold {
 		return false, nil
 	}
-	if st, _ := p.Trust.State(sig.Subject); st.Compromised {
+	state, _ := pdp.Trust.State(signal.Subject)
+	if state.Compromised {
 		return false, nil
 	}
-	compromise := trust.Signal{Subject: sig.Subject, Kind: trust.Compromise, Time: sig.Time, Source: sig.Source}
-	if err := p.Trust.Record(compromise); err != nil {
+	compromise := trust.Signal{Subject: signal.Subject, Kind: trust.Compromise, Time: signal.Time, Source: signal.Source}
+	if err := pdp.Trust.Record(compromise); err != nil {
 		return false, err
 	}
 	return true, nil

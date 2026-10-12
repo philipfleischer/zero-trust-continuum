@@ -45,46 +45,46 @@ func main() {
 
 // run starts the PDP and blocks until ctx is cancelled or the server fails.
 // It takes its dependencies as parameters so tests can call it directly.
-func run(ctx context.Context, env config.Env, logOut io.Writer) error {
-	s, err := svc.New("ztc-pdp", env, logOut)
+func run(ctx context.Context, environment config.Env, logOutput io.Writer) error {
+	service, err := svc.New("ztc-pdp", environment, logOutput)
 	if err != nil {
 		return err
 	}
-	app, checks, err := setup(env, s)
+	app, checks, err := setup(environment, service)
 	if err != nil {
 		return err
 	}
-	return s.Serve(ctx, ":8181", app, checks)
+	return service.Serve(ctx, ":8181", app, checks)
 }
 
 // setup builds the PDP from the configuration and returns its HTTP API and
 // readiness checks. A policy file that cannot be loaded is an error, so the
 // service never starts with a policy the operator did not ask for.
-func setup(env config.Env, s *svc.Service) (http.Handler, map[string]observability.Check, error) {
-	pol := policy.DefaultSubstationPolicy()
-	source := "built-in substation policy"
-	if path := env.String("policy_file", ""); path != "" {
+func setup(environment config.Env, service *svc.Service) (http.Handler, map[string]observability.Check, error) {
+	startPolicy := policy.DefaultSubstationPolicy()
+	policySource := "built-in substation policy"
+	if path := environment.String("policy_file", ""); path != "" {
 		loaded, err := policy.LoadFile(path)
 		if err != nil {
 			return nil, nil, err
 		}
-		pol, source = loaded, path
+		startPolicy, policySource = loaded, path
 	}
-	p := pdp.New(env.String("pdp_name", "cloud-pdp"), policy.NewEngine(pol))
+	decisionPoint := pdp.New(environment.String("pdp_name", "cloud-pdp"), policy.NewEngine(startPolicy))
 
-	token := env.String("pdp_token", "")
+	token := environment.String("pdp_token", "")
 	if token == "" {
-		s.Log.Warn("ZTC_PDP_TOKEN is not set: signals, policy and emergency endpoints are disabled")
+		service.Logger.Warn("ZTC_PDP_TOKEN is not set: signals, policy and emergency endpoints are disabled")
 	}
-	s.Log.Info("policy loaded", "source", source, "version", pol.Version, "rules", len(pol.Rules))
+	service.Logger.Info("policy loaded", "source", policySource, "version", startPolicy.Version, "rules", len(startPolicy.Rules))
 
 	checks := map[string]observability.Check{
 		"policy": func(context.Context) error {
-			if p.Engine.Policy().Version == 0 {
+			if decisionPoint.Engine.Policy().Version == 0 {
 				return errors.New("no policy installed")
 			}
 			return nil
 		},
 	}
-	return pdp.NewHandler(p, token, s.Metrics), checks, nil
+	return pdp.NewHandler(decisionPoint, token, service.Metrics), checks, nil
 }

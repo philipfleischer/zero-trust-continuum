@@ -14,52 +14,54 @@ import (
 	"github.com/philipfleischer/zero-trust-continuum/services/internal/observability"
 )
 
-// envFrom returns a config.Env that reads from vars instead of the process environment.
-func envFrom(vars map[string]string) config.Env {
+// environmentFrom returns a config.Env that reads from variables instead of
+// the process environment.
+func environmentFrom(variables map[string]string) config.Env {
 	return config.NewWithLookup(func(name string) (string, bool) {
-		v, ok := vars[name]
-		return v, ok
+		value, found := variables[name]
+		return value, found
 	})
 }
 
-func newService(t *testing.T, vars map[string]string) *Service {
+func newTestService(t *testing.T, variables map[string]string) *Service {
 	t.Helper()
-	s, err := New("ztc-test", envFrom(vars), io.Discard)
+	service, err := New("ztc-test", environmentFrom(variables), io.Discard)
 	if err != nil {
 		t.Fatal(err)
 	}
-	return s
+	return service
 }
 
 func TestNewRejectsUnknownLogLevel(t *testing.T) {
-	if _, err := New("ztc-test", envFrom(map[string]string{"ZTC_LOG_LEVEL": "verbose"}), io.Discard); err == nil {
+	environment := environmentFrom(map[string]string{"ZTC_LOG_LEVEL": "verbose"})
+	if _, err := New("ztc-test", environment, io.Discard); err == nil {
 		t.Fatal("New accepted ZTC_LOG_LEVEL=verbose")
 	}
 }
 
 func TestNewLogsJSONWithServiceName(t *testing.T) {
 	var logs bytes.Buffer
-	s, err := New("ztc-test", envFrom(nil), &logs)
+	service, err := New("ztc-test", environmentFrom(nil), &logs)
 	if err != nil {
 		t.Fatal(err)
 	}
-	s.Log.Info("hello")
+	service.Logger.Info("hello")
 	if !strings.Contains(logs.String(), `"service":"ztc-test"`) {
 		t.Errorf("log line = %q, want a JSON record with the service name", logs.String())
 	}
 }
 
 func TestHandlerRoutesAppAndOperationalEndpoints(t *testing.T) {
-	s := newService(t, nil)
-	app := http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
-		_, _ = w.Write([]byte("app"))
+	service := newTestService(t, nil)
+	app := http.HandlerFunc(func(writer http.ResponseWriter, _ *http.Request) {
+		_, _ = writer.Write([]byte("app"))
 	})
-	h := s.Handler(app, nil)
+	handler := service.Handler(app, nil)
 
 	get := func(path string) (int, string) {
-		rec := httptest.NewRecorder()
-		h.ServeHTTP(rec, httptest.NewRequest(http.MethodGet, path, nil))
-		return rec.Code, rec.Body.String()
+		recorder := httptest.NewRecorder()
+		handler.ServeHTTP(recorder, httptest.NewRequest(http.MethodGet, path, nil))
+		return recorder.Code, recorder.Body.String()
 	}
 
 	if code, body := get("/v1/anything"); code != http.StatusOK || body != "app" {
@@ -78,25 +80,26 @@ func TestHandlerRoutesAppAndOperationalEndpoints(t *testing.T) {
 }
 
 func TestServeRefusesInvalidConfiguration(t *testing.T) {
-	s := newService(t, map[string]string{"ZTC_TIMEOUT": "5"}) // no unit: invalid duration
-	_ = s.Env.Duration("timeout", time.Second)
+	service := newTestService(t, map[string]string{"ZTC_TIMEOUT": "5"}) // no unit: invalid duration
+	_ = service.Environment.Duration("timeout", time.Second)
 
-	err := s.Serve(context.Background(), "127.0.0.1:0", http.NotFoundHandler(), nil)
+	err := service.Serve(context.Background(), "127.0.0.1:0", http.NotFoundHandler(), nil)
 	if err == nil || !strings.Contains(err.Error(), "ZTC_TIMEOUT") {
 		t.Fatalf("Serve error = %v, want an error naming ZTC_TIMEOUT", err)
 	}
 }
 
 func TestServeStopsWhenContextIsCancelled(t *testing.T) {
-	s := newService(t, map[string]string{"ZTC_LISTEN": "127.0.0.1:0"})
+	service := newTestService(t, map[string]string{"ZTC_LISTEN": "127.0.0.1:0"})
 	ctx, cancel := context.WithCancel(context.Background())
 
-	done := make(chan error, 1)
-	go func() { done <- s.Serve(ctx, ":8181", http.NotFoundHandler(), map[string]observability.Check{}) }()
+	serveResult := make(chan error, 1)
+	noChecks := map[string]observability.Check{}
+	go func() { serveResult <- service.Serve(ctx, ":8181", http.NotFoundHandler(), noChecks) }()
 	cancel()
 
 	select {
-	case err := <-done:
+	case err := <-serveResult:
 		if err != nil {
 			t.Fatalf("Serve returned %v after cancel, want nil", err)
 		}
