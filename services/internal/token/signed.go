@@ -55,6 +55,7 @@ var (
 	ErrExpired      = errors.New("token: expired")
 	ErrNotYetValid  = errors.New("token: not yet valid")
 	ErrAudience     = errors.New("token: audience mismatch")
+	ErrRevoked      = errors.New("token: revoked")
 )
 
 // The only header values this package writes and accepts.
@@ -103,16 +104,17 @@ func (signer Signer) Sign(claims Claims) (string, error) {
 
 // Verifier checks signed tokens for one service.
 type Verifier struct {
-	Keys     map[string]ed25519.PublicKey // kid -> public key of the issuer
-	Audience string                       // this service; must be in the token's aud
-	Leeway   time.Duration                // allowed clock difference, fog nodes drift
-	Now      func() time.Time             // nil means time.Now
+	Keys        map[string]ed25519.PublicKey // kid -> public key of the issuer
+	Audience    string                       // this service; must be in the token's aud
+	Leeway      time.Duration                // allowed clock difference, fog nodes drift
+	Now         func() time.Time             // nil means time.Now
+	Revocations *RevocationList              // nil means no token is revoked
 }
 
 // Verify checks the format, algorithm, signature, required claims, time
-// window and audience of token, in that order, and returns its claims. On any
-// failure it returns empty claims and one of the errors above, so a caller
-// cannot use the claims of a rejected token by mistake.
+// window, audience and revocation of token, in that order, and returns its
+// claims. On any failure it returns empty claims and one of the errors above,
+// so a caller cannot use the claims of a rejected token by mistake.
 //
 // A verifier without an Audience rejects every token: a configuration
 // mistake must not turn into "any audience will do".
@@ -170,6 +172,9 @@ func (verifier Verifier) Verify(token string) (Claims, error) {
 	}
 	if verifier.Audience == "" || !slices.Contains(claims.Audience, verifier.Audience) {
 		return Claims{}, ErrAudience
+	}
+	if verifier.Revocations != nil && verifier.Revocations.IsRevoked(claims.ID) {
+		return Claims{}, ErrRevoked
 	}
 	return claims, nil
 }
