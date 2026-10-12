@@ -7,42 +7,42 @@ import (
 	"time"
 )
 
-// t0 is the reference time of the tests.
-var t0 = time.Date(2026, 10, 12, 12, 0, 0, 0, time.UTC)
+// referenceTime is the reference time of the tests.
+var referenceTime = time.Date(2026, 10, 12, 12, 0, 0, 0, time.UTC)
 
-// newSigner returns a signer with a fresh key and a verifier for "ztc-pep"
-// that trusts it and whose clock stands at t0.
-func newSigner(t *testing.T) (Signer, Verifier) {
+// newTestSigner returns a signer with a fresh key and a verifier for "ztc-pep"
+// that trusts it and whose clock stands at referenceTime.
+func newTestSigner(t *testing.T) (Signer, Verifier) {
 	t.Helper()
-	pub, key, err := ed25519.GenerateKey(nil)
+	publicKey, privateKey, err := ed25519.GenerateKey(nil)
 	if err != nil {
 		t.Fatal(err)
 	}
-	return Signer{KeyID: "k1", Key: key},
-		Verifier{Keys: map[string]ed25519.PublicKey{"k1": pub}, Audience: "ztc-pep", Now: func() time.Time { return t0 }}
+	return Signer{KeyID: "k1", Key: privateKey},
+		Verifier{Keys: map[string]ed25519.PublicKey{"k1": publicKey}, Audience: "ztc-pep", Now: func() time.Time { return referenceTime }}
 }
 
-// pmuClaims are valid at t0 for one minute.
+// pmuClaims are valid at referenceTime for one minute.
 func pmuClaims() Claims {
 	return Claims{
 		Issuer:    "ztc-ca",
 		Subject:   "spiffe://grid.example/edge/pmu/1",
 		Audience:  []string{"ztc-pep"},
-		ExpiresAt: t0.Add(time.Minute).Unix(),
-		NotBefore: t0.Unix(),
-		IssuedAt:  t0.Unix(),
+		ExpiresAt: referenceTime.Add(time.Minute).Unix(),
+		NotBefore: referenceTime.Unix(),
+		IssuedAt:  referenceTime.Unix(),
 		ID:        "jti-1",
 		Scope:     []string{"telemetry:write"},
 	}
 }
 
 func TestSignVerify(t *testing.T) {
-	s, v := newSigner(t)
-	tok, err := s.Sign(pmuClaims())
+	signer, verifier := newTestSigner(t)
+	token, err := signer.Sign(pmuClaims())
 	if err != nil {
 		t.Fatal(err)
 	}
-	got, err := v.Verify(tok)
+	got, err := verifier.Verify(token)
 	if err != nil {
 		t.Fatalf("Verify: %v", err)
 	}
@@ -52,16 +52,16 @@ func TestSignVerify(t *testing.T) {
 }
 
 func TestSignRequiresClaims(t *testing.T) {
-	s, _ := newSigner(t)
+	signer, _ := newTestSigner(t)
 	for name, change := range map[string]func(*Claims){
-		"no subject":  func(c *Claims) { c.Subject = "" },
-		"no audience": func(c *Claims) { c.Audience = nil },
-		"no expiry":   func(c *Claims) { c.ExpiresAt = 0 },
-		"no ID":       func(c *Claims) { c.ID = "" },
+		"no subject":  func(claims *Claims) { claims.Subject = "" },
+		"no audience": func(claims *Claims) { claims.Audience = nil },
+		"no expiry":   func(claims *Claims) { claims.ExpiresAt = 0 },
+		"no ID":       func(claims *Claims) { claims.ID = "" },
 	} {
-		c := pmuClaims()
-		change(&c)
-		if _, err := s.Sign(c); !errors.Is(err, ErrMissingClaim) {
+		claims := pmuClaims()
+		change(&claims)
+		if _, err := signer.Sign(claims); !errors.Is(err, ErrMissingClaim) {
 			t.Errorf("%s: Sign error %v, want ErrMissingClaim", name, err)
 		}
 	}
@@ -71,7 +71,7 @@ func TestSignRequiresClaims(t *testing.T) {
 }
 
 func TestHasScope(t *testing.T) {
-	c := Claims{Scope: []string{"telemetry:*", "breaker:read"}}
+	claims := Claims{Scope: []string{"telemetry:*", "breaker:read"}}
 	tests := []struct {
 		scope string
 		want  bool
@@ -83,9 +83,9 @@ func TestHasScope(t *testing.T) {
 		{"telemetryx:read", false}, // the wildcard ends at the colon
 		{"", false},
 	}
-	for _, tc := range tests {
-		if got := c.HasScope(tc.scope); got != tc.want {
-			t.Errorf("HasScope(%q) = %v, want %v", tc.scope, got, tc.want)
+	for _, testCase := range tests {
+		if got := claims.HasScope(testCase.scope); got != testCase.want {
+			t.Errorf("HasScope(%q) = %v, want %v", testCase.scope, got, testCase.want)
 		}
 	}
 	if (Claims{Scope: []string{"*"}}).HasScope("breaker:operate") {
@@ -94,14 +94,14 @@ func TestHasScope(t *testing.T) {
 }
 
 func TestKeyThumbprint(t *testing.T) {
-	pub := make(ed25519.PublicKey, ed25519.PublicKeySize)
+	publicKey := make(ed25519.PublicKey, ed25519.PublicKeySize)
 	// SHA-256 is 32 bytes, which is 43 characters of base64url without padding.
-	if got := KeyThumbprint(pub); len(got) != 43 || got != KeyThumbprint(pub) {
+	if got := KeyThumbprint(publicKey); len(got) != 43 || got != KeyThumbprint(publicKey) {
 		t.Errorf("KeyThumbprint = %q", got)
 	}
 	other := make(ed25519.PublicKey, ed25519.PublicKeySize)
 	other[0] = 1
-	if KeyThumbprint(pub) == KeyThumbprint(other) {
+	if KeyThumbprint(publicKey) == KeyThumbprint(other) {
 		t.Error("two keys have the same thumbprint")
 	}
 }
