@@ -1,345 +1,354 @@
 <mxfile host="app.diagrams.net" agent="ztc-diagram-generator" type="device">
   <diagram name="Trust-aware offloading" id="page-0">
-    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="900" math="0" shadow="0" background="#FFFFFF">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="1200" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="p0-0" />
         <mxCell id="p0-1" parent="p0-0" />
-        <mxCell id="p0-trustawa-1" value="M4 — trust-aware computation offloading" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="10" width="1600" height="32" as="geometry" />
+        <mxCell id="p0-trustawa-1" value="M4 — trust-aware computation offloading" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=28;fontStyle=1;fontColor=#111111;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="10" width="1680" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="p0-trustawa-2" value="A fog node decides where to run a task by cost: latency, energy and risk, where risk = 1 − trust of the target. A fast but untrusted node is never chosen. The task carries an attenuated capability, not the caller's full credential." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="44" width="1600" height="34" as="geometry" />
+        <mxCell id="p0-trustawa-2" value="A fog node decides where to run a task by cost: latency, energy and risk, where risk = 1 − trust of the target. A fast but untrusted node is never chosen. The task carries an attenuated capability, not the caller's full credential." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=19;fontColor=#555555;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="52" width="1680" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="p0-dev" value="&lt;b&gt;Edge device&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;POST /v1/tasks with capability (action=execute, task=42)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="330" width="200" height="90" as="geometry" />
+        <mxCell id="p0-trustawa-3" value="CLOUD" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=20;fontColor=#1f3a5f;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="115" width="1680" height="155" as="geometry" />
         </mxCell>
-        <mxCell id="p0-A" value="&lt;b&gt;fog-A (receiving node)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;candidates = SWIM alive members ∪ {local, cloud}; filter: trust ≥ 0.5 (policy execute-task)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
-          <mxGeometry x="300" y="310" width="260" height="130" as="geometry" />
+        <mxCell id="p0-cl" value="&lt;b&gt;cloud&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;RTT 40 ms · plenty of CPU · trust 0.95&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-trustawa-3">
+          <mxGeometry x="630" y="45" width="400" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="p0-trustawa-3" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-dev" target="p0-A">
+        <mxCell id="p0-trustawa-4" value="FOG — substation" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=20;fontColor=#2d4d1f;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="300" width="1680" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-C" value="&lt;b&gt;fog-C&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;load 5 % · RTT 2 ms · trust 0.41  ✘ below threshold&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=18;fontColor=#222222;spacing=4;" vertex="1" parent="p0-trustawa-4">
+          <mxGeometry x="20" y="50" width="320" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-D" value="&lt;b&gt;fog-D&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;suspect in SWIM  ✘ skipped&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=1.5;fontSize=18;fontColor=#222222;spacing=4;" vertex="1" parent="p0-trustawa-4">
+          <mxGeometry x="360" y="50" width="320" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-B" value="&lt;b&gt;fog-B&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;load 30 % · RTT 3 ms · trust 0.92  ✔ chosen&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=18;fontColor=#222222;spacing=4;" vertex="1" parent="p0-trustawa-4">
+          <mxGeometry x="980" y="50" width="320" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-capb" value="&lt;b&gt;delegated capability&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;fog-A appends caveats: target = fog-B, expires &amp;lt; t+30 s → fog-B can run task 42 and nothing else&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-trustawa-4">
+          <mxGeometry x="1340" y="40" width="320" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-loc" value="&lt;b&gt;run locally on fog-A&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;queue 80 % · latency 45 ms · trust 1.0&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-trustawa-4">
+          <mxGeometry x="20" y="275" width="400" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-A" value="&lt;b&gt;fog-A (receiving node)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;candidates = SWIM alive members ∪ {local, cloud}; filter: trust ≥ 0.5 (policy execute-task)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-trustawa-4">
+          <mxGeometry x="630" y="260" width="400" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-cost" value="&lt;b&gt;cost(target) =&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-family:Courier New;font-size:18px&quot;&gt;w_l · latency&lt;br&gt;+ w_e · energy&lt;br&gt;+ w_r · (1 − trust)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.5;fontSize=18;fontColor=#222222;spacing=4;" vertex="1" parent="p0-trustawa-4">
+          <mxGeometry x="1240" y="260" width="420" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-trustawa-5" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;strokeColor=#aaaaaa;" edge="1" parent="p0-1" source="p0-A" target="p0-loc">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-cost" value="&lt;b&gt;cost(target) =&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-family:Courier New;font-size:12px&quot;&gt;w_l · latency&lt;br&gt;+ w_e · energy&lt;br&gt;+ w_r · (1 − trust)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p0-1">
-          <mxGeometry x="300" y="470" width="260" height="110" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-loc" value="&lt;b&gt;run locally&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;queue 80 % · latency 45 ms · trust 1.0&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
-          <mxGeometry x="700" y="120" width="330" height="70" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-trustawa-4" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;strokeColor=#aaaaaa;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-A" target="p0-loc">
+        <mxCell id="p0-trustawa-6" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;strokeColor=#aaaaaa;exitX=0.1;exitY=0;exitDx=0;exitDy=0;entryX=0.7;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-A" target="p0-C">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-B" value="&lt;b&gt;fog-B&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;load 30 % · RTT 3 ms · trust 0.92  ✔ chosen&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p0-1">
-          <mxGeometry x="700" y="270" width="330" height="70" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-trustawa-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-A" target="p0-B">
+        <mxCell id="p0-trustawa-7" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;strokeColor=#aaaaaa;exitX=0.3;exitY=0;exitDx=0;exitDy=0;entryX=0.6;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-A" target="p0-D">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-C" value="&lt;b&gt;fog-C&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;load 5 % · RTT 2 ms · trust 0.41  ✘ below threshold&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p0-1">
-          <mxGeometry x="700" y="420" width="330" height="70" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-trustawa-6" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;strokeColor=#aaaaaa;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-A" target="p0-C">
+        <mxCell id="p0-trustawa-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;edgeStyle=none;exitX=0.8;exitY=0;exitDx=0;exitDy=0;entryX=0.4;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-A" target="p0-B">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-D" value="&lt;b&gt;fog-D&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;suspect in SWIM  ✘ skipped&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p0-1">
-          <mxGeometry x="700" y="570" width="330" height="70" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-trustawa-7" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;strokeColor=#aaaaaa;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-A" target="p0-D">
+        <mxCell id="p0-trustawa-9" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;strokeColor=#aaaaaa;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-A" target="p0-cl">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-cl" value="&lt;b&gt;cloud&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;RTT 40 ms · plenty of CPU · trust 0.95&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
-          <mxGeometry x="700" y="720" width="330" height="70" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-trustawa-8" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;strokeColor=#aaaaaa;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-A" target="p0-cl">
+        <mxCell id="p0-trustawa-10" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#6c8ebf;fontColor=#1f3a5f;dashed=1;" edge="1" parent="p0-1" source="p0-B" target="p0-capb">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-capb" value="&lt;b&gt;delegated capability&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;fog-A appends caveats: target = fog-B, expires &amp;lt; t+30 s → fog-B can run task 42 and nothing else&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
-          <mxGeometry x="1080" y="260" width="300" height="90" as="geometry" />
+        <mxCell id="p0-trustawa-11" value="EDGE" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=20;fontColor=#6b4a00;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="770" width="1680" height="160" as="geometry" />
         </mxCell>
-        <mxCell id="p0-trustawa-9" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#6c8ebf;fontColor=#1f3a5f;dashed=1;" edge="1" parent="p0-1" source="p0-B" target="p0-capb">
+        <mxCell id="p0-dev" value="&lt;b&gt;Edge device&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;POST /v1/tasks with capability (action=execute, task=42)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-trustawa-11">
+          <mxGeometry x="630" y="45" width="400" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-trustawa-12" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-dev" target="p0-A">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-trustawa-10" value="&lt;b&gt;Balancers compared (IN5700 T9)&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:11px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Balancer&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Idea&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Note&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;round-robin&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;next in turn&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;ignores load&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;least-loaded&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;minimum queue&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;needs fresh load info, herding&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;power-of-two-choices&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;sample 2, take the lighter&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;near-optimal with stale info&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;weighted least connections&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;connections / capacity&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;written as an exercise&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust-weighted&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;probability ∝ trust, threshold&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;the thesis contribution&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=11;overflow=fill;fontColor=#222222;" vertex="1" parent="p0-1">
-          <mxGeometry x="1080" y="380" width="620" height="190" as="geometry" />
+        <mxCell id="p0-trustawa-13" value="&lt;b&gt;Balancers compared (IN5700 T9)&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:17px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Balancer&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Idea&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Note&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;round-robin&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;next in turn&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;ignores load&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;least-loaded&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;minimum queue&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;needs fresh load info, herding&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;power-of-two-choices&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;sample 2, take the lighter&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;near-optimal with stale info&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;weighted least connections&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;connections / capacity&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;written as an exercise&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust-weighted&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;probability ∝ trust, threshold&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;proposed in this project&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=17;overflow=fill;fontColor=#222222;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="960" width="830" height="215" as="geometry" />
         </mxCell>
-        <mxCell id="p0-trustawa-11" value="&lt;b&gt;Design choices&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;risk is part of the cost, not a filter only: among trusted nodes the more trusted one still wins ties&lt;/li&gt;&lt;li&gt;hard floor from policy (execute-task needs trust ≥ 0.5) so the cost model cannot be tuned into an unsafe choice&lt;/li&gt;&lt;li&gt;capabilities make delegation least-privilege: fog-B cannot reuse the token elsewhere&lt;/li&gt;&lt;li&gt;measured: balancers on a skewed workload, table test + benchmark&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p0-1">
-          <mxGeometry x="1080" y="600" width="620" height="110" as="geometry" />
+        <mxCell id="p0-trustawa-14" value="&lt;b&gt;Design choices&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:17px&quot;&gt;&lt;li&gt;risk is part of the cost, not a filter only: among trusted nodes the more trusted one still wins ties&lt;/li&gt;&lt;li&gt;hard floor from policy (execute-task needs trust ≥ 0.5) so the cost model cannot be tuned into an unsafe choice&lt;/li&gt;&lt;li&gt;capabilities make delegation least-privilege: fog-B cannot reuse the token elsewhere&lt;/li&gt;&lt;li&gt;measured: balancers on a skewed workload, table test + benchmark&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=17;fontColor=#333333;" vertex="1" parent="p0-1">
+          <mxGeometry x="870" y="960" width="830" height="215" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram name="Docker Compose zones" id="page-1">
-    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="900" math="0" shadow="0" background="#FFFFFF">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="990" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="p1-0" />
         <mxCell id="p1-1" parent="p1-0" />
-        <mxCell id="p1-dockerco-1" value="M4 — Docker Compose: one network per IEC 62443 zone" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p1-1">
-          <mxGeometry x="20" y="10" width="1600" height="32" as="geometry" />
+        <mxCell id="p1-dockerco-1" value="M4 — Docker Compose: one network per IEC 62443 zone" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=28;fontStyle=1;fontColor=#111111;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="11.0" width="1600" height="35.2" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-2" value="A container joins only the networks it needs. A container on two networks is a conduit; everything else is unreachable by construction (ot-dmz is internal: no route to the internet)." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p1-1">
-          <mxGeometry x="20" y="44" width="1600" height="34" as="geometry" />
+        <mxCell id="p1-dockerco-2" value="A container joins only the networks it needs. A container on two networks is a conduit; everything else is unreachable by construction (ot-dmz is internal: no route to the internet)." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=18;fontColor=#555555;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="48.4" width="1600" height="37.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-3" value="control-centre" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;fontStyle=1;fontColor=#1f3a5f;" vertex="1" parent="p1-1">
-          <mxGeometry x="20" y="406" width="160" height="28" as="geometry" />
+        <mxCell id="p1-dockerco-3" value="control-centre" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=17;fontColor=#222222;fontStyle=1;fontColor=#1f3a5f;verticalAlign=middle;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="442.2" width="165" height="39.6" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-4" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;rounded=0;" vertex="1" parent="p1-1">
-          <mxGeometry x="190" y="414" width="1500" height="12" as="geometry" />
+        <mxCell id="p1-dockerco-4" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=17;fontColor=#222222;spacing=4;rounded=0;" vertex="1" parent="p1-1">
+          <mxGeometry x="190" y="455.4" width="1500" height="13.2" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-5" value="ot-dmz  (internal: true)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;fontStyle=1;fontColor=#4b2a5c;" vertex="1" parent="p1-1">
-          <mxGeometry x="20" y="486" width="160" height="28" as="geometry" />
+        <mxCell id="p1-dockerco-5" value="ot-dmz&lt;br&gt;(internal: true)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=17;fontColor=#222222;fontStyle=1;fontColor=#4b2a5c;verticalAlign=middle;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="530.2" width="165" height="39.6" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-6" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;rounded=0;" vertex="1" parent="p1-1">
-          <mxGeometry x="190" y="494" width="1500" height="12" as="geometry" />
+        <mxCell id="p1-dockerco-6" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=1.5;fontSize=17;fontColor=#222222;spacing=4;rounded=0;" vertex="1" parent="p1-1">
+          <mxGeometry x="190" y="543.4" width="1500" height="13.2" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-7" value="substation-fog" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;fontStyle=1;fontColor=#2d4d1f;" vertex="1" parent="p1-1">
-          <mxGeometry x="20" y="566" width="160" height="28" as="geometry" />
+        <mxCell id="p1-dockerco-7" value="substation-fog" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=17;fontColor=#222222;fontStyle=1;fontColor=#2d4d1f;verticalAlign=middle;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="618.2" width="165" height="39.6" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-8" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;rounded=0;" vertex="1" parent="p1-1">
-          <mxGeometry x="190" y="574" width="1500" height="12" as="geometry" />
+        <mxCell id="p1-dockerco-8" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=17;fontColor=#222222;spacing=4;rounded=0;" vertex="1" parent="p1-1">
+          <mxGeometry x="190" y="631.4" width="1500" height="13.2" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-9" value="station-bus" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;fontStyle=1;fontColor=#6b4a00;" vertex="1" parent="p1-1">
-          <mxGeometry x="20" y="646" width="160" height="28" as="geometry" />
+        <mxCell id="p1-dockerco-9" value="station-bus" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=17;fontColor=#222222;fontStyle=1;fontColor=#6b4a00;verticalAlign=middle;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="706.2" width="165" height="39.6" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-10" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;rounded=0;" vertex="1" parent="p1-1">
-          <mxGeometry x="190" y="654" width="1500" height="12" as="geometry" />
+        <mxCell id="p1-dockerco-10" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;fontSize=17;fontColor=#222222;spacing=4;rounded=0;" vertex="1" parent="p1-1">
+          <mxGeometry x="190" y="719.4" width="1500" height="13.2" as="geometry" />
         </mxCell>
-        <mxCell id="p1-grafana" value="&lt;b&gt;Grafana&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="230" y="120" width="130" height="70" as="geometry" />
+        <mxCell id="p1-grafana" value="&lt;b&gt;Grafana&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=17;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="230" y="132.0" width="130" height="77.0" as="geometry" />
         </mxCell>
         <mxCell id="p1-dockerco-11" value="" style="html=1;endArrow=none;strokeColor=#999999;strokeWidth=1;strokeColor=#333333;strokeWidth=1.5;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="295" y="190" as="sourcePoint" />
-            <mxPoint x="295" y="420" as="targetPoint" />
+            <mxPoint x="295" y="209.0" as="sourcePoint" />
+            <mxPoint x="295" y="462.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-dockerco-12" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="288" y="413" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-12" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="288" y="454.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-prom" value="&lt;b&gt;Prometheus&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="390" y="230" width="130" height="70" as="geometry" />
+        <mxCell id="p1-prom" value="&lt;b&gt;Prometheus&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=17;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="390" y="253.0" width="130" height="77.0" as="geometry" />
         </mxCell>
         <mxCell id="p1-dockerco-13" value="" style="html=1;endArrow=none;strokeColor=#999999;strokeWidth=1;strokeColor=#333333;strokeWidth=1.5;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="455" y="300" as="sourcePoint" />
-            <mxPoint x="455" y="580" as="targetPoint" />
+            <mxPoint x="455" y="330.0" as="sourcePoint" />
+            <mxPoint x="455" y="638.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-dockerco-14" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="448" y="413" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-14" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="448" y="454.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-15" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="448" y="493" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-15" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="448" y="542.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-16" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="448" y="573" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-16" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="448" y="630.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-pdp" value="&lt;b&gt;ztc-pdp ×3&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;named volumes&lt;/span&gt;&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="550" y="120" width="130" height="70" as="geometry" />
+        <mxCell id="p1-pdp" value="&lt;b&gt;ztc-pdp ×3&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;named volumes&lt;/span&gt;&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=17;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="550" y="132.0" width="130" height="77.0" as="geometry" />
         </mxCell>
         <mxCell id="p1-dockerco-17" value="" style="html=1;endArrow=none;strokeColor=#999999;strokeWidth=1;strokeColor=#333333;strokeWidth=1.5;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="615" y="190" as="sourcePoint" />
-            <mxPoint x="615" y="500" as="targetPoint" />
+            <mxPoint x="615" y="209.0" as="sourcePoint" />
+            <mxPoint x="615" y="550.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-dockerco-18" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="608" y="413" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-18" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="608" y="454.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-19" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="608" y="493" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-19" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="608" y="542.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-ingest" value="&lt;b&gt;ztc-ingest&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="710" y="230" width="130" height="70" as="geometry" />
+        <mxCell id="p1-ingest" value="&lt;b&gt;ztc-ingest&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=17;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="710" y="253.0" width="130" height="77.0" as="geometry" />
         </mxCell>
         <mxCell id="p1-dockerco-20" value="" style="html=1;endArrow=none;strokeColor=#999999;strokeWidth=1;strokeColor=#333333;strokeWidth=1.5;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="775" y="300" as="sourcePoint" />
-            <mxPoint x="775" y="500" as="targetPoint" />
+            <mxPoint x="775" y="330.0" as="sourcePoint" />
+            <mxPoint x="775" y="550.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-dockerco-21" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="768" y="413" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-21" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="768" y="454.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-22" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="768" y="493" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-22" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="768" y="542.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-ca" value="&lt;b&gt;ztc-ca&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="870" y="120" width="130" height="70" as="geometry" />
+        <mxCell id="p1-ca" value="&lt;b&gt;ztc-ca&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=17;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="870" y="132.0" width="130" height="77.0" as="geometry" />
         </mxCell>
         <mxCell id="p1-dockerco-23" value="" style="html=1;endArrow=none;strokeColor=#999999;strokeWidth=1;strokeColor=#333333;strokeWidth=1.5;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="935" y="190" as="sourcePoint" />
-            <mxPoint x="935" y="660" as="targetPoint" />
+            <mxPoint x="935" y="209.0" as="sourcePoint" />
+            <mxPoint x="935" y="726.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-dockerco-24" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="928" y="413" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-24" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="928" y="454.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-25" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="928" y="493" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-25" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="928" y="542.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-26" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="928" y="653" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-26" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="928" y="718.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-fog" value="&lt;b&gt;ztc-fog&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="1030" y="230" width="130" height="70" as="geometry" />
+        <mxCell id="p1-fog" value="&lt;b&gt;ztc-fog&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=17;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="1030" y="253.0" width="130" height="77.0" as="geometry" />
         </mxCell>
         <mxCell id="p1-dockerco-27" value="" style="html=1;endArrow=none;strokeColor=#999999;strokeWidth=1;strokeColor=#333333;strokeWidth=1.5;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1095" y="300" as="sourcePoint" />
-            <mxPoint x="1095" y="580" as="targetPoint" />
+            <mxPoint x="1095" y="330.0" as="sourcePoint" />
+            <mxPoint x="1095" y="638.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-dockerco-28" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="1088" y="573" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-28" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="1088" y="630.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-29" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="1088" y="493" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-29" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="1088" y="542.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-ids" value="&lt;b&gt;ztc-ids&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="1190" y="120" width="130" height="70" as="geometry" />
+        <mxCell id="p1-ids" value="&lt;b&gt;ztc-ids&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=17;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="1190" y="132.0" width="130" height="77.0" as="geometry" />
         </mxCell>
         <mxCell id="p1-dockerco-30" value="" style="html=1;endArrow=none;strokeColor=#999999;strokeWidth=1;strokeColor=#333333;strokeWidth=1.5;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1255" y="190" as="sourcePoint" />
-            <mxPoint x="1255" y="580" as="targetPoint" />
+            <mxPoint x="1255" y="209.0" as="sourcePoint" />
+            <mxPoint x="1255" y="638.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-dockerco-31" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="1248" y="573" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-31" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="1248" y="630.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-32" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="1248" y="493" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-32" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="1248" y="542.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-pep" value="&lt;b&gt;ztc-pep&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="1350" y="230" width="130" height="70" as="geometry" />
+        <mxCell id="p1-pep" value="&lt;b&gt;ztc-pep&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=17;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="1350" y="253.0" width="130" height="77.0" as="geometry" />
         </mxCell>
         <mxCell id="p1-dockerco-33" value="" style="html=1;endArrow=none;strokeColor=#999999;strokeWidth=1;strokeColor=#333333;strokeWidth=1.5;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1415" y="300" as="sourcePoint" />
-            <mxPoint x="1415" y="660" as="targetPoint" />
+            <mxPoint x="1415" y="330.0" as="sourcePoint" />
+            <mxPoint x="1415" y="726.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-dockerco-34" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="1408" y="653" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-34" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="1408" y="718.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-35" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="1408" y="573" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-35" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="1408" y="630.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-36" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="1408" y="493" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-36" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="1408" y="542.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-edge" value="&lt;b&gt;ztc-edge&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="1510" y="120" width="130" height="70" as="geometry" />
+        <mxCell id="p1-edge" value="&lt;b&gt;ztc-edge&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=17;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="1510" y="132.0" width="130" height="77.0" as="geometry" />
         </mxCell>
         <mxCell id="p1-dockerco-37" value="" style="html=1;endArrow=none;strokeColor=#999999;strokeWidth=1;strokeColor=#333333;strokeWidth=1.5;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1575" y="190" as="sourcePoint" />
-            <mxPoint x="1575" y="660" as="targetPoint" />
+            <mxPoint x="1575" y="209.0" as="sourcePoint" />
+            <mxPoint x="1575" y="726.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-dockerco-38" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="1568" y="653" width="14" height="14" as="geometry" />
+        <mxCell id="p1-dockerco-38" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="1568" y="718.3" width="14" height="15.4" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-39" value="&lt;b&gt;Hardened defaults on every service (YAML anchor)&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;read_only root filesystem, tmpfs for /tmp&lt;/li&gt;&lt;li&gt;cap_drop: [ALL], no-new-privileges&lt;/li&gt;&lt;li&gt;memory and CPU limits&lt;/li&gt;&lt;li&gt;distroless static image, non-root uid 65532&lt;/li&gt;&lt;li&gt;healthcheck = the binary's own healthcheck subcommand (no shell, no curl)&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p1-1">
-          <mxGeometry x="20" y="720" width="560" height="150" as="geometry" />
+        <mxCell id="p1-dockerco-39" value="&lt;b&gt;Hardened defaults on every service (YAML anchor)&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:16px&quot;&gt;&lt;li&gt;read_only root filesystem, tmpfs for /tmp&lt;/li&gt;&lt;li&gt;cap_drop: [ALL], no-new-privileges&lt;/li&gt;&lt;li&gt;memory and CPU limits&lt;/li&gt;&lt;li&gt;distroless static image, non-root uid 65532&lt;/li&gt;&lt;li&gt;healthcheck = the binary's own healthcheck subcommand (no shell, no curl)&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=16;fontColor=#333333;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="792.0" width="560" height="165.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-40" value="&lt;b&gt;Isolation is tested, not assumed&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;scripts/zone-check.sh runs inside the containers&lt;/li&gt;&lt;li&gt;ztc-edge → ztc-pdp must fail (no shared network)&lt;/li&gt;&lt;li&gt;ztc-edge → ztc-fog must fail (only the PEP reaches the fog: TB2)&lt;/li&gt;&lt;li&gt;ztc-pep → ztc-fog must succeed&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p1-1">
-          <mxGeometry x="600" y="720" width="520" height="150" as="geometry" />
+        <mxCell id="p1-dockerco-40" value="&lt;b&gt;Isolation is tested, not assumed&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:16px&quot;&gt;&lt;li&gt;scripts/zone-check.sh runs inside the containers&lt;/li&gt;&lt;li&gt;ztc-edge → ztc-pdp must fail (no shared network)&lt;/li&gt;&lt;li&gt;ztc-edge → ztc-fog must fail (only the PEP reaches the fog: TB2)&lt;/li&gt;&lt;li&gt;ztc-pep → ztc-fog must succeed&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=16;fontColor=#333333;" vertex="1" parent="p1-1">
+          <mxGeometry x="600" y="792.0" width="520" height="165.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dockerco-41" value="&lt;b&gt;Simplifications to be honest about&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;Docker networks are L3 segments, not a firewall: no port filtering inside a network&lt;/li&gt;&lt;li&gt;the CA is reachable from the station bus for enrolment&lt;/li&gt;&lt;li&gt;Kubernetes NetworkPolicies (next page) add port-level rules&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="p1-1">
-          <mxGeometry x="1140" y="720" width="560" height="150" as="geometry" />
+        <mxCell id="p1-dockerco-41" value="&lt;b&gt;Known simplifications&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:16px&quot;&gt;&lt;li&gt;Docker networks are L3 segments, not a firewall: no port filtering inside a network&lt;/li&gt;&lt;li&gt;the CA is reachable from the station bus for enrolment&lt;/li&gt;&lt;li&gt;Kubernetes NetworkPolicies (next page) add port-level rules&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=17;fontColor=#222222;spacing=4;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="p1-1">
+          <mxGeometry x="1140" y="792.0" width="560" height="165.0" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram name="Kubernetes" id="page-2">
-    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="960" math="0" shadow="0" background="#FFFFFF">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="1248" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="p2-0" />
         <mxCell id="p2-1" parent="p2-0" />
-        <mxCell id="p2-kubernet-1" value="M4 — Kubernetes: default deny, generated NetworkPolicies, a StatefulSet PDP" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p2-1">
-          <mxGeometry x="20" y="10" width="1600" height="32" as="geometry" />
+        <mxCell id="p2-kubernet-1" value="M4 — Kubernetes: default deny, generated NetworkPolicies, a StatefulSet PDP" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=28;fontStyle=1;fontColor=#111111;" vertex="1" parent="p2-1">
+          <mxGeometry x="20" y="13.0" width="1600" height="41.6" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-2" value="The same zones become pod labels. A default-deny policy blocks all traffic; one generated NetworkPolicy per conduit opens exactly the ports the zone model allows (needs a CNI that enforces policies, e.g. Calico)." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p2-1">
-          <mxGeometry x="20" y="44" width="1600" height="34" as="geometry" />
+        <mxCell id="p2-kubernet-2" value="The same zones become pod labels. A default-deny policy blocks all traffic; one generated NetworkPolicy per conduit opens exactly the ports the zone model allows (needs a CNI that enforces policies, e.g. Calico)." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=17;fontColor=#555555;" vertex="1" parent="p2-1">
+          <mxGeometry x="20" y="57.2" width="1600" height="44.2" as="geometry" />
         </mxCell>
-        <mxCell id="p2-ns" value="namespace ztc  ·  pod-security.kubernetes.io/enforce: restricted" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#333333;" vertex="1" parent="p2-1">
-          <mxGeometry x="20" y="100" width="1180" height="730" as="geometry" />
+        <mxCell id="p2-ns" value="namespace ztc  ·  pod-security.kubernetes.io/enforce: restricted" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=18;fontColor=#333333;" vertex="1" parent="p2-1">
+          <mxGeometry x="20" y="130.0" width="1180" height="949.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-zcc" value="zone=control-centre" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#1f3a5f;" vertex="1" parent="p2-ns">
-          <mxGeometry x="20" y="40" width="1140" height="280" as="geometry" />
+        <mxCell id="p2-zcc" value="zone=control-centre" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=18;fontColor=#1f3a5f;" vertex="1" parent="p2-ns">
+          <mxGeometry x="20" y="52.0" width="1140" height="364.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-sts" value="StatefulSet ztc-pdp  (headless Service → stable Raft peer names)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=3;container=1;collapsible=0;recursiveResize=0;fillColor=#ffffff;strokeColor=#888888;dashed=1;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;fontSize=12;fontColor=#333333;" vertex="1" parent="p2-zcc">
-          <mxGeometry x="20" y="40" width="560" height="220" as="geometry" />
+        <mxCell id="p2-sts" value="StatefulSet ztc-pdp  (headless Service → stable Raft peer names)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=3;container=1;collapsible=0;recursiveResize=0;fillColor=#ffffff;strokeColor=#888888;dashed=1;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;fontSize=16;fontColor=#333333;" vertex="1" parent="p2-zcc">
+          <mxGeometry x="20" y="52.0" width="560" height="286.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-3" value="&lt;b&gt;ztc-pdp-0&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;PVC raft-data&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-sts">
-          <mxGeometry x="15" y="40" width="165" height="70" as="geometry" />
+        <mxCell id="p2-kubernet-3" value="&lt;b&gt;ztc-pdp-0&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;PVC raft-data&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-sts">
+          <mxGeometry x="15" y="52.0" width="165" height="91.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-4" value="&lt;b&gt;ztc-pdp-1&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;PVC raft-data&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-sts">
-          <mxGeometry x="195" y="40" width="165" height="70" as="geometry" />
+        <mxCell id="p2-kubernet-4" value="&lt;b&gt;ztc-pdp-1&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;PVC raft-data&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-sts">
+          <mxGeometry x="195" y="52.0" width="165" height="91.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-5" value="&lt;b&gt;ztc-pdp-2&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;PVC raft-data&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-sts">
-          <mxGeometry x="375" y="40" width="165" height="70" as="geometry" />
+        <mxCell id="p2-kubernet-5" value="&lt;b&gt;ztc-pdp-2&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;PVC raft-data&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-sts">
+          <mxGeometry x="375" y="52.0" width="165" height="91.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-6" value="&lt;span style=&quot;font-size:11px&quot;&gt;PodDisruptionBudget minAvailable 2 · podAntiAffinity: one replica per node · readiness /readyz (raft-leader known)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p2-sts">
-          <mxGeometry x="15" y="125" width="530" height="50" as="geometry" />
+        <mxCell id="p2-kubernet-6" value="&lt;span style=&quot;font-size:15px&quot;&gt;PodDisruptionBudget minAvailable 2 · podAntiAffinity: one replica per node · readiness /readyz (raft-leader known)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;" vertex="1" parent="p2-sts">
+          <mxGeometry x="15" y="162.5" width="530" height="65.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-7" value="&lt;span style=&quot;font-size:11px&quot;&gt;ConfigMap ztc-policy ← deploy/policies/substation.json (test keeps copies identical)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p2-sts">
-          <mxGeometry x="15" y="170" width="530" height="40" as="geometry" />
+        <mxCell id="p2-kubernet-7" value="&lt;span style=&quot;font-size:15px&quot;&gt;ConfigMap ztc-policy ← deploy/policies/substation.json (test keeps copies identical)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;" vertex="1" parent="p2-sts">
+          <mxGeometry x="15" y="221.0" width="530" height="52.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-8" value="&lt;b&gt;Deployment ztc-ca&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-zcc">
-          <mxGeometry x="610" y="50" width="160" height="60" as="geometry" />
+        <mxCell id="p2-kubernet-8" value="&lt;b&gt;Deployment ztc-ca&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-zcc">
+          <mxGeometry x="610" y="65.0" width="160" height="78.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-9" value="&lt;b&gt;Deployment ztc-ingest&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-zcc">
-          <mxGeometry x="790" y="50" width="160" height="60" as="geometry" />
+        <mxCell id="p2-kubernet-9" value="&lt;b&gt;Deployment ztc-ingest&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-zcc">
+          <mxGeometry x="790" y="65.0" width="160" height="78.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-10" value="&lt;b&gt;Prometheus&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-zcc">
-          <mxGeometry x="970" y="50" width="150" height="60" as="geometry" />
+        <mxCell id="p2-kubernet-10" value="&lt;b&gt;Prometheus&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-zcc">
+          <mxGeometry x="970" y="65.0" width="150" height="78.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-11" value="&lt;span style=&quot;font-size:11px&quot;&gt;securityContext on every pod: runAsNonRoot, readOnlyRootFilesystem, allowPrivilegeEscalation false, capabilities drop ALL, seccompProfile RuntimeDefault; probes on /healthz and /readyz&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p2-zcc">
-          <mxGeometry x="610" y="130" width="510" height="70" as="geometry" />
+        <mxCell id="p2-kubernet-11" value="&lt;span style=&quot;font-size:15px&quot;&gt;securityContext on every pod: runAsNonRoot, readOnlyRootFilesystem, allowPrivilegeEscalation false, capabilities drop ALL, seccompProfile RuntimeDefault; probes on /healthz and /readyz&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;" vertex="1" parent="p2-zcc">
+          <mxGeometry x="610" y="169.0" width="510" height="91.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-zfog" value="zone=substation-fog" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#2d4d1f;" vertex="1" parent="p2-ns">
-          <mxGeometry x="20" y="340" width="1140" height="200" as="geometry" />
+        <mxCell id="p2-zfog" value="zone=substation-fog" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=18;fontColor=#2d4d1f;" vertex="1" parent="p2-ns">
+          <mxGeometry x="20" y="442.0" width="1140" height="260.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kpep" value="&lt;b&gt;Deployment ztc-pep&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-zfog">
-          <mxGeometry x="220" y="50" width="200" height="70" as="geometry" />
+        <mxCell id="p2-kpep" value="&lt;b&gt;Deployment ztc-pep&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-zfog">
+          <mxGeometry x="220" y="65.0" width="200" height="91.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kfog" value="&lt;b&gt;Deployment ztc-fog&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-zfog">
-          <mxGeometry x="480" y="50" width="200" height="70" as="geometry" />
+        <mxCell id="p2-kfog" value="&lt;b&gt;Deployment ztc-fog&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-zfog">
+          <mxGeometry x="480" y="65.0" width="200" height="91.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kids" value="&lt;b&gt;Deployment ztc-ids&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-zfog">
-          <mxGeometry x="720" y="50" width="180" height="70" as="geometry" />
+        <mxCell id="p2-kids" value="&lt;b&gt;Deployment ztc-ids&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-zfog">
+          <mxGeometry x="720" y="65.0" width="180" height="91.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-12" value="&lt;span style=&quot;font-size:11px&quot;&gt;edge overlay: nodeSelector fog=true, tolerations for the fog taint, arm64 images (Raspberry Pi)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p2-zfog">
-          <mxGeometry x="920" y="50" width="210" height="90" as="geometry" />
+        <mxCell id="p2-kubernet-12" value="&lt;span style=&quot;font-size:15px&quot;&gt;edge overlay: nodeSelector fog=true, tolerations for the fog taint, arm64 images (Raspberry Pi)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;" vertex="1" parent="p2-zfog">
+          <mxGeometry x="920" y="65.0" width="210" height="117.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-zedge" value="zone=station-bus" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#6b4a00;" vertex="1" parent="p2-ns">
-          <mxGeometry x="20" y="560" width="1140" height="140" as="geometry" />
+        <mxCell id="p2-zedge" value="zone=station-bus" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=18;fontColor=#6b4a00;" vertex="1" parent="p2-ns">
+          <mxGeometry x="20" y="728.0" width="1140" height="182.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kedge" value="&lt;b&gt;Deployment ztc-edge&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;simulated devices&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-zedge">
-          <mxGeometry x="220" y="45" width="200" height="70" as="geometry" />
+        <mxCell id="p2-kedge" value="&lt;b&gt;Deployment ztc-edge&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;simulated devices&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-zedge">
+          <mxGeometry x="220" y="58.5" width="200" height="91.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-13" value="8443 (allowed)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-kedge" target="p2-kpep">
+        <mxCell id="p2-kubernet-13" value="8443 (allowed)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-kedge" target="p2-kpep">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-14" value="9000" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-kpep" target="p2-kfog">
+        <mxCell id="p2-kubernet-14" value="9000" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-kpep" target="p2-kfog">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-15" value="8181" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p2-1" source="p2-kpep" target="p2-sts">
+        <mxCell id="p2-kubernet-15" value="8181" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p2-1" source="p2-kpep" target="p2-sts">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-16" value="&lt;b&gt;NetworkPolicies&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;&lt;b&gt;default-deny&lt;/b&gt;: podSelector {} with no ingress / egress rules&lt;/li&gt;&lt;li&gt;&lt;b&gt;allow-dns&lt;/b&gt; egress to kube-dns only&lt;/li&gt;&lt;li&gt;&lt;b&gt;one policy per conduit&lt;/b&gt;, generated by ztcctl segment export k8s from the Go zone model&lt;/li&gt;&lt;li&gt;fog ingress only from the PEP (TB2 enforced by the cluster, not by trust in headers)&lt;/li&gt;&lt;li&gt;CI check fails if the generated YAML is out of date&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p2-1">
-          <mxGeometry x="1230" y="100" width="470" height="160" as="geometry" />
+        <mxCell id="p2-kubernet-16" value="&lt;b&gt;NetworkPolicies&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:15px&quot;&gt;&lt;li&gt;&lt;b&gt;default-deny&lt;/b&gt;: podSelector {} with no ingress / egress rules&lt;/li&gt;&lt;li&gt;&lt;b&gt;allow-dns&lt;/b&gt; egress to kube-dns only&lt;/li&gt;&lt;li&gt;&lt;b&gt;one policy per conduit&lt;/b&gt;, generated by ztcctl segment export k8s from the Go zone model&lt;/li&gt;&lt;li&gt;fog ingress only from the PEP (TB2 enforced by the cluster, not by trust in headers)&lt;/li&gt;&lt;li&gt;CI check fails if the generated YAML is out of date&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=15;fontColor=#333333;" vertex="1" parent="p2-1">
+          <mxGeometry x="1230" y="130.0" width="470" height="208.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-17" value="&lt;b&gt;Kustomize overlays&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:11px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Overlay&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Target&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Differences&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;dev&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;kind + Calico&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;1 node, local images&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;edge&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;k3s on NREC VMs / Raspberry Pi&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;arm64, fog taints, real storage class&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;br&gt;&lt;b&gt;Helm chart&lt;/b&gt;&lt;span style=&quot;font-size:11px&quot;&gt;: replicas, placement, TLS as values; helm lint + template in CI&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=11;overflow=fill;fontColor=#222222;" vertex="1" parent="p2-1">
-          <mxGeometry x="1230" y="280" width="470" height="140" as="geometry" />
+        <mxCell id="p2-kubernet-17" value="&lt;b&gt;Kustomize overlays&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:15px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Overlay&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Target&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Differences&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;dev&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;kind + Calico&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;1 node, local images&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;edge&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;k3s on NREC VMs / Raspberry Pi&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;arm64, fog taints, real storage class&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;br&gt;&lt;b&gt;Helm chart&lt;/b&gt;&lt;span style=&quot;font-size:15px&quot;&gt;: replicas, placement, TLS as values; helm lint + template in CI&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=15;overflow=fill;fontColor=#222222;" vertex="1" parent="p2-1">
+          <mxGeometry x="1230" y="364.0" width="470" height="182.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-18" value="&lt;b&gt;Failure drill (IN5700)&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;kubectl delete pod ztc-pdp-0 → new Raft leader, decisions continue&lt;/li&gt;&lt;li&gt;kubectl exec ztc-edge → wget ztc-pdp:8181 times out (policy proof)&lt;/li&gt;&lt;li&gt;PDB blocks a drain that would lose the Raft majority&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p2-1">
-          <mxGeometry x="1230" y="440" width="470" height="100" as="geometry" />
+        <mxCell id="p2-kubernet-18" value="&lt;b&gt;Failure drill (IN5700)&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:15px&quot;&gt;&lt;li&gt;kubectl delete pod ztc-pdp-0 → new Raft leader, decisions continue&lt;/li&gt;&lt;li&gt;kubectl exec ztc-edge → wget ztc-pdp:8181 times out (policy proof)&lt;/li&gt;&lt;li&gt;PDB blocks a drain that would lose the Raft majority&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=15;fontColor=#333333;" vertex="1" parent="p2-1">
+          <mxGeometry x="1230" y="572.0" width="470" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-kubernet-19" value="&lt;b&gt;Why a StatefulSet for the PDP?&lt;/b&gt; Raft needs stable identities (ztc-pdp-0..2 resolve via the headless Service) and durable per-replica storage (PVC). A Deployment would give random names and shared or no storage." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p2-1">
-          <mxGeometry x="1230" y="560" width="470" height="90" as="geometry" />
+        <mxCell id="p2-kubernet-19" value="&lt;b&gt;Why a StatefulSet for the PDP?&lt;/b&gt; Raft needs stable identities (ztc-pdp-0..2 resolve via the headless Service) and durable per-replica storage (PVC). A Deployment would give random names and shared or no storage." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=15;fontColor=#333333;" vertex="1" parent="p2-1">
+          <mxGeometry x="1230" y="728.0" width="470" height="117.0" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
