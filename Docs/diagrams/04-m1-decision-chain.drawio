@@ -1,115 +1,115 @@
 <mxfile host="app.diagrams.net" agent="ztc-diagram-generator" type="device">
   <diagram name="PEP and PDP components" id="page-0">
-    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="960" math="0" shadow="0" background="#FFFFFF">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="1248" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="p0-0" />
         <mxCell id="p0-1" parent="p0-0" />
-        <mxCell id="p0-pepandpd-1" value="M1 — the decision chain: PEP → PDP (policy + trust)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="10" width="1600" height="32" as="geometry" />
+        <mxCell id="p0-pepandpd-1" value="M1 — the decision chain: PEP → PDP (policy + trust)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=28;fontStyle=1;fontColor=#111111;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="13.0" width="1600" height="41.6" as="geometry" />
         </mxCell>
-        <mxCell id="p0-pepandpd-2" value="The PEP never decides and the PDP never enforces (NIST SP 800-207 separation of duties). Every step fails closed: anything unknown, missing or unreachable becomes a deny." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="44" width="1600" height="34" as="geometry" />
+        <mxCell id="p0-pepandpd-2" value="The PEP never decides and the PDP never enforces (NIST SP 800-207 separation of duties). Every step fails closed: anything unknown, missing or unreachable becomes a deny." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=17;fontColor=#555555;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="57.2" width="1600" height="44.2" as="geometry" />
         </mxCell>
-        <mxCell id="p0-client" value="&lt;b&gt;Client&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;device, operator or fog workload with a credential&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="140" width="150" height="80" as="geometry" />
+        <mxCell id="p0-client" value="&lt;b&gt;Client&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;device, operator or fog workload with a credential&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="182.0" width="150" height="104.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-pepc" value="ztc-pep  (fog)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#2d4d1f;" vertex="1" parent="p0-1">
-          <mxGeometry x="200" y="100" width="640" height="830" as="geometry" />
+        <mxCell id="p0-pepc" value="ztc-pep  (fog)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=18;fontColor=#2d4d1f;" vertex="1" parent="p0-1">
+          <mxGeometry x="200" y="130.0" width="615" height="1079.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-s1" value="&lt;b&gt;1  Route table&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;MatchRoute(path) → Resource{type, zone, layer, sensitivity}. Unknown route → 404: there is no default resource.&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p0-pepc">
-          <mxGeometry x="20" y="40" width="600" height="90" as="geometry" />
+        <mxCell id="p0-s1" value="&lt;b&gt;1  Route table&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;MatchRoute(path) → Resource{type, zone, layer, sensitivity}. Unknown route → 404: there is no default resource.&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p0-pepc">
+          <mxGeometry x="20" y="52.0" width="575" height="117.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-s2" value="&lt;b&gt;2  Authenticate&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;Strip inbound X-ZTC-* headers. Bearer token → Ed25519 verify (alg pinned, exp, nbf, aud, revoked jti); capability → HMAC chain + caveats; mTLS SVID (M5). Nothing valid → 401.&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p0-pepc">
-          <mxGeometry x="20" y="152" width="600" height="90" as="geometry" />
+        <mxCell id="p0-s2" value="&lt;b&gt;2  Authenticate&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;Strip inbound X-ZTC-* headers. Bearer token → Ed25519 verify (alg pinned, exp, nbf, aud, revoked jti); capability → HMAC chain + caveats; mTLS SVID (M5). Nothing valid → 401.&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p0-pepc">
+          <mxGeometry x="20" y="197.6" width="575" height="117.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-pepandpd-3" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-s1" target="p0-s2">
+        <mxCell id="p0-pepandpd-3" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-s1" target="p0-s2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-s3" value="&lt;b&gt;3  Trust signals&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;First authentication of a credential → synchronous authentication signal (0.5 token, 0.6 capability, 0.8 mTLS). Location signal: is the subject in its expected zone?&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p0-pepc">
-          <mxGeometry x="20" y="264" width="600" height="90" as="geometry" />
+        <mxCell id="p0-s3" value="&lt;b&gt;3  Trust signals&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;First authentication of a credential → synchronous authentication signal (0.5 token, 0.6 capability, 0.8 mTLS). Location signal: is the subject in its expected zone?&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p0-pepc">
+          <mxGeometry x="20" y="343.2" width="575" height="117.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-pepandpd-4" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-s2" target="p0-s3">
+        <mxCell id="p0-pepandpd-4" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-s2" target="p0-s3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-s4" value="&lt;b&gt;4  Build request&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;subject (id, roles, layer, zone, owner from inventory) · action (GET→read, POST→write, …) · resource · context (time, source zone)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p0-pepc">
-          <mxGeometry x="20" y="376" width="600" height="90" as="geometry" />
+        <mxCell id="p0-s4" value="&lt;b&gt;4  Build request&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;subject (id, roles, layer, zone, owner from inventory) · action (GET→read, POST→write, …) · resource · context (time, source zone)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p0-pepc">
+          <mxGeometry x="20" y="488.8" width="575" height="117.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-pepandpd-5" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-s3" target="p0-s4">
+        <mxCell id="p0-pepandpd-5" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-s3" target="p0-s4">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-s5" value="&lt;b&gt;5  Decider (placement, RQ1)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;cloud → RemoteClient · hierarchical → Cache → RemoteClient · fog → local PDP replica. Chosen with ZTC_PLACEMENT.&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p0-pepc">
-          <mxGeometry x="20" y="488" width="600" height="90" as="geometry" />
+        <mxCell id="p0-s5" value="&lt;b&gt;5  Decider (placement, RQ1)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;cloud → RemoteClient · hierarchical → Cache → RemoteClient · fog → local PDP replica. Chosen with ZTC_PLACEMENT.&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p0-pepc">
+          <mxGeometry x="20" y="634.4" width="575" height="117.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-pepandpd-6" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-s4" target="p0-s5">
+        <mxCell id="p0-pepandpd-6" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-s4" target="p0-s5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-s6" value="&lt;b&gt;6  Enforce&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;allow → obligations (log, reverify, rate-limit) · deny → 403 · PDP error or timeout → 503 and deny (fail closed, ADR 0001)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p0-pepc">
-          <mxGeometry x="20" y="600" width="600" height="90" as="geometry" />
+        <mxCell id="p0-s6" value="&lt;b&gt;6  Enforce&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;allow → obligations (log, reverify, rate-limit) · deny → 403 · PDP error or timeout → 503 and deny (fail closed, ADR 0001)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p0-pepc">
+          <mxGeometry x="20" y="780.0" width="575" height="117.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-pepandpd-7" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-s5" target="p0-s6">
+        <mxCell id="p0-pepandpd-7" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-s5" target="p0-s6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-s7" value="&lt;b&gt;7  Reverse proxy&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;forward to the protected upstream with X-ZTC-Subject overwritten by the PEP; decision kept in the request context&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p0-pepc">
-          <mxGeometry x="20" y="712" width="600" height="90" as="geometry" />
+        <mxCell id="p0-s7" value="&lt;b&gt;7  Reverse proxy&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;forward to the protected upstream with X-ZTC-Subject overwritten by the PEP; decision kept in the request context&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p0-pepc">
+          <mxGeometry x="20" y="925.6" width="575" height="117.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-pepandpd-8" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-s6" target="p0-s7">
+        <mxCell id="p0-pepandpd-8" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-s6" target="p0-s7">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-pepandpd-9" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-client" target="p0-s1">
+        <mxCell id="p0-pepandpd-9" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-client" target="p0-s1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-pdpc" value="ztc-pdp  (cloud, or fog replica)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#1f3a5f;" vertex="1" parent="p0-1">
-          <mxGeometry x="900" y="100" width="800" height="830" as="geometry" />
+        <mxCell id="p0-pdpc" value="ztc-pdp  (cloud, or fog replica)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=18;fontColor=#1f3a5f;" vertex="1" parent="p0-1">
+          <mxGeometry x="900" y="130.0" width="800" height="1079.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-api" value="&lt;b&gt;HTTP API&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:11px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Read (open in M1)&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Write (Bearer ZTC_PDP_TOKEN, constant-time; mTLS + policy-admin in M5)&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;POST /v1/decide&lt;br&gt;GET /v1/trust&lt;br&gt;GET /v1/policy&lt;br&gt;GET /v1/revocations&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;POST /v1/signals&lt;br&gt;PUT /v1/policy&lt;br&gt;PUT /v1/emergency&lt;br&gt;POST /v1/revoke&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="p0-pdpc">
-          <mxGeometry x="20" y="40" width="760" height="120" as="geometry" />
+        <mxCell id="p0-api" value="&lt;b&gt;HTTP API&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:15px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Read (open in M1)&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Write (Bearer ZTC_PDP_TOKEN, constant-time; mTLS + policy-admin in M5)&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;POST /v1/decide&lt;br&gt;GET /v1/trust&lt;br&gt;GET /v1/policy&lt;br&gt;GET /v1/revocations&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;POST /v1/signals&lt;br&gt;PUT /v1/policy&lt;br&gt;PUT /v1/emergency&lt;br&gt;POST /v1/revoke&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="p0-pdpc">
+          <mxGeometry x="20" y="52.0" width="760" height="156.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-decide" value="&lt;b&gt;PDP.Decide(request)&lt;/b&gt;&lt;ol style='margin:4px 0 0 0;padding-left:18px;font-size:11px'&gt;&lt;li&gt;stamp the request with PDP-owned time (callers cannot set it)&lt;/li&gt;&lt;li&gt;context.trustScore ← trust.Store.Score(subject, now)&lt;/li&gt;&lt;li&gt;context.emergency ← break-glass flag&lt;/li&gt;&lt;li&gt;policy.Engine.Evaluate → effect, rule, obligations, TTL&lt;/li&gt;&lt;li&gt;Decision{effect, rule, reason, ttl, obligations, policyVersion, revocationEpoch}&lt;/li&gt;&lt;li&gt;on deny: record a denial signal for the subject&lt;/li&gt;&lt;/ol&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="p0-pdpc">
-          <mxGeometry x="20" y="190" width="760" height="200" as="geometry" />
+        <mxCell id="p0-decide" value="&lt;b&gt;PDP.Decide(request)&lt;/b&gt;&lt;ol style='margin:4px 0 0 0;padding-left:18px;font-size:15px'&gt;&lt;li&gt;stamp the request with PDP-owned time (callers cannot set it)&lt;/li&gt;&lt;li&gt;context.trustScore ← trust.Store.Score(subject, now)&lt;/li&gt;&lt;li&gt;context.emergency ← break-glass flag&lt;/li&gt;&lt;li&gt;policy.Engine.Evaluate → effect, rule, obligations, TTL&lt;/li&gt;&lt;li&gt;Decision{effect, rule, reason, ttl, obligations, policyVersion, revocationEpoch}&lt;/li&gt;&lt;li&gt;on deny: record a denial signal for the subject&lt;/li&gt;&lt;/ol&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;verticalAlign=top;spacing=8;" vertex="1" parent="p0-pdpc">
+          <mxGeometry x="20" y="247.0" width="760" height="208.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-engine" value="&lt;b&gt;policy.Engine&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;ABAC, deny-overrides, default deny. atomic.Pointer → lock-free reads; Install() rejects invalid or stale versions and keeps the old policy&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p0-pdpc">
-          <mxGeometry x="20" y="420" width="360" height="100" as="geometry" />
+        <mxCell id="p0-engine" value="&lt;b&gt;policy.Engine&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;ABAC, deny-overrides, default deny. atomic.Pointer → lock-free reads; Install() rejects invalid or stale versions and keeps the old policy&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;spacing=4;" vertex="1" parent="p0-pdpc">
+          <mxGeometry x="20" y="507.0" width="360" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-tstore" value="&lt;b&gt;trust.Store&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;per-subject state behind a mutex, injectable clock, decaying score (see 05)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p0-pdpc">
-          <mxGeometry x="420" y="420" width="360" height="100" as="geometry" />
+        <mxCell id="p0-tstore" value="&lt;b&gt;trust.Store&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;per-subject state behind a mutex, injectable clock, decaying score (see 05)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;spacing=4;" vertex="1" parent="p0-pdpc">
+          <mxGeometry x="420" y="507.0" width="360" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-rev" value="&lt;b&gt;Revocation list&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;revoked subjects / jti, epoch counter bumped on every revoke or compromise&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=11;" vertex="1" parent="p0-pdpc">
-          <mxGeometry x="280" y="555" width="240" height="100" as="geometry" />
+        <mxCell id="p0-rev" value="&lt;b&gt;Revocation list&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;revoked subjects / jti, epoch counter bumped on every revoke or compromise&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=15;" vertex="1" parent="p0-pdpc">
+          <mxGeometry x="280" y="682.5" width="240" height="143.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-aud" value="&lt;b&gt;Audit log (M2)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;every decision, signal and compromise, hash-chained&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=11;" vertex="1" parent="p0-pdpc">
-          <mxGeometry x="540" y="555" width="240" height="100" as="geometry" />
+        <mxCell id="p0-aud" value="&lt;b&gt;Audit log (M2)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;every decision, signal and compromise, hash-chained&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=15;" vertex="1" parent="p0-pdpc">
+          <mxGeometry x="540" y="682.5" width="240" height="143.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-psrc" value="&lt;b&gt;Policy source&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;deploy/policies/substation.json (ZTC_POLICY_FILE) or built-in default; strict JSON, unknown fields rejected; canonical copy tested against the Go default&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-pdpc">
-          <mxGeometry x="20" y="555" width="240" height="100" as="geometry" />
+        <mxCell id="p0-psrc" value="&lt;b&gt;Policy source&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;deploy/policies/substation.json (ZTC_POLICY_FILE) or built-in default; strict JSON, unknown fields rejected; canonical copy tested against the Go default&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-pdpc">
+          <mxGeometry x="20" y="682.5" width="240" height="162.5" as="geometry" />
         </mxCell>
-        <mxCell id="p0-pepandpd-10" value="&lt;b&gt;Separation of duties&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;PEP: authentication + enforcement, no policy knowledge&lt;/li&gt;&lt;li&gt;PDP: decision, no request bodies, never sees the upstream&lt;/li&gt;&lt;li&gt;a compromised PEP can lie about one request, but cannot change policy or trust&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p0-pdpc">
-          <mxGeometry x="20" y="680" width="760" height="120" as="geometry" />
+        <mxCell id="p0-pepandpd-10" value="&lt;b&gt;Separation of duties&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:15px&quot;&gt;&lt;li&gt;PEP: authentication + enforcement, no policy knowledge&lt;/li&gt;&lt;li&gt;PDP: decision, no request bodies, never sees the upstream&lt;/li&gt;&lt;li&gt;a compromised PEP can lie about one request, but cannot change policy or trust&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=15;fontColor=#333333;" vertex="1" parent="p0-pdpc">
+          <mxGeometry x="20" y="884.0" width="760" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-pepandpd-11" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-api" target="p0-decide">
+        <mxCell id="p0-pepandpd-11" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-api" target="p0-decide">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-pepandpd-12" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-decide" target="p0-engine">
+        <mxCell id="p0-pepandpd-12" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-decide" target="p0-engine">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-pepandpd-13" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-decide" target="p0-tstore">
+        <mxCell id="p0-pepandpd-13" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-decide" target="p0-tstore">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-pepandpd-14" value="Install" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#6c8ebf;fontColor=#1f3a5f;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.33;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-psrc" target="p0-engine">
+        <mxCell id="p0-pepandpd-14" value="Install" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#6c8ebf;fontColor=#1f3a5f;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.33;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-psrc" target="p0-engine">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-pepandpd-15" value="POST /v1/decide" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.7;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-s5" target="p0-api">
+        <mxCell id="p0-pepandpd-15" value="POST /v1/decide" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;horizontal=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.7;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-s5" target="p0-api">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="882" y="633" />
-              <mxPoint x="882" y="224" />
+              <mxPoint x="875" y="822.9" />
+              <mxPoint x="875" y="291.2" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="p0-pepandpd-16" value="POST /v1/signals" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-s3" target="p0-api">
+        <mxCell id="p0-pepandpd-16" value="POST /v1/signals" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;horizontal=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-s3" target="p0-api">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="862" y="409" />
-              <mxPoint x="862" y="176" />
+              <mxPoint x="845" y="531.7" />
+              <mxPoint x="845" y="228.8" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -117,300 +117,300 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Request sequence" id="page-1">
-    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1560" pageHeight="1110" math="0" shadow="0" background="#FFFFFF">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1560" pageHeight="1469" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="p1-0" />
         <mxCell id="p1-1" parent="p1-0" />
-        <mxCell id="p1-requests-1" value="M1 — one request, step by step (hierarchical placement)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p1-1">
-          <mxGeometry x="20" y="10" width="1500" height="32" as="geometry" />
+        <mxCell id="p1-requests-1" value="M1 — one request, step by step (hierarchical placement)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=28;fontStyle=1;fontColor=#111111;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="13.0" width="1500" height="41.6" as="geometry" />
         </mxCell>
-        <mxCell id="p1-dev" value="&lt;b&gt;PMU&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;edge&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="40.0" y="70" width="140" height="50" as="geometry" />
+        <mxCell id="p1-dev" value="&lt;b&gt;PMU&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;edge&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="40.0" y="91.0" width="140" height="65.0" as="geometry" />
         </mxCell>
         <mxCell id="p1-requests-2" value="" style="html=1;endArrow=none;dashed=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="110" y="120" as="sourcePoint" />
-            <mxPoint x="110" y="1000" as="targetPoint" />
+            <mxPoint x="110" y="156.0" as="sourcePoint" />
+            <mxPoint x="110" y="1300.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-ca" value="&lt;b&gt;ztc-ca&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;cloud&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="290.0" y="70" width="140" height="50" as="geometry" />
+        <mxCell id="p1-ca" value="&lt;b&gt;ztc-ca&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;cloud&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="290.0" y="91.0" width="140" height="65.0" as="geometry" />
         </mxCell>
         <mxCell id="p1-requests-3" value="" style="html=1;endArrow=none;dashed=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="360" y="120" as="sourcePoint" />
-            <mxPoint x="360" y="1000" as="targetPoint" />
+            <mxPoint x="360" y="156.0" as="sourcePoint" />
+            <mxPoint x="360" y="1300.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-pep" value="&lt;b&gt;ztc-pep&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;fog&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="540.0" y="70" width="140" height="50" as="geometry" />
+        <mxCell id="p1-pep" value="&lt;b&gt;ztc-pep&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;fog&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="540.0" y="91.0" width="140" height="65.0" as="geometry" />
         </mxCell>
         <mxCell id="p1-requests-4" value="" style="html=1;endArrow=none;dashed=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="610" y="120" as="sourcePoint" />
-            <mxPoint x="610" y="1000" as="targetPoint" />
+            <mxPoint x="610" y="156.0" as="sourcePoint" />
+            <mxPoint x="610" y="1300.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-cache" value="&lt;b&gt;Decision cache&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;fog&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="790.0" y="70" width="140" height="50" as="geometry" />
+        <mxCell id="p1-cache" value="&lt;b&gt;Decision cache&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;fog&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="790.0" y="91.0" width="140" height="65.0" as="geometry" />
         </mxCell>
         <mxCell id="p1-requests-5" value="" style="html=1;endArrow=none;dashed=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="860" y="120" as="sourcePoint" />
-            <mxPoint x="860" y="1000" as="targetPoint" />
+            <mxPoint x="860" y="156.0" as="sourcePoint" />
+            <mxPoint x="860" y="1300.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-pdp" value="&lt;b&gt;ztc-pdp&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;cloud&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="1040.0" y="70" width="140" height="50" as="geometry" />
+        <mxCell id="p1-pdp" value="&lt;b&gt;ztc-pdp&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;cloud&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="1040.0" y="91.0" width="140" height="65.0" as="geometry" />
         </mxCell>
         <mxCell id="p1-requests-6" value="" style="html=1;endArrow=none;dashed=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1110" y="120" as="sourcePoint" />
-            <mxPoint x="1110" y="1000" as="targetPoint" />
+            <mxPoint x="1110" y="156.0" as="sourcePoint" />
+            <mxPoint x="1110" y="1300.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-up" value="&lt;b&gt;ztc-fog&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;upstream&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="1290.0" y="70" width="140" height="50" as="geometry" />
+        <mxCell id="p1-up" value="&lt;b&gt;ztc-fog&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;upstream&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="1290.0" y="91.0" width="140" height="65.0" as="geometry" />
         </mxCell>
         <mxCell id="p1-requests-7" value="" style="html=1;endArrow=none;dashed=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1360" y="120" as="sourcePoint" />
-            <mxPoint x="1360" y="1000" as="targetPoint" />
+            <mxPoint x="1360" y="156.0" as="sourcePoint" />
+            <mxPoint x="1360" y="1300.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-8" value="POST /v1/token (join token)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-8" value="POST /v1/token (join token)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="110" y="160" as="sourcePoint" />
-            <mxPoint x="360" y="160" as="targetPoint" />
+            <mxPoint x="110" y="208.0" as="sourcePoint" />
+            <mxPoint x="360" y="208.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-9" value="Ed25519-signed token, TTL 5 min" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-9" value="Ed25519-signed token, TTL 5 min" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="360" y="195" as="sourcePoint" />
-            <mxPoint x="110" y="195" as="targetPoint" />
+            <mxPoint x="360" y="253.5" as="sourcePoint" />
+            <mxPoint x="110" y="253.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-10" value="POST /bay-1/telemetry/pmu-b1-1 · Authorization: Bearer …" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-10" value="POST /bay-1/telemetry/pmu-b1-1 · Authorization: Bearer …" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="110" y="240" as="sourcePoint" />
-            <mxPoint x="610" y="240" as="targetPoint" />
+            <mxPoint x="110" y="312.0" as="sourcePoint" />
+            <mxPoint x="610" y="312.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-11" value="verify signature (CA key from /v1/keys), alg, exp, nbf, aud, revoked jti" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;align=left;spacingLeft=46;labelBackgroundColor=none;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-11" value="verify signature (CA key from /v1/keys), alg, exp, nbf, aud, revoked jti" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;align=left;spacingLeft=46;labelBackgroundColor=#ffffff;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="610" y="255" as="sourcePoint" />
-            <mxPoint x="610" y="281" as="targetPoint" />
+            <mxPoint x="610" y="331.5" as="sourcePoint" />
+            <mxPoint x="610" y="365.3" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="650" y="255" />
-              <mxPoint x="650" y="281" />
+              <mxPoint x="650" y="331.5" />
+              <mxPoint x="650" y="365.3" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-12" value="signal: authentication 0.5 (first use of this token, synchronous)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-12" value="signal: authentication 0.5 (first use of this token, synchronous)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="610" y="320" as="sourcePoint" />
-            <mxPoint x="1110" y="320" as="targetPoint" />
+            <mxPoint x="610" y="416.0" as="sourcePoint" />
+            <mxPoint x="1110" y="416.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-13" value="decide(subject, write, bay-1/telemetry/pmu-b1-1)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-13" value="decide(subject, write, bay-1/telemetry/pmu-b1-1)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="610" y="360" as="sourcePoint" />
-            <mxPoint x="860" y="360" as="targetPoint" />
+            <mxPoint x="610" y="468.0" as="sourcePoint" />
+            <mxPoint x="860" y="468.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-14" value="alt" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=3;container=1;collapsible=0;recursiveResize=0;fillColor=#ffffff;strokeColor=#888888;dashed=1;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;fontSize=12;fontColor=#333333;dashed=0;strokeColor=#666666;fillColor=none;fontSize=11;" vertex="1" parent="p1-1">
-          <mxGeometry x="480" y="380" width="650" height="230" as="geometry" />
+        <mxCell id="p1-requests-14" value="alt" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=3;container=1;collapsible=0;recursiveResize=0;fillColor=#ffffff;strokeColor=#888888;dashed=1;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;fontSize=16;fontColor=#333333;dashed=0;strokeColor=#666666;fillColor=none;fontSize=15;" vertex="1" parent="p1-1">
+          <mxGeometry x="480" y="494.0" width="1000" height="299.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-requests-15" value="[cache hit: same subject, action, resource; TTL valid; same policy version and revocation epoch]" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;fontSize=10;fontColor=#555555;" vertex="1" parent="p1-1">
-          <mxGeometry x="530" y="382" width="600" height="20" as="geometry" />
+        <mxCell id="p1-requests-15" value="[cache hit: same subject, action, resource; TTL valid; same policy version and revocation epoch]" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;fontSize=14;fontColor=#555555;" vertex="1" parent="p1-1">
+          <mxGeometry x="530" y="496.6" width="600" height="26.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-requests-16" value="allow (decided by fog cache)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-16" value="allow (decided by fog cache)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="860" y="430" as="sourcePoint" />
-            <mxPoint x="610" y="430" as="targetPoint" />
+            <mxPoint x="860" y="559.0" as="sourcePoint" />
+            <mxPoint x="610" y="559.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="p1-requests-17" value="" style="html=1;endArrow=none;dashed=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="480" y="455" as="sourcePoint" />
-            <mxPoint x="1130" y="455" as="targetPoint" />
+            <mxPoint x="480" y="591.5" as="sourcePoint" />
+            <mxPoint x="1480" y="591.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-18" value="[miss]" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;fontSize=10;fontColor=#555555;" vertex="1" parent="p1-1">
-          <mxGeometry x="530" y="457" width="200" height="20" as="geometry" />
+        <mxCell id="p1-requests-18" value="[miss]" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;fontSize=14;fontColor=#555555;" vertex="1" parent="p1-1">
+          <mxGeometry x="530" y="594.1" width="200" height="26.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-requests-19" value="POST /v1/decide" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-19" value="POST /v1/decide" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="860" y="495" as="sourcePoint" />
-            <mxPoint x="1110" y="495" as="targetPoint" />
+            <mxPoint x="860" y="643.5" as="sourcePoint" />
+            <mxPoint x="1110" y="643.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-20" value="trust score → policy (deny-overrides)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;align=left;spacingLeft=46;labelBackgroundColor=none;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-20" value="trust score → policy (deny-overrides)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;align=left;spacingLeft=46;labelBackgroundColor=#ffffff;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1110" y="505" as="sourcePoint" />
-            <mxPoint x="1110" y="531" as="targetPoint" />
+            <mxPoint x="1110" y="656.5" as="sourcePoint" />
+            <mxPoint x="1110" y="690.3" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="1150" y="505" />
-              <mxPoint x="1150" y="531" />
+              <mxPoint x="1150" y="656.5" />
+              <mxPoint x="1150" y="690.3" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-21" value="allow · TTL 60 s · policyVersion · revocationEpoch" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-21" value="allow · TTL 60 s · policyVersion · revocationEpoch" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1110" y="565" as="sourcePoint" />
-            <mxPoint x="860" y="565" as="targetPoint" />
+            <mxPoint x="1110" y="734.5" as="sourcePoint" />
+            <mxPoint x="860" y="734.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-22" value="allow (stored)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-22" value="allow (stored)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="860" y="595" as="sourcePoint" />
-            <mxPoint x="610" y="595" as="targetPoint" />
+            <mxPoint x="860" y="773.5" as="sourcePoint" />
+            <mxPoint x="610" y="773.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-23" value="POST /v1/telemetry · X-ZTC-Subject: spiffe://grid.example/edge/pmu/pmu-b1-1" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-23" value="POST /v1/telemetry · X-ZTC-Subject: spiffe://grid.example/edge/pmu/pmu-b1-1" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="610" y="640" as="sourcePoint" />
-            <mxPoint x="1360" y="640" as="targetPoint" />
+            <mxPoint x="610" y="832.0" as="sourcePoint" />
+            <mxPoint x="1360" y="832.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-24" value="202 Accepted" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-24" value="202 Accepted" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1360" y="675" as="sourcePoint" />
-            <mxPoint x="610" y="675" as="targetPoint" />
+            <mxPoint x="1360" y="877.5" as="sourcePoint" />
+            <mxPoint x="610" y="877.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-25" value="202 Accepted" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-25" value="202 Accepted" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="610" y="705" as="sourcePoint" />
-            <mxPoint x="110" y="705" as="targetPoint" />
+            <mxPoint x="610" y="916.5" as="sourcePoint" />
+            <mxPoint x="110" y="916.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-26" value="alt  failure cases" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=3;container=1;collapsible=0;recursiveResize=0;fillColor=#ffffff;strokeColor=#888888;dashed=1;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;fontSize=12;fontColor=#333333;dashed=0;strokeColor=#b85450;fillColor=none;fontSize=11;fontColor=#b85450;" vertex="1" parent="p1-1">
-          <mxGeometry x="40" y="730" width="1100" height="230" as="geometry" />
+        <mxCell id="p1-requests-26" value="alt  failure cases" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=3;container=1;collapsible=0;recursiveResize=0;fillColor=#ffffff;strokeColor=#888888;dashed=1;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;fontSize=16;fontColor=#333333;dashed=0;strokeColor=#b85450;fillColor=none;fontSize=15;fontColor=#b85450;" vertex="1" parent="p1-1">
+          <mxGeometry x="40" y="949.0" width="1100" height="331.5" as="geometry" />
         </mxCell>
-        <mxCell id="p1-requests-27" value="expired, forged or alg=none token" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-27" value="expired, forged or alg=none token" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="110" y="780" as="sourcePoint" />
-            <mxPoint x="610" y="780" as="targetPoint" />
+            <mxPoint x="110" y="1014.0" as="sourcePoint" />
+            <mxPoint x="610" y="1014.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-28" value="401 — no PDP call at all" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-28" value="401 — no PDP call at all" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="610" y="805" as="sourcePoint" />
-            <mxPoint x="110" y="805" as="targetPoint" />
+            <mxPoint x="610" y="1046.5" as="sourcePoint" />
+            <mxPoint x="110" y="1046.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-29" value="decide (operator → operate breaker)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-29" value="decide (operator → operate breaker)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="610" y="850" as="sourcePoint" />
-            <mxPoint x="1110" y="850" as="targetPoint" />
+            <mxPoint x="610" y="1105.0" as="sourcePoint" />
+            <mxPoint x="1110" y="1105.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-30" value="deny: trust 0.62 &amp;lt; 0.8 (operate-breaker)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-30" value="deny: trust 0.62 &amp;lt; 0.8 (operate-breaker)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1110" y="875" as="sourcePoint" />
-            <mxPoint x="610" y="875" as="targetPoint" />
+            <mxPoint x="1110" y="1137.5" as="sourcePoint" />
+            <mxPoint x="610" y="1137.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-31" value="403" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-31" value="403" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="610" y="890" as="sourcePoint" />
-            <mxPoint x="110" y="890" as="targetPoint" />
+            <mxPoint x="610" y="1176.5" as="sourcePoint" />
+            <mxPoint x="110" y="1176.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-32" value="decide … PDP unreachable / timeout" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-32" value="decide … PDP unreachable / timeout" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="610" y="925" as="sourcePoint" />
-            <mxPoint x="1110" y="925" as="targetPoint" />
+            <mxPoint x="610" y="1222.0" as="sourcePoint" />
+            <mxPoint x="1110" y="1222.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="p1-requests-33" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;shape=mxgraph.basic.x;fillColor=#b85450;strokeColor=none;" vertex="1" parent="p1-1">
-          <mxGeometry x="1098" y="913" width="24" height="24" as="geometry" />
+          <mxGeometry x="1098.0" y="1210.0" width="24.0" height="24.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-requests-34" value="503 + deny (fail closed)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
+        <mxCell id="p1-requests-34" value="503 + deny (fail closed)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;dashed=1;endArrow=open;endFill=0;verticalAlign=bottom;" edge="1" parent="p1-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="610" y="945" as="sourcePoint" />
-            <mxPoint x="110" y="945" as="targetPoint" />
+            <mxPoint x="610" y="1254.5" as="sourcePoint" />
+            <mxPoint x="110" y="1254.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p1-requests-35" value="&lt;b&gt;Design notes&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;the CA public key is fetched once; tokens verify offline at the PEP&lt;/li&gt;&lt;li&gt;the first authentication is sent synchronously, otherwise the very first decision would see trust 0&lt;/li&gt;&lt;li&gt;denies are never cached; allows are cached with TTL, policy version and revocation epoch&lt;/li&gt;&lt;li&gt;the upstream trusts X-ZTC-Subject only because the network lets nothing but the PEP reach it (TB2)&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p1-1">
-          <mxGeometry x="40" y="980" width="1440" height="110" as="geometry" />
+        <mxCell id="p1-requests-35" value="&lt;b&gt;Design notes&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:15px&quot;&gt;&lt;li&gt;the CA public key is fetched once; tokens verify offline at the PEP&lt;/li&gt;&lt;li&gt;the first authentication is sent synchronously, otherwise the very first decision would see trust 0&lt;/li&gt;&lt;li&gt;denies are never cached; allows are cached with TTL, policy version and revocation epoch&lt;/li&gt;&lt;li&gt;the upstream trusts X-ZTC-Subject only because the network lets nothing but the PEP reach it (TB2)&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=15;fontColor=#333333;" vertex="1" parent="p1-1">
+          <mxGeometry x="40" y="1306.5" width="1440" height="117.0" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram name="Policy evaluation" id="page-2">
-    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0" background="#FFFFFF">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1625" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="p2-0" />
         <mxCell id="p2-1" parent="p2-0" />
-        <mxCell id="p2-policyev-1" value="M1 — how a decision is made: ABAC with deny-overrides and default deny" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p2-1">
-          <mxGeometry x="20" y="10" width="1500" height="32" as="geometry" />
+        <mxCell id="p2-policyev-1" value="M1 — how a decision is made: ABAC with deny-overrides and default deny" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=28;fontStyle=1;fontColor=#111111;" vertex="1" parent="p2-1">
+          <mxGeometry x="20" y="13.0" width="1500" height="41.6" as="geometry" />
         </mxCell>
-        <mxCell id="p2-a" value="&lt;b&gt;AccessRequest&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;subject · action · resource · context (trustScore, time, emergency, sourceZone)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=11;fontStyle=1;fillColor=#333333;" vertex="1" parent="p2-1">
-          <mxGeometry x="40" y="80" width="360" height="70" as="geometry" />
+        <mxCell id="p2-a" value="&lt;b&gt;AccessRequest&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;subject · action · resource · context (trustScore, time, emergency, sourceZone)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;ellipse;fillColor=#333333;strokeColor=none;fontColor=#ffffff;fontSize=15;fontStyle=1;fillColor=#333333;" vertex="1" parent="p2-1">
+          <mxGeometry x="40" y="104.0" width="360" height="91.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-b" value="&lt;b&gt;Match every rule&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;subjects (role:, spiffe:// glob) AND actions AND resources (type:, glob) AND all conditions true&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-1">
-          <mxGeometry x="40" y="190" width="360" height="80" as="geometry" />
+        <mxCell id="p2-b" value="&lt;b&gt;Match every rule&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;subjects (role:, spiffe:// glob) AND actions AND resources (type:, glob) AND all conditions true&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-1">
+          <mxGeometry x="40" y="247.0" width="360" height="104.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-c" value="any matching&lt;br&gt;&lt;b&gt;deny&lt;/b&gt; rule?" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rhombus;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.5;fontSize=11;" vertex="1" parent="p2-1">
-          <mxGeometry x="120" y="310" width="200" height="110" as="geometry" />
+        <mxCell id="p2-c" value="any matching&lt;br&gt;&lt;b&gt;deny&lt;/b&gt; rule?" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rhombus;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.5;fontSize=15;" vertex="1" parent="p2-1">
+          <mxGeometry x="120" y="403.0" width="200" height="143.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-d" value="DENY&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;deny-overrides: one deny beats any number of allows&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=12;fontStyle=1;" vertex="1" parent="p2-1">
-          <mxGeometry x="420" y="325" width="260" height="80" as="geometry" />
+        <mxCell id="p2-d" value="DENY&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;deny-overrides: one deny beats any number of allows&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=16;fontStyle=1;" vertex="1" parent="p2-1">
+          <mxGeometry x="420" y="422.5" width="260" height="104.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-e" value="any matching&lt;br&gt;&lt;b&gt;allow&lt;/b&gt; rule?" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rhombus;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.5;fontSize=11;" vertex="1" parent="p2-1">
-          <mxGeometry x="120" y="460" width="200" height="110" as="geometry" />
+        <mxCell id="p2-e" value="any matching&lt;br&gt;&lt;b&gt;allow&lt;/b&gt; rule?" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rhombus;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.5;fontSize=15;" vertex="1" parent="p2-1">
+          <mxGeometry x="120" y="598.0" width="200" height="143.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-f" value="DENY&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;default deny: no rule, no access (includes a trust condition that failed)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=12;fontStyle=1;" vertex="1" parent="p2-1">
-          <mxGeometry x="420" y="475" width="260" height="80" as="geometry" />
+        <mxCell id="p2-f" value="DENY&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;default deny: no rule, no access (includes a trust condition that failed)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=16;fontStyle=1;" vertex="1" parent="p2-1">
+          <mxGeometry x="420" y="617.5" width="260" height="104.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-g" value="ALLOW&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;+ obligations (log, rate-limit, reverify, alert) + TTL of the strictest matching rule&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontStyle=1;" vertex="1" parent="p2-1">
-          <mxGeometry x="70" y="620" width="300" height="90" as="geometry" />
+        <mxCell id="p2-g" value="ALLOW&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;+ obligations (log, rate-limit, reverify, alert) + TTL of the strictest matching rule&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontSize=16;fontStyle=1;" vertex="1" parent="p2-1">
+          <mxGeometry x="70" y="806.0" width="300" height="117.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-h" value="&lt;b&gt;PDP side effects&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;deny → denial signal lowers trust; every decision → audit; allow + TTL → cacheable&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-1">
-          <mxGeometry x="420" y="625" width="260" height="80" as="geometry" />
+        <mxCell id="p2-h" value="&lt;b&gt;PDP side effects&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;deny → denial signal lowers trust; every decision → audit; allow + TTL → cacheable&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p2-1">
+          <mxGeometry x="420" y="812.5" width="260" height="104.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-policyev-2" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-a" target="p2-b">
+        <mxCell id="p2-policyev-2" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-a" target="p2-b">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p2-policyev-3" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-b" target="p2-c">
+        <mxCell id="p2-policyev-3" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-b" target="p2-c">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p2-policyev-4" value="yes" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-c" target="p2-d">
+        <mxCell id="p2-policyev-4" value="yes" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-c" target="p2-d">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p2-policyev-5" value="no" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-c" target="p2-e">
+        <mxCell id="p2-policyev-5" value="no" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-c" target="p2-e">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p2-policyev-6" value="no" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-e" target="p2-f">
+        <mxCell id="p2-policyev-6" value="no" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-e" target="p2-f">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p2-policyev-7" value="yes" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-e" target="p2-g">
+        <mxCell id="p2-policyev-7" value="yes" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-e" target="p2-g">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p2-policyev-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#6c8ebf;fontColor=#1f3a5f;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="p2-1" source="p2-d" target="p2-h">
+        <mxCell id="p2-policyev-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#6c8ebf;fontColor=#1f3a5f;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="p2-1" source="p2-d" target="p2-h">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="720" y="365" />
-              <mxPoint x="720" y="649" />
+              <mxPoint x="720" y="474.5" />
+              <mxPoint x="720" y="843.7" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="p2-policyev-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#6c8ebf;fontColor=#1f3a5f;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p2-1" source="p2-f" target="p2-h">
+        <mxCell id="p2-policyev-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#6c8ebf;fontColor=#1f3a5f;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p2-1" source="p2-f" target="p2-h">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p2-policyev-10" value="&lt;b&gt;Fail-closed condition semantics (ADR 0001)&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:11px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Situation&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Result&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;attribute missing or time unset&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;condition is false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;numeric operator on a non-number&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;condition is false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;unknown field, attribute or operator; number like &quot;0,3&quot;&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;policy rejected at load, old policy kept&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;new policy version ≤ installed version&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;rejected (ErrStalePolicy), blocks rollback to a weaker policy&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;zero value of model.Decision&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;not allowed: Allowed() is true only for an explicit allow&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=11;overflow=fill;fontColor=#222222;" vertex="1" parent="p2-1">
-          <mxGeometry x="40" y="740" width="640" height="200" as="geometry" />
+        <mxCell id="p2-policyev-10" value="&lt;b&gt;Fail-closed condition semantics (ADR 0001)&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:15px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Situation&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Result&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;attribute missing or time unset&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;condition is false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;numeric operator on a non-number&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;condition is false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;unknown field, attribute or operator; number like &quot;0,3&quot;&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;policy rejected at load, old policy kept&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;new policy version ≤ installed version&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;rejected (ErrStalePolicy), blocks rollback to a weaker policy&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;zero value of model.Decision&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;not allowed: Allowed() is true only for an explicit allow&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=15;overflow=fill;fontColor=#222222;" vertex="1" parent="p2-1">
+          <mxGeometry x="760" y="442.0" width="820" height="338.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-policyev-11" value="&lt;b&gt;Default substation policy (deploy/policies/substation.json, version 1)&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:11px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Rule&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Effect&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Who / what&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Key conditions&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;TTL&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;deny-untrusted&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;deny&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;everyone&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trustScore &amp;lt; 0.3 (zero-trust floor)&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;5 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;auditor-read-only&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;deny&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;role:auditor&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;action ≠ read&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;60 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;edge-write-telemetry&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;edge → telemetry write&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;own zone (sameAs); obligation rate-limit 50/s&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;60 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;fog-read-telemetry&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;fog → telemetry read&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;own zone, trust ≥ 0.5&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;60 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;operate-breaker&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;role:operator → breaker&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust ≥ 0.8, from control-centre or substation HMI; log, reverify 10 s&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;10 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;break-glass-breaker&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;role:operator → breaker&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;emergency = true, trust ≥ 0.5; log, alert SOC&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;1 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;write-setpoint&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;role:engineer → setpoint&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust ≥ 0.7; log&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;10 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;auditor-read&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;role:auditor → telemetry, policy, audit log&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust ≥ 0.5; log&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;60 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;cloud-read-aggregates&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;cloud → aggregates only&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust ≥ 0.5&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;60 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;execute-task&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;fog / cloud → task&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust ≥ 0.5&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;30 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;edge-offload-task&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;edge → task&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;own zone, trust ≥ 0.5&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;30 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;migrate-service&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;fog / cloud → service&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust ≥ 0.7&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;10 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;policy-admin&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;spiffe://*/cloud/admin/*&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust ≥ 0.8; log&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;5 s&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=11;overflow=fill;fontColor=#222222;" vertex="1" parent="p2-1">
-          <mxGeometry x="760" y="80" width="820" height="520" as="geometry" />
+        <mxCell id="p2-policyev-11" value="&lt;b&gt;Default substation policy (deploy/policies/substation.json, version 1)&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:15px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;width:17%;&quot;&gt;Rule&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;width:7%;&quot;&gt;Effect&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;width:26%;&quot;&gt;Who / what&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;width:43%;&quot;&gt;Key conditions&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;width:7%;&quot;&gt;TTL&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;deny-untrusted&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;deny&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;everyone&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trustScore &amp;lt; 0.3 (zero-trust floor)&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;5 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;auditor-read-only&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;deny&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;role:auditor&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;action ≠ read&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;60 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;edge-write-telemetry&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;edge → telemetry write&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;own zone (sameAs); obligation rate-limit 50/s&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;60 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;fog-read-telemetry&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;fog → telemetry read&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;own zone, trust ≥ 0.5&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;60 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;operate-breaker&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;role:operator → breaker&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust ≥ 0.8, from control-centre or substation HMI; log, reverify 10 s&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;10 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;break-glass-breaker&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;role:operator → breaker&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;emergency = true, trust ≥ 0.5; log, alert SOC&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;1 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;write-setpoint&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;role:engineer → setpoint&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust ≥ 0.7; log&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;10 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;auditor-read&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;role:auditor → telemetry, policy, audit log&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust ≥ 0.5; log&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;60 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;cloud-read-aggregates&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;cloud → aggregates only&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust ≥ 0.5&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;60 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;execute-task&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;fog / cloud → task&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust ≥ 0.5&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;30 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;edge-offload-task&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;edge → task&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;own zone, trust ≥ 0.5&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;30 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;migrate-service&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;fog / cloud → service&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust ≥ 0.7&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;10 s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;policy-admin&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;allow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;spiffe://*/cloud/admin/*&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trust ≥ 0.8; log&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;5 s&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=15;overflow=fill;fontColor=#222222;" vertex="1" parent="p2-1">
+          <mxGeometry x="40" y="988.0" width="1540" height="572.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-policyev-12" value="&lt;b&gt;Why ABAC and not RBAC alone?&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;roles say who; zero trust also needs &lt;i&gt;where&lt;/i&gt; (zone, layer), &lt;i&gt;when&lt;/i&gt; (time, emergency) and &lt;i&gt;how much&lt;/i&gt; (trust score)&lt;/li&gt;&lt;li&gt;the trust score turns a static policy into a continuous one without rewriting rules&lt;/li&gt;&lt;li&gt;least privilege per zone: a PMU may write only its own zone's telemetry (sameAs)&lt;/li&gt;&lt;li&gt;short TTLs on dangerous actions (breaker 10 s, break-glass 1 s) force frequent re-decisions&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p2-1">
-          <mxGeometry x="760" y="490" width="820" height="140" as="geometry" />
+        <mxCell id="p2-policyev-12" value="&lt;b&gt;Why ABAC and not RBAC alone?&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:15px&quot;&gt;&lt;li&gt;roles say who; zero trust also needs &lt;i&gt;where&lt;/i&gt; (zone, layer), &lt;i&gt;when&lt;/i&gt; (time, emergency) and &lt;i&gt;how much&lt;/i&gt; (trust score)&lt;/li&gt;&lt;li&gt;the trust score turns a static policy into a continuous one without rewriting rules&lt;/li&gt;&lt;li&gt;least privilege per zone: a PMU may write only its own zone's telemetry (sameAs)&lt;/li&gt;&lt;li&gt;short TTLs on dangerous actions (breaker 10 s, break-glass 1 s) force frequent re-decisions&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=15;fontColor=#333333;" vertex="1" parent="p2-1">
+          <mxGeometry x="760" y="104.0" width="820" height="156.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-policyev-13" value="&lt;b&gt;Why deny-overrides?&lt;/b&gt; It is the only combining algorithm where adding a rule can never open access that a deny closes. Combined with default deny, a typo in a rule makes the system stricter, never more open." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p2-1">
-          <mxGeometry x="760" y="650" width="820" height="70" as="geometry" />
+        <mxCell id="p2-policyev-13" value="&lt;b&gt;Why deny-overrides?&lt;/b&gt; It is the only combining algorithm where adding a rule can never open access that a deny closes. Combined with default deny, a typo in a rule makes the system stricter, never more open." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=15;fontColor=#333333;" vertex="1" parent="p2-1">
+          <mxGeometry x="760" y="292.5" width="820" height="91.0" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

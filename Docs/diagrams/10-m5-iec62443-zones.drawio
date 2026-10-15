@@ -1,196 +1,196 @@
 <mxfile host="app.diagrams.net" agent="ztc-diagram-generator" type="device">
   <diagram name="Zones and conduits" id="page-0">
-    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="1000" math="0" shadow="0" background="#FFFFFF">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="1300" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="p0-0" />
         <mxCell id="p0-1" parent="p0-0" />
-        <mxCell id="p0-zonesand-1" value="M5 — IEC 62443 zones and conduits on the Purdue model" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="10" width="1600" height="32" as="geometry" />
+        <mxCell id="p0-zonesand-1" value="M5 — IEC 62443 zones and conduits on the Purdue model" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=28;fontStyle=1;fontColor=#111111;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="13.0" width="1600" height="41.6" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-2" value="Assets with the same security requirements share a zone with a target security level (SL-T). Zones talk only through conduits that name the protocol, the port and whether traffic is encrypted. Source of truth: services/internal/segment." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="44" width="1600" height="34" as="geometry" />
+        <mxCell id="p0-zonesand-2" value="Assets with the same security requirements share a zone with a target security level (SL-T). Zones talk only through conduits that name the protocol, the port and whether traffic is encrypted. Source of truth: services/internal/segment." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=17;fontColor=#555555;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="57.2" width="1600" height="44.2" as="geometry" />
         </mxCell>
-        <mxCell id="p0-z0" value="enterprise-cloud" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#1f3a5f;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="100" width="1000" height="95" as="geometry" />
+        <mxCell id="p0-z0" value="enterprise-cloud" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=18;fontColor=#1f3a5f;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="130.0" width="1000" height="123.5" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-3" value="Purdue L5 · SL-T 2" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;align=right;fontStyle=1;fontSize=12;" vertex="1" parent="p0-z0">
-          <mxGeometry x="760" y="4" width="230" height="22" as="geometry" />
+        <mxCell id="p0-zonesand-3" value="Purdue L5 · SL-T 2" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;align=right;fontStyle=1;fontSize=18;" vertex="1" parent="p0-z0">
+          <mxGeometry x="700" y="5.2" width="290" height="31.2" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-4" value="&lt;span style=&quot;font-size:12px&quot;&gt;analytics, business systems&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p0-z0">
-          <mxGeometry x="20" y="40" width="520" height="40" as="geometry" />
+        <mxCell id="p0-zonesand-4" value="analytics, business systems" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;fontSize=20;verticalAlign=middle;" vertex="1" parent="p0-z0">
+          <mxGeometry x="20" y="44.2" width="960" height="65.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-z1" value="control-centre" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#1f3a5f;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="225" width="1000" height="95" as="geometry" />
+        <mxCell id="p0-z1" value="control-centre" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=18;fontColor=#1f3a5f;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="292.5" width="1000" height="123.5" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-5" value="Purdue L4 · SL-T 3" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;align=right;fontStyle=1;fontSize=12;" vertex="1" parent="p0-z1">
-          <mxGeometry x="760" y="4" width="230" height="22" as="geometry" />
+        <mxCell id="p0-zonesand-5" value="Purdue L4 · SL-T 3" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;align=right;fontStyle=1;fontSize=18;" vertex="1" parent="p0-z1">
+          <mxGeometry x="700" y="5.2" width="290" height="31.2" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-6" value="&lt;span style=&quot;font-size:12px&quot;&gt;ztc-pdp ×3, ztc-ca, ztc-ingest, SCADA, Prometheus&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p0-z1">
-          <mxGeometry x="20" y="40" width="520" height="40" as="geometry" />
+        <mxCell id="p0-zonesand-6" value="ztc-pdp ×3, ztc-ca, ztc-ingest, SCADA, Prometheus" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;fontSize=20;verticalAlign=middle;" vertex="1" parent="p0-z1">
+          <mxGeometry x="20" y="44.2" width="960" height="65.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-z2" value="ot-dmz" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#4b2a5c;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="350" width="1000" height="95" as="geometry" />
+        <mxCell id="p0-z2" value="ot-dmz" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=18;fontColor=#4b2a5c;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="455.0" width="1000" height="123.5" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-7" value="Purdue L3.5 · SL-T 2" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;align=right;fontStyle=1;fontSize=12;" vertex="1" parent="p0-z2">
-          <mxGeometry x="760" y="4" width="230" height="22" as="geometry" />
+        <mxCell id="p0-zonesand-7" value="Purdue L3.5 · SL-T 2" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;align=right;fontStyle=1;fontSize=18;" vertex="1" parent="p0-z2">
+          <mxGeometry x="700" y="5.2" width="290" height="31.2" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-8" value="&lt;span style=&quot;font-size:12px&quot;&gt;brokers, jump host, update server&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p0-z2">
-          <mxGeometry x="20" y="40" width="520" height="40" as="geometry" />
+        <mxCell id="p0-zonesand-8" value="brokers, jump host, update server" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;fontSize=20;verticalAlign=middle;" vertex="1" parent="p0-z2">
+          <mxGeometry x="20" y="44.2" width="960" height="65.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-z3" value="substation-fog" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#2d4d1f;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="475" width="1000" height="95" as="geometry" />
+        <mxCell id="p0-z3" value="substation-fog" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=18;fontColor=#2d4d1f;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="617.5" width="1000" height="123.5" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-9" value="Purdue L3 · SL-T 3" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;align=right;fontStyle=1;fontSize=12;" vertex="1" parent="p0-z3">
-          <mxGeometry x="760" y="4" width="230" height="22" as="geometry" />
+        <mxCell id="p0-zonesand-9" value="Purdue L3 · SL-T 3" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;align=right;fontStyle=1;fontSize=18;" vertex="1" parent="p0-z3">
+          <mxGeometry x="700" y="5.2" width="290" height="31.2" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-10" value="&lt;span style=&quot;font-size:12px&quot;&gt;ztc-pep, ztc-fog, ztc-ids&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p0-z3">
-          <mxGeometry x="20" y="40" width="520" height="40" as="geometry" />
+        <mxCell id="p0-zonesand-10" value="ztc-pep, ztc-fog, ztc-ids" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;fontSize=20;verticalAlign=middle;" vertex="1" parent="p0-z3">
+          <mxGeometry x="20" y="44.2" width="960" height="65.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-z4" value="station-bus" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#6b4a00;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="600" width="1000" height="95" as="geometry" />
+        <mxCell id="p0-z4" value="station-bus" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=18;fontColor=#6b4a00;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="780.0" width="1000" height="123.5" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-11" value="Purdue L2 · SL-T 3" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;align=right;fontStyle=1;fontSize=12;" vertex="1" parent="p0-z4">
-          <mxGeometry x="760" y="4" width="230" height="22" as="geometry" />
+        <mxCell id="p0-zonesand-11" value="Purdue L2 · SL-T 3" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;align=right;fontStyle=1;fontSize=18;" vertex="1" parent="p0-z4">
+          <mxGeometry x="700" y="5.2" width="290" height="31.2" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-12" value="&lt;span style=&quot;font-size:12px&quot;&gt;bay controllers, local HMI, RTU&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p0-z4">
-          <mxGeometry x="20" y="40" width="520" height="40" as="geometry" />
+        <mxCell id="p0-zonesand-12" value="bay controllers, local HMI, RTU" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;fontSize=20;verticalAlign=middle;" vertex="1" parent="p0-z4">
+          <mxGeometry x="20" y="44.2" width="960" height="65.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-z5" value="process-bus" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#6b4a00;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="725" width="1000" height="95" as="geometry" />
+        <mxCell id="p0-z5" value="process-bus" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=18;fontColor=#6b4a00;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="942.5" width="1000" height="123.5" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-13" value="Purdue L1 · SL-T 3" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;align=right;fontStyle=1;fontSize=12;" vertex="1" parent="p0-z5">
-          <mxGeometry x="760" y="4" width="230" height="22" as="geometry" />
+        <mxCell id="p0-zonesand-13" value="Purdue L1 · SL-T 3" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;align=right;fontStyle=1;fontSize=18;" vertex="1" parent="p0-z5">
+          <mxGeometry x="700" y="5.2" width="290" height="31.2" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-14" value="&lt;span style=&quot;font-size:12px&quot;&gt;merging units, protection IEDs (GOOSE / SV)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p0-z5">
-          <mxGeometry x="20" y="40" width="520" height="40" as="geometry" />
+        <mxCell id="p0-zonesand-14" value="merging units, protection IEDs (GOOSE / SV)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;fontSize=20;verticalAlign=middle;" vertex="1" parent="p0-z5">
+          <mxGeometry x="20" y="44.2" width="960" height="65.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-15" value="&lt;b&gt;iec61850-mms&lt;/b&gt;&lt;br&gt;TCP 3782, MMS over TLS" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="p0-1">
+        <mxCell id="p0-zonesand-15" value="&lt;b&gt;iec61850-mms&lt;/b&gt;&lt;br&gt;TCP 3782, MMS over TLS" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;fontSize=14;labelBackgroundColor=#ffffff;" edge="1" parent="p0-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="600" y="725" as="sourcePoint" />
-            <mxPoint x="600" y="695" as="targetPoint" />
+            <mxPoint x="600" y="942.5" as="sourcePoint" />
+            <mxPoint x="600" y="903.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p0-zonesand-16" value="&lt;b&gt;telemetry-up&lt;/b&gt;&lt;br&gt;TCP 8443, 802 (Modbus/TCP Security)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="p0-1">
+        <mxCell id="p0-zonesand-16" value="&lt;b&gt;telemetry-up&lt;/b&gt;&lt;br&gt;TCP 8443, 802 (Modbus/TCP Security)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;fontSize=14;labelBackgroundColor=#ffffff;" edge="1" parent="p0-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="600" y="600" as="sourcePoint" />
-            <mxPoint x="600" y="570" as="targetPoint" />
+            <mxPoint x="600" y="780.0" as="sourcePoint" />
+            <mxPoint x="600" y="741.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p0-zonesand-17" value="&lt;b&gt;commands-down&lt;/b&gt;&lt;br&gt;TCP 802, 3782" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="p0-1">
+        <mxCell id="p0-zonesand-17" value="&lt;b&gt;commands-down&lt;/b&gt;&lt;br&gt;TCP 802, 3782" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;fontSize=14;labelBackgroundColor=#ffffff;" edge="1" parent="p0-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="830" y="570" as="sourcePoint" />
-            <mxPoint x="830" y="600" as="targetPoint" />
+            <mxPoint x="830" y="741.0" as="sourcePoint" />
+            <mxPoint x="830" y="780.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p0-zonesand-18" value="&lt;b&gt;fog-to-dmz&lt;/b&gt;&lt;br&gt;TCP 8443, 8883 (MQTT/TLS)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="p0-1">
+        <mxCell id="p0-zonesand-18" value="&lt;b&gt;fog-to-dmz&lt;/b&gt;&lt;br&gt;TCP 8443, 8883 (MQTT/TLS)" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;fontSize=14;labelBackgroundColor=#ffffff;" edge="1" parent="p0-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="600" y="475" as="sourcePoint" />
-            <mxPoint x="600" y="445" as="targetPoint" />
+            <mxPoint x="600" y="617.5" as="sourcePoint" />
+            <mxPoint x="600" y="578.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p0-zonesand-19" value="&lt;b&gt;cc-to-dmz&lt;/b&gt;&lt;br&gt;TCP 8443" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="p0-1">
+        <mxCell id="p0-zonesand-19" value="&lt;b&gt;cc-to-dmz&lt;/b&gt;&lt;br&gt;TCP 8443" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;fontSize=14;labelBackgroundColor=#ffffff;" edge="1" parent="p0-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="600" y="320" as="sourcePoint" />
-            <mxPoint x="600" y="350" as="targetPoint" />
+            <mxPoint x="600" y="416.0" as="sourcePoint" />
+            <mxPoint x="600" y="455.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p0-zonesand-20" value="&lt;b&gt;dmz-to-cc&lt;/b&gt;&lt;br&gt;TCP 8181" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="p0-1">
+        <mxCell id="p0-zonesand-20" value="&lt;b&gt;dmz-to-cc&lt;/b&gt;&lt;br&gt;TCP 8181" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;fontSize=14;labelBackgroundColor=#ffffff;" edge="1" parent="p0-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="830" y="350" as="sourcePoint" />
-            <mxPoint x="830" y="320" as="targetPoint" />
+            <mxPoint x="830" y="455.0" as="sourcePoint" />
+            <mxPoint x="830" y="416.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p0-zonesand-21" value="&lt;b&gt;enterprise-read&lt;/b&gt;&lt;br&gt;TCP 443" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="p0-1">
+        <mxCell id="p0-zonesand-21" value="&lt;b&gt;enterprise-read&lt;/b&gt;&lt;br&gt;TCP 443" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;fontSize=14;labelBackgroundColor=#ffffff;" edge="1" parent="p0-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="700" y="195" as="sourcePoint" />
-            <mxPoint x="700" y="350" as="targetPoint" />
+            <mxPoint x="700" y="253.5" as="sourcePoint" />
+            <mxPoint x="700" y="455.0" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p0-zonesand-22" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;" edge="1" parent="p0-1">
+        <mxCell id="p0-zonesand-22" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;" edge="1" parent="p0-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1060" y="772" as="sourcePoint" />
-            <mxPoint x="1060" y="272" as="targetPoint" />
+            <mxPoint x="1050" y="1003.6" as="sourcePoint" />
+            <mxPoint x="1050" y="353.6" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="p0-zonesand-23" value="" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;shape=mxgraph.basic.x;fillColor=#b85450;strokeColor=none;" vertex="1" parent="p0-1">
-          <mxGeometry x="1046" y="440" width="28" height="28" as="geometry" />
+          <mxGeometry x="1036.0" y="576.2" width="28.0" height="28.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-24" value="&lt;span style=&quot;font-size:11px&quot;&gt;&lt;b&gt;rejected by Validate()&lt;/b&gt;&lt;br&gt;process-bus → control-centre skips Purdue levels and does not end in the DMZ&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;fontColor=#b85450;" vertex="1" parent="p0-1">
-          <mxGeometry x="1080" y="410" width="220" height="80" as="geometry" />
+        <mxCell id="p0-zonesand-24" value="&lt;span style=&quot;font-size:15px&quot;&gt;&lt;b&gt;rejected by Validate()&lt;/b&gt;&lt;br&gt;process-bus → control-centre skips Purdue levels and does not end in the DMZ&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;fontColor=#b85450;" vertex="1" parent="p0-1">
+          <mxGeometry x="1075" y="520.0" width="235" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-25" value="&lt;b&gt;Validation rules (enforced in code, unit-tested)&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;zone names unique; conduits only between known zones&lt;/li&gt;&lt;li&gt;every conduit restricts protocols and ports (no any/any)&lt;/li&gt;&lt;li&gt;no conduit skips a Purdue level unless it ends in the DMZ&lt;/li&gt;&lt;li&gt;conduits into a zone with SL-T ≥ 3 must be encrypted&lt;/li&gt;&lt;li&gt;the model fails to load if any rule is broken (fail closed)&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p0-1">
-          <mxGeometry x="1320" y="100" width="380" height="200" as="geometry" />
+        <mxCell id="p0-zonesand-25" value="&lt;b&gt;Validation rules (enforced in code, unit-tested)&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:15px&quot;&gt;&lt;li&gt;zone names unique; conduits only between known zones&lt;/li&gt;&lt;li&gt;every conduit restricts protocols and ports (no any/any)&lt;/li&gt;&lt;li&gt;no conduit skips a Purdue level unless it ends in the DMZ&lt;/li&gt;&lt;li&gt;conduits into a zone with SL-T ≥ 3 must be encrypted&lt;/li&gt;&lt;li&gt;the model fails to load if any rule is broken (fail closed)&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=15;fontColor=#333333;" vertex="1" parent="p0-1">
+          <mxGeometry x="1320" y="130.0" width="380" height="253.5" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-26" value="&lt;b&gt;Security levels&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:11px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;SL&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Protects against&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;1&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;casual or accidental violation&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;2&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;intentional, simple means, low resources&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;3&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;sophisticated means, moderate resources, IACS skills&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;4&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;sophisticated means, extended resources (nation state)&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=11;overflow=fill;fontColor=#222222;" vertex="1" parent="p0-1">
-          <mxGeometry x="1320" y="320" width="380" height="190" as="geometry" />
+        <mxCell id="p0-zonesand-26" value="&lt;b&gt;Security levels&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:15px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;SL&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Protects against&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;1&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;casual or accidental violation&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;2&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;intentional, simple means, low resources&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;3&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;sophisticated means, moderate resources, IACS skills&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;4&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;sophisticated means, extended resources (nation state)&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=15;overflow=fill;fontColor=#222222;" vertex="1" parent="p0-1">
+          <mxGeometry x="1320" y="416.0" width="380" height="247.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-27" value="&lt;b&gt;IEC 62443-3-3 foundational requirements → ZTC&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:11px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;FR&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Mechanism&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;FR1 Identification and authentication&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;SPIFFE IDs, CA, tokens, 802.1X&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;FR2 Use control&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;ABAC policy, least privilege, audit (SR 2.8)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;FR3 System integrity&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;signed tokens, sealed migration state, GOOSE validation, distroless images&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;FR4 Data confidentiality&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;TLS / mTLS, IPsec, AES-GCM&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;FR5 Restricted data flow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;zones and conduits → NetworkPolicies, ACLs, zone-based firewall&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;FR6 Timely response to events&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;IDS, audit log, alert rules, incident runbook&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;FR7 Resource availability&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;Raft PDP, fog placement, PDB, storm control, CoPP&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=11;overflow=fill;fontColor=#222222;" vertex="1" parent="p0-1">
-          <mxGeometry x="1060" y="530" width="640" height="290" as="geometry" />
+        <mxCell id="p0-zonesand-27" value="&lt;b&gt;IEC 62443-3-3 foundational requirements → ZTC&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:15px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;FR&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Mechanism&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;FR1 Identification and authentication&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;SPIFFE IDs, CA, tokens, 802.1X&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;FR2 Use control&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;ABAC policy, least privilege, audit (SR 2.8)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;FR3 System integrity&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;signed tokens, sealed migration state, GOOSE validation, distroless images&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;FR4 Data confidentiality&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;TLS / mTLS, IPsec, AES-GCM&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;FR5 Restricted data flow&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;zones and conduits → NetworkPolicies, ACLs, zone-based firewall&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;FR6 Timely response to events&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;IDS, audit log, alert rules, incident runbook&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;FR7 Resource availability&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;Raft PDP, fog placement, PDB, storm control, CoPP&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=15;overflow=fill;fontColor=#222222;" vertex="1" parent="p0-1">
+          <mxGeometry x="1090" y="689.0" width="610" height="377.0" as="geometry" />
         </mxCell>
-        <mxCell id="p0-zonesand-28" value="&lt;span style=&quot;font-size:11px&quot;&gt;SL-T 3 for protection and control zones is the usual target for substations; the DMZ and enterprise zones are SL-T 2 because they hold no control functions and are separated by the DMZ.&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="860" width="1000" height="40" as="geometry" />
+        <mxCell id="p0-zonesand-28" value="&lt;span style=&quot;font-size:15px&quot;&gt;SL-T 3 for protection and control zones is the usual target for substations; the DMZ and enterprise zones are SL-T 2 because they hold no control functions and are separated by the DMZ.&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="1118.0" width="1000" height="52.0" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram name="One model, four layers" id="page-1">
-    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="820" math="0" shadow="0" background="#FFFFFF">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="962" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="p1-0" />
         <mxCell id="p1-1" parent="p1-0" />
-        <mxCell id="p1-onemodel-1" value="M5 — one zone model, exported to every enforcement layer (ADR 0006)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p1-1">
-          <mxGeometry x="20" y="10" width="1600" height="32" as="geometry" />
+        <mxCell id="p1-onemodel-1" value="M5 — one zone model, exported to every enforcement layer (ADR 0006)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=28;fontStyle=1;fontColor=#111111;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="13.0" width="1600" height="41.6" as="geometry" />
         </mxCell>
-        <mxCell id="p1-onemodel-2" value="Writing the same rules by hand in YAML, IOS and HCL drifts. Here the Go model is the single source; generated files are committed and CI fails if they are out of date." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p1-1">
-          <mxGeometry x="20" y="44" width="1600" height="34" as="geometry" />
+        <mxCell id="p1-onemodel-2" value="Writing the same rules by hand in YAML, IOS and HCL drifts. Here the Go model is the single source; generated files are committed and CI fails if they are out of date." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=17;fontColor=#555555;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="57.2" width="1600" height="44.2" as="geometry" />
         </mxCell>
-        <mxCell id="p1-model" value="&lt;b&gt;segment.SubstationModel&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;zones, Purdue level, SL-T, assets; conduits with protocols, ports, encryption&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="40" y="300" width="280" height="110" as="geometry" />
+        <mxCell id="p1-model" value="&lt;b&gt;segment.SubstationModel&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;zones, Purdue level, SL-T, assets; conduits with protocols, ports, encryption&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="40" y="390.0" width="280" height="143.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-val" value="&lt;b&gt;Validate()&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;the rules from the previous page&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rhombus;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.5;fontSize=11;rounded=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="380" y="315" width="180" height="80" as="geometry" />
+        <mxCell id="p1-val" value="&lt;b&gt;Validate()&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;zone rules&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rhombus;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.5;fontSize=15;rounded=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="370" y="396.5" width="200" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-exp" value="&lt;b&gt;ztcctl segment export&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;make netpol&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="620" y="315" width="200" height="80" as="geometry" />
+        <mxCell id="p1-exp" value="&lt;b&gt;ztcctl segment export&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;make netpol&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="620" y="409.5" width="200" height="104.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-onemodel-3" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p1-1" source="p1-model" target="p1-val">
+        <mxCell id="p1-onemodel-3" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p1-1" source="p1-model" target="p1-val">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p1-onemodel-4" value="valid" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p1-1" source="p1-val" target="p1-exp">
+        <mxCell id="p1-onemodel-4" value="valid" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p1-1" source="p1-val" target="p1-exp">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p1-k8s" value="&lt;b&gt;Kubernetes NetworkPolicies&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;deploy/k8s/reference/networkpolicies-zones.yaml · default deny + one policy per conduit&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="920" y="110" width="380" height="100" as="geometry" />
+        <mxCell id="p1-k8s" value="&lt;b&gt;Kubernetes NetworkPolicies&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;deploy/k8s/reference/networkpolicies-zones.yaml · default deny + one policy per conduit&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="920" y="143.0" width="380" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-onemodel-5" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p1-1" source="p1-exp" target="p1-k8s">
+        <mxCell id="p1-onemodel-5" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p1-1" source="p1-exp" target="p1-k8s">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p1-cisco" value="&lt;b&gt;Cisco extended ACLs&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;deploy/network/cisco/generated-zone-acls.ios · ZTC-IN-&amp;lt;zone&amp;gt; on the core switch SVIs&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="920" y="245" width="380" height="100" as="geometry" />
+        <mxCell id="p1-cisco" value="&lt;b&gt;Cisco extended ACLs&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;deploy/network/cisco/generated-zone-acls.ios · ZTC-IN-&amp;lt;zone&amp;gt; on the core switch SVIs&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="920" y="318.5" width="380" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-onemodel-6" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p1-1" source="p1-exp" target="p1-cisco">
+        <mxCell id="p1-onemodel-6" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p1-1" source="p1-exp" target="p1-cisco">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p1-docker" value="&lt;b&gt;Docker Compose networks&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;one network per zone; services attached only where a conduit exists&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="920" y="380" width="380" height="100" as="geometry" />
+        <mxCell id="p1-docker" value="&lt;b&gt;Docker Compose networks&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;one network per zone; services attached only where a conduit exists&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="920" y="494.0" width="380" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-onemodel-7" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p1-1" source="p1-exp" target="p1-docker">
+        <mxCell id="p1-onemodel-7" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p1-1" source="p1-exp" target="p1-docker">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p1-tf" value="&lt;b&gt;OpenStack security groups&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;Terraform on NREC: one security group per zone, rules per conduit&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="920" y="515" width="380" height="100" as="geometry" />
+        <mxCell id="p1-tf" value="&lt;b&gt;OpenStack security groups&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;Terraform on NREC: one security group per zone, rules per conduit&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="920" y="669.5" width="380" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-onemodel-8" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p1-1" source="p1-exp" target="p1-tf">
+        <mxCell id="p1-onemodel-8" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p1-1" source="p1-exp" target="p1-tf">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p1-onemodel-9" value="&lt;b&gt;CI drift check&lt;/b&gt;: regenerate and git diff --exit-code, so a hand edit of a generated file fails the build." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p1-1">
-          <mxGeometry x="1330" y="110" width="370" height="100" as="geometry" />
+        <mxCell id="p1-onemodel-9" value="&lt;b&gt;CI drift check&lt;/b&gt;: regenerate and git diff --exit-code, so a hand edit of a generated file fails the build." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=15;fontColor=#333333;" vertex="1" parent="p1-1">
+          <mxGeometry x="1330" y="143.0" width="370" height="110.5" as="geometry" />
         </mxCell>
-        <mxCell id="p1-onemodel-10" value="&lt;b&gt;Why both ACLs and a PEP?&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:11px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Layer&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Decides&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Granularity&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Changes&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;ACL / NetworkPolicy / SG&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;which hosts may talk on which ports&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;L3/L4, static&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;on deploy&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;PEP + PDP&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;which authenticated identity may do what, now&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;L7, per request, trust-aware&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;every second&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;span style=&quot;font-size:11px&quot;&gt;Zero trust needs both: the network layer shrinks the attack surface, the identity layer makes the decision. Defence in depth, not either-or.&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=11;overflow=fill;fontColor=#222222;" vertex="1" parent="p1-1">
-          <mxGeometry x="1330" y="240" width="370" height="260" as="geometry" />
+        <mxCell id="p1-onemodel-10" value="&lt;b&gt;Why both ACLs and a PEP?&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:15px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Layer&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Decides&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Granularity&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Changes&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;ACL / NetworkPolicy / SG&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;which hosts may talk on which ports&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;L3/L4, static&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;on deploy&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;PEP + PDP&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;which authenticated identity may do what, now&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;L7, per request, trust-aware&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;every second&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;span style=&quot;font-size:15px&quot;&gt;Zero trust needs both: the network layer shrinks the attack surface, the identity layer makes the decision. Defence in depth, not either-or.&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=15;overflow=fill;fontColor=#222222;" vertex="1" parent="p1-1">
+          <mxGeometry x="40" y="578.5" width="840" height="221.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-onemodel-11" value="&lt;b&gt;Exercise built into the design&lt;/b&gt;: add a historian server to the DMZ in the Go model, regenerate, and all four layers pick it up consistently." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p1-1">
-          <mxGeometry x="40" y="600" width="780" height="70" as="geometry" />
+        <mxCell id="p1-onemodel-11" value="&lt;b&gt;Example&lt;/b&gt;: add a historian server to the DMZ in the Go model and regenerate; all four layers pick it up consistently." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=15;fontColor=#333333;" vertex="1" parent="p1-1">
+          <mxGeometry x="40" y="832.0" width="840" height="71.5" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
