@@ -6,7 +6,6 @@ package pep
 import (
 	"context"
 	"errors"
-	"fmt"
 	"log/slog"
 	"net/http"
 	"sync"
@@ -143,7 +142,7 @@ func (enforcer *Enforcer) Middleware(next http.Handler) http.Handler {
 			enforcer.reject(writer, "denied", http.StatusForbidden, "forbidden")
 			return
 		}
-		if err := enforcer.fulfilObligations(accessRequest, decision); err != nil {
+		if err := enforcer.fulfilObligations(writer, accessRequest, decision); err != nil {
 			enforcer.config.Logger.Error("obligation not fulfilled", "pep", enforcer.config.Name, "subject", subject.ID, "reason", err)
 			enforcer.reject(writer, "obligation-failed", http.StatusForbidden, "forbidden")
 			return
@@ -189,18 +188,6 @@ func (enforcer *Enforcer) decide(ctx context.Context, accessRequest model.Access
 		return model.Decision{}, err
 	}
 	return decision, nil
-}
-
-// fulfilObligations carries out the duties the PDP attached to an allow. An
-// obligation the PEP does not know makes the request fail: the PDP allowed it
-// only on that condition.
-func (enforcer *Enforcer) fulfilObligations(_ model.AccessRequest, decision model.Decision) error {
-	// TODO(ztc): fulfil log, alert and reverify. Until then every obligation
-	// is unknown, and the request is denied.
-	if len(decision.Obligations) > 0 {
-		return fmt.Errorf("unknown obligation %q", decision.Obligations[0])
-	}
-	return nil
 }
 
 // reportAuthentication sends an authentication signal for subject if none was
