@@ -1,0 +1,18 @@
+[
+  {
+    "prefix": "/bay-1/telemetry/",
+    "upstream": "http://localhost:9000",
+    "resourceType": "telemetry",
+    "zone": "bay-1",
+    "layer": "fog",
+    "sensitivity": 1
+  },
+  {
+    "prefix": "/bay-1/breaker/",
+    "upstream": "http://localhost:9000",
+    "resourceType": "breaker",
+    "zone": "bay-1",
+    "layer": "edge",
+    "sensitivity": 4
+  }
+]
