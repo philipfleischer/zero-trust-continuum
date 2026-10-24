@@ -9,7 +9,7 @@ Legend: ✅ implemented and tested · 🟡 works, known gaps · 🔴 not started
 | Milestone | Content | Status |
 | --- | --- | --- |
 | M0 Foundation | repo hygiene, Go service skeleton, CI | ✅ |
-| M1 Decision chain | policy, trust, PDP, tokens, PEP | 🟡 Policy engine, trust score and PDP done |
+| M1 Decision chain | policy, trust, PDP, tokens, PEP | 🟡 policy engine, trust score, PDP and credentials done |
 | M2 Fog, IDS and demo | telemetry, edge devices, fog node, IDS, audit, e2e demo | 🔴 |
 | M3 Distributed systems | clocks, Raft, SWIM, Chord | 🔴 |
 | M4 Offloading and containers | load balancing, Docker, Compose, monitoring, Kubernetes | 🔴 |
@@ -21,13 +21,13 @@ Legend: ✅ implemented and tested · 🟡 works, known gaps · 🔴 not started
 
 | Part | Path | Status | Notes |
 | --- | --- | --- | --- |
-| Go services | `services/` | 🟡 | libraries: `model`, `config`, `httpx`, `observability`, `svc`, `trust`, `pdp`; service `ztc-pdp`; CLI `ztcctl` |
+| Go services | `services/` | 🟡 | libraries `model`, `config`, `httpx`, `observability`, `svc`, `policy`, `trust`, `pdp`, `token`; services `ztc-pdp`, `ztc-ca`; CLI `ztcctl` |
 | C++ simulation core | `sim/core/` | 🔴 | |
 | OMNeT++ model | `sim/omnetpp/` | 🔴 | |
 | Analytics | `analytics/` | 🔴 | |
 | Deployment | `deploy/` | 🟡 | `policies/substation.json`, the canonical default policy |
 | CI/CD | `.github/workflows/` | ✅ | build, race tests with coverage, golangci-lint, actionlint, Dependabot |
-| Docs | `Docs/` | 🟡 | `adr/`: 0001 fail closed, 0002 PDP write token; `architecture/`: trust algorithm; `diagrams/`: target architecture and design per milestone (17 diagrams.net files with rationale) |
+| Docs | `Docs/` | 🟡 | `adr/`: 0001 fail closed, 0002 PDP write token, 0003 standard library only; `architecture/`: trust algorithm; `diagrams/`: target architecture and design per milestone (17 diagrams.net files with rationale); `go-style.md` |
 
 ## Go packages
 
@@ -41,7 +41,10 @@ Legend: ✅ implemented and tested · 🟡 works, known gaps · 🔴 not started
 | `internal/httpx` | ✅ | strict JSON decoding, server timeouts, graceful shutdown |
 | `internal/observability` | ✅ | Prometheus exposition, `/healthz`, `/readyz`, RED metrics, JSON logs |
 | `internal/svc` | ✅ | shared start-up: config, logger, metrics, fail-fast serve |
-| `cmd/ztc-pdp` | 🟡 | runs; decision API comes in M1 |
+| `cmd/ztc-pdp` | ✅ | decision API, policy from `ZTC_POLICY_FILE`, writes behind `ZTC_PDP_TOKEN`, readiness checks the policy |
+| `cmd/ztc-ca` | ✅ | v1: tokens for registered clients (`POST /v1/token`), signing key as JWK set (`GET /v1/keys`); X.509 in M5 |
+| `cmd/ztcctl` | ✅ | `policy`, `decide`, `signal`, `keys gen`, `token issue`/`verify`, `cap rootkey`/`mint`/`attenuate`/`show` |
+| `internal/token` | ✅ | Ed25519-signed tokens with strict verification, attenuable HMAC capabilities, revocation list with epoch and snapshots, PEM key files, JWK set |
 
 ## Repository basics
 
