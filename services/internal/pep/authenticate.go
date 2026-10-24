@@ -21,12 +21,18 @@ var ErrUnauthenticated = errors.New("pep: unauthenticated")
 // CapabilityHeader is the request header that carries a capability.
 const CapabilityHeader = "X-ZTC-Capability"
 
+// TokenVerifier checks a signed token. token.Verifier implements it, and so
+// does RemoteKeys, which keeps the keys fresh from the issuer.
+type TokenVerifier interface {
+	Verify(signedToken string) (token.Claims, error)
+}
+
 // Authenticator turns the credential of a request into a subject. It accepts
 // a bearer token in the Authorization header, and otherwise a capability in
 // CapabilityHeader; which of the two are accepted is configurable, because
 // RQ2 compares them.
 type Authenticator struct {
-	Tokens            *token.Verifier  // nil means bearer tokens are not accepted
+	Tokens            TokenVerifier    // nil means bearer tokens are not accepted
 	CapabilityRootKey []byte           // nil means capabilities are not accepted
 	TrustDomain       string           // a token's subject must be spiffe://<TrustDomain>/...
 	Layer             model.Layer      // the layer this PEP runs on, for "layer <=" caveats
