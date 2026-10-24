@@ -18,7 +18,7 @@ import (
 var (
 	ErrKeyFormat          = errors.New("token: not a single PEM key of the expected kind")
 	ErrNotEd25519         = errors.New("token: key is not an Ed25519 key")
-	ErrKeyFilePermissions = errors.New("token: private key file is readable by other users")
+	ErrKeyFilePermissions = errors.New("token: key file is readable by other users")
 )
 
 // PEM block types of PKCS #8 private keys and PKIX public keys. These are the
@@ -97,14 +97,34 @@ func singlePEMBlock(data []byte, wantType string) ([]byte, error) {
 	return block.Bytes, nil
 }
 
-// WritePrivateKeyFile writes privateKey as PEM to a new file at path that only
-// its owner can read (0600). It never overwrites an existing file: replacing
-// a signing key by mistake would make every token issued with it unverifiable.
+// WritePrivateKeyFile writes privateKey as PEM to a new file at path with
+// WriteSecretFile.
 func WritePrivateKeyFile(path string, privateKey ed25519.PrivateKey) error {
 	data, err := EncodePrivateKeyPEM(privateKey)
 	if err != nil {
 		return err
 	}
+	return WriteSecretFile(path, data)
+}
+
+// LoadPrivateKeyFile reads the PEM private key at path with ReadSecretFile.
+func LoadPrivateKeyFile(path string) (ed25519.PrivateKey, error) {
+	data, err := ReadSecretFile(path)
+	if err != nil {
+		return nil, err
+	}
+	privateKey, err := ParsePrivateKeyPEM(data)
+	if err != nil {
+		return nil, fmt.Errorf("%s: %w", path, err)
+	}
+	return privateKey, nil
+}
+
+// WriteSecretFile writes data to a new file at path that only its owner can
+// read (0600). It never overwrites an existing file: replacing a signing key
+// or a root key by mistake would make every credential issued with it
+// unverifiable.
+func WriteSecretFile(path string, data []byte) error {
 	file, err := os.OpenFile(filepath.Clean(path), os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0o600)
 	if err != nil {
 		return err
@@ -116,10 +136,10 @@ func WritePrivateKeyFile(path string, privateKey ed25519.PrivateKey) error {
 	return file.Close()
 }
 
-// LoadPrivateKeyFile reads the PEM private key at path. Like ssh, it refuses a
-// file that users other than the owner can read, because then the key may
-// already be known to someone else.
-func LoadPrivateKeyFile(path string) (ed25519.PrivateKey, error) {
+// ReadSecretFile reads the file at path. Like ssh, it refuses a file that
+// users other than the owner can read, because then the secret may already be
+// known to someone else.
+func ReadSecretFile(path string) ([]byte, error) {
 	cleanPath := filepath.Clean(path)
 	info, err := os.Stat(cleanPath)
 	if err != nil {
@@ -129,15 +149,7 @@ func LoadPrivateKeyFile(path string) (ed25519.PrivateKey, error) {
 	if readableByOthers {
 		return nil, fmt.Errorf("%w: %s has mode %v, want 0600", ErrKeyFilePermissions, path, info.Mode().Perm())
 	}
-	data, err := os.ReadFile(cleanPath)
-	if err != nil {
-		return nil, err
-	}
-	privateKey, err := ParsePrivateKeyPEM(data)
-	if err != nil {
-		return nil, fmt.Errorf("%s: %w", path, err)
-	}
-	return privateKey, nil
+	return os.ReadFile(cleanPath)
 }
 
 // KeyIDOf returns the key ID ("kid") of publicKey: the first 16 characters of
