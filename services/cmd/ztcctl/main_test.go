@@ -24,11 +24,18 @@ func environmentFrom(variables map[string]string) config.Env {
 	})
 }
 
-// ztcctl runs one command and returns its exit status, stdout and stderr.
+// ztcctl runs one command with empty standard input and returns its exit
+// status, stdout and stderr.
 func ztcctl(t *testing.T, variables map[string]string, arguments ...string) (int, string, string) {
 	t.Helper()
+	return ztcctlWithInput(t, variables, "", arguments...)
+}
+
+// ztcctlWithInput runs one command with input as standard input.
+func ztcctlWithInput(t *testing.T, variables map[string]string, input string, arguments ...string) (int, string, string) {
+	t.Helper()
 	var stdout, stderr bytes.Buffer
-	code := run(context.Background(), arguments, environmentFrom(variables), &stdout, &stderr)
+	code := run(context.Background(), arguments, environmentFrom(variables), strings.NewReader(input), &stdout, &stderr)
 	return code, stdout.String(), stderr.String()
 }
 

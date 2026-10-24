@@ -6,16 +6,28 @@
 //	ztcctl policy validate <file>      check a policy file the way ztc-pdp loads it
 //	ztcctl decide [flags]              ask a PDP for a decision
 //	ztcctl signal [flags]              send a trust signal to a PDP
+//	ztcctl keys gen -out <file>        make an Ed25519 signing key
+//	ztcctl token issue [flags]         sign a token with a key file
+//	ztcctl token verify [flags]        verify a token read from standard input
+//	ztcctl cap rootkey -out <file>     make a root key for capabilities
+//	ztcctl cap mint [flags] [caveat]   mint a capability with a root key file
+//	ztcctl cap attenuate <caveat>...   narrow a capability read from standard input
+//	ztcctl cap show                    print a capability read from standard input
 //
-// Run "ztcctl decide -h" or "ztcctl signal -h" for the flags.
+// Run "ztcctl <command> <subcommand> -h" for the flags.
 //
-// Exit status: 0 success (for decide: allow), 3 deny, 1 error, 2 wrong usage.
+// Exit status: 0 success (for decide: allow), 3 deny or rejected token,
+// 1 error, 2 wrong usage.
+//
+// Secrets never come from command-line arguments, which every user on the
+// machine can see with ps and which end up in the shell history. Tokens and
+// capabilities are read from standard input, keys from files that only their
+// owner can read, and the PDP token from the environment.
 //
 // Environment:
 //
 //	ZTC_PDP_URL     PDP base URL (default http://localhost:8181)
-//	ZTC_PDP_TOKEN   bearer token for signal; read from the environment, not a
-//	                flag, so it does not show up in the process list
+//	ZTC_PDP_TOKEN   bearer token for signal
 package main
 
 import (
@@ -49,23 +61,31 @@ const usage = `usage: ztcctl <command>
   policy validate <file>      check a policy file the way ztc-pdp loads it
   decide [flags]              ask a PDP for a decision (ztcctl decide -h)
   signal [flags]              send a trust signal to a PDP (ztcctl signal -h)
+  keys gen -out <file>        make an Ed25519 signing key
+  token issue [flags]         sign a token (ztcctl token issue -h)
+  token verify [flags]        verify a token from standard input
+  cap rootkey -out <file>     make a root key for capabilities
+  cap mint [flags] [caveat]   mint a capability (ztcctl cap mint -h)
+  cap attenuate <caveat>...   narrow a capability from standard input
+  cap show                    print a capability from standard input
 `
 
 var (
 	// errUsage marks an error in how ztcctl was called.
 	errUsage = errors.New("wrong usage")
-	// errDenied is returned by decide when the PDP denies the request.
+	// errDenied is returned by decide when the PDP denies the request, and
+	// by token verify when the token is rejected.
 	errDenied = errors.New("denied")
 )
 
 func main() {
-	os.Exit(run(context.Background(), os.Args[1:], config.New(), os.Stdout, os.Stderr))
+	os.Exit(run(context.Background(), os.Args[1:], config.New(), os.Stdin, os.Stdout, os.Stderr))
 }
 
 // run executes one ztcctl command and returns the exit status. It takes its
 // dependencies as parameters so tests can call it directly.
-func run(ctx context.Context, arguments []string, environment config.Env, stdout, stderr io.Writer) int {
-	err := dispatch(ctx, arguments, environment, stdout, stderr)
+func run(ctx context.Context, arguments []string, environment config.Env, stdin io.Reader, stdout, stderr io.Writer) int {
+	err := dispatch(ctx, arguments, environment, stdin, stdout, stderr)
 	switch {
 	case err == nil:
 		return exitOK
@@ -83,7 +103,7 @@ func run(ctx context.Context, arguments []string, environment config.Env, stdout
 }
 
 // dispatch picks the command named by the first arguments and runs it.
-func dispatch(ctx context.Context, arguments []string, environment config.Env, stdout, stderr io.Writer) error {
+func dispatch(ctx context.Context, arguments []string, environment config.Env, stdin io.Reader, stdout, stderr io.Writer) error {
 	pdpURL := environment.String("pdp_url", "http://localhost:8181")
 	if len(arguments) == 0 {
 		return fmt.Errorf("%w: no command", errUsage)
@@ -98,6 +118,12 @@ func dispatch(ctx context.Context, arguments []string, environment config.Env, s
 		return decideCommand(ctx, commandArguments, pdpURL, stdout, stderr)
 	case command == "signal":
 		return signalCommand(ctx, commandArguments, pdpURL, environment.String("pdp_token", ""), stderr)
+	case command == "keys":
+		return keysCommand(commandArguments, stdout, stderr)
+	case command == "token":
+		return tokenCommand(commandArguments, stdin, stdout, stderr)
+	case command == "cap":
+		return capabilityCommand(commandArguments, stdin, stdout, stderr)
 	}
 	return fmt.Errorf("%w: unknown command %q", errUsage, strings.Join(arguments, " "))
 }
@@ -148,7 +174,7 @@ func decideCommand(ctx context.Context, arguments []string, pdpURL string, stdou
 		return fmt.Errorf("%w: %w", errUsage, err)
 	}
 	request := model.AccessRequest{
-		Subject:  model.Subject{ID: *subject, Layer: layer, Zone: *subjectZone, Roles: splitRoles(*roles)},
+		Subject:  model.Subject{ID: *subject, Layer: layer, Zone: *subjectZone, Roles: splitList(*roles)},
 		Action:   *action,
 		Resource: model.Resource{ID: *resource, Type: *resourceType, Zone: valueOrDefault(*resourceZone, *subjectZone)},
 		Context:  model.Context{SourceZone: valueOrDefault(*sourceZone, *subjectZone), SourceLayer: layer},
@@ -203,16 +229,17 @@ func layerOf(spiffeID string) (model.Layer, error) {
 	return model.ParseLayer(layerName)
 }
 
-// splitRoles turns "operator, engineer" into ["operator" "engineer"].
-func splitRoles(commaSeparated string) []string {
-	var roles []string
-	for _, role := range strings.Split(commaSeparated, ",") {
-		role = strings.TrimSpace(role)
-		if role != "" {
-			roles = append(roles, role)
+// splitList turns "operator, engineer" into ["operator" "engineer"] and drops
+// empty items. It splits roles, audiences and scopes.
+func splitList(commaSeparated string) []string {
+	var items []string
+	for _, item := range strings.Split(commaSeparated, ",") {
+		item = strings.TrimSpace(item)
+		if item != "" {
+			items = append(items, item)
 		}
 	}
-	return roles
+	return items
 }
 
 // valueOrDefault returns value, or defaultValue if value is empty.
