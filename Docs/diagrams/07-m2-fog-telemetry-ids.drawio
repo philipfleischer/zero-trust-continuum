@@ -1,285 +1,304 @@
 <mxfile host="app.diagrams.net" agent="ztc-diagram-generator" type="device">
   <diagram name="Telemetry pipeline" id="page-0">
-    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="900" math="0" shadow="0" background="#FFFFFF">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="1440" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="p0-0" />
         <mxCell id="p0-1" parent="p0-0" />
-        <mxCell id="p0-telemetr-1" value="M2 — telemetry from field device to cloud, through the PEP" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="10" width="1600" height="32" as="geometry" />
+        <mxCell id="p0-telemetr-1" value="M2 — telemetry from field device to cloud, through the PEP" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=28;fontStyle=1;fontColor=#111111;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="10" width="1680" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="p0-telemetr-2" value="Raw 50 Hz measurements stay in the substation; only 1 Hz aggregates cross the WAN. The IDS sees every raw point, so detection happens where the data is (IN5700: latency, bandwidth, autonomy)." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="44" width="1600" height="34" as="geometry" />
+        <mxCell id="p0-telemetr-2" value="Raw 50 Hz measurements stay in the substation; only 1 Hz aggregates cross the WAN. The IDS sees every raw point, so detection happens where the data is (IN5700: latency, bandwidth, autonomy)." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=19;fontColor=#555555;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="52" width="1680" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="p0-telemetr-3" value="edge  (ztc-edge)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#6b4a00;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="100" width="230" height="560" as="geometry" />
+        <mxCell id="p0-telemetr-3" value="CLOUD" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=20;fontColor=#1f3a5f;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="115" width="1680" height="180" as="geometry" />
         </mxCell>
-        <mxCell id="p0-d0" value="&lt;b&gt;PMU&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;50 Hz: voltage, current, frequency, phase&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-3">
-          <mxGeometry x="15" y="40" width="200" height="68" as="geometry" />
+        <mxCell id="p0-pdp" value="&lt;b&gt;ztc-pdp&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;behaviour signals → trust score&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-3">
+          <mxGeometry x="20" y="45" width="380" height="105" as="geometry" />
         </mxCell>
-        <mxCell id="p0-d1" value="&lt;b&gt;Smart meter&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;daily load profile&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-3">
-          <mxGeometry x="15" y="122" width="200" height="68" as="geometry" />
+        <mxCell id="p0-ingest" value="&lt;b&gt;ztc-ingest&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;bounded ring-buffer time-series store; GET /v1/series, /v1/query?format=csv&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-3">
+          <mxGeometry x="440" y="45" width="480" height="105" as="geometry" />
         </mxCell>
-        <mxCell id="p0-d2" value="&lt;b&gt;Breaker&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;status events&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-3">
-          <mxGeometry x="15" y="204" width="200" height="68" as="geometry" />
+        <mxCell id="p0-graf" value="&lt;b&gt;Grafana&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;telemetry panels&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-3">
+          <mxGeometry x="960" y="45" width="330" height="105" as="geometry" />
         </mxCell>
-        <mxCell id="p0-d3" value="&lt;b&gt;RTU&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;Modbus registers&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-3">
-          <mxGeometry x="15" y="286" width="200" height="68" as="geometry" />
+        <mxCell id="p0-ana" value="&lt;b&gt;analytics&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;batch ETL, anomaly re-check&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-3">
+          <mxGeometry x="1320" y="45" width="340" height="105" as="geometry" />
         </mxCell>
-        <mxCell id="p0-d4" value="&lt;b&gt;EV charger&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;power, setpoint&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-3">
-          <mxGeometry x="15" y="368" width="200" height="68" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-atk" value="&lt;b&gt;Attack injector&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;ZTC_ATTACK = fdi · fdi-ramp · replay · flood, ZTC_ATTACK_AFTER&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p0-telemetr-3">
-          <mxGeometry x="15" y="455" width="200" height="85" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-pep" value="&lt;b&gt;ztc-pep&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;authN + authZ per request, obligation rate-limit 50/s per device&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-1">
-          <mxGeometry x="290" y="300" width="170" height="110" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-telemetr-4" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.2;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-d0" target="p0-pep">
+        <mxCell id="p0-telemetr-4" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#82b366;fontColor=#2d4d1f;strokeWidth=2;" edge="1" parent="p0-1" source="p0-ingest" target="p0-graf">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-telemetr-5" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-d1" target="p0-pep">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-telemetr-6" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-d2" target="p0-pep">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-telemetr-7" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.6499999999999999;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-d3" target="p0-pep">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-telemetr-8" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.8;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-d4" target="p0-pep">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-fogc" value="ztc-fog  (fog node)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#2d4d1f;" vertex="1" parent="p0-1">
-          <mxGeometry x="500" y="100" width="840" height="560" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-ing" value="&lt;b&gt;Ingest&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;POST /v1/telemetry; line protocol → points&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-fogc">
-          <mxGeometry x="20" y="50" width="185" height="75" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-val" value="&lt;b&gt;Validate&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;required fields, timestamp skew&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-fogc">
-          <mxGeometry x="225" y="50" width="185" height="75" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-telemetr-9" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-ing" target="p0-val">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-rng" value="&lt;b&gt;Range&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;physical limits per device kind&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-fogc">
-          <mxGeometry x="430" y="50" width="185" height="75" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-telemetr-10" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-val" target="p0-rng">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-enr" value="&lt;b&gt;Enrich&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;subject, zone, layer from the PEP&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-fogc">
-          <mxGeometry x="635" y="50" width="185" height="75" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-telemetr-11" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-rng" target="p0-enr">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-ids" value="&lt;b&gt;IDS detectors&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;EWMA z-score + CUSUM per series, warm-up period; redundancy CUSUM across paired sensors (M5)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#b85450;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-fogc">
-          <mxGeometry x="60" y="190" width="330" height="90" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-win" value="&lt;b&gt;Tumbling window (1 s)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;per series: count, mean, min, max · mutex-protected (found by -race)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-fogc">
-          <mxGeometry x="450" y="190" width="330" height="90" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-alert" value="&lt;b&gt;Alert → trust signal&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;POST /v1/signals behaviour = score (see lock-out loop)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#b85450;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-fogc">
-          <mxGeometry x="60" y="330" width="330" height="75" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-fwd" value="&lt;b&gt;Upstream forwarder&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;batch POST every second, bounded queue, drop counter&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-fogc">
-          <mxGeometry x="450" y="330" width="330" height="75" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-telemetr-12" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.85;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-enr" target="p0-ids">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-telemetr-13" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-enr" target="p0-win">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-telemetr-14" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;" edge="1" parent="p0-1" source="p0-ids" target="p0-alert">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-telemetr-15" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-win" target="p0-fwd">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-telemetr-16" value="&lt;span style=&quot;font-family:Courier New;font-size:11px&quot;&gt;pmu,device=pmu-b1-1,bay=1 v=230.1,i=412.7,f=50.01 1760000000000000000&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;Influx-style line protocol: measurement, tags, fields, timestamp (ns)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p0-fogc">
-          <mxGeometry x="40" y="440" width="780" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-telemetr-17" value="&lt;b&gt;Metrics that make the fog argument in numbers&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;ztc_telemetry_points_total (raw, in)&lt;/li&gt;&lt;li&gt;ztc_upstream_aggregates_total (out)&lt;/li&gt;&lt;li&gt;ratio ≈ 50 : 1 for PMUs; bandwidth and cloud load drop accordingly&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p0-fogc">
-          <mxGeometry x="40" y="495" width="780" height="55" as="geometry" />
-        </mxCell>
-        <mxCell id="p0-telemetr-18" value="allowed + X-ZTC-Subject" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-pep" target="p0-ing">
+        <mxCell id="p0-telemetr-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#82b366;fontColor=#2d4d1f;strokeWidth=2;exitX=0.85;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-ingest" target="p0-ana">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="480" y="333" />
-              <mxPoint x="480" y="187" />
+              <mxPoint x="868" y="147" />
+              <mxPoint x="1510" y="147" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="p0-telemetr-19" value="cloud" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=14;fontColor=#1f3a5f;" vertex="1" parent="p0-1">
-          <mxGeometry x="1380" y="100" width="320" height="560" as="geometry" />
+        <mxCell id="p0-telemetr-6" value="" style="html=1;endArrow=none;dashed=1;dashPattern=10 5;strokeColor=#b85450;strokeWidth=2;fontColor=#b85450;fontStyle=1;fontSize=17;labelBackgroundColor=#ffffff;align=left;" edge="1" parent="p0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="20" y="328" as="sourcePoint" />
+            <mxPoint x="1700" y="328" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="p0-ingest" value="&lt;b&gt;ztc-ingest&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;bounded ring-buffer time-series store; GET /v1/series, /v1/query?format=csv&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-19">
-          <mxGeometry x="20" y="50" width="280" height="100" as="geometry" />
+        <mxCell id="p0-telemetr-7" value="TB3  WAN: only 1 Hz aggregates and trust signals leave the substation" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=18;fontColor=#222222;fontColor=#b85450;fontStyle=1;fontSize=17;align=right;" vertex="1" parent="p0-1">
+          <mxGeometry x="900" y="298" width="790" height="24" as="geometry" />
         </mxCell>
-        <mxCell id="p0-pdp" value="&lt;b&gt;ztc-pdp&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;behaviour signals → trust&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-19">
-          <mxGeometry x="20" y="200" width="280" height="75" as="geometry" />
+        <mxCell id="p0-telemetr-8" value="FOG — substation" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=20;fontColor=#2d4d1f;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="360" width="1680" height="585" as="geometry" />
         </mxCell>
-        <mxCell id="p0-graf" value="&lt;b&gt;Grafana&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;telemetry panels&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-19">
-          <mxGeometry x="20" y="320" width="130" height="70" as="geometry" />
+        <mxCell id="p0-fogc" value="ztc-fog  (fog node)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=3;container=1;collapsible=0;recursiveResize=0;fillColor=#ffffff;strokeColor=#888888;dashed=1;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;fontSize=18;fontColor=#333333;fillColor=#f4faf2;strokeColor=#82b366;fontColor=#2d4d1f;" vertex="1" parent="p0-telemetr-8">
+          <mxGeometry x="20" y="40" width="1300" height="420" as="geometry" />
         </mxCell>
-        <mxCell id="p0-ana" value="&lt;b&gt;analytics&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;batch ETL, anomaly re-check&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-19">
-          <mxGeometry x="160" y="320" width="140" height="70" as="geometry" />
+        <mxCell id="p0-alert" value="&lt;b&gt;Alert → trust signal&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;POST /v1/signals behaviour = score (see the lock-out loop)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#b85450;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-fogc">
+          <mxGeometry x="30" y="45" width="580" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="p0-telemetr-20" value="1 Hz aggregates" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#82b366;fontColor=#2d4d1f;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.7;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-fwd" target="p0-ingest">
+        <mxCell id="p0-fwd" value="&lt;b&gt;Upstream forwarder&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;batch POST every second, bounded queue, drop counter&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-fogc">
+          <mxGeometry x="690" y="45" width="580" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-ids" value="&lt;b&gt;IDS detectors&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;EWMA z-score + CUSUM per series, warm-up period; redundancy CUSUM across paired sensors (M5)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#b85450;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-fogc">
+          <mxGeometry x="30" y="170" width="580" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-win" value="&lt;b&gt;Tumbling window (1 s)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;per series: count, mean, min, max · mutex-protected (found by -race)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-fogc">
+          <mxGeometry x="690" y="170" width="580" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-ing" value="&lt;b&gt;Ingest&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;POST /v1/telemetry; line protocol → points&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-fogc">
+          <mxGeometry x="30" y="300" width="290" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-val" value="&lt;b&gt;Validate&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;required fields, timestamp skew&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-fogc">
+          <mxGeometry x="343" y="300" width="290" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-telemetr-9" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-ing" target="p0-val">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-telemetr-21" value="behaviour signal" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-alert" target="p0-pdp">
+        <mxCell id="p0-rng" value="&lt;b&gt;Range&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;physical limits per device kind&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-fogc">
+          <mxGeometry x="656" y="300" width="290" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-telemetr-10" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-val" target="p0-rng">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-enr" value="&lt;b&gt;Enrich&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;subject, zone, layer from the PEP&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-fogc">
+          <mxGeometry x="969" y="300" width="290" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-telemetr-11" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-rng" target="p0-enr">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-telemetr-12" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.731;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-enr" target="p0-win">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-telemetr-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.2;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-enr" target="p0-ids">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="525" y="467" />
-              <mxPoint x="525" y="676" />
-              <mxPoint x="1360" y="676" />
-              <mxPoint x="1360" y="337" />
+              <mxPoint x="1067" y="680" />
+              <mxPoint x="360" y="680" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="p0-telemetr-22" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#82b366;fontColor=#2d4d1f;strokeWidth=2;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-ingest" target="p0-graf">
+        <mxCell id="p0-telemetr-14" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;" edge="1" parent="p0-1" source="p0-ids" target="p0-alert">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-telemetr-23" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#82b366;fontColor=#2d4d1f;strokeWidth=2;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-ingest" target="p0-ana">
+        <mxCell id="p0-telemetr-15" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p0-1" source="p0-win" target="p0-fwd">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p0-telemetr-24" value="&lt;b&gt;Design choices&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:11px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Choice&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Why&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Alternative considered&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;IDS on the fog, on raw data&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;sees every sample; detection latency independent of the WAN&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;cloud-side detection on aggregates: cheaper, but blind to fast attacks&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;composable stages over channels&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;each stage unit-tested; easy to add GOOSE/Modbus taps later&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;one big handler&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;tumbling (not sliding) windows&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;bounded memory, one aggregate per series per second&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;sliding windows: smoother, more CPU&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;telemetry also goes through the PEP&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;a sensor is a subject like any other; per-device rate limits&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trusted field network: exactly what zero trust rejects&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=11;overflow=fill;fontColor=#222222;" vertex="1" parent="p0-1">
-          <mxGeometry x="20" y="690" width="1680" height="160" as="geometry" />
+        <mxCell id="p0-telemetr-16" value="&lt;b&gt;Metrics that make the fog argument in numbers&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:17px&quot;&gt;&lt;li&gt;ztc_telemetry_points_total (raw, in)&lt;/li&gt;&lt;li&gt;ztc_upstream_aggregates_total (out)&lt;/li&gt;&lt;li&gt;ratio ≈ 50 : 1 for PMUs; bandwidth and cloud load drop accordingly&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=17;fontColor=#333333;" vertex="1" parent="p0-telemetr-8">
+          <mxGeometry x="1340" y="40" width="320" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-pep" value="&lt;b&gt;ztc-pep&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;authN + authZ per request · obligation rate-limit 50/s per device&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-8">
+          <mxGeometry x="20" y="485" width="1300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-telemetr-17" value="&lt;span style=&quot;font-family:Courier New;font-size:17px&quot;&gt;pmu,device=pmu-b1-1,bay=1&lt;br&gt;v=230.1,i=412.7,f=50.01&lt;br&gt;1760000000000000000&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;Influx-style line protocol: measurement, tags, fields, timestamp (ns)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=17;fontColor=#333333;" vertex="1" parent="p0-telemetr-8">
+          <mxGeometry x="1340" y="260" width="320" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-telemetr-18" value="allowed + X-ZTC-Subject" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.135;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-pep" target="p0-ing">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-telemetr-19" value="1 Hz aggregates" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#82b366;fontColor=#2d4d1f;strokeWidth=2;exitX=0.293;exitY=0;exitDx=0;exitDy=0;entryX=0.917;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-fwd" target="p0-ingest">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-telemetr-20" value="behaviour signal" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;exitX=0.276;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-alert" target="p0-pdp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-telemetr-21" value="" style="html=1;endArrow=none;dashed=1;dashPattern=10 5;strokeColor=#b85450;strokeWidth=2;fontColor=#b85450;fontStyle=1;fontSize=17;labelBackgroundColor=#ffffff;align=left;" edge="1" parent="p0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="20" y="968" as="sourcePoint" />
+            <mxPoint x="1700" y="968" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p0-telemetr-22" value="TB1  device ↔ PEP" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=18;fontColor=#222222;fontColor=#b85450;fontStyle=1;fontSize=17;align=right;" vertex="1" parent="p0-1">
+          <mxGeometry x="1300" y="939" width="390" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-telemetr-23" value="EDGE  (ztc-edge)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=4;fontStyle=1;fontSize=20;fontColor=#6b4a00;align=right;spacingRight=14;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="990" width="1680" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-d0" value="&lt;b&gt;PMU&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;50 Hz: voltage, current, frequency, phase&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-23">
+          <mxGeometry x="20" y="45" width="240" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-telemetr-24" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.09230769230769231;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-d0" target="p0-pep">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-d1" value="&lt;b&gt;Smart meter&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;daily load profile&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-23">
+          <mxGeometry x="285" y="45" width="240" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-telemetr-25" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.29615384615384616;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-d1" target="p0-pep">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-d2" value="&lt;b&gt;Breaker&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;status events&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-23">
+          <mxGeometry x="550" y="45" width="240" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-telemetr-26" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-d2" target="p0-pep">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-d3" value="&lt;b&gt;RTU&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;Modbus registers&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-23">
+          <mxGeometry x="815" y="45" width="240" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-telemetr-27" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.7038461538461539;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-d3" target="p0-pep">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-d4" value="&lt;b&gt;EV charger&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;power, setpoint&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#d79b00;strokeWidth=1.5;fontSize=18;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p0-telemetr-23">
+          <mxGeometry x="1080" y="45" width="240" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-telemetr-28" value="" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=17;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.9076923076923077;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="p0-1" source="p0-d4" target="p0-pep">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-atk" value="&lt;b&gt;Attack injector&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:16px&quot;&gt;ZTC_ATTACK = fdi · fdi-ramp · replay · flood, ZTC_ATTACK_AFTER&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=18;fontColor=#222222;spacing=4;" vertex="1" parent="p0-telemetr-23">
+          <mxGeometry x="1340" y="45" width="320" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="p0-telemetr-29" value="&lt;b&gt;Design choices&lt;/b&gt;&lt;table style=&quot;border-collapse:collapse;width:100%;font-size:17px&quot;&gt;&lt;tr&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Choice&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Why&lt;/th&gt;&lt;th style=&quot;border:1px solid #999;background:#e8e8e8;padding:3px 5px;text-align:left;&quot;&gt;Alternative considered&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;IDS on the fog, on raw data&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;sees every sample; detection latency independent of the WAN&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;cloud-side detection on aggregates: cheaper, but blind to fast attacks&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;composable stages over channels&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;each stage unit-tested; easy to add GOOSE/Modbus taps later&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;one big handler&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;tumbling (not sliding) windows&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;bounded memory, one aggregate per series per second&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;sliding windows: smoother, more CPU&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;telemetry also goes through the PEP&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;a sensor is a subject like any other; per-device rate limits&lt;/td&gt;&lt;td style=&quot;border:1px solid #bbb;padding:3px 5px;vertical-align:top;background:#ffffff;&quot;&gt;trusted field network: exactly what zero trust rejects&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=17;overflow=fill;fontColor=#222222;" vertex="1" parent="p0-1">
+          <mxGeometry x="20" y="1180" width="1680" height="240" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram name="Lock-out loop (RQ4)" id="page-1">
-    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="1000" math="0" shadow="0" background="#FFFFFF">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="1300" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="p1-0" />
         <mxCell id="p1-1" parent="p1-0" />
-        <mxCell id="p1-lockoutl-1" value="M2 — continuous verification: from anomaly to lock-out" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p1-1">
-          <mxGeometry x="20" y="10" width="1600" height="32" as="geometry" />
+        <mxCell id="p1-lockoutl-1" value="M2 — continuous verification: from anomaly to lock-out" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=28;fontStyle=1;fontColor=#111111;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="13.0" width="1600" height="41.6" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-2" value="The loop that makes this zero trust rather than perimeter security: a device that was allowed a second ago is denied as soon as its behaviour changes, and only that device." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p1-1">
-          <mxGeometry x="20" y="44" width="1600" height="34" as="geometry" />
+        <mxCell id="p1-lockoutl-2" value="The loop that makes this zero trust rather than perimeter security: a device that was allowed a second ago is denied as soon as its behaviour changes, and only that device." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=17;fontColor=#555555;" vertex="1" parent="p1-1">
+          <mxGeometry x="20" y="57.2" width="1600" height="44.2" as="geometry" />
         </mxCell>
-        <mxCell id="p1-A" value="&lt;b&gt;Compromised PMU&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;pmu-b1-3 injects false data&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="40.0" y="420.00000000000006" width="240" height="100" as="geometry" />
+        <mxCell id="p1-A" value="&lt;b&gt;Compromised PMU&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;pmu-b1-3 injects false data&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=16;fontColor=#222222;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="40.0" y="546.0" width="240" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-B" value="&lt;b&gt;ztc-pep&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;authenticates; policy allows telemetry writes&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="239.99999999999983" y="160.1923788646685" width="240" height="100" as="geometry" />
+        <mxCell id="p1-B" value="&lt;b&gt;ztc-pep&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;authenticates; policy allows telemetry writes&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="239.99999999999983" y="208.3" width="240" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-C" value="&lt;b&gt;ztc-fog + IDS&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;EWMA z = 19σ → alert ANOM-001 (ATT&amp;amp;CK for ICS T0832 Manipulation of View)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="640.0" y="160.1923788646684" width="240" height="100" as="geometry" />
+        <mxCell id="p1-C" value="&lt;b&gt;ztc-fog + IDS&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;EWMA z = 19σ → alert ANOM-001 (ATT&amp;amp;CK for ICS T0832 Manipulation of View)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="640.0" y="208.3" width="240" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-D" value="&lt;b&gt;ztc-pdp&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;behaviour ≥ 0.9 ⇒ compromise: trust 0, revocation epoch + 1, audit, alert&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
-          <mxGeometry x="840.0" y="420.0" width="240" height="100" as="geometry" />
+        <mxCell id="p1-D" value="&lt;b&gt;ztc-pdp&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;behaviour ≥ 0.9 ⇒ compromise: trust 0, revocation epoch + 1, audit, alert&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;" vertex="1" parent="p1-1">
+          <mxGeometry x="840.0" y="546.0" width="240" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-E" value="&lt;b&gt;Decision caches&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;every PEP polls GET /v1/revocations, sees the new epoch and flushes&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=11;" vertex="1" parent="p1-1">
-          <mxGeometry x="640.0" y="679.8076211353316" width="240" height="100" as="geometry" />
+        <mxCell id="p1-E" value="&lt;b&gt;Decision caches&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;every PEP polls GET /v1/revocations, sees the new epoch and flushes&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=8;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=1.5;fontSize=15;" vertex="1" parent="p1-1">
+          <mxGeometry x="640.0" y="883.7" width="240" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-F" value="&lt;b&gt;ztc-pep&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;next request: cache miss → PDP deny → 403&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=12;fontStyle=1;" vertex="1" parent="p1-1">
-          <mxGeometry x="240.00000000000006" y="679.8076211353316" width="240" height="100" as="geometry" />
+        <mxCell id="p1-F" value="&lt;b&gt;ztc-pep&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;next request: cache miss → PDP deny → 403&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=16;fontStyle=1;" vertex="1" parent="p1-1">
+          <mxGeometry x="240.00000000000006" y="883.7" width="240" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-3" value="① telemetry with +4 kV bias" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p1-1" source="p1-A" target="p1-B">
+        <mxCell id="p1-lockoutl-3" value="① telemetry with +4 kV bias" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p1-1" source="p1-A" target="p1-B">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-4" value="② allowed (policy permits writes)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p1-1" source="p1-B" target="p1-C">
+        <mxCell id="p1-lockoutl-4" value="② allowed&lt;br&gt;(policy permits&lt;br&gt;writes)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p1-1" source="p1-B" target="p1-C">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-5" value="③ POST /v1/signals behaviour = 1.0" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;" edge="1" parent="p1-1" source="p1-C" target="p1-D">
+        <mxCell id="p1-lockoutl-5" value="③ POST /v1/signals behaviour = 1.0" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;" edge="1" parent="p1-1" source="p1-C" target="p1-D">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-6" value="④ epoch + 1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;" edge="1" parent="p1-1" source="p1-D" target="p1-E">
+        <mxCell id="p1-lockoutl-6" value="④ epoch + 1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;" edge="1" parent="p1-1" source="p1-D" target="p1-E">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-7" value="⑤ flush" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;" edge="1" parent="p1-1" source="p1-E" target="p1-F">
+        <mxCell id="p1-lockoutl-7" value="⑤ flush" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#b85450;fontColor=#b85450;dashed=1;" edge="1" parent="p1-1" source="p1-E" target="p1-F">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-8" value="⑥ request denied" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p1-1" source="p1-F" target="p1-A">
+        <mxCell id="p1-lockoutl-8" value="⑥ request denied" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p1-1" source="p1-F" target="p1-A">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-9" value="&lt;b&gt;unauthorized access window&lt;/b&gt;&lt;br&gt;= detection delay&lt;br&gt;+ signal transport&lt;br&gt;+ cache staleness&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;(≤ min(TTL, poll interval))&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;fontSize=13;" vertex="1" parent="p1-1">
-          <mxGeometry x="430" y="400" width="260" height="140" as="geometry" />
+        <mxCell id="p1-lockoutl-9" value="&lt;b&gt;unauthorized access window&lt;/b&gt;&lt;br&gt;= detection delay&lt;br&gt;+ signal transport&lt;br&gt;+ cache staleness&lt;br&gt;&lt;span style=&quot;font-size:14px&quot;&gt;(≤ min(TTL, poll interval))&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.5;fontSize=16;fontColor=#222222;spacing=4;fontSize=17;" vertex="1" parent="p1-1">
+          <mxGeometry x="430" y="520.0" width="260" height="182.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-10" value="&lt;b&gt;Two independent paths to lock-out&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;&lt;b&gt;IDS path&lt;/b&gt;: behaviour signal ⇒ compromise ⇒ epoch ⇒ every cache flushed&lt;/li&gt;&lt;li&gt;&lt;b&gt;Denial path&lt;/b&gt;: lateral-movement and breaker attempts are denied; each denial lowers trust until even telemetry falls below the floor — often before the IDS fires&lt;/li&gt;&lt;li&gt;invalidate-on-deny makes the second path work through a cache&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p1-1">
-          <mxGeometry x="1080" y="120" width="620" height="130" as="geometry" />
+        <mxCell id="p1-lockoutl-10" value="&lt;b&gt;Two independent paths to lock-out&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:15px&quot;&gt;&lt;li&gt;&lt;b&gt;IDS path&lt;/b&gt;: behaviour signal ⇒ compromise ⇒ epoch ⇒ every cache flushed&lt;/li&gt;&lt;li&gt;&lt;b&gt;Denial path&lt;/b&gt;: lateral-movement and breaker attempts are denied; each denial lowers trust until even telemetry falls below the floor — often before the IDS fires&lt;/li&gt;&lt;li&gt;invalidate-on-deny makes the second path work through a cache&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=15;fontColor=#333333;" vertex="1" parent="p1-1">
+          <mxGeometry x="1110" y="156.0" width="590" height="175.5" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-11" value="&lt;b&gt;Only the compromised device is affected&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;trust is per subject; honest PMUs keep high trust and their cached allows&lt;/li&gt;&lt;li&gt;the epoch flush costs every PEP one round trip per subject, then the cache refills&lt;/li&gt;&lt;li&gt;operators can clear a compromise only through the audited admin API&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p1-1">
-          <mxGeometry x="1080" y="270" width="620" height="100" as="geometry" />
+        <mxCell id="p1-lockoutl-11" value="&lt;b&gt;Only the compromised device is affected&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:15px&quot;&gt;&lt;li&gt;trust is per subject; honest PMUs keep high trust and their cached allows&lt;/li&gt;&lt;li&gt;the epoch flush costs every PEP one round trip per subject, then the cache refills&lt;/li&gt;&lt;li&gt;operators can clear a compromise only through the audited admin API&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=15;fontColor=#333333;" vertex="1" parent="p1-1">
+          <mxGeometry x="1110" y="357.5" width="590" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-12" value="&lt;b&gt;Asserted in CI, not only shown&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;scripts/demo.sh starts CA, PDP, ingest, fog, PEP and edge devices with an FDI attack&lt;/li&gt;&lt;li&gt;the job fails unless the attacker ends with trust 0 and 403, honest devices keep high trust, and ztcctl audit verify passes&lt;/li&gt;&lt;li&gt;regression test: a cached allow is never served after a compromise&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p1-1">
-          <mxGeometry x="1080" y="390" width="620" height="110" as="geometry" />
+        <mxCell id="p1-lockoutl-12" value="&lt;b&gt;Checked in CI&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:15px&quot;&gt;&lt;li&gt;scripts/demo.sh starts CA, PDP, ingest, fog, PEP and edge devices with an FDI attack&lt;/li&gt;&lt;li&gt;the job fails unless the attacker ends with trust 0 and 403, honest devices keep high trust, and ztcctl audit verify passes&lt;/li&gt;&lt;li&gt;regression test: a cached allow is never served after a compromise&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=15;fontColor=#333333;" vertex="1" parent="p1-1">
+          <mxGeometry x="1110" y="513.5" width="590" height="149.5" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-13" value="&lt;b&gt;Timeline of one compromise&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p1-1">
-          <mxGeometry x="40" y="830" width="400" height="22" as="geometry" />
+        <mxCell id="p1-lockoutl-13" value="&lt;b&gt;Timeline of one compromise&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;" vertex="1" parent="p1-1">
+          <mxGeometry x="40" y="1079.0" width="400" height="28.6" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-14" value="&lt;span style=&quot;font-size:11px&quot;&gt;detection delay (IDS warm-up, threshold)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fillColor=#f8cecc;strokeColor=#888888;" vertex="1" parent="p1-1">
-          <mxGeometry x="40" y="860" width="520" height="40" as="geometry" />
+        <mxCell id="p1-lockoutl-14" value="&lt;span style=&quot;font-size:15px&quot;&gt;detection delay (IDS warm-up, threshold)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fillColor=#f8cecc;strokeColor=#888888;" vertex="1" parent="p1-1">
+          <mxGeometry x="40" y="1118.0" width="520" height="52.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-15" value="&lt;span style=&quot;font-size:11px&quot;&gt;signal&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fillColor=#e1d5e7;strokeColor=#888888;" vertex="1" parent="p1-1">
-          <mxGeometry x="560" y="860" width="120" height="40" as="geometry" />
+        <mxCell id="p1-lockoutl-15" value="&lt;span style=&quot;font-size:15px&quot;&gt;signal&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fillColor=#e1d5e7;strokeColor=#888888;" vertex="1" parent="p1-1">
+          <mxGeometry x="560" y="1118.0" width="120" height="52.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-16" value="&lt;span style=&quot;font-size:11px&quot;&gt;cache staleness ≤ poll&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fillColor=#fff2cc;strokeColor=#888888;" vertex="1" parent="p1-1">
-          <mxGeometry x="680" y="860" width="260" height="40" as="geometry" />
+        <mxCell id="p1-lockoutl-16" value="&lt;span style=&quot;font-size:15px&quot;&gt;cache staleness ≤ poll&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fillColor=#fff2cc;strokeColor=#888888;" vertex="1" parent="p1-1">
+          <mxGeometry x="680" y="1118.0" width="260" height="52.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-17" value="&lt;span style=&quot;font-size:11px&quot;&gt;first 403&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fillColor=#d5e8d4;strokeColor=#888888;" vertex="1" parent="p1-1">
-          <mxGeometry x="940" y="860" width="140" height="40" as="geometry" />
+        <mxCell id="p1-lockoutl-17" value="&lt;span style=&quot;font-size:15px&quot;&gt;first 403&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fillColor=#d5e8d4;strokeColor=#888888;" vertex="1" parent="p1-1">
+          <mxGeometry x="940" y="1118.0" width="140" height="52.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-18" value="&lt;span style=&quot;font-size:11px&quot;&gt;t₀&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;" vertex="1" parent="p1-1">
-          <mxGeometry x="30" y="905" width="40" height="20" as="geometry" />
+        <mxCell id="p1-lockoutl-18" value="&lt;span style=&quot;font-size:15px&quot;&gt;t₀&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;" vertex="1" parent="p1-1">
+          <mxGeometry x="30" y="1176.5" width="40" height="26.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-19" value="&lt;span style=&quot;font-size:11px&quot;&gt;attacker allowed&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;fontColor=#b85450;" vertex="1" parent="p1-1">
-          <mxGeometry x="300" y="905" width="300" height="20" as="geometry" />
+        <mxCell id="p1-lockoutl-19" value="&lt;span style=&quot;font-size:15px&quot;&gt;attacker allowed&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;fontColor=#b85450;" vertex="1" parent="p1-1">
+          <mxGeometry x="300" y="1176.5" width="300" height="26.0" as="geometry" />
         </mxCell>
-        <mxCell id="p1-lockoutl-20" value="&lt;span style=&quot;font-size:11px&quot;&gt;attacker denied&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=12;fontColor=#222222;fontColor=#2d4d1f;" vertex="1" parent="p1-1">
-          <mxGeometry x="930" y="905" width="200" height="20" as="geometry" />
+        <mxCell id="p1-lockoutl-20" value="&lt;span style=&quot;font-size:15px&quot;&gt;attacker denied&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=16;fontColor=#222222;fontColor=#2d4d1f;" vertex="1" parent="p1-1">
+          <mxGeometry x="930" y="1176.5" width="200" height="26.0" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram name="Audit log" id="page-2">
-    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="520" math="0" shadow="0" background="#FFFFFF">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1720" pageHeight="676" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="p2-0" />
         <mxCell id="p2-1" parent="p2-0" />
-        <mxCell id="p2-auditlog-1" value="M2 — tamper-evident audit log (hash chain)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=22;fontStyle=1;fontColor=#111111;" vertex="1" parent="p2-1">
-          <mxGeometry x="20" y="10" width="1600" height="32" as="geometry" />
+        <mxCell id="p2-auditlog-1" value="M2 — tamper-evident audit log (hash chain)" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=28;fontStyle=1;fontColor=#111111;" vertex="1" parent="p2-1">
+          <mxGeometry x="20" y="13.0" width="1600" height="41.6" as="geometry" />
         </mxCell>
-        <mxCell id="p2-auditlog-2" value="Every decision, signal, compromise and policy change is appended to a JSONL log where each entry commits to the one before it. Editing or deleting any entry breaks every later link (IEC 62443 SR 2.8, NIST tenet 7)." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=13;fontColor=#555555;" vertex="1" parent="p2-1">
-          <mxGeometry x="20" y="44" width="1600" height="34" as="geometry" />
+        <mxCell id="p2-auditlog-2" value="Every decision, signal, compromise and policy change is appended to a JSONL log where each entry commits to the one before it. Editing or deleting any entry breaks every later link (IEC 62443 SR 2.8, NIST tenet 7)." style="whiteSpace=wrap;html=1;fontFamily=Helvetica;text;align=left;verticalAlign=top;fontSize=17;fontColor=#555555;" vertex="1" parent="p2-1">
+          <mxGeometry x="20" y="57.2" width="1600" height="44.2" as="geometry" />
         </mxCell>
-        <mxCell id="p2-e0" value="&lt;b&gt;genesis&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;seq 0 · HLC time&lt;br&gt;prev = 000…0&lt;br&gt;kind: start, node: pdp-0&lt;br&gt;hash = SHA-256(prev ‖ canonical JSON)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p2-1">
-          <mxGeometry x="20" y="110" width="360" height="130" as="geometry" />
+        <mxCell id="p2-e0" value="&lt;b&gt;genesis&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;seq 0 · HLC time&lt;br&gt;prev = 000…0&lt;br&gt;kind: start, node: pdp-0&lt;br&gt;hash = SHA-256(prev ‖ canonical JSON)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p2-1">
+          <mxGeometry x="20" y="143.0" width="360" height="169.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-e1" value="&lt;b&gt;entry 1&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;seq 1 · HLC time&lt;br&gt;prev = h₀&lt;br&gt;decision: allow pmu-b1-1 write bay-1/telemetry&lt;br&gt;hash = SHA-256(prev ‖ canonical JSON)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p2-1">
-          <mxGeometry x="440" y="110" width="360" height="130" as="geometry" />
+        <mxCell id="p2-e1" value="&lt;b&gt;entry 1&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;seq 1 · HLC time&lt;br&gt;prev = h₀&lt;br&gt;decision: allow pmu-b1-1 write bay-1/telemetry&lt;br&gt;hash = SHA-256(prev ‖ canonical JSON)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p2-1">
+          <mxGeometry x="440" y="143.0" width="360" height="169.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-auditlog-3" value="h₀" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-e0" target="p2-e1">
+        <mxCell id="p2-auditlog-3" value="h₀" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-e0" target="p2-e1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p2-e2" value="&lt;b&gt;entry 2&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;seq 2 · HLC time&lt;br&gt;prev = h₁&lt;br&gt;signal: behaviour 1.0 for pmu-b1-3&lt;br&gt;hash = SHA-256(prev ‖ canonical JSON)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p2-1">
-          <mxGeometry x="860" y="110" width="360" height="130" as="geometry" />
+        <mxCell id="p2-e2" value="&lt;b&gt;entry 2&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;seq 2 · HLC time&lt;br&gt;prev = h₁&lt;br&gt;signal: behaviour 1.0 for pmu-b1-3&lt;br&gt;hash = SHA-256(prev ‖ canonical JSON)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p2-1">
+          <mxGeometry x="860" y="143.0" width="360" height="169.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-auditlog-4" value="h₁" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-e1" target="p2-e2">
+        <mxCell id="p2-auditlog-4" value="h₁" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-e1" target="p2-e2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p2-e3" value="&lt;b&gt;entry 3&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;seq 3 · HLC time&lt;br&gt;prev = h₂&lt;br&gt;compromise: pmu-b1-3, epoch 7 → 8&lt;br&gt;hash = SHA-256(prev ‖ canonical JSON)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=12;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p2-1">
-          <mxGeometry x="1280" y="110" width="360" height="130" as="geometry" />
+        <mxCell id="p2-e3" value="&lt;b&gt;entry 3&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;seq 3 · HLC time&lt;br&gt;prev = h₂&lt;br&gt;compromise: pmu-b1-3, epoch 7 → 8&lt;br&gt;hash = SHA-256(prev ‖ canonical JSON)&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=16;fontColor=#222222;verticalAlign=middle;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p2-1">
+          <mxGeometry x="1280" y="143.0" width="360" height="169.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-auditlog-5" value="h₂" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=11;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-e2" target="p2-e3">
+        <mxCell id="p2-auditlog-5" value="h₂" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=15;labelBackgroundColor=#ffffff;fontFamily=Helvetica;strokeColor=#333333;fontColor=#222222;" edge="1" parent="p2-1" source="p2-e2" target="p2-e3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="p2-auditlog-6" value="&lt;b&gt;Tampering is detected&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px&quot;&gt;an attacker edits entry 2 (&quot;behaviour 0.1&quot;): its hash changes, entry 3 still says prev = h₂ (old value) → verification fails at seq 3 and names it&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=12;fontColor=#222222;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p2-1">
-          <mxGeometry x="860" y="280" width="400" height="90" as="geometry" />
+        <mxCell id="p2-auditlog-6" value="&lt;b&gt;Tampering is detected&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:15px&quot;&gt;an attacker edits entry 2 (&quot;behaviour 0.1&quot;): its hash changes, entry 3 still says prev = h₂ (old value) → verification fails at seq 3 and names it&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;fontSize=16;fontColor=#222222;spacing=4;align=left;spacingLeft=10;" vertex="1" parent="p2-1">
+          <mxGeometry x="860" y="364.0" width="400" height="117.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-auditlog-7" value="&lt;b&gt;Operations&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;&lt;b&gt;ztcctl audit verify&lt;/b&gt;: recompute every hash from genesis&lt;/li&gt;&lt;li&gt;&lt;b&gt;restart&lt;/b&gt;: OpenFile reads the JSONL and continues from the last hash (the original lost the chain here)&lt;/li&gt;&lt;li&gt;&lt;b&gt;HLC timestamps&lt;/b&gt; (M3): logs from several nodes merge in causal order&lt;/li&gt;&lt;li&gt;&lt;b&gt;export&lt;/b&gt;: syslog to a SIEM, where a copy lives outside the attacker's reach&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p2-1">
-          <mxGeometry x="20" y="280" width="800" height="100" as="geometry" />
+        <mxCell id="p2-auditlog-7" value="&lt;b&gt;Operations&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:15px&quot;&gt;&lt;li&gt;&lt;b&gt;ztcctl audit verify&lt;/b&gt;: recompute every hash from genesis&lt;/li&gt;&lt;li&gt;&lt;b&gt;restart&lt;/b&gt;: OpenFile reads the JSONL and continues from the last hash so a restart never breaks the chain&lt;/li&gt;&lt;li&gt;&lt;b&gt;HLC timestamps&lt;/b&gt; (M3): logs from several nodes merge in causal order&lt;/li&gt;&lt;li&gt;&lt;b&gt;export&lt;/b&gt;: syslog to a SIEM, where a copy lives outside the attacker's reach&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=15;fontColor=#333333;" vertex="1" parent="p2-1">
+          <mxGeometry x="20" y="364.0" width="800" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-auditlog-8" value="&lt;b&gt;Known limit and mitigation&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;an attacker with write access to the whole file can rebuild the entire chain&lt;/li&gt;&lt;li&gt;mitigation: anchor the head hash elsewhere (SIEM, Raft log, signed checkpoints)&lt;/li&gt;&lt;li&gt;the log is evidence, not prevention: detection and accountability (STRIDE R)&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p2-1">
-          <mxGeometry x="20" y="400" width="800" height="90" as="geometry" />
+        <mxCell id="p2-auditlog-8" value="&lt;b&gt;Known limit and mitigation&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:15px&quot;&gt;&lt;li&gt;an attacker with write access to the whole file can rebuild the entire chain&lt;/li&gt;&lt;li&gt;mitigation: anchor the head hash elsewhere (SIEM, Raft log, signed checkpoints)&lt;/li&gt;&lt;li&gt;the log is evidence, not prevention: detection and accountability (STRIDE R)&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=15;fontColor=#333333;" vertex="1" parent="p2-1">
+          <mxGeometry x="20" y="520.0" width="800" height="117.0" as="geometry" />
         </mxCell>
-        <mxCell id="p2-auditlog-9" value="&lt;b&gt;Why a hash chain and not a database?&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:11px&quot;&gt;&lt;li&gt;append-only by construction, verifiable with 30 lines of Go&lt;/li&gt;&lt;li&gt;no extra service in the trust path&lt;/li&gt;&lt;li&gt;same idea as certificate transparency and git, without a Merkle tree (not needed at this size)&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=11;fontColor=#333333;" vertex="1" parent="p2-1">
-          <mxGeometry x="860" y="400" width="840" height="90" as="geometry" />
+        <mxCell id="p2-auditlog-9" value="&lt;b&gt;Why a hash chain and not a database?&lt;/b&gt;&lt;ul style=&quot;margin:2px 0 0 0;padding-left:16px;font-size:15px&quot;&gt;&lt;li&gt;append-only by construction, verifiable with 30 lines of Go&lt;/li&gt;&lt;li&gt;no extra service in the trust path&lt;/li&gt;&lt;li&gt;same idea as certificate transparency and git, without a Merkle tree (not needed at this size)&lt;/li&gt;&lt;/ul&gt;" style="whiteSpace=wrap;html=1;fontFamily=Helvetica;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacing=8;fontSize=15;fontColor=#333333;" vertex="1" parent="p2-1">
+          <mxGeometry x="860" y="520.0" width="840" height="117.0" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
