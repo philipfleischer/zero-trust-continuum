@@ -8,8 +8,9 @@
 //	                 → {"token": "...", "expiresAt": "..."}
 //	GET  /v1/keys    → the JSON Web Key Set of the signing key
 //
-// The token's subject, audience and scope come from the clients file, never
-// from the request, so a client cannot ask for more than it was given.
+// The token's subject, audience, scope, roles and zone come from the clients
+// file, never from the request, so a client cannot ask for more than it was
+// given.
 //
 // Environment:
 //
@@ -142,8 +143,8 @@ type tokenResponse struct {
 }
 
 // issueToken answers POST /v1/token. The client proves who it is with its
-// secret; the token then carries the subject, audience and scope registered
-// for that secret, whatever the request body says.
+// secret; the token then carries the subject, audience, scope, roles and zone
+// registered for that secret, whatever the request body says.
 func (issuer *tokenIssuer) issueToken(writer http.ResponseWriter, request *http.Request) {
 	presentedSecret, hasBearer := strings.CutPrefix(request.Header.Get("Authorization"), "Bearer ")
 	client, isRegistered := issuer.clients[secretHash(presentedSecret)]
@@ -166,6 +167,8 @@ func (issuer *tokenIssuer) issueToken(writer http.ResponseWriter, request *http.
 		IssuedAt:  now.Unix(),
 		ID:        token.NewTokenID(),
 		Scope:     client.Scope,
+		Roles:     client.Roles,
+		Zone:      client.Zone,
 	}
 	signedToken, err := issuer.signer.Sign(claims)
 	if err != nil {

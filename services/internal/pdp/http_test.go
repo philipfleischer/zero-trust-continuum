@@ -125,7 +125,7 @@ func TestHTTPStatusCodes(t *testing.T) {
 			}
 		})
 	}
-	if api.pdp.Engine.Policy().Version != 1 || api.pdp.Emergency() {
+	if api.pdp.Engine.Policy().Version != 2 || api.pdp.Emergency() {
 		t.Error("a rejected request changed the PDP")
 	}
 }
@@ -157,13 +157,13 @@ func TestHTTPTrust(t *testing.T) {
 
 func TestHTTPPolicy(t *testing.T) {
 	api := newAPI(t)
-	nextPolicy := `{"version":2,"rules":[{"id":"allow-all","effect":"allow"}]}`
+	nextPolicy := `{"version":3,"rules":[{"id":"allow-all","effect":"allow"}]}`
 	if recorder := api.do(http.MethodPut, "/v1/policy", nextPolicy, token); recorder.Code != http.StatusNoContent {
 		t.Fatalf("PUT /v1/policy = %d %s", recorder.Code, recorder.Body)
 	}
 	recorder := api.do(http.MethodGet, "/v1/policy", nil, "")
 	var got struct{ Version uint64 }
-	if err := json.NewDecoder(recorder.Body).Decode(&got); err != nil || got.Version != 2 {
+	if err := json.NewDecoder(recorder.Body).Decode(&got); err != nil || got.Version != 3 {
 		t.Errorf("GET /v1/policy after PUT: version %d, %v", got.Version, err)
 	}
 	authenticate(t, api.pdp, pmu)

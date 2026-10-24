@@ -33,6 +33,7 @@ func pmuClaims() Claims {
 		IssuedAt:  referenceTime.Unix(),
 		ID:        "jti-1",
 		Scope:     []string{"telemetry:write"},
+		Zone:      "bay-1",
 	}
 }
 
@@ -48,6 +49,9 @@ func TestSignVerify(t *testing.T) {
 	}
 	if got.Subject != "spiffe://grid.example/edge/pmu/1" || got.ID != "jti-1" || !got.HasScope("telemetry:write") {
 		t.Errorf("Verify returned %+v", got)
+	}
+	if got.Zone != "bay-1" || len(got.Roles) != 0 {
+		t.Errorf("zone %q and roles %q, want bay-1 and none", got.Zone, got.Roles)
 	}
 }
 

@@ -57,7 +57,8 @@ func testSetup(t *testing.T) map[string]string {
 		"secretSHA256": "`+secretHash(pmuSecret)+`",
 		"subject": "spiffe://grid.example/edge/pmu/1",
 		"audience": ["ztc-pep"],
-		"scope": ["telemetry:write"]}]}`)
+		"scope": ["telemetry:write"],
+		"zone": "bay-1"}]}`)
 	return map[string]string{"ZTC_CA_KEY_FILE": keyPath, "ZTC_CA_CLIENTS_FILE": clientsPath}
 }
 
@@ -141,6 +142,9 @@ func TestTokenVerifiesWithPublishedKeys(t *testing.T) {
 	if claims.Subject != "spiffe://grid.example/edge/pmu/1" || claims.Issuer != "ztc-ca" || !claims.HasScope("telemetry:write") {
 		t.Errorf("claims = %+v", claims)
 	}
+	if claims.Zone != "bay-1" {
+		t.Errorf("zone = %q, want bay-1 from the clients file", claims.Zone)
+	}
 	if lifetime := claims.ExpiresAt - claims.IssuedAt; lifetime != 300 {
 		t.Errorf("token lifetime = %d s, want 300", lifetime)
 	}
@@ -153,7 +157,7 @@ func TestTokenVerifiesWithPublishedKeys(t *testing.T) {
 // named the subject and scope, so any client could ask for an admin token.
 func TestClientCannotChooseItsIdentity(t *testing.T) {
 	server := startServer(t, testSetup(t))
-	wish := `{"subject":"spiffe://grid.example/cloud/admin/mallory","scope":["policy:*"]}`
+	wish := `{"subject":"spiffe://grid.example/cloud/admin/mallory","scope":["policy:*"],"roles":["operator"],"zone":"control-centre"}`
 	code, body := requestToken(t, server, "Bearer "+pmuSecret, wish)
 	if code != http.StatusOK {
 		t.Fatalf("POST /v1/token = %d %s", code, body)
@@ -167,7 +171,9 @@ func TestClientCannotChooseItsIdentity(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if claims.Subject != "spiffe://grid.example/edge/pmu/1" || claims.HasScope("policy:write") {
+	isStillThePMU := claims.Subject == "spiffe://grid.example/edge/pmu/1" && claims.Zone == "bay-1"
+	gotWhatItAskedFor := claims.HasScope("policy:write") || len(claims.Roles) != 0
+	if !isStillThePMU || gotWhatItAskedFor {
 		t.Errorf("the request chose its own identity: %+v", claims)
 	}
 }

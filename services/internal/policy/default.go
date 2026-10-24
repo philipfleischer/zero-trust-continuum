@@ -24,6 +24,10 @@ import "github.com/philipfleischer/zero-trust-continuum/services/internal/model"
 //  11. services may be migrated by fog and cloud nodes with trust >= 0.7
 //  12. policy administration is only for spiffe://*/cloud/admin/* with trust >= 0.8
 //
+// Obligations are limited to what the PEP can fulfil: log, alert and
+// reverify. A PEP denies a request whose obligation it does not know, so an
+// obligation such as rate-limit belongs here only once the PEP enforces it.
+//
 // It returns a new value on every call, so callers may modify it. The same
 // rules exist as JSON in deploy/policies/substation.json.
 func DefaultSubstationPolicy() *Policy {
@@ -31,7 +35,7 @@ func DefaultSubstationPolicy() *Policy {
 		return Condition{Attribute: attribute, Operator: operator, Value: value}
 	}
 	return &Policy{
-		Version:     1,
+		Version:     2,
 		Description: "digital substation baseline (IEC 62443 zones, Purdue levels, least privilege)",
 		Rules: []Rule{
 			{ID: "deny-untrusted", Effect: model.Deny, Description: "zero trust floor",
@@ -40,8 +44,8 @@ func DefaultSubstationPolicy() *Policy {
 				Subjects: []string{"role:auditor"}, Conditions: []Condition{condition("action", "neq", "read")}, TTLSeconds: 60},
 			{ID: "edge-write-telemetry", Effect: model.Allow, Description: "sensors report to their own zone",
 				Actions: []string{"write"}, Resources: []string{"type:telemetry"},
-				Conditions:  []Condition{condition("subject.layer", "eq", "edge"), condition("subject.zone", "sameAs", "resource.zone")},
-				Obligations: []string{"rate-limit:50/s"}, TTLSeconds: 60},
+				Conditions: []Condition{condition("subject.layer", "eq", "edge"), condition("subject.zone", "sameAs", "resource.zone")},
+				TTLSeconds: 60},
 			{ID: "fog-read-telemetry", Effect: model.Allow, Description: "fog services process their own zone",
 				Actions: []string{"read"}, Resources: []string{"type:telemetry"},
 				Conditions: []Condition{condition("subject.layer", "eq", "fog"), condition("subject.zone", "sameAs", "resource.zone"),

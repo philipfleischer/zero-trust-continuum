@@ -42,6 +42,10 @@ policy-json: build ## Regenerate deploy/policies/substation.json from the built-
 run-pdp: build ## Build and start ztc-pdp on :8181
 	$(BIN)/ztc-pdp
 
+.PHONY: demo
+demo: ## Run the end-to-end demo: CA, PDP, upstream and PEP on localhost
+	./scripts/demo.sh
+
 .PHONY: clean
 clean: ## Remove build and coverage output
 	rm -rf $(BIN) services/coverage.out

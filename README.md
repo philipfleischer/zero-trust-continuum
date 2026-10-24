@@ -55,7 +55,30 @@ The target architecture and the design of every milestone, as editable [diagrams
 
 ## Status
 
-This project is a work in progress. The structure below is the plan for what the repository will contain as the different parts get built out.
+M1 is done: the first end-to-end zero-trust decision. A PMU gets a short-lived token from `ztc-ca`, `ztc-pep` verifies it,
+asks `ztc-pdp`, which combines the ABAC policy with the PMU's trust score, and forwards or rejects the request.
+[STATUS.md](STATUS.md) lists what is implemented, and [Docs/architecture](Docs/architecture/overview.md) shows how the parts fit
+together and where the trust boundaries are. The rest of the repository layout below is still the plan.
+
+```
+PMU ──token──► ztc-pep ──decide──► ztc-pdp (policy + trust)
+                  │  ▲
+                  │  └── keys ── ztc-ca
+                  ▼
+               upstream, only on allow
+```
+
+## Try it
+
+With Go and Python 3 installed:
+
+```bash
+make demo
+```
+
+The demo starts `ztc-ca`, `ztc-pdp`, a protected upstream and `ztc-pep` on localhost and checks four outcomes: a valid token
+gives 200, an invalid or missing token 401, the same PMU after an IDS alert 403, and the same PMU with the PDP stopped 503. The
+same script runs as the `e2e` job in CI.
 
 ## Repository layout
 
