@@ -5,6 +5,7 @@ package policy
 
 import (
 	"slices"
+	"strings"
 	"testing"
 	"time"
 
@@ -47,8 +48,23 @@ func TestDefaultSubstationPolicyIsValid(t *testing.T) {
 	if err := Validate(policy); err != nil {
 		t.Fatalf("Validate() = %v", err)
 	}
-	if policy.Version != 1 {
-		t.Errorf("version = %d, want 1", policy.Version)
+	if policy.Version != 2 {
+		t.Errorf("version = %d, want 2", policy.Version)
+	}
+}
+
+// TestDefaultSubstationPolicyObligations keeps the default policy to the
+// obligations the PEP can fulfil. Version 1 had rate-limit on edge telemetry,
+// which a PEP without rate limiting must deny, so no PMU could have reported.
+func TestDefaultSubstationPolicyObligations(t *testing.T) {
+	enforceable := []string{"log", "alert", "reverify"}
+	for _, rule := range DefaultSubstationPolicy().Rules {
+		for _, obligation := range rule.Obligations {
+			kind, _, _ := strings.Cut(obligation, ":")
+			if !slices.Contains(enforceable, kind) {
+				t.Errorf("rule %s has obligation %q, which the PEP cannot fulfil", rule.ID, obligation)
+			}
+		}
 	}
 }
 
