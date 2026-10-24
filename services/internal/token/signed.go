@@ -38,6 +38,10 @@ type Claims struct {
 	IssuedAt  int64    `json:"iat,omitempty"`   // Unix seconds
 	ID        string   `json:"jti"`             // unique ID, used for revocation
 	Scope     []string `json:"scope,omitempty"` // e.g. "telemetry:read", "breaker:*"
+	// Roles and Zone are attributes of the subject that the issuer vouches
+	// for, so a PEP can pass them to the PDP without asking anyone else.
+	Roles []string `json:"roles,omitempty"` // e.g. "operator"
+	Zone  string   `json:"zone,omitempty"`  // IEC 62443 zone the subject belongs to, e.g. "bay-1"
 	// Confirmation binds the token to the holder's key (RFC 7800): the
 	// KeyThumbprint of its public key. Verify does not check it; a PEP that
 	// asks the client to prove it holds the key does.

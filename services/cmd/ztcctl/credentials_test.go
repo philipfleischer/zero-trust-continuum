@@ -52,7 +52,7 @@ func TestKeysGen(t *testing.T) {
 func TestTokenIssueAndVerify(t *testing.T) {
 	privateKeyPath, publicKeyPath := generateKeys(t)
 	code, signedToken, stderr := ztcctl(t, nil, "token", "issue", "-key", privateKeyPath,
-		"-subject", "spiffe://grid.example/edge/pmu/1", "-audience", "ztc-pep", "-scope", "telemetry:write")
+		"-subject", "spiffe://grid.example/edge/pmu/1", "-audience", "ztc-pep", "-scope", "telemetry:write", "-zone", "bay-1")
 	if code != exitOK {
 		t.Fatalf("token issue: exit %d, %s", code, stderr)
 	}
@@ -61,7 +61,9 @@ func TestTokenIssueAndVerify(t *testing.T) {
 		code, stdout, _ := ztcctlWithInput(t, nil, input, "token", "verify", "-pub", publicKeyPath, "-audience", audience)
 		return code, stdout
 	}
-	if code, stdout := verify(signedToken, "ztc-pep"); code != exitOK || !strings.Contains(stdout, `"sub": "spiffe://grid.example/edge/pmu/1"`) {
+	code, stdout := verify(signedToken, "ztc-pep")
+	showsSubjectAndZone := strings.Contains(stdout, `"sub": "spiffe://grid.example/edge/pmu/1"`) && strings.Contains(stdout, `"zone": "bay-1"`)
+	if code != exitOK || !showsSubjectAndZone {
 		t.Errorf("valid token: exit %d, %q", code, stdout)
 	}
 	if code, stdout := verify(signedToken, "ztc-historian"); code != exitDeny || !strings.Contains(stdout, "audience") {

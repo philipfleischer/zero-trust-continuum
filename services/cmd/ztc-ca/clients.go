@@ -16,7 +16,8 @@ import (
 )
 
 // registeredClient is one entry of the clients file. The CA, not the client,
-// decides the subject, audience and scope of the tokens a client gets.
+// decides the subject, audience, scope, roles and zone of the tokens a client
+// gets.
 type registeredClient struct {
 	// SecretSHA256 is the hex SHA-256 of the client's secret. The file never
 	// holds the secret itself, so reading the file is not enough to get tokens.
@@ -24,6 +25,8 @@ type registeredClient struct {
 	Subject      string   `json:"subject"`
 	Audience     []string `json:"audience"`
 	Scope        []string `json:"scope,omitempty"`
+	Roles        []string `json:"roles,omitempty"`
+	Zone         string   `json:"zone,omitempty"`
 }
 
 // clientsFile is the JSON format of ZTC_CA_CLIENTS_FILE.

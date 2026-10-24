@@ -80,6 +80,8 @@ func issueToken(arguments []string, stdout, stderr io.Writer) error {
 	subject := flags.String("subject", "", "SPIFFE ID of the holder (required)")
 	audience := flags.String("audience", "", "comma-separated services that may accept the token (required)")
 	scope := flags.String("scope", "", "comma-separated scopes, e.g. telemetry:write")
+	roles := flags.String("roles", "", "comma-separated roles, e.g. operator")
+	zone := flags.String("zone", "", "the subject's zone, e.g. bay-1")
 	issuer := flags.String("issuer", "ztcctl", "the iss claim")
 	lifetime := flags.Duration("ttl", 5*time.Minute, "how long the token is valid, at most 24h")
 	if err := flags.Parse(arguments); err != nil {
@@ -106,6 +108,8 @@ func issueToken(arguments []string, stdout, stderr io.Writer) error {
 		IssuedAt:  now.Unix(),
 		ID:        token.NewTokenID(),
 		Scope:     splitList(*scope),
+		Roles:     splitList(*roles),
+		Zone:      *zone,
 	}
 	signer := token.Signer{KeyID: token.KeyIDOf(publicKey), Key: privateKey}
 	signedToken, err := signer.Sign(claims)
