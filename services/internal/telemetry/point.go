@@ -143,6 +143,18 @@ func (point Point) Key() string {
 	return builder.String()
 }
 
+// Clone returns a copy of the point with its own Tags and Fields maps, never
+// nil, so a pipeline stage can change the copy without changing a point that
+// another goroutine may still be reading.
+func (point Point) Clone() Point {
+	clone := point
+	clone.Tags = make(map[string]string, len(point.Tags))
+	maps.Copy(clone.Tags, point.Tags)
+	clone.Fields = make(map[string]float64, len(point.Fields))
+	maps.Copy(clone.Fields, point.Fields)
+	return clone
+}
+
 // parseSeries parses the first section of a line, "measurement,tag=value,...",
 // into a point without fields.
 func parseSeries(section string) (Point, error) {
