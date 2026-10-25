@@ -20,6 +20,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"unicode"
+	"unicode/utf8"
 )
 
 // Point is one measurement: what was measured (Measurement), where and by
@@ -48,10 +50,19 @@ const (
 // floats, integers (12i), unsigned integers (12u) or booleans, all stored as
 // float64. A line without a timestamp gets a zero Time, which the receiver
 // replaces with the arrival time.
+//
+// A line must be valid UTF-8 without control characters, and the measurement
+// must not start with #. Both rules keep Line from turning an accepted point
+// into something else: a line break would split it into two lines, and a
+// leading # would make it a comment.
 func ParseLine(line string) (Point, error) {
 	line = strings.TrimSpace(line)
 	if line == "" || strings.HasPrefix(line, "#") {
 		return Point{}, fmt.Errorf("%w: empty line or comment", ErrSyntax)
+	}
+	isPlainText := utf8.ValidString(line) && !strings.ContainsFunc(line, unicode.IsControl)
+	if !isPlainText {
+		return Point{}, fmt.Errorf("%w: invalid UTF-8 or a control character", ErrSyntax)
 	}
 	sections := withoutEmpty(splitUnescaped(line, ' '))
 	if len(sections) < 2 || len(sections) > 3 {
@@ -137,8 +148,8 @@ func (point Point) Key() string {
 func parseSeries(section string) (Point, error) {
 	parts := splitUnescaped(section, ',')
 	point := Point{Measurement: unescape(parts[0]), Tags: map[string]string{}}
-	if point.Measurement == "" {
-		return Point{}, fmt.Errorf("%w: empty measurement", ErrSyntax)
+	if point.Measurement == "" || strings.HasPrefix(point.Measurement, "#") {
+		return Point{}, fmt.Errorf("%w: empty measurement or one that starts with #", ErrSyntax)
 	}
 	for _, pair := range parts[1:] {
 		key, rawValue, err := splitKeyValue(pair)

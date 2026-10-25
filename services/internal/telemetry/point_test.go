@@ -119,6 +119,19 @@ func TestParseLineRejects(t *testing.T) {
 		{"timestamp that is not a number", "pmu voltage_kv=1 yesterday"},
 		{"timestamp with decimals", "pmu voltage_kv=1 1.5"},
 		{"escaped space hides the fields", `pmu,bay=b3\ voltage_kv=1`},
+
+		// The first two were found by FuzzParseLineRoundTrip: accepted, but
+		// Line turned them into something else. The rest are the same flaw
+		// with other control characters.
+		{"measurement that starts with #", `\#pmu voltage_kv=1`},
+		{"line break in a field key", "pmu voltage\n_kv=1"},
+		{"line break in a tag value", "pmu,bay=b3\npmu voltage_kv=1"},
+		{"carriage return", "pmu,bay=b3\r voltage_kv=1"},
+		{"tab", "pmu,bay=b\t3 voltage_kv=1"},
+		{"NUL byte", "pmu,bay=b3\x00 voltage_kv=1"},
+		{"DEL", "pmu,bay=b3\x7f voltage_kv=1"},
+		{"C1 control character", "pmu,bay=b3\u0085 voltage_kv=1"},
+		{"invalid UTF-8", "pmu,bay=b\xff3 voltage_kv=1"},
 	}
 	for _, testCase := range tests {
 		t.Run(testCase.name, func(t *testing.T) {
