@@ -10,7 +10,7 @@ Legend: ✅ implemented and tested · 🟡 works, known gaps · 🔴 not started
 | --- | --- | --- |
 | M0 Foundation | repo hygiene, Go service skeleton, CI | ✅ |
 | M1 Decision chain | policy, trust, PDP, tokens, PEP | ✅ first end-to-end decision, `make demo`, tag `v0.1.0` |
-| M2 Fog, IDS and demo | telemetry, edge devices, fog node, IDS, audit, e2e demo | 🔴 |
+| M2 Fog, IDS and demo | telemetry, edge devices, fog node, IDS, audit, e2e demo | 🟡 telemetry pipeline and `ztc-ingest` |
 | M3 Distributed systems | clocks, Raft, SWIM, Chord | 🔴 |
 | M4 Offloading and containers | load balancing, Docker, Compose, monitoring, Kubernetes | 🔴 |
 | M5 Industrial security | threat model, zones, Modbus/GOOSE, IDS service, mTLS | 🔴 |
@@ -21,7 +21,7 @@ Legend: ✅ implemented and tested · 🟡 works, known gaps · 🔴 not started
 
 | Part | Path | Status | Notes |
 | --- | --- | --- | --- |
-| Go services | `services/` | 🟡 | libraries `model`, `config`, `httpx`, `observability`, `svc`, `policy`, `trust`, `pdp`, `token`, `pep`; services `ztc-pdp`, `ztc-ca`, `ztc-pep`; CLI `ztcctl` |
+| Go services | `services/` | 🟡 | libraries `model`, `config`, `httpx`, `observability`, `svc`, `policy`, `trust`, `pdp`, `token`, `pep`, `telemetry`; services `ztc-pdp`, `ztc-ca`, `ztc-pep`, `ztc-ingest`; CLI `ztcctl` |
 | C++ simulation core | `sim/core/` | 🔴 | |
 | OMNeT++ model | `sim/omnetpp/` | 🔴 | |
 | Analytics | `analytics/` | 🔴 | |
@@ -44,9 +44,11 @@ Legend: ✅ implemented and tested · 🟡 works, known gaps · 🔴 not started
 | `cmd/ztc-pdp` | ✅ | decision API, policy from `ZTC_POLICY_FILE`, writes behind `ZTC_PDP_TOKEN`, readiness checks the policy |
 | `cmd/ztc-ca` | ✅ | v1: tokens for registered clients (`POST /v1/token`), signing key as JWK set (`GET /v1/keys`); X.509 in M5 |
 | `cmd/ztc-pep` | ✅ | routes from `ZTC_PEP_ROUTES_FILE`, source zone from configuration, keys from `ztc-ca`, placement `cloud` or `hierarchical`; readiness checks keys and PDP |
+| `cmd/ztc-ingest` | ✅ | cloud end of the telemetry: line protocol in (`POST /v1/write`, 1 MiB cap), queries as JSON or CSV (`GET /v1/query`), series list; points counted by result |
 | `cmd/ztcctl` | ✅ | `policy`, `decide`, `signal`, `keys gen`, `token issue`/`verify`, `cap rootkey`/`mint`/`attenuate`/`show` |
 | `internal/token` | ✅ | Ed25519-signed tokens with strict verification, attenuable HMAC capabilities, revocation list with epoch and snapshots, PEM key files, JWK set |
 | `internal/pep` | ✅ | route table without dot segments, token and capability authentication, fail-closed middleware, reverse proxy that strips client `X-ZTC-*` headers, obligations, placement, key refresh from the CA |
+| `internal/telemetry` | ✅ | line protocol with a fuzz-tested round trip, pipeline stages (`Validate`, `Enrich`, `Range`), tumbling windows that send each window once, ring-buffer store with a series limit |
 
 ## Repository basics
 
