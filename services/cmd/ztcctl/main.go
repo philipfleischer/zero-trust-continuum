@@ -13,6 +13,8 @@
 //	ztcctl cap mint [flags] [caveat]   mint a capability with a root key file
 //	ztcctl cap attenuate <caveat>...   narrow a capability read from standard input
 //	ztcctl cap show                    print a capability read from standard input
+//	ztcctl inventory secret -out <file>  make a master secret for the field devices
+//	ztcctl inventory clients [flags]   print the ztc-ca clients file for an inventory
 //
 // Run "ztcctl <command> <subcommand> -h" for the flags.
 //
@@ -68,6 +70,8 @@ const usage = `usage: ztcctl <command>
   cap mint [flags] [caveat]   mint a capability (ztcctl cap mint -h)
   cap attenuate <caveat>...   narrow a capability from standard input
   cap show                    print a capability from standard input
+  inventory secret -out <file>  make a master secret for the field devices
+  inventory clients [flags]   print the ztc-ca clients file (ztcctl inventory clients -h)
 `
 
 var (
@@ -124,6 +128,8 @@ func dispatch(ctx context.Context, arguments []string, environment config.Env, s
 		return tokenCommand(commandArguments, stdin, stdout, stderr)
 	case command == "cap":
 		return capabilityCommand(commandArguments, stdin, stdout, stderr)
+	case command == "inventory":
+		return inventoryCommand(commandArguments, stdout, stderr)
 	}
 	return fmt.Errorf("%w: unknown command %q", errUsage, strings.Join(arguments, " "))
 }
