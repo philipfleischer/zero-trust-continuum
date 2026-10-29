@@ -1,0 +1,54 @@
+{
+  "trustDomain": "grid.example",
+  "substation": "s1",
+  "devices": [
+    {
+      "id": "pmu-b1-1",
+      "kind": "pmu",
+      "zone": "bay-1",
+      "roles": [
+        "sensor"
+      ]
+    },
+    {
+      "id": "meter-b1-1",
+      "kind": "meter",
+      "zone": "bay-1",
+      "roles": [
+        "sensor"
+      ]
+    },
+    {
+      "id": "breaker-b1-1",
+      "kind": "breaker",
+      "zone": "bay-1",
+      "roles": [
+        "sensor"
+      ]
+    },
+    {
+      "id": "pmu-b2-1",
+      "kind": "pmu",
+      "zone": "bay-2",
+      "roles": [
+        "sensor"
+      ]
+    },
+    {
+      "id": "rtu-b2-1",
+      "kind": "rtu",
+      "zone": "bay-2",
+      "roles": [
+        "sensor"
+      ]
+    },
+    {
+      "id": "evcharger-b2-1",
+      "kind": "evcharger",
+      "zone": "bay-2",
+      "roles": [
+        "sensor"
+      ]
+    }
+  ]
+}
