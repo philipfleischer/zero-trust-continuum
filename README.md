@@ -40,7 +40,17 @@ Every arrow crosses a trust boundary. No component trusts another because of its
 
 ## Architecture diagrams
 
-![Target architecture](Docs/diagrams/svg/00-system-overview-1.svg)
+### At a glance
+
+![ZTC at a glance](Docs/diagrams/svg/00-system-overview-1.svg)
+
+The system spans four layers of a digital substation, and each has one job. The **cloud** (control centre) decides: it issues every identity, judges every request against the policy and a live trust score, and keeps the telemetry and the records. The **OT-DMZ** controls every crossing between the substation and the control centre: a firewall with an encrypted tunnel for identities, decisions and revocations, and a broker for telemetry and trust signals. The **fog** (the substation itself) enforces: a Policy Enforcement Point checks every request close to the devices and keeps recent answers, so it keeps working when the WAN is cut, while the fog node processes data and intrusion detection watches the traffic. The **edge** is the physical grid, where every device has its own identity.
+
+The numbers follow one request: a device enrols (1) and sends a request with its identity (2), the gatekeeper gets a decision (3) and lets only allowed requests through (4), intrusion detection reports a device that turns suspicious (5), and the control centre revokes the cached answers so its next request is denied (6).
+
+### Target architecture
+
+![Target architecture](Docs/diagrams/svg/00-system-overview-2.svg)
 
 The target architecture and the design of every milestone, as editable [diagrams.net](https://app.diagrams.net) files with the reasoning behind each decision: NIST SP 800-207 mapping, the decision chain, credential models and the trust algorithm, PDP placement, the continuous-verification loop, Raft/SWIM/Chord, IEC 62443 zones, the STRIDE threat model, secure migration and the evaluation plan. Start at [Docs/diagrams](Docs/diagrams/README.md), or read the walkthrough on the [project page](https://philipfleischer.github.io/projects/zero-trust-continuum/).
 

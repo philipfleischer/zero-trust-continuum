@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="2580" height="3633" viewBox="0 0 2580 3633">
+<defs><marker id="a999999" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#999999"/></marker><marker id="s999999" viewBox="0 0 12 12" refX="1" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M12,0 L0,6 L12,12 z" fill="#999999"/></marker><marker id="a82b366" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#82b366"/></marker><marker id="s82b366" viewBox="0 0 12 12" refX="1" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M12,0 L0,6 L12,12 z" fill="#82b366"/></marker><marker id="a888888" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#888888"/></marker><marker id="s888888" viewBox="0 0 12 12" refX="1" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M12,0 L0,6 L12,12 z" fill="#888888"/></marker><marker id="ab85450" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#b85450"/></marker><marker id="sb85450" viewBox="0 0 12 12" refX="1" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M12,0 L0,6 L12,12 z" fill="#b85450"/></marker><marker id="a333333" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#333333"/></marker><marker id="s333333" viewBox="0 0 12 12" refX="1" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M12,0 L0,6 L12,12 z" fill="#333333"/></marker><marker id="a6c8ebf" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#6c8ebf"/></marker><marker id="s6c8ebf" viewBox="0 0 12 12" refX="1" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M12,0 L0,6 L12,12 z" fill="#6c8ebf"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="40" y="60.0" font-family="Helvetica, Arial, sans-serif" font-size="32" fill="#111111" font-weight="bold" text-anchor="start">ZTC: Zero-Trust Continuum, target architecture</text>
+<text x="40" y="100.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#555555" text-anchor="start">Zero trust (NIST SP 800-207) for a digital power substation, from the field devices to the control centre. Being on the network grants nothing: every request carries a verifiable identity, is judged by policy and a live trust score, and is enforced before it</text>
+<text x="40" y="126.4" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#555555" text-anchor="start">reaches anything that matters. Follow the numbered steps 1 to 6 for one full cycle.</text>
+<rect x="40" y="170" width="2500" height="530" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
+<text x="64" y="220.0" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#1f3a5f" font-weight="bold" text-anchor="start">CLOUD</text>
+<text x="64" y="249.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#1f3a5f" font-weight="bold" text-anchor="start">Control centre</text>
+<text x="64" y="271.4" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#555555" text-anchor="start">Purdue L4-5 · IEC 62443 SL-T 3</text>
+<text x="64" y="303.5" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">Issues identities, decides on every</text>
+<text x="64" y="325.9" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">request, keeps the trust scores</text>
+<text x="64" y="348.4" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">and the records.</text>
+<rect x="400" y="270" width="260" height="150" rx="8" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="530.0" y="306.9" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Security operators</text>
+<text x="530.0" y="333.6" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Write policy as code and</text>
+<text x="530.0" y="354.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">review it like software.</text>
+<text x="530.0" y="375.9" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Changing it needs the admin</text>
+<text x="530.0" y="397.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">role and high trust.</text>
+<rect x="400" y="480" width="260" height="160" rx="8" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="530.0" y="510.0" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Identity provider</text>
+<text x="530.0" y="533.8" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">(ztc-ca)</text>
+<text x="530.0" y="560.5" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Gives every device and</text>
+<text x="530.0" y="581.6" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">service a short-lived certificate</text>
+<text x="530.0" y="602.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">with its own identity, and can</text>
+<text x="530.0" y="623.9" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">revoke it.</text>
+<rect x="800" y="240" width="1040" height="425" rx="6" fill="#ffffff" stroke="#888888" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="818" y="270.0" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#333333" font-weight="bold" text-anchor="start">Policy Decision Point (ztc-pdp): three replicas kept in sync</text>
+<text x="1650.11904" y="270.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#b85450" font-weight="bold" text-anchor="start">TB4 replica ↔ replica</text>
+<rect x="870" y="300" width="230" height="76" rx="8" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="985.0" y="331.6" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">ztc-pdp-0</text>
+<text x="985.0" y="358.3" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">leader</text>
+<rect x="1205" y="300" width="230" height="76" rx="8" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1320.0" y="331.6" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">ztc-pdp-1</text>
+<text x="1320.0" y="358.3" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">follower</text>
+<rect x="1540" y="300" width="230" height="76" rx="8" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1655.0" y="331.6" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">ztc-pdp-2</text>
+<text x="1655.0" y="358.3" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">follower</text>
+<path d="M1100,338.0 L1205,338.0" fill="none" stroke="#333333" stroke-width="2" marker-end="url(#a333333)" marker-start="url(#s333333)" stroke-linejoin="round"/>
+<text x="1152.5" y="324.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Raft</text>
+<path d="M1435,338.0 L1540,338.0" fill="none" stroke="#333333" stroke-width="2" marker-end="url(#a333333)" marker-start="url(#s333333)" stroke-linejoin="round"/>
+<text x="1487.5" y="324.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Raft</text>
+<text x="825" y="420.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#555555" font-style="italic" text-anchor="start">Inside every replica:</text>
+<rect x="825" y="440" width="230" height="190" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="940.0" y="507.4" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Policy Administrator</text>
+<text x="940.0" y="534.2" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Manages policy versions</text>
+<text x="940.0" y="555.3" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">and announces</text>
+<text x="940.0" y="576.4" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">revocations to every PEP.</text>
+<rect x="1077" y="440" width="230" height="190" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1192.0" y="496.9" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Policy Engine</text>
+<text x="1192.0" y="523.6" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Judges each request</text>
+<text x="1192.0" y="544.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">against the policy rules</text>
+<text x="1192.0" y="565.9" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">and the current trust</text>
+<text x="1192.0" y="587.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">score. Denies by default.</text>
+<path d="M1329,449 L1329,621 A115.0,9 0 0 0 1559,621 L1559,449" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/><ellipse cx="1444.0" cy="449" rx="115.0" ry="9" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1444.0" y="511.9" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Trust store</text>
+<text x="1444.0" y="538.7" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">A live trust score for every</text>
+<text x="1444.0" y="559.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">device, lowered by trust</text>
+<text x="1444.0" y="580.9" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">signals.</text>
+<path d="M1581,449 L1581,621 A117.0,9 0 0 0 1815,621 L1815,449" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/><ellipse cx="1698.0" cy="449" rx="117.0" ry="9" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1698.0" y="511.9" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Raft log</text>
+<text x="1698.0" y="538.7" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Every policy version and</text>
+<text x="1698.0" y="559.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">revocation, the same on all</text>
+<text x="1698.0" y="580.9" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">replicas.</text>
+<rect x="1960" y="270" width="240" height="150" rx="8" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="2080.0" y="306.9" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Monitoring</text>
+<text x="2080.0" y="333.6" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Prometheus and Grafana</text>
+<text x="2080.0" y="354.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">collect health and metrics</text>
+<text x="2080.0" y="375.9" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">from every service and</text>
+<text x="2080.0" y="397.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">raise alerts.</text>
+<path d="M1960,489 L1960,631 A120.0,9 0 0 0 2200,631 L2200,489" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/><ellipse cx="2080.0" cy="489" rx="120.0" ry="9" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="2080.0" y="536.9" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Audit log</text>
+<text x="2080.0" y="563.7" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Tamper-evident record of</text>
+<text x="2080.0" y="584.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">every decision and policy</text>
+<text x="2080.0" y="605.9" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">change.</text>
+<path d="M1840,560 L1960,560" fill="none" stroke="#333333" stroke-width="2" marker-end="url(#a333333)" stroke-linejoin="round"/>
+<text x="1900.0" y="527.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#222222" text-anchor="middle">every</text>
+<text x="1900.0" y="546.8" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#222222" text-anchor="middle">decision</text>
+<rect x="2260" y="240" width="260" height="190" rx="6" fill="#ffffff" stroke="#888888" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="2278" y="270.0" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#333333" font-weight="bold" text-anchor="start">Enterprise IT (L5)</text>
+<rect x="2280" y="290" width="220" height="120" rx="8" fill="#ffffff" stroke="#888888" stroke-width="1.5"/>
+<text x="2390.0" y="322.4" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Analytics</text>
+<text x="2390.0" y="349.2" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Finds anomalies and</text>
+<text x="2390.0" y="370.3" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">builds the evaluation</text>
+<text x="2390.0" y="391.4" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">figures.</text>
+<rect x="2260" y="480" width="260" height="160" rx="8" fill="#ffffff" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="2390.0" y="520.6" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Telemetry store</text>
+<text x="2390.0" y="544.3" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">(ztc-ingest)</text>
+<text x="2390.0" y="571.1" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Keeps the per-second</text>
+<text x="2390.0" y="592.2" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">measurements from the</text>
+<text x="2390.0" y="613.3" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">substation.</text>
+<path d="M2390,480 L2390,410" fill="none" stroke="#82b366" stroke-width="3.5" marker-end="url(#a82b366)" stroke-linejoin="round"/>
+<text x="2402" y="455.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#2d4d1f" text-anchor="start">read-only</text>
+<path d="M660,330 L800,330" fill="none" stroke="#333333" stroke-width="2" marker-end="url(#a333333)" stroke-linejoin="round"/>
+<text x="730.0" y="297.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#222222" text-anchor="middle">policy</text>
+<text x="730.0" y="316.8" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#222222" text-anchor="middle">changes</text>
+<text x="730.0" y="355.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#b85450" font-weight="bold" text-anchor="middle">TB6</text>
+<path d="M40,740 L2540,740" fill="none" stroke="#b85450" stroke-width="2.5" stroke-dasharray="12 7" stroke-linejoin="round"/>
+<text x="1500" y="725.0" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#b85450" font-weight="bold" text-anchor="start">TB3 substation ↔ control centre, across the WAN</text>
+<rect x="40" y="780" width="2500" height="270" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="2"/>
+<text x="64" y="830.0" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#4b2a5c" font-weight="bold" text-anchor="start">OT-DMZ</text>
+<text x="64" y="859.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#4b2a5c" font-weight="bold" text-anchor="start">Buffer zone and WAN</text>
+<text x="64" y="881.4" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#555555" text-anchor="start">Purdue L3.5 · IEC 62443 SL-T 2</text>
+<text x="64" y="913.5" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">Nothing goes straight between</text>
+<text x="64" y="935.9" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">substation and control centre. The</text>
+<text x="64" y="958.4" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">WAN can be slow or cut off.</text>
+<rect x="400" y="910" width="960" height="120" rx="8" fill="#ffffff" stroke="#9673a6" stroke-width="1.5"/>
+<text x="880.0" y="953.0" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Substation firewall (SUB1-FW)</text>
+<text x="880.0" y="979.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Zone-based firewall with an encrypted IPsec tunnel over the WAN (fibre, MPLS or 4G/5G). Carries enrolment, decisions and</text>
+<text x="880.0" y="1000.9" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">revocations.</text>
+<rect x="1400" y="910" width="1120" height="120" rx="8" fill="#ffffff" stroke="#9673a6" stroke-width="1.5"/>
+<text x="1960.0" y="963.6" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Message broker (MQTT over TLS)</text>
+<text x="1960.0" y="990.3" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Carries telemetry and trust signals up to the control centre.</text>
+<rect x="40" y="1120" width="2500" height="660" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="2"/>
+<text x="64" y="1170.0" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#2d4d1f" font-weight="bold" text-anchor="start">FOG</text>
+<text x="64" y="1199.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#2d4d1f" font-weight="bold" text-anchor="start">Substation</text>
+<text x="64" y="1221.4" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#555555" text-anchor="start">Purdue L3 · IEC 62443 SL-T 3</text>
+<text x="64" y="1253.5" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">Enforces every request close to</text>
+<text x="64" y="1275.9" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">the devices and keeps working</text>
+<text x="64" y="1298.4" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">when the WAN is down.</text>
+<rect x="1400" y="1250" width="380" height="170" rx="8" fill="#ffffff" stroke="#82b366" stroke-width="1.5"/>
+<text x="1590.0" y="1307.4" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Intrusion detection (ztc-ids)</text>
+<text x="1590.0" y="1334.2" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Checks field traffic for known attacks on</text>
+<text x="1590.0" y="1355.3" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">industrial protocols (MITRE ATT&amp;CK for ICS)</text>
+<text x="1590.0" y="1376.4" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">and scores unusual behaviour.</text>
+<rect x="1980" y="1250" width="420" height="170" rx="8" fill="#ffffff" stroke="#82b366" stroke-width="1.5"/>
+<text x="2190.0" y="1307.4" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Fog node (ztc-fog)</text>
+<text x="2190.0" y="1334.2" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Does the substation's work: checks and summarises</text>
+<text x="2190.0" y="1355.3" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">telemetry, runs offloaded tasks and moves services</text>
+<text x="2190.0" y="1376.4" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">between fog nodes.</text>
+<path d="M600,1549 L600,1711 A145.0,9 0 0 0 890,1711 L890,1549" fill="#ffffff" stroke="#82b366" stroke-width="1.5"/><ellipse cx="745.0" cy="1549" rx="145.0" ry="9" fill="#ffffff" stroke="#82b366" stroke-width="1.5"/>
+<text x="745.0" y="1584.5" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Decision cache or local</text>
+<text x="745.0" y="1608.3" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">PDP replica</text>
+<text x="745.0" y="1635.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Recent answers, so the PEP can</text>
+<text x="745.0" y="1656.1" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">still decide when the WAN is</text>
+<text x="745.0" y="1677.2" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">down. They expire, and a</text>
+<text x="745.0" y="1698.4" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">revocation clears them.</text>
+<rect x="1010" y="1540" width="380" height="180" rx="8" fill="#ffffff" stroke="#82b366" stroke-width="1.5"/>
+<text x="1200.0" y="1602.4" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Policy Enforcement Point (ztc-pep)</text>
+<text x="1200.0" y="1629.2" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">The gatekeeper. Checks the certificate on</text>
+<text x="1200.0" y="1650.3" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">every request, gets a decision and lets only</text>
+<text x="1200.0" y="1671.4" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">allowed requests through.</text>
+<rect x="2150" y="1560" width="350" height="150" rx="8" fill="#ffffff" stroke="#82b366" stroke-width="1.5"/>
+<text x="2325.0" y="1618.0" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Other fog nodes</text>
+<text x="2325.0" y="1644.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Take over work and receive services that</text>
+<text x="2325.0" y="1665.9" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">migrate. Membership is tracked by gossip.</text>
+<path d="M1010,1630 L890,1630" fill="none" stroke="#333333" stroke-width="2" marker-end="url(#a333333)" marker-start="url(#s333333)" stroke-linejoin="round"/>
+<text x="950.0" y="1611.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#222222" text-anchor="middle">cached?</text>
+<path d="M1390,1640 L2040,1640 L2040,1420" fill="none" stroke="#333333" stroke-width="2" marker-end="url(#a333333)" stroke-linejoin="round"/>
+<path d="M1500,1520 L1500,1760" fill="none" stroke="#b85450" stroke-width="2.5" stroke-dasharray="12 7" stroke-linejoin="round"/>
+<text x="1500.0" y="1510.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#b85450" font-weight="bold" text-anchor="middle">TB2</text>
+<circle cx="1560" cy="1612" r="16" fill="#333333" stroke="#ffffff" stroke-width="2"/><text x="1560" y="1618" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">4</text>
+<text x="1584" y="1616.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">allowed requests only</text>
+<path d="M1980,1335 L1780,1335" fill="none" stroke="#888888" stroke-width="2" stroke-dasharray="3 4" marker-end="url(#a888888)" stroke-linejoin="round"/>
+<text x="1880.0" y="1317.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#555555" text-anchor="middle">traffic copy</text>
+<path d="M2320,1420 L2320,1560" fill="none" stroke="#333333" stroke-width="2" marker-end="url(#a333333)" marker-start="url(#s333333)" stroke-linejoin="round"/>
+<text x="2334" y="1475.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#222222" text-anchor="start">offload, gossip,</text>
+<text x="2334" y="1494.8" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#222222" text-anchor="start">migration</text>
+<text x="2306.0" y="1494.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#b85450" font-weight="bold" text-anchor="end">TB5</text>
+<path d="M40,1815 L2540,1815" fill="none" stroke="#b85450" stroke-width="2.5" stroke-dasharray="12 7" stroke-linejoin="round"/>
+<text x="1600" y="1800.0" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#b85450" font-weight="bold" text-anchor="start">TB1 field device ↔ PEP</text>
+<rect x="40" y="1850" width="2500" height="440" rx="8" fill="#ffe6cc" stroke="#d79b00" stroke-width="2"/>
+<text x="64" y="1900.0" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#6b4a00" font-weight="bold" text-anchor="start">EDGE</text>
+<text x="64" y="1929.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#6b4a00" font-weight="bold" text-anchor="start">Field devices</text>
+<text x="64" y="1951.4" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#555555" text-anchor="start">Purdue L0-2 · IEC 62443 SL-T 3</text>
+<text x="64" y="1983.5" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">Measure, protect and switch the</text>
+<text x="64" y="2005.9" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">physical grid.</text>
+<rect x="400" y="1900" width="2120" height="50" rx="8" fill="#fffaf2" stroke="#d79b00" stroke-width="1.5"/>
+<text x="1600.0" y="1930.0" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#6b4a00" font-weight="bold" text-anchor="middle">Field network: process bus (GOOSE) and station bus (MMS, Modbus/TCP)</text>
+<rect x="400" y="2030" width="262" height="150" rx="8" fill="#ffffff" stroke="#d79b00" stroke-width="1.5"/>
+<text x="531.0" y="2088.0" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">PMU</text>
+<text x="531.0" y="2114.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Measures voltage and current</text>
+<text x="531.0" y="2135.9" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">50 times a second</text>
+<path d="M531.0,2030 L531.0,1950" fill="none" stroke="#999999" stroke-width="1.5" stroke-linejoin="round"/>
+<rect x="706" y="2030" width="262" height="150" rx="8" fill="#ffffff" stroke="#d79b00" stroke-width="1.5"/>
+<text x="837.0" y="2098.6" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Smart meter</text>
+<text x="837.0" y="2125.3" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Energy use and load</text>
+<path d="M837.0,2030 L837.0,1950" fill="none" stroke="#999999" stroke-width="1.5" stroke-linejoin="round"/>
+<rect x="1012" y="2030" width="262" height="150" rx="8" fill="#ffffff" stroke="#d79b00" stroke-width="1.5"/>
+<text x="1143.0" y="2098.6" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Protection relay (IED)</text>
+<text x="1143.0" y="2125.3" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Trips the breaker on a fault</text>
+<path d="M1143.0,2030 L1143.0,1950" fill="none" stroke="#999999" stroke-width="1.5" stroke-linejoin="round"/>
+<rect x="1318" y="2030" width="262" height="150" rx="8" fill="#ffffff" stroke="#d79b00" stroke-width="1.5"/>
+<text x="1449.0" y="2088.0" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">RTU / bay controller</text>
+<text x="1449.0" y="2114.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Remote control over</text>
+<text x="1449.0" y="2135.9" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Modbus/TCP</text>
+<path d="M1449.0,2030 L1449.0,1950" fill="none" stroke="#999999" stroke-width="1.5" stroke-linejoin="round"/>
+<rect x="1624" y="2030" width="262" height="150" rx="8" fill="#ffffff" stroke="#d79b00" stroke-width="1.5"/>
+<text x="1755.0" y="2098.6" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">EV charger</text>
+<text x="1755.0" y="2125.3" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Receives charging setpoints</text>
+<path d="M1755.0,2030 L1755.0,1950" fill="none" stroke="#999999" stroke-width="1.5" stroke-linejoin="round"/>
+<rect x="1930" y="2030" width="262" height="150" rx="8" fill="#ffffff" stroke="#d79b00" stroke-width="1.5"/>
+<text x="2061.0" y="2088.0" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Engineer laptop (HMI)</text>
+<text x="2061.0" y="2114.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Local operation and</text>
+<text x="2061.0" y="2135.9" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">maintenance</text>
+<path d="M2061.0,2030 L2061.0,1950" fill="none" stroke="#999999" stroke-width="1.5" stroke-linejoin="round"/>
+<rect x="2236" y="2030" width="262" height="150" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+<text x="2367.0" y="2077.4" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="middle">Threat</text>
+<text x="2367.0" y="2104.2" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Compromised PMU sending</text>
+<text x="2367.0" y="2125.3" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">false data, rogue laptop,</text>
+<text x="2367.0" y="2146.4" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">replayed or flooded messages</text>
+<path d="M2367.0,2030 L2367.0,1950" fill="none" stroke="#b85450" stroke-width="1.5" stroke-dasharray="4 4" stroke-linejoin="round"/>
+<text x="400" y="2225.0" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">Every device is simulated by ztc-edge and has its own identity, for example spiffe://grid.example/edge/pmu/pmu-b1-1.</text>
+<path d="M530,1900 L530,1030" fill="none" stroke="#333333" stroke-width="2" marker-end="url(#a333333)" marker-start="url(#s333333)" stroke-linejoin="round"/>
+<path d="M530,910 L530,640" fill="none" stroke="#333333" stroke-width="2" marker-end="url(#a333333)" marker-start="url(#s333333)" stroke-linejoin="round"/>
+<circle cx="530" cy="1760" r="16" fill="#333333" stroke="#ffffff" stroke-width="2"/><text x="530" y="1766" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">1</text>
+<text x="554" y="1764.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">enrol once</text>
+<circle cx="530" cy="845" r="16" fill="#333333" stroke="#ffffff" stroke-width="2"/><text x="530" y="851" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">1</text>
+<text x="554" y="849.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">join token in,</text>
+<text x="554" y="870.1" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">certificate out</text>
+<path d="M1200,1900 L1200,1720" fill="none" stroke="#333333" stroke-width="2" marker-end="url(#a333333)" stroke-linejoin="round"/>
+<circle cx="1200" cy="1760" r="16" fill="#333333" stroke="#ffffff" stroke-width="2"/><text x="1200" y="1766" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">2</text>
+<text x="1224" y="1764.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">request + certificate (mutual TLS)</text>
+<path d="M1200,1540 L1200,1030" fill="none" stroke="#333333" stroke-width="2" marker-end="url(#a333333)" marker-start="url(#s333333)" stroke-linejoin="round"/>
+<path d="M1192,910 L1192,630" fill="none" stroke="#333333" stroke-width="2" marker-end="url(#a333333)" marker-start="url(#s333333)" stroke-linejoin="round"/>
+<circle cx="1200" cy="1180" r="16" fill="#333333" stroke="#ffffff" stroke-width="2"/><text x="1200" y="1186" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">3</text>
+<text x="1224" y="1184.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">no cached answer:</text>
+<text x="1224" y="1205.1" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">ask the PDP</text>
+<circle cx="1192" cy="845" r="16" fill="#333333" stroke="#ffffff" stroke-width="2"/><text x="1192" y="851" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">3</text>
+<text x="1216" y="849.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">question and</text>
+<text x="1216" y="870.1" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">answer</text>
+<path d="M940,630 L940,910" fill="none" stroke="#6c8ebf" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#a6c8ebf)" stroke-linejoin="round"/>
+<path d="M745,1030 L745,1540" fill="none" stroke="#6c8ebf" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#a6c8ebf)" stroke-linejoin="round"/>
+<circle cx="940" cy="845" r="16" fill="#4a6fa5" stroke="#ffffff" stroke-width="2"/><text x="940" y="851" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">6</text>
+<text x="964" y="849.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#1f3a5f" text-anchor="start">new revocation</text>
+<text x="964" y="870.1" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#1f3a5f" text-anchor="start">epoch</text>
+<circle cx="745" cy="1180" r="16" fill="#4a6fa5" stroke="#ffffff" stroke-width="2"/><text x="745" y="1186" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">6</text>
+<text x="769" y="1184.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#1f3a5f" text-anchor="start">clear cached</text>
+<text x="769" y="1205.1" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#1f3a5f" text-anchor="start">answers</text>
+<path d="M1590,1250 L1590,1030" fill="none" stroke="#b85450" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#ab85450)" stroke-linejoin="round"/>
+<path d="M1444,910 L1444,630" fill="none" stroke="#b85450" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#ab85450)" stroke-linejoin="round"/>
+<circle cx="1590" cy="1180" r="16" fill="#b85450" stroke="#ffffff" stroke-width="2"/><text x="1590" y="1186" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">5</text>
+<text x="1614" y="1184.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#b85450" text-anchor="start">suspicious behaviour</text>
+<circle cx="1444" cy="845" r="16" fill="#b85450" stroke="#ffffff" stroke-width="2"/><text x="1444" y="851" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">5</text>
+<text x="1468" y="849.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#b85450" text-anchor="start">trust signal:</text>
+<text x="1468" y="870.1" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#b85450" text-anchor="start">lower the score</text>
+<path d="M2190,1250 L2190,1030" fill="none" stroke="#82b366" stroke-width="3.5" marker-end="url(#a82b366)" stroke-linejoin="round"/>
+<path d="M2390,910 L2390,640" fill="none" stroke="#82b366" stroke-width="3.5" marker-end="url(#a82b366)" stroke-linejoin="round"/>
+<text x="2204" y="1184.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#2d4d1f" text-anchor="start">per-second</text>
+<text x="2204" y="1205.1" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#2d4d1f" text-anchor="start">summaries</text>
+<text x="2376.0" y="849.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#2d4d1f" text-anchor="end">telemetry</text>
+<text x="40" y="2384.0" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#111111" font-weight="bold" text-anchor="start">One full cycle, in six steps</text>
+<circle cx="56" cy="2426" r="16" fill="#333333" stroke="#ffffff" stroke-width="2"/><text x="56" y="2432" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">1</text>
+<text x="86" y="2433.0" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#111111" font-weight="bold" text-anchor="start">Enrol</text>
+<text x="86" y="2460.0" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#333333" text-anchor="start">A device proves that it may join with a one-time join token, and gets a short-lived certificate with its own identity from the identity provider. Like everything that leaves the</text>
+<text x="86" y="2483.8" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#333333" text-anchor="start">substation, the request passes the firewall.</text>
+<circle cx="56" cy="2527.52" r="16" fill="#333333" stroke="#ffffff" stroke-width="2"/><text x="56" y="2533.52" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">2</text>
+<text x="86" y="2534.5" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#111111" font-weight="bold" text-anchor="start">Request</text>
+<text x="86" y="2561.5" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#333333" text-anchor="start">Every request the device sends carries that certificate. It goes over the field network to the Policy Enforcement Point (PEP), which checks it with mutual TLS.</text>
+<circle cx="56" cy="2605.28" r="16" fill="#333333" stroke="#ffffff" stroke-width="2"/><text x="56" y="2611.28" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">3</text>
+<text x="86" y="2612.3" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#111111" font-weight="bold" text-anchor="start">Decide</text>
+<text x="86" y="2639.3" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#333333" text-anchor="start">The PEP first looks for a recent answer in its decision cache. If there is none, it asks the Policy Engine in the control centre through the firewall. The answer combines the</text>
+<text x="86" y="2663.0" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#333333" text-anchor="start">policy with the device's current trust score, and the audit log records it.</text>
+<circle cx="56" cy="2706.8" r="16" fill="#333333" stroke="#ffffff" stroke-width="2"/><text x="56" y="2712.8" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">4</text>
+<text x="86" y="2713.8" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#111111" font-weight="bold" text-anchor="start">Enforce</text>
+<text x="86" y="2740.8" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#333333" text-anchor="start">Only allowed requests are passed on to the fog node. A denied request stops at the PEP.</text>
+<circle cx="56" cy="2784.5600000000004" r="16" fill="#b85450" stroke="#ffffff" stroke-width="2"/><text x="56" y="2790.5600000000004" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">5</text>
+<text x="86" y="2791.6" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#111111" font-weight="bold" text-anchor="start">Watch</text>
+<text x="86" y="2818.6" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#333333" text-anchor="start">The intrusion detection system gets a copy of the field traffic from the fog node. When a device behaves suspiciously, it sends a trust signal through the broker, and the</text>
+<text x="86" y="2842.3" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#333333" text-anchor="start">device's trust score drops.</text>
+<circle cx="56" cy="2886.0800000000004" r="16" fill="#4a6fa5" stroke="#ffffff" stroke-width="2"/><text x="56" y="2892.0800000000004" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">6</text>
+<text x="86" y="2893.1" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#111111" font-weight="bold" text-anchor="start">Revoke</text>
+<text x="86" y="2920.1" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#333333" text-anchor="start">The Policy Administrator announces a new revocation epoch through the firewall. Every PEP clears its cached answers, so the device's next request is decided again with the</text>
+<text x="86" y="2943.8" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#333333" text-anchor="start">lower score, and denied.</text>
+<text x="1620" y="2384.0" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#111111" font-weight="bold" text-anchor="start">How to read it</text>
+<rect x="1620" y="2412" width="40" height="22" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="1672" y="2428.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">Cloud: control centre (Purdue L4-5)</text>
+<rect x="2080" y="2412" width="40" height="22" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.5"/>
+<text x="2132" y="2428.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">OT-DMZ and WAN (Purdue L3.5)</text>
+<rect x="1620" y="2446" width="40" height="22" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="1672" y="2462.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">Fog: substation (Purdue L3)</text>
+<rect x="2080" y="2446" width="40" height="22" rx="8" fill="#ffe6cc" stroke="#d79b00" stroke-width="1.5"/>
+<text x="2132" y="2462.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">Edge: field devices (Purdue L0-2)</text>
+<rect x="1620" y="2480" width="40" height="22" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+<text x="1672" y="2496.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">Threat</text>
+<path d="M1620,2539 L1664,2539" fill="none" stroke="#333333" stroke-width="2" marker-end="url(#a333333)" stroke-linejoin="round"/>
+<text x="1676" y="2544.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">request or data path</text>
+<path d="M2080,2539 L2124,2539" fill="none" stroke="#b85450" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#ab85450)" stroke-linejoin="round"/>
+<text x="2136" y="2544.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">trust signal (continuous verification)</text>
+<path d="M1620,2573 L1664,2573" fill="none" stroke="#6c8ebf" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#a6c8ebf)" stroke-linejoin="round"/>
+<text x="1676" y="2578.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">control: revocation</text>
+<path d="M2080,2573 L2124,2573" fill="none" stroke="#82b366" stroke-width="3.5" marker-end="url(#a82b366)" stroke-linejoin="round"/>
+<text x="2136" y="2578.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">telemetry</text>
+<path d="M1620,2607 L1664,2607" fill="none" stroke="#888888" stroke-width="2" stroke-dasharray="3 4" marker-end="url(#a888888)" stroke-linejoin="round"/>
+<text x="1676" y="2612.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">copy of traffic for inspection</text>
+<path d="M2080,2607 L2124,2607" fill="none" stroke="#b85450" stroke-width="2.5" stroke-dasharray="12 7" stroke-linejoin="round"/>
+<text x="2136" y="2612.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">trust boundary TB1-TB6</text>
+<circle cx="1636" cy="2656" r="16" fill="#333333" stroke="#ffffff" stroke-width="2"/><text x="1636" y="2662" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">1</text>
+<text x="1666" y="2660.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#222222" text-anchor="start">a step of the cycle, shown on every part of its path</text>
+<text x="1620" y="2698.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="start">An arrow that ends at the firewall or the broker carries on out of the other side, with the same number and style. Nothing</text>
+<text x="1620" y="2719.1" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="start">crosses the DMZ any other way.</text>
+<text x="1620" y="2752.2" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="start">Monitoring reads metrics from every service. Those lines are left out to keep the picture readable.</text>
+<text x="1620" y="2785.4" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#333333" text-anchor="start">SL-T is the IEC 62443 security level target of a zone.</text>
+<rect x="40.0" y="3013.6000000000004" width="476.0" height="270" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.5"/>
+<text x="58.0" y="3048.6" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="start">Why a fog layer?</text>
+<circle cx="63.0" cy="3070.2" r="3" fill="#333333"/>
+<text x="76.0" y="3075.7" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">Decisions keep working when the WAN is cut (RQ1).</text>
+<circle cx="63.0" cy="3092.7" r="3" fill="#333333"/>
+<text x="76.0" y="3098.1" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">About 50 times less traffic upstream: only per-second</text>
+<text x="76.0" y="3120.6" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">summaries leave the substation.</text>
+<circle cx="63.0" cy="3137.6" r="3" fill="#333333"/>
+<text x="76.0" y="3143.0" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">Fast answers for control actions.</text>
+<circle cx="63.0" cy="3160.0" r="3" fill="#333333"/>
+<text x="76.0" y="3165.4" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">Work and services can move between fog nodes</text>
+<text x="76.0" y="3187.9" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">(RQ2, RQ3).</text>
+<circle cx="63.0" cy="3204.9" r="3" fill="#333333"/>
+<text x="76.0" y="3210.3" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">But fog nodes may be shared and less trusted, so</text>
+<text x="76.0" y="3232.8" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">they get a trust score too.</text>
+<rect x="546.0" y="3013.6000000000004" width="476.0" height="270" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.5"/>
+<text x="564.0" y="3048.6" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="start">Safety first</text>
+<text x="564.0" y="3075.7" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">Protection trips (GOOSE messages between relays)</text>
+<text x="564.0" y="3098.1" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">stay on the process bus and never wait for the PEP.</text>
+<text x="564.0" y="3120.6" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">ZTC watches them but never blocks them. In</text>
+<text x="564.0" y="3143.0" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">operational technology the order is safety, availability,</text>
+<text x="564.0" y="3165.4" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">integrity, then confidentiality.</text>
+<rect x="1052.0" y="3013.6000000000004" width="476.0" height="270" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.5"/>
+<text x="1070.0" y="3048.6" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="start">Fail closed</text>
+<text x="1070.0" y="3075.7" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">If no decision can be made, the answer is no. An</text>
+<text x="1070.0" y="3098.1" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">attacker who cuts the WAN must not be able to switch</text>
+<text x="1070.0" y="3120.6" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">access control off. Availability comes from where</text>
+<text x="1070.0" y="3143.0" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">decisions are made, not from weaker failure modes.</text>
+<rect x="1558.0" y="3013.6000000000004" width="476.0" height="270" rx="8" fill="#f5f5f5" stroke="#666666" stroke-width="1.5"/>
+<text x="1576.0" y="3048.6" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="start">One zone model, enforced four times</text>
+<text x="1576.0" y="3075.7" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">IEC 62443 zones and conduits are defined once and</text>
+<text x="1576.0" y="3098.1" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">exported to Kubernetes network policies, Docker</text>
+<text x="1576.0" y="3120.6" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">networks, Cisco ACLs and OpenStack security groups.</text>
+<text x="1576.0" y="3143.0" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">Segmentation and identity checks back each other up.</text>
+<rect x="2064.0" y="3013.6000000000004" width="476.0" height="270" rx="8" fill="#f5f5f5" stroke="#666666" stroke-width="1.5"/>
+<text x="2082.0" y="3048.6" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#222222" font-weight="bold" text-anchor="start">Secure supply chain</text>
+<text x="2082.0" y="3075.7" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">Only Go's standard library in the trust path. Every</text>
+<text x="2082.0" y="3098.1" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">change passes race tests, linting, CodeQL,</text>
+<text x="2082.0" y="3120.6" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">govulncheck, gosec, gitleaks and Trivy, and ships as a</text>
+<text x="2082.0" y="3143.0" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#333333" text-anchor="start">small non-root image with an SBOM.</text>
+<text x="40" y="3357.6" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#111111" font-weight="bold" text-anchor="start">Research questions</text>
+<rect x="40" y="3381.6000000000004" width="140" height="42.44" fill="#eeeeee" stroke="#bbbbbb"/>
+<text x="52" y="3405.6" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#222222" font-weight="bold" text-anchor="start">RQ</text>
+<rect x="180" y="3381.6000000000004" width="1460" height="42.44" fill="#eeeeee" stroke="#bbbbbb"/>
+<text x="192" y="3405.6" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#222222" font-weight="bold" text-anchor="start">Question</text>
+<rect x="1640" y="3381.6000000000004" width="900" height="42.44" fill="#eeeeee" stroke="#bbbbbb"/>
+<text x="1652" y="3405.6" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#222222" font-weight="bold" text-anchor="start">Where in the diagram</text>
+<rect x="40" y="3424.0400000000004" width="140" height="42.44" fill="#ffffff" stroke="#bbbbbb"/>
+<text x="52" y="3448.0" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#222222" font-weight="bold" text-anchor="start">RQ1</text>
+<rect x="180" y="3424.0400000000004" width="1460" height="42.44" fill="#ffffff" stroke="#bbbbbb"/>
+<text x="192" y="3448.0" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#222222" text-anchor="start">Where should decisions be made: only in the cloud, in the cloud with a cache on the fog, or with a full replica on the fog?</text>
+<rect x="1640" y="3424.0400000000004" width="900" height="42.44" fill="#ffffff" stroke="#bbbbbb"/>
+<text x="1652" y="3448.0" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#222222" text-anchor="start">Policy Decision Point and the decision cache (step 3)</text>
+<rect x="40" y="3466.4800000000005" width="140" height="42.44" fill="#ffffff" stroke="#bbbbbb"/>
+<text x="52" y="3490.5" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#222222" font-weight="bold" text-anchor="start">RQ2</text>
+<rect x="180" y="3466.4800000000005" width="1460" height="42.44" fill="#ffffff" stroke="#bbbbbb"/>
+<text x="192" y="3490.5" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#222222" text-anchor="start">Which credential fits a system that moves: tokens, certificates or capabilities that can be narrowed?</text>
+<rect x="1640" y="3466.4800000000005" width="900" height="42.44" fill="#ffffff" stroke="#bbbbbb"/>
+<text x="1652" y="3490.5" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#222222" text-anchor="start">The certificate in steps 1 and 2</text>
+<rect x="40" y="3508.9200000000005" width="140" height="42.44" fill="#ffffff" stroke="#bbbbbb"/>
+<text x="52" y="3532.9" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#222222" font-weight="bold" text-anchor="start">RQ3</text>
+<rect x="180" y="3508.9200000000005" width="1460" height="42.44" fill="#ffffff" stroke="#bbbbbb"/>
+<text x="192" y="3532.9" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#222222" text-anchor="start">How does trust follow a service that moves to another fog node?</text>
+<rect x="1640" y="3508.9200000000005" width="900" height="42.44" fill="#ffffff" stroke="#bbbbbb"/>
+<text x="1652" y="3532.9" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#222222" text-anchor="start">Fog node and other fog nodes (TB5)</text>
+<rect x="40" y="3551.3600000000006" width="140" height="42.44" fill="#ffffff" stroke="#bbbbbb"/>
+<text x="52" y="3575.4" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#222222" font-weight="bold" text-anchor="start">RQ4</text>
+<rect x="180" y="3551.3600000000006" width="1460" height="42.44" fill="#ffffff" stroke="#bbbbbb"/>
+<text x="192" y="3575.4" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#222222" text-anchor="start">Is a compromised device locked out fast enough?</text>
+<rect x="1640" y="3551.3600000000006" width="900" height="42.44" fill="#ffffff" stroke="#bbbbbb"/>
+<text x="1652" y="3575.4" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#222222" text-anchor="start">The loop from step 5 to step 6</text>
+</svg>

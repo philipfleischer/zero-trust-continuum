@@ -1,19 +1,41 @@
-# 00 — System overview: the target architecture
+# 00 — System overview: at a glance and the target architecture
 
-Diagram: [`00-system-overview.drawio`](00-system-overview.drawio) · 1 page
+Diagram: [`00-system-overview.drawio`](00-system-overview.drawio) · 2 pages
 
-![System overview](svg/00-system-overview-1.svg)
+## Page 1: at a glance
 
-## What it shows
+![ZTC at a glance](svg/00-system-overview-1.svg)
 
-The complete ZTC system in a digital substation, laid out on the edge–fog–cloud continuum and on the Purdue model at the same time:
+The same four layers and colours as the full target architecture, with one box per role and nothing else. Each layer has one job:
 
-- **Cloud / control centre (L4–5)**: a Raft-replicated Policy Decision Point (`ztc-pdp` ×3) holding the Policy Engine and Policy Administrator, the identity provider (`ztc-ca`), the hash-chained audit log, the telemetry store (`ztc-ingest`), Prometheus/Grafana and the operator. Analytics sits in a separate enterprise zone (L5).
-- **OT-DMZ + WAN (L3.5)**: the zone-based firewall with IPsec to the control centre, a broker and a jump host. Every flow between fog and cloud passes through it.
-- **Fog / substation (L3)**: the Policy Enforcement Point (`ztc-pep`) with a decision cache or PDP replica, the fog node (`ztc-fog`: telemetry pipeline, offloading, gossip, Chord placement, migration), the ICS intrusion detection system (`ztc-ids`) and peer fog nodes.
-- **Edge (L0–2)**: PMUs, meters, breakers/IEDs, RTUs, EV chargers and HMIs, simulated by `ztc-edge`, each with its own SPIFFE identity.
+- **Cloud / control centre (L4-5)** decides: who is who (identity provider), what is allowed and how far to trust it (Policy Decision Point), and what is happening (telemetry and monitoring).
+- **OT-DMZ (L3.5)** controls every crossing between the substation and the control centre. The firewall carries identities, decisions and revocations; the broker carries telemetry and trust signals.
+- **Fog / substation (L3)** enforces: the Policy Enforcement Point checks every request locally and keeps recent answers so it keeps working when the WAN is down. The fog node does the local processing, and intrusion detection watches the traffic.
+- **Edge (L0-2)** is the physical grid: devices that measure, protect and control, charge and maintain, each with its own identity. The threat sits on the same field network.
 
-The numbered path ① → ⑥ is one full cycle of zero trust: a device enrols and sends a request with a credential (①), the PEP asks for a decision (②), on a cache miss the cloud PDP decides (③), the allowed request reaches the fog node (④), the IDS turns abnormal behaviour into a trust signal (⑤), and the PDP pushes a revocation epoch that flushes every cache (⑥). The red dashed lines are the trust boundaries TB1–TB6 analysed in the [threat model](11-m5-threat-model.md).
+The numbers are the same six steps as on page 2, so the two pages can be read side by side.
+
+## Page 2: target architecture
+
+![Target architecture](svg/00-system-overview-2.svg)
+
+The complete ZTC system in a digital substation, laid out on the edge-fog-cloud continuum and on the Purdue model at the same time:
+
+- **Cloud / control centre (L4-5)**: a Raft-replicated Policy Decision Point (`ztc-pdp` ×3) in which every replica holds the Policy Engine, the Policy Administrator, the trust store and the Raft log; the identity provider (`ztc-ca`), the hash-chained audit log, the telemetry store (`ztc-ingest`), monitoring and the operators. Analytics sits in a separate enterprise zone (L5).
+- **OT-DMZ (L3.5)**: the zone-based firewall with an IPsec tunnel over the WAN, and an MQTT broker. Every flow between fog and cloud ends at one of them, and an arrow into either continues out of the other side with the same number and style.
+- **Fog / substation (L3)**: the Policy Enforcement Point (`ztc-pep`) with its decision cache or local PDP replica, the fog node (`ztc-fog`: telemetry pipeline, offloading, migration), the ICS intrusion detection system (`ztc-ids`) and the other fog nodes.
+- **Edge (L0-2)**: PMUs, smart meters, protection relays, RTUs, EV chargers and engineer laptops on the field network, simulated by `ztc-edge`, each with its own SPIFFE identity.
+
+### One full cycle, in six steps
+
+1. **Enrol.** A device proves that it may join with a one-time join token, and gets a short-lived certificate with its own identity from the identity provider. Like everything that leaves the substation, the request passes the firewall.
+2. **Request.** Every request the device sends carries that certificate. It goes over the field network to the Policy Enforcement Point (PEP), which checks it with mutual TLS.
+3. **Decide.** The PEP first looks for a recent answer in its decision cache. If there is none, it asks the Policy Engine in the control centre through the firewall. The answer combines the policy with the device's current trust score, and the audit log records it.
+4. **Enforce.** Only allowed requests are passed on to the fog node. A denied request stops at the PEP.
+5. **Watch.** The intrusion detection system gets a copy of the field traffic from the fog node. When a device behaves suspiciously, it sends a trust signal through the broker, and the device's trust score drops.
+6. **Revoke.** The Policy Administrator announces a new revocation epoch through the firewall. Every PEP clears its cached answers, so the device's next request is decided again with the lower score, and denied.
+
+The red dashed lines are the trust boundaries TB1-TB6 analysed in the [threat model](11-m5-threat-model.md). Monitoring reads metrics from every service; those lines are left out to keep the picture readable.
 
 ## Key design decisions
 

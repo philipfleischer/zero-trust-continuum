@@ -10,7 +10,7 @@ Start with the target architecture, then follow the milestones in the order they
 
 | # | Diagram | Pages | What it answers |
 |---|---|---|---|
-| 00 | [System overview](00-system-overview.md) | 1 | What the finished system looks like, end to end |
+| 00 | [System overview](00-system-overview.md) | 2 | The architecture at a glance, then the finished system end to end |
 | 01 | [Architecture evolution](01-architecture-evolution.md) | 2 | How M0 → M7 add up to the target architecture |
 | 02 | [NIST SP 800-207 mapping](02-nist-zta-mapping.md) | 1 | Which ZTC part plays which zero-trust role |
 | 03 | [M0 Service foundation](03-m0-service-foundation.md) | 2 | What every service has in common; how the Go packages are layered |
@@ -46,6 +46,8 @@ The same conventions are used in every diagram, so a colour or line style always
 | Dashed red arrow | trust signal (continuous verification) |
 | Dashed blue arrow | control traffic: revocation epoch, policy, replication |
 | Thick green arrow | telemetry aggregates |
+| Dotted grey arrow | copy of traffic for inspection |
+| Numbered circle | a step of the zero-trust cycle, on every part of its path |
 | Thick dashed red line | trust boundary (TB1–TB6, defined in [11](11-m5-threat-model.md)) |
 
 ## Editing
